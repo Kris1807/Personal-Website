@@ -77,8 +77,10 @@
         a.className = "related-link";
         a.href = link.url;
         a.textContent = link.label;
-        a.target = "_blank";
-        a.rel = "noreferrer";
+        if (link.url.startsWith("http://") || link.url.startsWith("https://")) {
+          a.target = "_blank";
+          a.rel = "noreferrer";
+        }
         relatedLinks.appendChild(a);
       });
     } else {
