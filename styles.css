@@ -147,12 +147,11 @@ p {
 
 @media (min-width: 1280px) {
   .right-rail {
-    position: fixed;
-    right: 1.5rem;
-    top: 3rem;
+    position: static;
+    float: right;
     width: 260px;
     max-width: 260px;
-    margin: 0;
+    margin: 3rem 1.5rem 1rem 0;
     padding: 0;
   }
 
