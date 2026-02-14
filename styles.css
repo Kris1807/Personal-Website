@@ -165,12 +165,6 @@ p {
     padding: 0;
   }
 
-  .related-links-panel {
-    position: fixed;
-    width: 260px;
-    right: max(1rem, calc((100vw - 1280px) / 2 + 1rem));
-    top: calc(3rem + 260px + 1.2rem);
-  }
 
   #related-links {
     display: flex;
