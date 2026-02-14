@@ -21,3 +21,4 @@ Personal portfolio/resume website built as a static site and hosted with GitHub 
 - `index.html` - Page layout and section rendering
 - `styles.css` - Visual design and responsive layout
 - `resume-content.js` - Resume/profile data used by the site
+- `thesis-sources.html` - Page layout for thesis sources info for future use

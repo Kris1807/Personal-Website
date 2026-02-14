@@ -1,19 +1,23 @@
 const resume = {
   name: "Kristian Pitshugin",
-  title: "Computer Science BS & AI MS Student | Full-Stack Developer",
+  title:
+    "Athlete | Computer Science BS & AI MS Student | Researcher | Full-Stack Developer ",
   summary:
     "UGA Double Dawgs Computer Science and AI student focused on building reliable full-stack products and real-world systems. Experience includes leading research development at UGA CoolDawgs VIPR, designing concurrency-aware booking and data workflows, and delivering production-style applications in React, Node.js, Django, and Java.",
   relatedLinks: [
     { label: "Thesis Sources", url: "thesis-sources.html" },
     { label: "GitHub Profile", url: "https://github.com/Kris1807" },
-    { label: "Personal Website Repo", url: "https://github.com/Kris1807/Personal-Website" },
-    { label: "Film Hub Demo", url: "https://film-hub-theta.vercel.app/" }
+    {
+      label: "Personal Website Repo",
+      url: "https://github.com/Kris1807/Personal-Website",
+    },
+    { label: "Film Hub Demo", url: "https://film-hub-theta.vercel.app/" },
   ],
   contact: [
     { label: "krispitshugin@gmail.com", url: "mailto:krispitshugin@gmail.com" },
     { label: "kp39596@uga.edu", url: "mailto:kp39596@uga.edu" },
     { label: "Phone", url: "tel:+17065108226" },
-    { label: "GitHub", url: "https://github.com/Kris1807" }
+    { label: "GitHub", url: "https://github.com/Kris1807" },
   ],
   experience: [
     {
@@ -21,56 +25,57 @@ const resume = {
       company: "CoolDawgs VIPR, University of Georgia",
       period: "2024 - Present",
       description:
-        "Developed app and sensor systems as a VIPR researcher under Drs. Barnes and Ramaswamy; led team execution in a following term with focus on delivery and technical coordination."
-    }
+        "Developed app and sensor systems as a VIPR researcher under Drs. Barnes and Ramaswamy; led team execution in a following term with focus on delivery and technical coordination.",
+    },
   ],
   projects: [
     {
       name: "Cinema Ticketing Website",
       description:
-        "Built a full-stack movie booking system with dynamic seat selection, timed seat holds, concurrency-safe reservation logic, checkout flow, and reusable card handling (Django backend, modern frontend, Supabase).",
-      link: "https://film-hub-theta.vercel.app/"
+        "Built a full-stack movie booking system with dynamic seat selection, timed seat holds, concurrency-safe reservation logic, checkout flow, and reusable card handling (Django backend, modern frontend, Supabase).\n **If not working connect me to allow use",
+      link: "https://film-hub-theta.vercel.app/",
     },
     {
       name: "Patient Record App",
       description:
         "Designed and implemented a full-stack medical records app (React + Node.js) with patient CRUD, diagnosis/treatment tracking, PDF export, and safe-delete safeguards for data integrity.",
-      link: ""
+      link: "",
     },
     {
       name: "JavaFX API Integration App",
       description:
         "Developed a desktop JavaFX app integrating external APIs for currency conversion and game discovery, with asynchronous data loading, JSON parsing, and responsive navigation UI.",
-      link: ""
-    }
+      link: "",
+    },
   ],
   education: [
     {
-      degree: "B.S. Computer Science (Double Dawgs) + M.S. Artificial Intelligence (in progress)",
+      degree:
+        "B.S. Computer Science (Double Dawgs) + M.S. Artificial Intelligence (in progress)",
       school: "University of Georgia, Athens, GA",
-      period: "May 2026 (B.S.) / December 2026 (M.S.)"
+      period: "May 2026 (B.S.) / December 2026 (M.S.)",
     },
     {
       degree: "Minor in Business",
       school: "University of Georgia",
-      period: "Current"
+      period: "Completed",
     },
     {
-      degree: "GPA: 3.76/4.00 (Overall)",
+      degree: "GPA: 3.76/4.00 (Overall)\n 4.00/4.00 (Major relaited)",
       school: "University of Georgia",
-      period: "Current"
+      period: "Current",
     },
     {
       degree: "Google Cybersecurity Certificate (Self-Studied)",
       school: "Independent Study",
-      period: "Completed"
-    }
+      period: "Completed",
+    },
   ],
   honors: [
     "Morton S. Hodgson, Jr. Men's Swimming and Diving Scholarship",
     "SEC Academic Honor Roll",
     "University of Georgia Presidential Scholars Honors",
-    "J. Reid Parker Director of Athletics Honor Roll (multiple 4.0 semesters)"
+    "J. Reid Parker Director of Athletics Honor Roll (multiple 4.0 semesters)",
   ],
   athletics: [
     {
@@ -78,12 +83,12 @@ const resume = {
       period: "August 2022 - Present",
       achievements: [
         "All American for 2023 and 2025",
+        "Fastest 50Y breaststroke in school history",
         "8th place at the SEC conference",
         "6th and 8th place at NCAA as a relay swimmer",
         "Part of school records in the 200 and 400 IM relays",
         "8th fastest result in the 100Y breaststroke",
-        "Fastest 50Y breaststroke in school history"
-      ]
+      ],
     },
     {
       organization: "International - Israel National Team",
@@ -93,8 +98,8 @@ const resume = {
         "One of only three Israeli swimmers to make two semifinals at World Championships",
         "10th and 14th place at the World Championships 2022",
         "Two gold medals at Switzerland Olympic Trials competition",
-        "Part of two Israeli relay records for the national team"
-      ]
+        "Part of two Israeli relay records for the national team",
+      ],
     },
     {
       organization: "National - Greater Jerusalem Swimming Club",
@@ -102,9 +107,9 @@ const resume = {
       achievements: [
         "Only swimmer in club history to win a medal at European Championships",
         "Israeli record holder in 3 individual events and 2 relay events",
-        "Israeli champion since 2020 (short course and long course)"
-      ]
-    }
+        "Israeli champion since 2020 (short course and long course)",
+      ],
+    },
   ],
   skills: [
     {
@@ -119,20 +124,21 @@ const resume = {
         "React Native",
         "Node.js",
         "Django",
-        "Assembly"
-      ]
+        "Assembly",
+        "HTML",
+      ],
     },
     {
       category: "Data Bases",
-      items: ["MongoDB", "PostgreSQL", "Supabase", "Firebase"]
+      items: ["MongoDB", "PostgreSQL", "Supabase", "Firebase"],
     },
     {
       category: "Sensor Design",
-      items: ["KiCad", "Arduino"]
+      items: ["KiCad", "Arduino"],
     },
     {
       category: "Languages",
-      items: ["Hebrew (Native)", "English (Fluent)", "Russian (Professional)"]
-    }
-  ]
+      items: ["Hebrew (Native)", "English (Fluent)", "Russian (Professional)"],
+    },
+  ],
 };
