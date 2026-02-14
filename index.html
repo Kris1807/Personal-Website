@@ -56,8 +56,10 @@
       const a = document.createElement("a");
       a.href = c.url;
       a.textContent = c.label;
-      a.target = "_blank";
-      a.rel = "noreferrer";
+      if (c.url.startsWith("http://") || c.url.startsWith("https://")) {
+        a.target = "_blank";
+        a.rel = "noreferrer";
+      }
       contact.appendChild(a);
     });
 
