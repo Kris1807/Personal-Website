@@ -87,6 +87,11 @@
 
     const relatedLinksPanel = document.getElementById("related-links-panel");
     const relatedLinks = document.getElementById("related-links");
+    const formatText = (value) =>
+      String(value ?? "")
+        .replace(/\*\*(.*?)\*\*/g, "<strong>$1</strong>")
+        .replace(/\n/g, "<br>");
+
     if (Array.isArray(resume.relatedLinks) && resume.relatedLinks.length > 0) {
       resume.relatedLinks.forEach((link) => {
         const a = document.createElement("a");
@@ -116,22 +121,22 @@
     renderCards("experience", resume.experience, (i) => `
       <h3>${i.role} · ${i.company}</h3>
       <p class="meta">${i.period}</p>
-      <p>${i.description}</p>
+      <p>${formatText(i.description)}</p>
     `);
 
     renderCards("projects", resume.projects, (i) => `
       <h3>${i.name}</h3>
-      <p>${i.description}</p>
+      <p>${formatText(i.description)}</p>
       ${i.link ? `<p><a href="${i.link}" target="_blank" rel="noreferrer">View project</a></p>` : ""}
     `);
 
     renderCards("education", resume.education, (i) => `
-      <h3>${i.degree}</h3>
+      <h3>${formatText(i.degree)}</h3>
       <p class="meta">${i.school} · ${i.period}</p>
     `);
 
     renderCards("honors", resume.honors, (h) => `
-      <p>${h}</p>
+      <p>${formatText(h)}</p>
     `);
 
     renderCards("athletics", resume.athletics, (a) => `
