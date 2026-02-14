@@ -42,7 +42,7 @@ const resume = {
     {
       degree: "B.S. Computer Science (Double Dawgs) + M.S. Artificial Intelligence (in progress)",
       school: "University of Georgia, Athens, GA",
-      period: "Dec 2026 (B.S.) / May 2027 (M.S.)"
+      period: "May 2026 (B.S.) / December 2026 (M.S.)"
     },
     {
       degree: "Minor in Business",
