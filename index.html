@@ -1,0 +1,92 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title id="page-title">Portfolio</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;600;700&family=Fraunces:opsz,wght@9..144,600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <header class="hero">
+    <p class="eyebrow" id="title"></p>
+    <h1 id="name"></h1>
+    <p id="summary"></p>
+    <div id="contact" class="contact"></div>
+  </header>
+
+  <main class="grid">
+    <section>
+      <h2>Experience</h2>
+      <div id="experience"></div>
+    </section>
+    <section>
+      <h2>Projects</h2>
+      <div id="projects"></div>
+    </section>
+    <section>
+      <h2>Education</h2>
+      <div id="education"></div>
+    </section>
+    <section>
+      <h2>Skills</h2>
+      <div id="skills" class="chips"></div>
+    </section>
+  </main>
+
+  <script src="resume-content.js"></script>
+  <script>
+    document.getElementById("page-title").textContent = `${resume.name} | ${resume.title}`;
+    document.getElementById("name").textContent = resume.name;
+    document.getElementById("title").textContent = resume.title;
+    document.getElementById("summary").textContent = resume.summary;
+
+    const contact = document.getElementById("contact");
+    resume.contact.forEach((c) => {
+      const a = document.createElement("a");
+      a.href = c.url;
+      a.textContent = c.label;
+      a.target = "_blank";
+      a.rel = "noreferrer";
+      contact.appendChild(a);
+    });
+
+    const renderCards = (id, items, mapFn) => {
+      const root = document.getElementById(id);
+      items.forEach((item) => {
+        const article = document.createElement("article");
+        article.className = "card";
+        article.innerHTML = mapFn(item);
+        root.appendChild(article);
+      });
+    };
+
+    renderCards("experience", resume.experience, (i) => `
+      <h3>${i.role} · ${i.company}</h3>
+      <p class="meta">${i.period}</p>
+      <p>${i.description}</p>
+    `);
+
+    renderCards("projects", resume.projects, (i) => `
+      <h3>${i.name}</h3>
+      <p>${i.description}</p>
+      ${i.link ? `<p><a href="${i.link}" target="_blank" rel="noreferrer">View project</a></p>` : ""}
+    `);
+
+    renderCards("education", resume.education, (i) => `
+      <h3>${i.degree}</h3>
+      <p class="meta">${i.school} · ${i.period}</p>
+    `);
+
+    const skills = document.getElementById("skills");
+    resume.skills.forEach((s) => {
+      const span = document.createElement("span");
+      span.className = "chip";
+      span.textContent = s;
+      skills.appendChild(span);
+    });
+  </script>
+</body>
+</html>
