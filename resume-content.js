@@ -101,24 +101,32 @@ const resume = {
     }
   ],
   skills: [
-    "Python",
-    "Java",
-    "JavaFX",
-    "C",
-    "C++",
-    "React",
-    "React Native",
-    "Node.js",
-    "Django",
-    "Assembly",
-    "MongoDB",
-    "PostgreSQL",
-    "Supabase",
-    "Firebase",
-    "KiCad",
-    "Arduino",
-    "Hebrew (Native)",
-    "English (Fluent)",
-    "Russian (Professional)"
+    {
+      category: "Programming Languages",
+      items: [
+        "Python",
+        "Java",
+        "JavaFX",
+        "C",
+        "C++",
+        "React",
+        "React Native",
+        "Node.js",
+        "Django",
+        "Assembly"
+      ]
+    },
+    {
+      category: "Data Bases",
+      items: ["MongoDB", "PostgreSQL", "Supabase", "Firebase"]
+    },
+    {
+      category: "Sensor Design",
+      items: ["KiCad", "Arduino"]
+    },
+    {
+      category: "Languages",
+      items: ["Hebrew (Native)", "English (Fluent)", "Russian (Professional)"]
+    }
   ]
 };

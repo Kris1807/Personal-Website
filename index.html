@@ -40,7 +40,7 @@
     </section>
     <section>
       <h2>Skills</h2>
-      <div id="skills" class="chips"></div>
+      <div id="skills"></div>
     </section>
   </main>
 
@@ -100,13 +100,10 @@
       <ul>${a.achievements.map((item) => `<li>${item}</li>`).join("")}</ul>
     `);
 
-    const skills = document.getElementById("skills");
-    resume.skills.forEach((s) => {
-      const span = document.createElement("span");
-      span.className = "chip";
-      span.textContent = s;
-      skills.appendChild(span);
-    });
+    renderCards("skills", resume.skills, (group) => `
+      <h3>${group.category}</h3>
+      <div class="chips">${group.items.map((item) => `<span class="chip">${item}</span>`).join("")}</div>
+    `);
   </script>
 </body>
 </html>
