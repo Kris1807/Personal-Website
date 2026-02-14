@@ -31,6 +31,14 @@
       <div id="education"></div>
     </section>
     <section>
+      <h2>Honors</h2>
+      <div id="honors"></div>
+    </section>
+    <section>
+      <h2>Athletics</h2>
+      <div id="athletics"></div>
+    </section>
+    <section>
       <h2>Skills</h2>
       <div id="skills" class="chips"></div>
     </section>
@@ -78,6 +86,16 @@
     renderCards("education", resume.education, (i) => `
       <h3>${i.degree}</h3>
       <p class="meta">${i.school} · ${i.period}</p>
+    `);
+
+    renderCards("honors", resume.honors, (h) => `
+      <p>${h}</p>
+    `);
+
+    renderCards("athletics", resume.athletics, (a) => `
+      <h3>${a.organization}</h3>
+      <p class="meta">${a.period}</p>
+      <ul>${a.achievements.map((item) => `<li>${item}</li>`).join("")}</ul>
     `);
 
     const skills = document.getElementById("skills");
