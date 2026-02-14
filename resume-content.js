@@ -5,7 +5,7 @@ const resume = {
     "UGA Double Dawgs Computer Science and AI student with full-stack development, research, and systems design experience. Strong foundation in algorithms and data structures, with hands-on project work in React, Node.js, Django, and Java.",
   contact: [
     { label: "Email", url: "mailto:krispitshugin@gmail.com" },
-    { label: "UGA Email", url: "mailto:Kristian.pitshugin@uga.edu" },
+    { label: "UGA Email", url: "mailto:kp39596@uga.edu" },
     { label: "Phone", url: "tel:+17065108226" },
     { label: "GitHub", url: "https://github.com/Kris1807" }
   ],
