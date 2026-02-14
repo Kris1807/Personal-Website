@@ -115,10 +115,17 @@ p {
   white-space: pre-line;
 }
 
-.related-links-panel {
+.right-rail {
   max-width: 980px;
   margin: 0 auto 1rem;
   padding: 0 1rem;
+}
+
+.related-links-panel {
+  background: var(--panel);
+  border: 1px solid var(--border);
+  border-radius: 14px;
+  padding: 1rem;
 }
 
 #related-links {
@@ -139,18 +146,14 @@ p {
 }
 
 @media (min-width: 1280px) {
-  .related-links-panel {
+  .right-rail {
     position: fixed;
     right: 1.5rem;
-    top: 7.5rem;
+    top: 3rem;
     width: 260px;
     max-width: 260px;
     margin: 0;
     padding: 0;
-    background: var(--panel);
-    border: 1px solid var(--border);
-    border-radius: 14px;
-    padding: 1rem;
   }
 
   #related-links {
@@ -166,6 +169,13 @@ p {
 
 .profile-image-wrap {
   margin-bottom: 0.9rem;
+}
+
+.profile-card {
+  background: var(--panel);
+  border: 1px solid var(--border);
+  border-radius: 14px;
+  padding: 0.5rem;
 }
 
 .profile-image {
