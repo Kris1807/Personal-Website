@@ -111,6 +111,10 @@ p {
   }
 }
 
+.card p {
+  white-space: pre-line;
+}
+
 .related-links-panel {
   max-width: 980px;
   margin: 0 auto 1rem;
@@ -159,7 +163,6 @@ p {
     margin-right: calc(260px + 3rem);
   }
 }
-
 
 .profile-image-wrap {
   margin-bottom: 0.9rem;
