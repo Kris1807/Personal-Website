@@ -20,10 +20,15 @@ body {
   font-family: "Space Grotesk", sans-serif;
 }
 
-.hero {
-  max-width: 980px;
+.top-layout {
+  max-width: 1280px;
   margin: 3rem auto 1.5rem;
   padding: 0 1rem;
+}
+
+.hero {
+  margin: 0;
+  padding: 0;
 }
 
 .eyebrow {
@@ -146,23 +151,23 @@ p {
 }
 
 @media (min-width: 1280px) {
+  .top-layout {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) 260px;
+    column-gap: 1.5rem;
+    align-items: start;
+  }
+
   .right-rail {
-    position: static;
-    float: right;
     width: 260px;
     max-width: 260px;
-    margin: 0.75rem 1.5rem 1rem 0;
+    margin: 0;
     padding: 0;
   }
 
   #related-links {
     display: flex;
     flex-direction: column;
-  }
-
-  .grid,
-  .hero {
-    margin-right: calc(260px + 3rem);
   }
 }
 
