@@ -17,6 +17,11 @@
     <div id="contact" class="contact"></div>
   </header>
 
+  <aside id="related-links-panel" class="related-links-panel">
+    <h2>Related Links</h2>
+    <div id="related-links"></div>
+  </aside>
+
   <main class="grid">
     <section>
       <h2>Experience</h2>
@@ -31,8 +36,16 @@
       <div id="education"></div>
     </section>
     <section>
+      <h2>Honors</h2>
+      <div id="honors"></div>
+    </section>
+    <section>
+      <h2>Athletics</h2>
+      <div id="athletics"></div>
+    </section>
+    <section>
       <h2>Skills</h2>
-      <div id="skills" class="chips"></div>
+      <div id="skills"></div>
     </section>
   </main>
 
@@ -48,10 +61,31 @@
       const a = document.createElement("a");
       a.href = c.url;
       a.textContent = c.label;
-      a.target = "_blank";
-      a.rel = "noreferrer";
+      if (c.url.startsWith("http://") || c.url.startsWith("https://")) {
+        a.target = "_blank";
+        a.rel = "noreferrer";
+      }
       contact.appendChild(a);
     });
+
+
+    const relatedLinksPanel = document.getElementById("related-links-panel");
+    const relatedLinks = document.getElementById("related-links");
+    if (Array.isArray(resume.relatedLinks) && resume.relatedLinks.length > 0) {
+      resume.relatedLinks.forEach((link) => {
+        const a = document.createElement("a");
+        a.className = "related-link";
+        a.href = link.url;
+        a.textContent = link.label;
+        if (link.url.startsWith("http://") || link.url.startsWith("https://")) {
+          a.target = "_blank";
+          a.rel = "noreferrer";
+        }
+        relatedLinks.appendChild(a);
+      });
+    } else {
+      relatedLinksPanel.style.display = "none";
+    }
 
     const renderCards = (id, items, mapFn) => {
       const root = document.getElementById(id);
@@ -80,13 +114,20 @@
       <p class="meta">${i.school} · ${i.period}</p>
     `);
 
-    const skills = document.getElementById("skills");
-    resume.skills.forEach((s) => {
-      const span = document.createElement("span");
-      span.className = "chip";
-      span.textContent = s;
-      skills.appendChild(span);
-    });
+    renderCards("honors", resume.honors, (h) => `
+      <p>${h}</p>
+    `);
+
+    renderCards("athletics", resume.athletics, (a) => `
+      <h3>${a.organization}</h3>
+      <p class="meta">${a.period}</p>
+      <ul>${a.achievements.map((item) => `<li>${item}</li>`).join("")}</ul>
+    `);
+
+    renderCards("skills", resume.skills, (group) => `
+      <h3>${group.category}</h3>
+      <div class="chips">${group.items.map((item) => `<span class="chip">${item}</span>`).join("")}</div>
+    `);
   </script>
 </body>
 </html>

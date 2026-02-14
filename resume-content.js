@@ -1,11 +1,17 @@
 const resume = {
   name: "Kristian Pitshugin",
-  title: "Computer Science & AI Student | Full-Stack Developer",
+  title: "Computer Science BS & AI MS Student | Full-Stack Developer",
   summary:
-    "UGA Double Dawgs Computer Science and AI student with full-stack development, research, and systems design experience. Strong foundation in algorithms and data structures, with hands-on project work in React, Node.js, Django, and Java.",
+    "UGA Double Dawgs Computer Science and AI student focused on building reliable full-stack products and real-world systems. Experience includes leading research development at UGA CoolDawgs VIPR, designing concurrency-aware booking and data workflows, and delivering production-style applications in React, Node.js, Django, and Java.",
+  relatedLinks: [
+    { label: "Thesis Sources", url: "thesis-sources.html" },
+    { label: "GitHub Profile", url: "https://github.com/Kris1807" },
+    { label: "Personal Website Repo", url: "https://github.com/Kris1807/Personal-Website" },
+    { label: "Film Hub Demo", url: "https://film-hub-theta.vercel.app/" }
+  ],
   contact: [
-    { label: "Email", url: "mailto:krispitshugin@gmail.com" },
-    { label: "UGA Email", url: "mailto:kp39596@uga.edu" },
+    { label: "krispitshugin@gmail.com", url: "mailto:krispitshugin@gmail.com" },
+    { label: "kp39596@uga.edu", url: "mailto:kp39596@uga.edu" },
     { label: "Phone", url: "tel:+17065108226" },
     { label: "GitHub", url: "https://github.com/Kris1807" }
   ],
@@ -16,20 +22,6 @@ const resume = {
       period: "2024 - Present",
       description:
         "Developed app and sensor systems as a VIPR researcher under Drs. Barnes and Ramaswamy; led team execution in a following term with focus on delivery and technical coordination."
-    },
-    {
-      role: "Student-Athlete",
-      company: "UGA Swimming and Diving",
-      period: "August 2022 - Present",
-      description:
-        "All-American (2023, 2025), SEC finalist, NCAA relay finalist, and part of UGA relay records with top school performances in breaststroke events."
-    },
-    {
-      role: "International Competitor",
-      company: "Israel National Team",
-      period: "September 2019 - Present",
-      description:
-        "European Championships bronze medalist (2024), World Championships semifinalist, and national relay record contributor."
     }
   ],
   projects: [
@@ -56,10 +48,15 @@ const resume = {
     {
       degree: "B.S. Computer Science (Double Dawgs) + M.S. Artificial Intelligence (in progress)",
       school: "University of Georgia, Athens, GA",
-      period: "Dec 2026 (B.S.) / May 2027 (M.S.)"
+      period: "May 2026 (B.S.) / December 2026 (M.S.)"
     },
     {
-      degree: "Minor in Business | GPA: 3.76/4.00",
+      degree: "Minor in Business",
+      school: "University of Georgia",
+      period: "Current"
+    },
+    {
+      degree: "GPA: 3.76/4.00 (Overall)",
       school: "University of Georgia",
       period: "Current"
     },
@@ -69,25 +66,73 @@ const resume = {
       period: "Completed"
     }
   ],
+  honors: [
+    "Morton S. Hodgson, Jr. Men's Swimming and Diving Scholarship",
+    "SEC Academic Honor Roll",
+    "University of Georgia Presidential Scholars Honors",
+    "J. Reid Parker Director of Athletics Honor Roll (multiple 4.0 semesters)"
+  ],
+  athletics: [
+    {
+      organization: "UGA Swimming and Diving",
+      period: "August 2022 - Present",
+      achievements: [
+        "All American for 2023 and 2025",
+        "8th place at the SEC conference",
+        "6th and 8th place at NCAA as a relay swimmer",
+        "Part of school records in the 200 and 400 IM relays",
+        "8th fastest result in the 100Y breaststroke",
+        "Fastest 50Y breaststroke in school history"
+      ]
+    },
+    {
+      organization: "International - Israel National Team",
+      period: "September 2019 - Present",
+      achievements: [
+        "3rd place at the European Championships 2024",
+        "One of only three Israeli swimmers to make two semifinals at World Championships",
+        "10th and 14th place at the World Championships 2022",
+        "Two gold medals at Switzerland Olympic Trials competition",
+        "Part of two Israeli relay records for the national team"
+      ]
+    },
+    {
+      organization: "National - Greater Jerusalem Swimming Club",
+      period: "September 2019 - Present",
+      achievements: [
+        "Only swimmer in club history to win a medal at European Championships",
+        "Israeli record holder in 3 individual events and 2 relay events",
+        "Israeli champion since 2020 (short course and long course)"
+      ]
+    }
+  ],
   skills: [
-    "Python",
-    "Java",
-    "JavaFX",
-    "C",
-    "C++",
-    "React",
-    "React Native",
-    "Node.js",
-    "Django",
-    "Assembly",
-    "MongoDB",
-    "PostgreSQL",
-    "Supabase",
-    "Firebase",
-    "KiCad",
-    "Arduino",
-    "Hebrew (Native)",
-    "English (Fluent)",
-    "Russian (Professional)"
+    {
+      category: "Programming Languages",
+      items: [
+        "Python",
+        "Java",
+        "JavaFX",
+        "C",
+        "C++",
+        "React",
+        "React Native",
+        "Node.js",
+        "Django",
+        "Assembly"
+      ]
+    },
+    {
+      category: "Data Bases",
+      items: ["MongoDB", "PostgreSQL", "Supabase", "Firebase"]
+    },
+    {
+      category: "Sensor Design",
+      items: ["KiCad", "Arduino"]
+    },
+    {
+      category: "Languages",
+      items: ["Hebrew (Native)", "English (Fluent)", "Russian (Professional)"]
+    }
   ]
 };
