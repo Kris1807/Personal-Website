@@ -17,6 +17,11 @@
     <div id="contact" class="contact"></div>
   </header>
 
+  <aside id="related-links-panel" class="related-links-panel">
+    <h2>Related Links</h2>
+    <div id="related-links"></div>
+  </aside>
+
   <main class="grid">
     <section>
       <h2>Experience</h2>
@@ -62,6 +67,23 @@
       }
       contact.appendChild(a);
     });
+
+
+    const relatedLinksPanel = document.getElementById("related-links-panel");
+    const relatedLinks = document.getElementById("related-links");
+    if (Array.isArray(resume.relatedLinks) && resume.relatedLinks.length > 0) {
+      resume.relatedLinks.forEach((link) => {
+        const a = document.createElement("a");
+        a.className = "related-link";
+        a.href = link.url;
+        a.textContent = link.label;
+        a.target = "_blank";
+        a.rel = "noreferrer";
+        relatedLinks.appendChild(a);
+      });
+    } else {
+      relatedLinksPanel.style.display = "none";
+    }
 
     const renderCards = (id, items, mapFn) => {
       const root = document.getElementById(id);
