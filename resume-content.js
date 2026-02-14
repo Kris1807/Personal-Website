@@ -2,7 +2,7 @@ const resume = {
   name: "Kristian Pitshugin",
   title: "Computer Science & AI Student | Full-Stack Developer",
   summary:
-    "UGA Double Dawgs Computer Science and AI student with full-stack development, research, and systems design experience. Strong foundation in algorithms and data structures, with hands-on project work in React, Node.js, Django, and Java.",
+    "UGA Double Dawgs Computer Science and AI student focused on building reliable full-stack products and real-world systems. Experience includes leading research development at UGA CoolDawgs VIPR, designing concurrency-aware booking and data workflows, and delivering production-style applications in React, Node.js, Django, and Java.",
   contact: [
     { label: "krispitshugin@gmail.com", url: "mailto:krispitshugin@gmail.com" },
     { label: "kp39596@uga.edu", url: "mailto:kp39596@uga.edu" },
