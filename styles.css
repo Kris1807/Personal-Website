@@ -159,3 +159,17 @@ p {
     margin-right: calc(260px + 3rem);
   }
 }
+
+
+.profile-image-wrap {
+  margin-bottom: 0.9rem;
+}
+
+.profile-image {
+  width: 100%;
+  aspect-ratio: 1 / 1;
+  object-fit: cover;
+  border-radius: 14px;
+  border: 1px solid var(--border);
+  display: block;
+}

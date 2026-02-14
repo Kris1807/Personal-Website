@@ -18,6 +18,9 @@
   </header>
 
   <aside id="related-links-panel" class="related-links-panel">
+    <div id="profile-image-wrap" class="profile-image-wrap">
+      <img id="profile-image" class="profile-image" alt="Kristian Pitshugin profile photo" />
+    </div>
     <h2>Related Links</h2>
     <div id="related-links"></div>
   </aside>
@@ -68,6 +71,14 @@
       contact.appendChild(a);
     });
 
+
+    const profileImageWrap = document.getElementById("profile-image-wrap");
+    const profileImage = document.getElementById("profile-image");
+    if (resume.profileImage && resume.profileImage.trim() !== "") {
+      profileImage.src = resume.profileImage;
+    } else {
+      profileImageWrap.style.display = "none";
+    }
 
     const relatedLinksPanel = document.getElementById("related-links-panel");
     const relatedLinks = document.getElementById("related-links");
