@@ -33,7 +33,7 @@ const resume = {
     {
       name: "Cinema Ticketing Website",
       description:
-        "Built a full-stack movie booking system with dynamic seat selection, timed seat holds, concurrency-safe reservation logic, checkout flow, and reusable card handling (Django backend, modern frontend, Supabase). \n **If not working connect me to allow use",
+        "Built a full-stack movie booking system with dynamic seat selection, timed seat holds, concurrency-safe reservation logic, checkout flow, and reusable card handling (Django backend, modern frontend, Supabase). \n **If it isn't working- reach out to me to allow use",
       link: "https://film-hub-theta.vercel.app/",
     },
     {
