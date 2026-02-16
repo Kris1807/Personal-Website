@@ -8,10 +8,7 @@ const resume = {
   relatedLinks: [
     { label: "Thesis Sources", url: "thesis-sources.html" },
     { label: "GitHub Profile", url: "https://github.com/Kris1807" },
-    {
-      label: "Personal Website Repo",
-      url: "https://github.com/Kris1807/Personal-Website",
-    },
+    { label: "Patient Record App", url: "https://keepatients.vercel.app/" },
     { label: "Film Hub Demo", url: "https://film-hub-theta.vercel.app/" },
   ],
   contact: [
