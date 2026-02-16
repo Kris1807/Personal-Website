@@ -8,113 +8,177 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;600;700&family=Fraunces:opsz,wght@9..144,600&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="styles.css" />
+  <style>
+    .thesis-grid {
+      display: grid;
+      gap: 1rem;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+
+    .entry {
+      margin-bottom: 0.9rem;
+      padding-bottom: 0.7rem;
+      border-bottom: 1px solid var(--border);
+    }
+
+    .entry:last-child {
+      margin-bottom: 0;
+      padding-bottom: 0;
+      border-bottom: none;
+    }
+
+    .entry h3 {
+      margin-bottom: 0.3rem;
+    }
+
+    .entry p {
+      margin-bottom: 0.4rem;
+    }
+
+    .entry a {
+      color: var(--accent);
+      font-weight: 600;
+      text-decoration: none;
+    }
+
+    .constraint-svg {
+      width: 100%;
+      height: auto;
+      display: block;
+      margin-top: 0.5rem;
+    }
+
+    .proposal-link {
+      display: inline-block;
+      padding: 0.55rem 0.85rem;
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      color: var(--accent);
+      font-weight: 700;
+      text-decoration: none;
+      background: #efe9dc;
+    }
+
+    @media (max-width: 900px) {
+      .thesis-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+  </style>
 </head>
 <body>
   <header class="hero">
     <p class="eyebrow">Research Workspace</p>
     <h1>Thesis Sources</h1>
-    <p>
-      Working page for sources, papers, and references related to my thesis.
-      This page is structured so I can continuously add, compare, and prioritize sources.
-    </p>
+    <p>Structured page for thesis references, tools, datasets, constraints, and proposal files.</p>
     <div class="contact">
       <a href="index.html">Back to Main Website</a>
     </div>
   </header>
 
-  <main class="grid">
+  <main class="hero thesis-grid">
     <section>
-      <h2>Thesis Focus</h2>
+      <h2>Background Researches</h2>
       <article class="card">
-        <h3>Working Topic</h3>
-        <p>Define your thesis statement here in 1-2 sentences.</p>
-      </article>
-      <article class="card">
-        <h3>Current Scope</h3>
-        <ul>
-          <li>Primary domain:</li>
-          <li>Target problem:</li>
-          <li>Expected contribution:</li>
-        </ul>
+        <div class="entry">
+          <h3>Headline</h3>
+          <a href="#">Link</a>
+        </div>
+        <div class="entry">
+          <h3>Headline</h3>
+          <a href="#">Link</a>
+        </div>
       </article>
     </section>
 
     <section>
-      <h2>Research Questions</h2>
+      <h2>Related Researches</h2>
       <article class="card">
-        <ul>
-          <li>RQ1:</li>
-          <li>RQ2:</li>
-          <li>RQ3:</li>
-        </ul>
+        <div class="entry">
+          <h3>Headline</h3>
+          <a href="#">Link</a>
+        </div>
+        <div class="entry">
+          <h3>Headline</h3>
+          <a href="#">Link</a>
+        </div>
       </article>
     </section>
 
     <section>
-      <h2>Priority Sources</h2>
+      <h2>Optional Packages + Advantages / Disadvantages</h2>
       <article class="card">
-        <h3>Source #1</h3>
-        <p class="meta">Author(s) | Year | Venue</p>
-        <ul>
-          <li>Main finding:</li>
-          <li>How it supports my thesis:</li>
-          <li>Limitations:</li>
-          <li>Citation link:</li>
-        </ul>
-      </article>
-      <article class="card">
-        <h3>Source #2</h3>
-        <p class="meta">Author(s) | Year | Venue</p>
-        <ul>
-          <li>Main finding:</li>
-          <li>How it supports my thesis:</li>
-          <li>Limitations:</li>
-          <li>Citation link:</li>
-        </ul>
+        <div class="entry">
+          <h3>Package Name</h3>
+          <a href="#">Package Link</a>
+          <ul>
+            <li>Advantage:</li>
+            <li>Disadvantage:</li>
+          </ul>
+        </div>
+        <div class="entry">
+          <h3>Package Name</h3>
+          <a href="#">Package Link</a>
+          <ul>
+            <li>Advantage:</li>
+            <li>Disadvantage:</li>
+          </ul>
+        </div>
       </article>
     </section>
 
     <section>
-      <h2>Source Backlog</h2>
+      <h2>Related Data Sets</h2>
       <article class="card">
-        <h3>To Read Next</h3>
-        <ul>
-          <li>Paper/Article:</li>
-          <li>Why it matters:</li>
-          <li>Priority: High / Medium / Low</li>
-        </ul>
-      </article>
-      <article class="card">
-        <h3>Potential Datasets / Repos</h3>
-        <ul>
-          <li>Name:</li>
-          <li>Use case:</li>
-          <li>Link:</li>
-        </ul>
+        <div class="entry">
+          <h3>Data Set Name</h3>
+          <a href="#">Data Set Link</a>
+          <p><strong>Explanation:</strong> </p>
+          <p><strong>Language:</strong> </p>
+        </div>
+        <div class="entry">
+          <h3>Data Set Name</h3>
+          <a href="#">Data Set Link</a>
+          <p><strong>Explanation:</strong> </p>
+          <p><strong>Language:</strong> </p>
+        </div>
       </article>
     </section>
 
     <section>
-      <h2>Notes and Insights</h2>
+      <h2>Constraint Lists</h2>
       <article class="card">
-        <h3>Comparative Notes</h3>
-        <p>Add cross-paper comparisons and contradictions here.</p>
-      </article>
-      <article class="card">
-        <h3>Methodology Notes</h3>
-        <p>Track methods, models, metrics, and evaluation strategies.</p>
+        <svg class="constraint-svg" viewBox="0 0 720 260" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Constraints diagram">
+          <defs>
+            <marker id="arrow" markerWidth="8" markerHeight="8" refX="7" refY="4" orient="auto" markerUnits="strokeWidth">
+              <path d="M0,0 L8,4 L0,8 z" fill="#5f6158" />
+            </marker>
+          </defs>
+
+          <rect x="285" y="25" width="150" height="54" rx="10" fill="#efe9dc" stroke="#ddd3bd" />
+          <text x="360" y="58" text-anchor="middle" font-family="Space Grotesk, sans-serif" font-size="20" fill="#1e1f1c">Constraints</text>
+
+          <rect x="60" y="165" width="170" height="52" rx="10" fill="#fffdf8" stroke="#e2ddd1" />
+          <text x="145" y="196" text-anchor="middle" font-family="Space Grotesk, sans-serif" font-size="20" fill="#1e1f1c">Doctors</text>
+
+          <rect x="275" y="165" width="170" height="52" rx="10" fill="#fffdf8" stroke="#e2ddd1" />
+          <text x="360" y="196" text-anchor="middle" font-family="Space Grotesk, sans-serif" font-size="20" fill="#1e1f1c">Patients</text>
+
+          <rect x="490" y="165" width="170" height="52" rx="10" fill="#fffdf8" stroke="#e2ddd1" />
+          <text x="575" y="196" text-anchor="middle" font-family="Space Grotesk, sans-serif" font-size="20" fill="#1e1f1c">Schedules</text>
+
+          <line x1="320" y1="79" x2="165" y2="165" stroke="#5f6158" stroke-width="2" marker-end="url(#arrow)" />
+          <line x1="360" y1="79" x2="360" y2="165" stroke="#5f6158" stroke-width="2" marker-end="url(#arrow)" />
+          <line x1="400" y1="79" x2="555" y2="165" stroke="#5f6158" stroke-width="2" marker-end="url(#arrow)" />
+        </svg>
       </article>
     </section>
 
     <section>
-      <h2>Next Actions</h2>
+      <h2>Proposal</h2>
       <article class="card">
-        <ul>
-          <li>[ ] Add 5 foundational sources</li>
-          <li>[ ] Define final thesis statement draft</li>
-          <li>[ ] Narrow methodology options</li>
-          <li>[ ] Build initial bibliography</li>
-        </ul>
+        <p>Download current proposal PDF:</p>
+        <a class="proposal-link" href="thesis-proposal.pdf" download>Download Proposal (.pdf)</a>
       </article>
     </section>
   </main>
