@@ -1,91 +1,133 @@
 const resume = {
   name: "Kristian Pitshugin",
   title:
-    "Athlete | Computer Science BS & AI MS Student | Researcher | Full-Stack Developer ",
+    "Athlete | Computer Science B.S. | AI M.S. Student | Researcher | Full-Stack Developer",
   profileImage: "profile.JPG",
   summary:
-    "UGA Double Dawgs Computer Science and AI student focused on building reliable full-stack products and real-world systems. Experience includes leading research development at UGA CoolDawgs VIPR, designing concurrency-aware booking and data workflows, and delivering production-style applications in React, Node.js, Django, and Java.",
+    "Computer Science graduate and Double Dawgs M.S. in Artificial Intelligence student focused on full-stack product development, healthcare-oriented research, and data-driven systems. Experience spans CoolDawgs VIPR research, scheduling and records platforms, and production-style applications built with React, Next.js, Django, Supabase, and PostgreSQL.",
   relatedLinks: [
     { label: "Thesis Sources", url: "thesis-sources.html" },
     { label: "GitHub Profile", url: "https://github.com/Kris1807" },
     { label: "Patient Record App", url: "https://keepatients.vercel.app/" },
+    { label: "Roster Lab App", url: "https://swimming-stats.vercel.app/" },
     { label: "Film Hub Demo", url: "https://film-hub-theta.vercel.app/" },
   ],
   contact: [
     { label: "krispitshugin@gmail.com", url: "mailto:krispitshugin@gmail.com" },
-    { label: "kp39596@uga.edu", url: "mailto:kp39596@uga.edu" },
-    { label: "Phone", url: "tel:+17065108226" },
+    {
+      label: "Kristian.pitshugin@uga.edu",
+      url: "mailto:Kristian.pitshugin@uga.edu",
+    },
+    { label: "052-6335738", url: "tel:+972526335738" },
     { label: "GitHub", url: "https://github.com/Kris1807" },
   ],
   experience: [
     {
-      role: "Team Leader & Developer (Research)",
+      role: "Research Developer & Team Leader",
       company: "CoolDawgs VIPR, University of Georgia",
-      period: "2024 - Present",
+      period: "Two-term VIPR research appointment",
       description:
-        "Developed app and sensor systems as a VIPR researcher under Drs. Barnes and Ramaswamy; led team execution in a following term with focus on delivery and technical coordination.",
+        "Built app and sensor systems under Drs. Barnes and Ramaswamy, then led the following term's delivery and technical execution.",
+      highlights: [
+        "Developer of app and sensor systems for one term as a CoolDawgs VIPR researcher.",
+        "Team leader and developer of app and sensor systems for the following term.",
+        'Received a **Best Paper** award with the CoolDawgs lead team at CURO.',
+      ],
     },
   ],
   projects: [
     {
       name: "Cinema Ticketing Website",
-      description:
-        "Built a full-stack movie booking system with dynamic seat selection, timed seat holds, concurrency-safe reservation logic, checkout flow, and reusable card handling (Django backend, modern frontend, Supabase). \n **If it isn't working- reach out to me to allow use",
+      description: "Full-stack developer.",
+      highlights: [
+        "Developed a full-stack movie ticket booking platform with dynamic seat selection, checkout flow, and reservation logic.",
+        "Implemented seat states including available, held, and booked to prevent double-booking and handle concurrent users.",
+        "Designed server-side temporary seat holds that automatically expire if checkout is not completed.",
+        "Contributed frontend components for booking, payment, saved cards, navigation, and user interaction.",
+      ],
       link: "https://film-hub-theta.vercel.app/",
     },
     {
       name: "Patient Record App",
-      description:
-        "Designed and implemented a full-stack medical records app (React + Node.js) with patient CRUD, diagnosis/treatment tracking, PDF export, and safe-delete safeguards for data integrity.",
-      link: "",
+      description: "Full-stack medical records platform.",
+      highlights: [
+        "Built a secure patient record management system for patient intake, treatment sessions, appointments, and PDF exports.",
+        "Implemented authentication, row-level security, patient search/filtering, automatic age calculation, and session numbering.",
+        "Designed relational database schemas for patients, reports, and appointments with protected multi-user access.",
+        "Added reusable clinical note templates and PDF summary exports, including support for Hebrew notes.",
+        "Stack: React/Next.js, Supabase Auth, PostgreSQL.",
+      ],
+      link: "https://keepatients.vercel.app/",
     },
     {
-      name: "JavaFX API Integration App",
-      description:
-        "Developed a desktop JavaFX app integrating external APIs for currency conversion and game discovery, with asynchronous data loading, JSON parsing, and responsive navigation UI.",
-      link: "",
+      name: "Roster Lab App",
+      description: "Full-stack developer.",
+      highlights: [
+        "Developed a swim team recruiting and roster analysis platform for managing athletes, commits, roster turnover, and recruiting priorities.",
+        "Built analytics for roster projections, team strength scoring, recruiting needs, and what-if recruit simulations.",
+        "Implemented searchable roster views, best-time tables, filtering/sorting, CSV/XLSX import, and CSV export.",
+        "Added shared authentication with role-based admin access for collaborative staff use.",
+        "Stack: Next.js, TypeScript, Tailwind CSS, Prisma, PostgreSQL.",
+      ],
+      link: "https://swimming-stats.vercel.app/",
+    },
+    {
+      name: "Personal Profile Website",
+      description: "GitHub Pages portfolio site.",
+      highlights: [
+        "Designed and deployed a responsive personal portfolio website using GitHub Pages.",
+        "Implemented modular, data-driven sections for education, experience, projects, honors, athletics, and skills.",
+        "Added dedicated page structure for thesis references and future academic source tracking.",
+        "Stack: HTML, CSS, JavaScript, Git, GitHub Pages.",
+      ],
+      link: "https://kris1807.github.io/Personal-Website/",
     },
   ],
   education: [
     {
+      degree: "Master of Science in Artificial Intelligence\nDouble Dawgs Program",
+      school: "University of Georgia, School of Computing",
+      period: "Expected December 2026",
+    },
+    {
       degree:
-        "B.S. Computer Science (Double Dawgs) + M.S. Artificial Intelligence (in progress)",
-      school: "University of Georgia, Athens, GA",
-      period: "May 2026 (B.S.) / December 2026 (M.S.)",
+        "Bachelor of Science in Computer Science\nArea of Emphasis in Artificial Intelligence",
+      school: "University of Georgia, School of Computing",
+      period: "Graduated May 2026",
     },
     {
       degree: "Minor in Business",
       school: "University of Georgia",
-      period: "Completed",
+      period: "Graduated May 2026",
     },
     {
-      degree: "GPA: 3.76/4.00 (Overall)\n 4.00/4.00 (Major relaited)",
-      school: "University of Georgia",
+      degree: "Relevant Coursework & Credentials",
+      school: "University of Georgia / Independent Study",
       period: "Current",
-    },
-    {
-      degree: "Google Cybersecurity Certificate (Self-Studied)",
-      school: "Independent Study",
-      period: "Completed",
+      details: [
+        "Google Cybersecurity Certificate",
+        "Swimming & Diving Team Scholarship",
+      ],
     },
   ],
   honors: [
     "Morton S. Hodgson, Jr. Men's Swimming and Diving Scholarship",
     "SEC Academic Honor Roll",
-    "University of Georgia Presidential Scholars Honors",
-    "J. Reid Parker Director of Athletics Honor Roll (multiple 4.0 semesters)",
+    "University of Georgia Presidential Scholars honors",
+    "J. Reid Parker Director of Athletics Honor Roll for receiving multiple 4.0 semesters",
+    "Best Paper award with the CoolDawgs lead team at CURO",
   ],
   athletics: [
     {
       organization: "UGA Swimming and Diving",
-      period: "August 2022 - Present",
+      period: "August 2022 - May 2025",
       achievements: [
         "All American for 2023 and 2025",
-        "Fastest 50Y breaststroke in school history",
         "8th place at the SEC conference",
         "6th and 8th place at NCAA as a relay swimmer",
-        "Part of school records in the 200 and 400 IM relays",
+        "Part of the school records in the 200 and 400 IM relays",
         "8th fastest result in the 100Y breaststroke",
+        "Fastest 50Y breaststroke in school history",
       ],
     },
     {
@@ -96,7 +138,7 @@ const resume = {
         "One of only three Israeli swimmers to make two semifinals at World Championships",
         "10th and 14th place at the World Championships 2022",
         "Two gold medals at Switzerland Olympic Trials competition",
-        "Part of two Israeli relay records for the national team",
+        "Part of 2 Israeli relay records for the national team",
       ],
     },
     {
@@ -104,8 +146,8 @@ const resume = {
       period: "September 2019 - Present",
       achievements: [
         "Only swimmer in club history to win a medal at European Championships",
-        "Israeli record holder in 3 individual events and 2 relay events",
-        "Israeli champion since 2020 (short course and long course)",
+        "Israeli record holder in 3 individual events and 2 additional relay events",
+        "Israeli champion since 2020 in both short-course and long-course pools",
       ],
     },
   ],
@@ -115,28 +157,43 @@ const resume = {
       items: [
         "Python",
         "Java",
-        "JavaFX",
         "C",
         "C++",
-        "React",
-        "React Native",
-        "Node.js",
-        "Django",
+        "JavaScript",
+        "TypeScript",
+        "SQL",
         "Assembly",
-        "HTML",
       ],
     },
     {
-      category: "Data Bases",
-      items: ["MongoDB", "PostgreSQL", "Supabase", "Firebase"],
+      category: "Frameworks / Libraries",
+      items: [
+        "React",
+        "React Native",
+        "Expo",
+        "JavaFX",
+        "Django",
+        "Node.js",
+        "Tailwind CSS",
+      ],
     },
     {
-      category: "Sensor Design",
-      items: ["KiCad", "Arduino"],
+      category: "Databases / Platforms",
+      items: [
+        "PostgreSQL",
+        "MongoDB",
+        "Supabase",
+        "Firebase",
+        "Firestore",
+      ],
+    },
+    {
+      category: "Tools / Hardware",
+      items: ["Git/GitHub", "Prisma", "Arduino", "KiCad"],
     },
     {
       category: "Languages",
-      items: ["Hebrew (Native)", "English (Fluent)", "Russian (Professional)"],
+      items: ["Hebrew - Native", "English - Fluent", "Russian - Professional"],
     },
   ],
 };

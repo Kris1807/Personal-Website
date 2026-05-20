@@ -121,18 +121,27 @@
     renderCards("experience", resume.experience, (i) => `
       <h3>${i.role} · ${i.company}</h3>
       <p class="meta">${i.period}</p>
-      <p>${formatText(i.description)}</p>
+      ${i.description ? `<p>${formatText(i.description)}</p>` : ""}
+      ${Array.isArray(i.highlights) && i.highlights.length > 0
+        ? `<ul>${i.highlights.map((item) => `<li>${formatText(item)}</li>`).join("")}</ul>`
+        : ""}
     `);
 
     renderCards("projects", resume.projects, (i) => `
       <h3>${i.name}</h3>
-      <p>${formatText(i.description)}</p>
+      ${i.description ? `<p>${formatText(i.description)}</p>` : ""}
+      ${Array.isArray(i.highlights) && i.highlights.length > 0
+        ? `<ul>${i.highlights.map((item) => `<li>${formatText(item)}</li>`).join("")}</ul>`
+        : ""}
       ${i.link ? `<p><a href="${i.link}" target="_blank" rel="noreferrer">View project</a></p>` : ""}
     `);
 
     renderCards("education", resume.education, (i) => `
       <h3>${formatText(i.degree)}</h3>
       <p class="meta">${i.school} · ${i.period}</p>
+      ${Array.isArray(i.details) && i.details.length > 0
+        ? `<ul>${i.details.map((item) => `<li>${formatText(item)}</li>`).join("")}</ul>`
+        : ""}
     `);
 
     renderCards("honors", resume.honors, (h) => `
