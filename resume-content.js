@@ -9,7 +9,10 @@ const resume = {
     { label: "Thesis Sources", url: "thesis-sources.html" },
     { label: "GitHub Profile", url: "https://github.com/Kris1807" },
     { label: "Patient Record App", url: "https://keepatients.vercel.app/" },
-    { label: "DoCompare", url: "https://docompare.vercel.app/" },
+    {
+      label: "DoCompare",
+      url: "https://do-compare-879rlbsk4-kris-projects-c44a0f3c.vercel.app/",
+    },
     { label: "Roster Lab App", url: "https://swimming-stats.vercel.app/" },
     { label: "Film Hub Demo", url: "https://film-hub-theta.vercel.app/" },
   ],
