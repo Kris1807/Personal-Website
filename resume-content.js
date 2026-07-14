@@ -7,23 +7,15 @@ const resume = {
     "Computer Science graduate and Double Dawgs M.S. in Artificial Intelligence student focused on full-stack product development, healthcare-oriented research, and data-driven systems. Experience spans AI application work, recruiting and roster-analysis platforms, and production-style applications built with React, Next.js, Django, Supabase, and PostgreSQL.",
   relatedLinks: [
     { label: "Thesis Sources", url: "thesis-sources.html" },
-    { label: "GitHub Profile", url: "https://github.com/Kris1807" },
-    { label: "Patient Record App", url: "https://keepatients.vercel.app/" },
-    {
-      label: "DoCompare",
-      url: "https://do-compare-879rlbsk4-kris-projects-c44a0f3c.vercel.app/",
-    },
-    { label: "Roster Lab App", url: "https://swimming-stats.vercel.app/" },
-    { label: "Film Hub Demo", url: "https://film-hub-theta.vercel.app/" },
   ],
   contact: [
     { label: "krispitshugin@gmail.com", url: "mailto:krispitshugin@gmail.com" },
     { label: "+972-52-633-5738", url: "tel:+972526335738" },
+    { label: "GitHub", url: "https://github.com/Kris1807" },
     {
       label: "LinkedIn",
       url: "https://www.linkedin.com/in/kristian-pitshugin-3461001a9/",
     },
-    { label: "GitHub", url: "https://github.com/Kris1807" },
   ],
   experience: [
     {
