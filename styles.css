@@ -118,7 +118,8 @@ li {
 
 .surface-hero {
   overflow: hidden;
-  background: linear-gradient(135deg, rgba(16, 33, 60, 0.14), rgba(248, 244, 237, 0.90));
+  background: linear-gradient(135deg, rgba(250, 246, 239, 0.98), rgba(232, 224, 212, 0.94));
+  border-color: rgba(214, 203, 186, 0.96);
 }
 
 .landing-shell {
