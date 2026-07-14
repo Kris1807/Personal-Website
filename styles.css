@@ -1,10 +1,10 @@
 :root {
-  --bg: #0c1830;
+  --bg: #071224;
   --panel: rgba(247, 243, 236, 0.95);
   --panel-strong: #fbf8f2;
   --text: #13213a;
   --muted: #50607a;
-  --accent: #16345f;
+  --accent: #102f5c;
   --accent-soft: #d9d3c9;
   --border: #cfc4b5;
   --shadow: 0 24px 64px rgba(7, 15, 31, 0.26);
@@ -24,8 +24,8 @@ body {
   color: var(--text);
   background:
     radial-gradient(circle at 12% -10%, rgba(217, 202, 176, 0.18) 0, transparent 34%),
-    radial-gradient(circle at 88% 6%, rgba(96, 126, 184, 0.30) 0, transparent 28%),
-    linear-gradient(180deg, rgba(18, 35, 65, 0.90), rgba(10, 22, 44, 0.98)),
+    radial-gradient(circle at 88% 6%, rgba(76, 108, 170, 0.36) 0, transparent 29%),
+    linear-gradient(180deg, rgba(14, 30, 58, 0.96), rgba(5, 13, 27, 0.995)),
     var(--bg);
   font-family: "Space Grotesk", sans-serif;
 }
@@ -101,7 +101,7 @@ li {
 
 .surface-hero {
   overflow: hidden;
-  background: linear-gradient(135deg, rgba(18, 35, 65, 0.08), rgba(248, 244, 237, 0.92));
+  background: linear-gradient(135deg, rgba(16, 33, 60, 0.14), rgba(248, 244, 237, 0.90));
 }
 
 .landing-shell {
