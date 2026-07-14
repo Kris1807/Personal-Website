@@ -4,7 +4,7 @@ const resume = {
     "Athlete | Computer Science B.S. | AI M.S. Student | Researcher | Full-Stack Developer",
   profileImage: "profile.JPG",
   summary:
-    "Computer Science graduate and Double Dawgs M.S. in Artificial Intelligence student focused on full-stack product development, healthcare-oriented research, and data-driven systems. Experience spans CoolDawgs VIPR research, scheduling and records platforms, and production-style applications built with React, Next.js, Django, Supabase, and PostgreSQL.",
+    "Computer Science graduate and Double Dawgs M.S. in Artificial Intelligence student focused on full-stack product development, healthcare-oriented research, and data-driven systems. Experience spans AI application work, recruiting and roster-analysis platforms, and production-style applications built with React, Next.js, Django, Supabase, and PostgreSQL.",
   relatedLinks: [
     { label: "Thesis Sources", url: "thesis-sources.html" },
     { label: "GitHub Profile", url: "https://github.com/Kris1807" },
@@ -22,20 +22,34 @@ const resume = {
       label: "Kristian.pitshugin@uga.edu",
       url: "mailto:Kristian.pitshugin@uga.edu",
     },
-    { label: "052-6335738", url: "tel:+972526335738" },
+    { label: "+972-52-633-5738", url: "tel:+972526335738" },
     { label: "GitHub", url: "https://github.com/Kris1807" },
   ],
   experience: [
     {
-      role: "Research Developer & Team Leader",
-      company: "CoolDawgs VIPR, University of Georgia",
-      period: "Two-term VIPR research appointment",
-      description:
-        "Built app and sensor systems under Drs. Barnes and Ramaswamy, then led the following term's delivery and technical execution.",
+      role: "AI & App Development Intern",
+      company: "IntelliVerse",
+      period: "Remote | July 2026 - Present",
       highlights: [
-        "Developer of app and sensor systems for one term as a CoolDawgs VIPR researcher.",
-        "Team leader and developer of app and sensor systems for the following term.",
-        'Received a **Best Paper** award with the CoolDawgs lead team at CURO.',
+        "Contribute to the development, testing, and improvement of AI-driven application features and technical workflows in collaboration with the development team.",
+      ],
+    },
+    {
+      role: "App Developer / Incoming Graduate Assistant",
+      company: "University of Georgia Swimming & Diving",
+      period: "Athens, GA | April 2026 - Present",
+      highlights: [
+        "Develop a recruiting and roster-analysis application with athlete management, roster projections, recruiting priorities, and collaborative staff tools.",
+        "Begin a formal Graduate Assistant appointment in August 2026, supporting team operations and athlete development.",
+      ],
+    },
+    {
+      role: "Team Lead & Mobile Developer",
+      company: "CoolDawgs Research Team, University of Georgia",
+      period: "Athens, GA | Aug 2025 - May 2026",
+      highlights: [
+        "Led development of a React Native application that collected and visualized data from Bluetooth-connected environmental sensors.",
+        "Built temperature summaries and interactive charts for multidisciplinary research recognized with the CURO Best Paper Award.",
       ],
     },
   ],
@@ -64,6 +78,17 @@ const resume = {
       link: "https://keepatients.vercel.app/",
     },
     {
+      name: "DoCompare",
+      description: "Document comparison web application.",
+      highlights: [
+        "Built a lightweight web app for comparing two legal-style documents side by side.",
+        "Added protected account access so document data is only visible after sign-in.",
+        "Implemented quoted-difference review, downloadable reports, and per-user cached comparisons.",
+        "Supports PDF, DOCX, TXT, and Markdown uploads with Supabase-backed storage workflows.",
+      ],
+      link: "https://do-compare-879rlbsk4-kris-projects-c44a0f3c.vercel.app/",
+    },
+    {
       name: "Roster Lab App",
       description: "Full-stack developer.",
       highlights: [
@@ -74,6 +99,16 @@ const resume = {
         "Stack: Next.js, TypeScript, Tailwind CSS, Prisma, PostgreSQL.",
       ],
       link: "https://swimming-stats.vercel.app/",
+    },
+    {
+      name: "CNN Project",
+      description: "Deep learning and model evaluation project.",
+      highlights: [
+        "Built a convolutional neural network project centered on model training, evaluation, and iterative performance improvement.",
+        "Implemented supporting workflows for dataset handling, evaluation output, and model analysis.",
+        "Added Grad-CAM style visualization tooling to inspect how the model makes predictions.",
+      ],
+      link: "",
     },
     {
       name: "Personal Profile Website",
