@@ -106,7 +106,9 @@ function renderRelatedLinks() {
     link.className = "related-link";
     link.href = entry.url;
     link.textContent = entry.label;
-    if (isExternalLink(entry.url)) {
+    if (entry.download) {
+      link.download = entry.download === true ? "" : entry.download;
+    } else if (isExternalLink(entry.url)) {
       link.target = "_blank";
       link.rel = "noreferrer";
     }

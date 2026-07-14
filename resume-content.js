@@ -7,6 +7,11 @@ const resume = {
     "Computer Science graduate and Double Dawgs M.S. in Artificial Intelligence student focused on full-stack product development, healthcare-oriented research, and data-driven systems. Experience spans AI application work, recruiting and roster-analysis platforms, and production-style applications built with React, Next.js, Django, Supabase, and PostgreSQL.",
   relatedLinks: [
     { label: "Thesis Sources", url: "thesis-sources.html" },
+    {
+      label: "Resume PDF",
+      url: "Kristian-Pitshugin-Resume.pdf",
+      download: true,
+    },
   ],
   contact: [
     { label: "krispitshugin@gmail.com", url: "mailto:krispitshugin@gmail.com" },
