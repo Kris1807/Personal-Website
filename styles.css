@@ -122,6 +122,12 @@ li {
   border-color: rgba(214, 203, 186, 0.96);
 }
 
+.nav-card,
+.related-card {
+  background: linear-gradient(180deg, rgba(250, 246, 239, 0.99), rgba(236, 228, 216, 0.96));
+  border-color: rgba(214, 203, 186, 0.96);
+}
+
 .landing-shell {
   display: grid;
   gap: 1.4rem;
