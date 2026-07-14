@@ -3,161 +3,48 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title id="page-title">Portfolio</title>
+  <title>Kristian Pitshugin</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;600;700&family=Fraunces:opsz,wght@9..144,600&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Fraunces:opsz,wght@9..144,600;9..144,700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="styles.css" />
 </head>
-<body>
-  <div class="top-layout">
-    <header class="hero">
-      <p class="eyebrow" id="title"></p>
-      <h1 id="name"></h1>
-      <p id="summary"></p>
-      <div id="contact" class="contact"></div>
-    </header>
-
-    <aside class="right-rail">
-      <div id="profile-image-wrap" class="profile-image-wrap profile-card">
-        <img id="profile-image" class="profile-image" alt="Kristian Pitshugin profile photo" />
+<body data-page="landing">
+  <main class="landing-shell">
+    <section class="landing-hero card surface-hero">
+      <div class="landing-copy">
+        <p class="eyebrow" id="title"></p>
+        <h1 id="name"></h1>
+        <p class="lead" id="summary"></p>
+        <div id="contact" class="contact"></div>
       </div>
 
-      <section id="related-links-panel" class="related-links-panel">
-        <h2>Related Links</h2>
-        <div id="related-links"></div>
-      </section>
-    </aside>
-  </div>
+      <div class="landing-visual">
+        <div id="profile-image-wrap" class="profile-card hero-profile-card">
+          <img id="profile-image" class="profile-image" alt="Kristian Pitshugin profile photo" />
+        </div>
+      </div>
+    </section>
 
-  <main class="grid">
-    <section>
-      <h2>Experience</h2>
-      <div id="experience"></div>
+    <section class="card nav-card">
+      <div class="section-heading">
+        <p class="eyebrow">Explore</p>
+        <h2>Choose a section</h2>
+        <p>Each page focuses on one part of the story, so the site stays easy to browse and never feels overloaded.</p>
+      </div>
+      <div id="section-nav" class="button-grid"></div>
     </section>
-    <section>
-      <h2>Projects</h2>
-      <div id="projects"></div>
-    </section>
-    <section>
-      <h2>Education</h2>
-      <div id="education"></div>
-    </section>
-    <section>
-      <h2>Honors</h2>
-      <div id="honors"></div>
-    </section>
-    <section>
-      <h2>Athletics</h2>
-      <div id="athletics"></div>
-    </section>
-    <section>
-      <h2>Skills</h2>
-      <div id="skills"></div>
+
+    <section id="related-links-panel" class="card related-card">
+      <div class="section-heading compact-heading">
+        <p class="eyebrow">Links</p>
+        <h2>Related Links</h2>
+      </div>
+      <div id="related-links" class="related-grid"></div>
     </section>
   </main>
 
   <script src="resume-content.js"></script>
-  <script>
-    document.getElementById("page-title").textContent = `${resume.name} | ${resume.title}`;
-    document.getElementById("name").textContent = resume.name;
-    document.getElementById("title").textContent = resume.title;
-    document.getElementById("summary").textContent = resume.summary;
-
-    const contact = document.getElementById("contact");
-    resume.contact.forEach((c) => {
-      const a = document.createElement("a");
-      a.href = c.url;
-      a.textContent = c.label;
-      if (c.url.startsWith("http://") || c.url.startsWith("https://")) {
-        a.target = "_blank";
-        a.rel = "noreferrer";
-      }
-      contact.appendChild(a);
-    });
-
-
-    const profileImageWrap = document.getElementById("profile-image-wrap");
-    const profileImage = document.getElementById("profile-image");
-    if (resume.profileImage && resume.profileImage.trim() !== "") {
-      profileImage.src = resume.profileImage;
-    } else {
-      profileImageWrap.style.display = "none";
-    }
-
-    const relatedLinksPanel = document.getElementById("related-links-panel");
-    const relatedLinks = document.getElementById("related-links");
-    const formatText = (value) =>
-      String(value ?? "")
-        .replace(/\*\*(.*?)\*\*/g, "<strong>$1</strong>")
-        .replace(/\n/g, "<br>");
-
-    if (Array.isArray(resume.relatedLinks) && resume.relatedLinks.length > 0) {
-      resume.relatedLinks.forEach((link) => {
-        const a = document.createElement("a");
-        a.className = "related-link";
-        a.href = link.url;
-        a.textContent = link.label;
-        if (link.url.startsWith("http://") || link.url.startsWith("https://")) {
-          a.target = "_blank";
-          a.rel = "noreferrer";
-        }
-        relatedLinks.appendChild(a);
-      });
-    } else {
-      relatedLinksPanel.style.display = "none";
-    }
-
-    const renderCards = (id, items, mapFn) => {
-      const root = document.getElementById(id);
-      items.forEach((item) => {
-        const article = document.createElement("article");
-        article.className = "card";
-        article.innerHTML = mapFn(item);
-        root.appendChild(article);
-      });
-    };
-
-    renderCards("experience", resume.experience, (i) => `
-      <h3>${i.role} · ${i.company}</h3>
-      <p class="meta">${i.period}</p>
-      ${i.description ? `<p>${formatText(i.description)}</p>` : ""}
-      ${Array.isArray(i.highlights) && i.highlights.length > 0
-        ? `<ul>${i.highlights.map((item) => `<li>${formatText(item)}</li>`).join("")}</ul>`
-        : ""}
-    `);
-
-    renderCards("projects", resume.projects, (i) => `
-      <h3>${i.name}</h3>
-      ${i.description ? `<p>${formatText(i.description)}</p>` : ""}
-      ${Array.isArray(i.highlights) && i.highlights.length > 0
-        ? `<ul>${i.highlights.map((item) => `<li>${formatText(item)}</li>`).join("")}</ul>`
-        : ""}
-      ${i.link ? `<p><a href="${i.link}" target="_blank" rel="noreferrer">View project</a></p>` : ""}
-    `);
-
-    renderCards("education", resume.education, (i) => `
-      <h3>${formatText(i.degree)}</h3>
-      <p class="meta">${i.school} · ${i.period}</p>
-      ${Array.isArray(i.details) && i.details.length > 0
-        ? `<ul>${i.details.map((item) => `<li>${formatText(item)}</li>`).join("")}</ul>`
-        : ""}
-    `);
-
-    renderCards("honors", resume.honors, (h) => `
-      <p>${formatText(h)}</p>
-    `);
-
-    renderCards("athletics", resume.athletics, (a) => `
-      <h3>${a.organization}</h3>
-      <p class="meta">${a.period}</p>
-      <ul>${a.achievements.map((item) => `<li>${item}</li>`).join("")}</ul>
-    `);
-
-    renderCards("skills", resume.skills, (group) => `
-      <h3>${group.category}</h3>
-      <div class="chips">${group.items.map((item) => `<span class="chip">${item}</span>`).join("")}</div>
-    `);
-  </script>
+  <script src="site.js"></script>
 </body>
 </html>
