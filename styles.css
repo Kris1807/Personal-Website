@@ -134,7 +134,24 @@ li {
 }
 
 .landing-copy {
-  padding: 0.8rem;
+  padding: 1.15rem 1.2rem;
+  background: linear-gradient(180deg, rgba(252, 248, 241, 0.88), rgba(235, 227, 214, 0.78));
+  border: 1px solid rgba(215, 204, 186, 0.9);
+  border-radius: 24px;
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.45);
+}
+
+.landing-copy .eyebrow {
+  color: #1d4778;
+}
+
+.landing-copy h1 {
+  color: #102644;
+  text-shadow: 0 1px 0 rgba(255, 255, 255, 0.2);
+}
+
+.landing-copy .lead {
+  color: #41526d;
 }
 
 .landing-visual {
@@ -425,7 +442,7 @@ li {
   }
 
   .landing-copy {
-    padding: 1.2rem 1.1rem 1.2rem 1.35rem;
+    padding: 1.25rem 1.25rem 1.25rem 1.35rem;
   }
 }
 
