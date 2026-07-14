@@ -1,13 +1,13 @@
 :root {
-  --bg: #e9e4db;
-  --panel: rgba(247, 243, 236, 0.94);
+  --bg: #0c1830;
+  --panel: rgba(247, 243, 236, 0.95);
   --panel-strong: #fbf8f2;
   --text: #13213a;
   --muted: #50607a;
   --accent: #16345f;
   --accent-soft: #d9d3c9;
   --border: #cfc4b5;
-  --shadow: 0 20px 56px rgba(14, 28, 52, 0.11);
+  --shadow: 0 24px 64px rgba(7, 15, 31, 0.26);
 }
 
 * {
@@ -23,9 +23,9 @@ body {
   min-height: 100vh;
   color: var(--text);
   background:
-    radial-gradient(circle at 10% -8%, rgba(209, 197, 178, 0.92) 0, transparent 35%),
-    radial-gradient(circle at 90% 6%, rgba(57, 83, 124, 0.26) 0, transparent 30%),
-    linear-gradient(180deg, rgba(248, 244, 237, 0.7), rgba(233, 228, 219, 0.35)),
+    radial-gradient(circle at 12% -10%, rgba(217, 202, 176, 0.18) 0, transparent 34%),
+    radial-gradient(circle at 88% 6%, rgba(96, 126, 184, 0.30) 0, transparent 28%),
+    linear-gradient(180deg, rgba(18, 35, 65, 0.90), rgba(10, 22, 44, 0.98)),
     var(--bg);
   font-family: "Space Grotesk", sans-serif;
 }
