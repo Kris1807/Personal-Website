@@ -18,11 +18,11 @@ const resume = {
   ],
   contact: [
     { label: "krispitshugin@gmail.com", url: "mailto:krispitshugin@gmail.com" },
-    {
-      label: "Kristian.pitshugin@uga.edu",
-      url: "mailto:Kristian.pitshugin@uga.edu",
-    },
     { label: "+972-52-633-5738", url: "tel:+972526335738" },
+    {
+      label: "LinkedIn",
+      url: "https://www.linkedin.com/in/kristian-pitshugin-3461001a9/",
+    },
     { label: "GitHub", url: "https://github.com/Kris1807" },
   ],
   experience: [
