@@ -252,6 +252,7 @@ li {
 }
 
 .page-hero {
+  margin-bottom: 1.6rem;
   background: linear-gradient(135deg, rgba(18, 38, 71, 0.22), rgba(247, 243, 236, 0.94));
   border-color: rgba(174, 186, 209, 0.55);
   box-shadow: 0 24px 70px rgba(5, 13, 27, 0.22);
