@@ -27,6 +27,8 @@ const resume = {
       role: "AI & App Development Intern",
       company: "IntelliVerse",
       period: "Remote | July 2026 - Present",
+      image: "assets/experience/intelliverse.jpeg",
+      imageAlt: "IntelliVerse visual mark.",
       highlights: [
         "Contribute to the development, testing, and improvement of AI-driven application features and technical workflows in collaboration with the development team.",
       ],
@@ -35,6 +37,8 @@ const resume = {
       role: "App Developer / Incoming Graduate Assistant",
       company: "University of Georgia Swimming & Diving",
       period: "Athens, GA | April 2026 - Present",
+      image: "assets/experience/uga.png",
+      imageAlt: "University of Georgia logo.",
       highlights: [
         "Develop a recruiting and roster-analysis application with athlete management, roster projections, recruiting priorities, and collaborative staff tools.",
         "Begin a formal Graduate Assistant appointment in August 2026, supporting team operations and athlete development.",
@@ -44,6 +48,8 @@ const resume = {
       role: "Team Lead & Mobile Developer",
       company: "CoolDawgs Research Team, University of Georgia",
       period: "Athens, GA | Aug 2025 - May 2026",
+      image: "assets/experience/cooldawgs.png",
+      imageAlt: "CoolDawgs research team logo.",
       highlights: [
         "Led development of a React Native application that collected and visualized data from Bluetooth-connected environmental sensors.",
         "Built temperature summaries and interactive charts for multidisciplinary research recognized with the CURO Best Paper Award.",

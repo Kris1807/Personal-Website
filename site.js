@@ -158,6 +158,13 @@ function renderExperience(root) {
   resume.experience.forEach((item) => {
     root.appendChild(
       createCard(`
+        ${item.image ? `
+          <div class="experience-media-wrap">
+            <div class="experience-media-frame">
+              <img class="experience-media" src="${item.image}" alt="${item.imageAlt || `${item.company} visual`}" loading="lazy" decoding="async" />
+            </div>
+          </div>
+        ` : ""}
         <h2>${item.role} · ${item.company}</h2>
         <p class="meta">${item.period}</p>
         ${item.description ? `<p>${formatText(item.description)}</p>` : ""}
