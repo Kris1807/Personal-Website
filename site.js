@@ -216,6 +216,32 @@ function renderAthletics(root) {
   });
 }
 
+function renderAthleticsGallery(root) {
+  if (!Array.isArray(resume.athleticsGallery) || resume.athleticsGallery.length === 0) return;
+
+  const section = document.createElement("section");
+  section.className = "card detail-card athletics-gallery-card";
+  section.innerHTML = `
+    <div class="compact-heading">
+      <p class="eyebrow">Photo Highlights</p>
+      <h2>Athletics Gallery</h2>
+      <p class="gallery-copy">Selected race-day, national-team, and college competition moments.</p>
+    </div>
+    <div class="athletics-gallery-track">
+      ${resume.athleticsGallery
+        .map(
+          (item) => `
+            <figure class="athletics-gallery-item">
+              <img src="${item.src}" alt="${item.alt}" loading="lazy" decoding="async" />
+            </figure>
+          `
+        )
+        .join("")}
+    </div>
+  `;
+  root.appendChild(section);
+}
+
 function renderSkills(root) {
   resume.skills.forEach((item) => {
     root.appendChild(
@@ -247,7 +273,10 @@ function renderSectionPage(sectionKey) {
   if (sectionKey === "education") renderEducation(content);
   if (sectionKey === "projects") renderProjects(content);
   if (sectionKey === "honors") renderHonors(content);
-  if (sectionKey === "athletics") renderAthletics(content);
+  if (sectionKey === "athletics") {
+    renderAthletics(content);
+    renderAthleticsGallery(content);
+  }
   if (sectionKey === "skills") renderSkills(content);
 }
 

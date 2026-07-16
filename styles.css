@@ -404,6 +404,62 @@ li {
   font-size: 0.94rem;
 }
 
+.athletics-gallery-card {
+  overflow: hidden;
+}
+
+.athletics-gallery-card h2 {
+  margin-bottom: 0.3rem;
+}
+
+.gallery-copy {
+  margin-bottom: 0;
+  color: var(--muted);
+}
+
+.athletics-gallery-track {
+  display: flex;
+  gap: 0.9rem;
+  margin-top: 1.15rem;
+  overflow-x: auto;
+  padding-bottom: 0.4rem;
+  scroll-snap-type: x proximity;
+  scrollbar-width: thin;
+  scrollbar-color: rgba(62, 84, 118, 0.55) rgba(222, 226, 234, 0.6);
+}
+
+.athletics-gallery-track::-webkit-scrollbar {
+  height: 10px;
+}
+
+.athletics-gallery-track::-webkit-scrollbar-track {
+  background: rgba(222, 226, 234, 0.72);
+  border-radius: 999px;
+}
+
+.athletics-gallery-track::-webkit-scrollbar-thumb {
+  background: rgba(62, 84, 118, 0.55);
+  border-radius: 999px;
+}
+
+.athletics-gallery-item {
+  flex: 0 0 auto;
+  margin: 0;
+  border: 1px solid rgba(130, 150, 182, 0.38);
+  border-radius: 22px;
+  overflow: hidden;
+  background: rgba(245, 241, 234, 0.9);
+  box-shadow: 0 14px 28px rgba(7, 15, 31, 0.12);
+  scroll-snap-align: start;
+}
+
+.athletics-gallery-item img {
+  display: block;
+  height: clamp(220px, 31vw, 340px);
+  width: auto;
+  max-width: none;
+}
+
 .thesis-grid {
   display: grid;
   gap: 1rem;

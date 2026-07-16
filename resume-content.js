@@ -188,6 +188,56 @@ const resume = {
       ],
     },
   ],
+  athleticsGallery: [
+    {
+      src: "assets/athletics/athletics-01.jpeg",
+      alt: "Kristian Pitshugin holding a European Championships medal.",
+    },
+    {
+      src: "assets/athletics/athletics-02.jpeg",
+      alt: "Kristian Pitshugin flexing poolside after competition.",
+    },
+    {
+      src: "assets/athletics/athletics-03.jpeg",
+      alt: "Kristian Pitshugin smiling in the pool after a race.",
+    },
+    {
+      src: "assets/athletics/athletics-04.jpeg",
+      alt: "Kristian Pitshugin racing breaststroke in competition.",
+    },
+    {
+      src: "assets/athletics/athletics-05.jpeg",
+      alt: "Kristian Pitshugin powering through a breaststroke race.",
+    },
+    {
+      src: "assets/athletics/athletics-06.jpeg",
+      alt: "Overhead action shot of Kristian Pitshugin in the pool during competition.",
+    },
+    {
+      src: "assets/athletics/athletics-07.jpeg",
+      alt: "Kristian Pitshugin focused before a race in UGA gear.",
+    },
+    {
+      src: "assets/athletics/athletics-08.jpeg",
+      alt: "Kristian Pitshugin seated on deck before competition.",
+    },
+    {
+      src: "assets/athletics/athletics-09.jpeg",
+      alt: "Kristian Pitshugin walking onto the World Aquatics competition deck.",
+    },
+    {
+      src: "assets/athletics/athletics-10.jpeg",
+      alt: "Kristian Pitshugin waving at the European Championships venue.",
+    },
+    {
+      src: "assets/athletics/athletics-11.jpeg",
+      alt: "Kristian Pitshugin at the wall after a race in the pool.",
+    },
+    {
+      src: "assets/athletics/athletics-12.jpeg",
+      alt: "Kristian Pitshugin racing breaststroke for Israel.",
+    },
+  ],
   skills: [
     {
       category: "Programming Languages",
