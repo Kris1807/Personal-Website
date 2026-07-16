@@ -258,6 +258,22 @@ li {
   box-shadow: 0 24px 70px rgba(5, 13, 27, 0.22);
 }
 
+.page-hero .eyebrow {
+  color: #183a67;
+}
+
+.page-hero h1 {
+  color: #0f2544;
+}
+
+.page-hero .section-lead {
+  color: #41526d;
+}
+
+.page-hero .back-link {
+  color: #173760;
+}
+
 .button-grid {
   display: grid;
   gap: 0.95rem;
