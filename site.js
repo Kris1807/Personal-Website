@@ -183,6 +183,34 @@ function renderEducation(root) {
   });
 }
 
+function renderPhotoGallery(root, options) {
+  const { items, eyebrow, title, copy } = options;
+  if (!Array.isArray(items) || items.length === 0) return;
+
+  const section = document.createElement("section");
+  section.className = "card detail-card section-gallery-card";
+  section.innerHTML = `
+    <div class="compact-heading">
+      <p class="eyebrow">${eyebrow}</p>
+      <h2>${title}</h2>
+      <p class="gallery-copy">${copy}</p>
+    </div>
+    <div class="section-gallery-track">
+      ${items
+        .map(
+          (item) => `
+            <figure class="section-gallery-item">
+              <img src="${item.src}" alt="${item.alt}" loading="lazy" decoding="async" />
+            </figure>
+          `
+        )
+        .join("")}
+    </div>
+  `;
+  root.appendChild(section);
+}
+
+
 function renderProjects(root) {
   resume.projects.forEach((item) => {
     root.appendChild(
@@ -216,30 +244,22 @@ function renderAthletics(root) {
   });
 }
 
-function renderAthleticsGallery(root) {
-  if (!Array.isArray(resume.athleticsGallery) || resume.athleticsGallery.length === 0) return;
+function renderEducationGallery(root) {
+  renderPhotoGallery(root, {
+    items: resume.educationGallery,
+    eyebrow: "Photo Highlights",
+    title: "Education Gallery",
+    copy: "Graduation and campus moments that represent the academic side of the story.",
+  });
+}
 
-  const section = document.createElement("section");
-  section.className = "card detail-card athletics-gallery-card";
-  section.innerHTML = `
-    <div class="compact-heading">
-      <p class="eyebrow">Photo Highlights</p>
-      <h2>Athletics Gallery</h2>
-      <p class="gallery-copy">Selected race-day, national-team, and college competition moments.</p>
-    </div>
-    <div class="athletics-gallery-track">
-      ${resume.athleticsGallery
-        .map(
-          (item) => `
-            <figure class="athletics-gallery-item">
-              <img src="${item.src}" alt="${item.alt}" loading="lazy" decoding="async" />
-            </figure>
-          `
-        )
-        .join("")}
-    </div>
-  `;
-  root.appendChild(section);
+function renderAthleticsGallery(root) {
+  renderPhotoGallery(root, {
+    items: resume.athleticsGallery,
+    eyebrow: "Photo Highlights",
+    title: "Athletics Gallery",
+    copy: "Selected race-day, national-team, and college competition moments.",
+  });
 }
 
 function renderSkills(root) {
@@ -270,7 +290,10 @@ function renderSectionPage(sectionKey) {
   renderSectionNav(sectionKey);
 
   if (sectionKey === "experience") renderExperience(content);
-  if (sectionKey === "education") renderEducation(content);
+  if (sectionKey === "education") {
+    renderEducation(content);
+    renderEducationGallery(content);
+  }
   if (sectionKey === "projects") renderProjects(content);
   if (sectionKey === "honors") renderHonors(content);
   if (sectionKey === "athletics") {

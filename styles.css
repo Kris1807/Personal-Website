@@ -404,11 +404,11 @@ li {
   font-size: 0.94rem;
 }
 
-.athletics-gallery-card {
+.section-gallery-card {
   overflow: hidden;
 }
 
-.athletics-gallery-card h2 {
+.section-gallery-card h2 {
   margin-bottom: 0.3rem;
 }
 
@@ -417,7 +417,7 @@ li {
   color: var(--muted);
 }
 
-.athletics-gallery-track {
+.section-gallery-track {
   display: flex;
   gap: 0.9rem;
   margin-top: 1.15rem;
@@ -428,21 +428,21 @@ li {
   scrollbar-color: rgba(62, 84, 118, 0.55) rgba(222, 226, 234, 0.6);
 }
 
-.athletics-gallery-track::-webkit-scrollbar {
+.section-gallery-track::-webkit-scrollbar {
   height: 10px;
 }
 
-.athletics-gallery-track::-webkit-scrollbar-track {
+.section-gallery-track::-webkit-scrollbar-track {
   background: rgba(222, 226, 234, 0.72);
   border-radius: 999px;
 }
 
-.athletics-gallery-track::-webkit-scrollbar-thumb {
+.section-gallery-track::-webkit-scrollbar-thumb {
   background: rgba(62, 84, 118, 0.55);
   border-radius: 999px;
 }
 
-.athletics-gallery-item {
+.section-gallery-item {
   flex: 0 0 auto;
   margin: 0;
   border: 1px solid rgba(130, 150, 182, 0.38);
@@ -453,7 +453,7 @@ li {
   scroll-snap-align: start;
 }
 
-.athletics-gallery-item img {
+.section-gallery-item img {
   display: block;
   height: clamp(220px, 31vw, 340px);
   width: auto;

@@ -146,6 +146,24 @@ const resume = {
       ],
     },
   ],
+  educationGallery: [
+    {
+      src: "assets/education/education-01.jpeg",
+      alt: "Kristian Pitshugin at graduation in cap and gown holding his diploma.",
+    },
+    {
+      src: "assets/education/education-02.jpeg",
+      alt: "Kristian Pitshugin at Sanford Stadium during graduation ceremonies.",
+    },
+    {
+      src: "assets/education/education-03.jpeg",
+      alt: "Kristian Pitshugin outside after graduation holding his diploma.",
+    },
+    {
+      src: "assets/education/education-04.jpeg",
+      alt: "Kristian Pitshugin under the University of Georgia arch in graduation attire.",
+    },
+  ],
   honors: [
     "Morton S. Hodgson, Jr. Men's Swimming and Diving Scholarship",
     "Carey Louis Davis Scholarship",
