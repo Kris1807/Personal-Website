@@ -148,6 +148,7 @@ const resume = {
   ],
   honors: [
     "Morton S. Hodgson, Jr. Men's Swimming and Diving Scholarship",
+    "Carey Louis Davis Scholarship",
     "SEC Academic Honor Roll",
     "University of Georgia Presidential Scholars honors",
     "J. Reid Parker Director of Athletics Honor Roll for receiving multiple 4.0 semesters",
