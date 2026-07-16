@@ -37,7 +37,7 @@ const resume = {
       role: "App Developer / Incoming Graduate Assistant",
       company: "University of Georgia Swimming & Diving",
       period: "Athens, GA | April 2026 - Present",
-      image: "assets/experience/uga.png",
+      image: "assets/experience/uga.webp",
       imageAlt: "University of Georgia logo.",
       highlights: [
         "Develop a recruiting and roster-analysis application with athlete management, roster projections, recruiting priorities, and collaborative staff tools.",

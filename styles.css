@@ -388,8 +388,17 @@ li {
   font-size: 0.95rem;
 }
 
+.experience-card-layout {
+  display: grid;
+  gap: 1rem;
+}
+
+.experience-copy {
+  min-width: 0;
+}
+
 .experience-media-wrap {
-  margin-bottom: 1rem;
+  align-self: start;
 }
 
 .experience-media-frame {
@@ -408,7 +417,7 @@ li {
   display: block;
   width: 100%;
   max-width: 260px;
-  max-height: 100px;
+  max-height: 120px;
   object-fit: contain;
 }
 
@@ -587,5 +596,12 @@ li {
   .section-nav,
   .thesis-links {
     gap: 0.6rem;
+  }
+}
+
+@media (min-width: 760px) {
+  .experience-card-layout {
+    grid-template-columns: minmax(0, 1fr) minmax(180px, 240px);
+    align-items: start;
   }
 }
