@@ -111,7 +111,7 @@ const resume = {
         "Implemented supporting workflows for dataset handling, evaluation output, and model analysis.",
         "Added Grad-CAM style visualization tooling to inspect how the model makes predictions.",
       ],
-      link: "",
+      link: "https://faceimp.onrender.com/",
     },
     {
       name: "Personal Profile Website",
