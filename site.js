@@ -53,6 +53,22 @@ const formatText = (value) =>
 
 const isExternalLink = (url) => url.startsWith("http://") || url.startsWith("https://");
 
+function applyRevealMotion(element, index = 0, step = 45) {
+  if (!element) return element;
+  element.classList.add("reveal-card");
+  element.style.setProperty("--reveal-delay", `${index * step}ms`);
+  return element;
+}
+
+function finalizePageLoad() {
+  const reveal = () => document.body.classList.remove("is-loading");
+  if (document.fonts && document.fonts.ready) {
+    document.fonts.ready.finally(() => requestAnimationFrame(reveal));
+  } else {
+    requestAnimationFrame(reveal);
+  }
+}
+
 function fillBasicIdentity() {
   document.title = `${resume.name}`;
 
@@ -62,13 +78,35 @@ function fillBasicIdentity() {
   const image = document.getElementById("profile-image");
   const imageWrap = document.getElementById("profile-image-wrap");
 
-  if (title) title.textContent = resume.title;
-  if (name) name.textContent = resume.name;
-  if (summary) summary.textContent = resume.summary;
+  if (title) {
+    title.textContent = resume.title;
+    title.classList.remove("skeleton-text", "skeleton-eyebrow");
+  }
+  if (name) {
+    name.textContent = resume.name;
+    name.classList.remove("skeleton-text", "skeleton-name");
+  }
+  if (summary) {
+    summary.textContent = resume.summary;
+    summary.classList.remove("skeleton-text", "skeleton-summary");
+  }
 
   if (image && imageWrap) {
     if (resume.profileImage && resume.profileImage.trim() !== "") {
+      const revealImage = () => {
+        image.hidden = false;
+        imageWrap.classList.remove("media-loading");
+      };
+      image.addEventListener("load", revealImage, { once: true });
+      image.addEventListener(
+        "error",
+        () => imageWrap.classList.remove("media-loading"),
+        { once: true }
+      );
       image.src = resume.profileImage;
+      if (image.complete) {
+        revealImage();
+      }
     } else {
       imageWrap.style.display = "none";
     }
@@ -79,7 +117,8 @@ function renderContact() {
   const root = document.getElementById("contact");
   if (!root) return;
 
-  resume.contact.forEach((entry) => {
+  root.innerHTML = "";
+  resume.contact.forEach((entry, index) => {
     const link = document.createElement("a");
     link.href = entry.url;
     link.textContent = entry.label;
@@ -87,7 +126,7 @@ function renderContact() {
       link.target = "_blank";
       link.rel = "noreferrer";
     }
-    root.appendChild(link);
+    root.appendChild(applyRevealMotion(link, index, 35));
   });
 }
 
@@ -101,7 +140,8 @@ function renderRelatedLinks() {
     return;
   }
 
-  resume.relatedLinks.forEach((entry) => {
+  root.innerHTML = "";
+  resume.relatedLinks.forEach((entry, index) => {
     const link = document.createElement("a");
     link.className = "related-link";
     link.href = entry.url;
@@ -112,7 +152,7 @@ function renderRelatedLinks() {
       link.target = "_blank";
       link.rel = "noreferrer";
     }
-    root.appendChild(link);
+    root.appendChild(applyRevealMotion(link, index));
   });
 }
 
@@ -120,13 +160,14 @@ function renderSectionNav(currentKey) {
   const root = document.getElementById("section-nav");
   if (!root) return;
 
-  sectionOrder.forEach((key) => {
+  root.innerHTML = "";
+  sectionOrder.forEach((key, index) => {
     const item = sectionMeta[key];
     const link = document.createElement("a");
     link.className = `section-pill${currentKey === key ? " is-active" : ""}`;
     link.href = item.href;
     link.textContent = item.label;
-    root.appendChild(link);
+    root.appendChild(applyRevealMotion(link, index, 28));
   });
 }
 
@@ -134,7 +175,8 @@ function renderLandingNav() {
   const root = document.getElementById("section-nav");
   if (!root) return;
 
-  sectionOrder.forEach((key) => {
+  root.innerHTML = "";
+  sectionOrder.forEach((key, index) => {
     const item = sectionMeta[key];
     const link = document.createElement("a");
     link.className = "nav-button";
@@ -143,21 +185,23 @@ function renderLandingNav() {
       <span class="nav-button-label">${item.label}</span>
       <span class="nav-button-copy">${item.description}</span>
     `;
-    root.appendChild(link);
+    root.appendChild(applyRevealMotion(link, index));
   });
 }
 
-function createCard(innerHtml) {
+function createCard(innerHtml, index = 0) {
   const article = document.createElement("article");
   article.className = "card detail-card";
   article.innerHTML = innerHtml;
-  return article;
+  return applyRevealMotion(article, index);
 }
 
 function renderExperience(root) {
-  resume.experience.forEach((item) => {
+  root.innerHTML = "";
+  resume.experience.forEach((item, index) => {
     root.appendChild(
-      createCard(`
+      createCard(
+        `
         <div class="experience-card-layout">
           <div class="experience-copy">
             <h2>${item.role} · ${item.company}</h2>
@@ -175,21 +219,27 @@ function renderExperience(root) {
             </div>
           ` : ""}
         </div>
-      `)
+      `,
+        index
+      )
     );
   });
 }
 
 function renderEducation(root) {
-  resume.education.forEach((item) => {
+  root.innerHTML = "";
+  resume.education.forEach((item, index) => {
     root.appendChild(
-      createCard(`
+      createCard(
+        `
         <h2>${formatText(item.degree)}</h2>
         <p class="meta">${item.school} · ${item.period}</p>
         ${Array.isArray(item.details) && item.details.length > 0
           ? `<ul>${item.details.map((entry) => `<li>${formatText(entry)}</li>`).join("")}</ul>`
           : ""}
-      `)
+      `,
+        index
+      )
     );
   });
 }
@@ -218,39 +268,47 @@ function renderPhotoGallery(root, options) {
         .join("")}
     </div>
   `;
-  root.appendChild(section);
+  root.appendChild(applyRevealMotion(section, root.children.length));
 }
 
-
 function renderProjects(root) {
-  resume.projects.forEach((item) => {
+  root.innerHTML = "";
+  resume.projects.forEach((item, index) => {
     root.appendChild(
-      createCard(`
+      createCard(
+        `
         <h2>${item.name}</h2>
         ${item.description ? `<p>${formatText(item.description)}</p>` : ""}
         ${Array.isArray(item.highlights) && item.highlights.length > 0
           ? `<ul>${item.highlights.map((entry) => `<li>${formatText(entry)}</li>`).join("")}</ul>`
           : ""}
         ${item.link ? `<a class="card-link" href="${item.link}" target="_blank" rel="noreferrer">Open project</a>` : ""}
-      `)
+      `,
+        index
+      )
     );
   });
 }
 
 function renderHonors(root) {
-  resume.honors.forEach((item) => {
-    root.appendChild(createCard(`<p>${formatText(item)}</p>`));
+  root.innerHTML = "";
+  resume.honors.forEach((item, index) => {
+    root.appendChild(createCard(`<p>${formatText(item)}</p>`, index));
   });
 }
 
 function renderAthletics(root) {
-  resume.athletics.forEach((item) => {
+  root.innerHTML = "";
+  resume.athletics.forEach((item, index) => {
     root.appendChild(
-      createCard(`
+      createCard(
+        `
         <h2>${item.organization}</h2>
         <p class="meta">${item.period}</p>
         <ul>${item.achievements.map((entry) => `<li>${formatText(entry)}</li>`).join("")}</ul>
-      `)
+      `,
+        index
+      )
     );
   });
 }
@@ -274,12 +332,16 @@ function renderAthleticsGallery(root) {
 }
 
 function renderSkills(root) {
-  resume.skills.forEach((item) => {
+  root.innerHTML = "";
+  resume.skills.forEach((item, index) => {
     root.appendChild(
-      createCard(`
+      createCard(
+        `
         <h2>${item.category}</h2>
         <div class="chips">${item.items.map((entry) => `<span class="chip">${entry}</span>`).join("")}</div>
-      `)
+      `,
+        index
+      )
     );
   });
 }
@@ -322,12 +384,15 @@ function init() {
   if (pageType === "landing") {
     renderLandingNav();
     renderRelatedLinks();
+    finalizePageLoad();
     return;
   }
 
   if (pageType === "section") {
     renderSectionPage(document.body.dataset.section);
   }
+
+  finalizePageLoad();
 }
 
 init();
