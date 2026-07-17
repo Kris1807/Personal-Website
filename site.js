@@ -244,6 +244,79 @@ function renderEducation(root) {
   });
 }
 
+function setupRotatingGallery(section) {
+  const prefersReducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+  const track = section.querySelector(".section-gallery-track");
+  const slides = Array.from(section.querySelectorAll(".section-gallery-item"));
+  const dots = Array.from(section.querySelectorAll(".gallery-dot"));
+
+  if (!track || slides.length < 2) return;
+
+  let currentIndex = 0;
+  let timer = null;
+
+  const setActiveSlide = (index, behavior = "smooth") => {
+    currentIndex = (index + slides.length) % slides.length;
+
+    slides.forEach((slide, slideIndex) => {
+      slide.classList.toggle("is-active", slideIndex === currentIndex);
+    });
+
+    dots.forEach((dot, dotIndex) => {
+      const isActive = dotIndex === currentIndex;
+      dot.classList.toggle("is-active", isActive);
+      dot.setAttribute("aria-pressed", String(isActive));
+    });
+
+    const activeSlide = slides[currentIndex];
+    track.scrollTo({ left: activeSlide.offsetLeft, behavior });
+  };
+
+  const stopRotation = () => {
+    if (timer) {
+      window.clearInterval(timer);
+      timer = null;
+    }
+  };
+
+  const startRotation = () => {
+    if (prefersReducedMotion) return;
+    stopRotation();
+    timer = window.setInterval(() => {
+      setActiveSlide(currentIndex + 1);
+    }, 3600);
+  };
+
+  track.classList.add("is-rotating");
+
+  dots.forEach((dot, index) => {
+    dot.addEventListener("click", () => {
+      setActiveSlide(index);
+      startRotation();
+    });
+  });
+
+  section.addEventListener("mouseenter", stopRotation);
+  section.addEventListener("mouseleave", startRotation);
+  section.addEventListener("focusin", stopRotation);
+  section.addEventListener("focusout", (event) => {
+    if (!section.contains(event.relatedTarget)) {
+      startRotation();
+    }
+  });
+
+  document.addEventListener("visibilitychange", () => {
+    if (document.hidden) {
+      stopRotation();
+    } else {
+      startRotation();
+    }
+  });
+
+  setActiveSlide(0, "auto");
+  startRotation();
+}
+
 function renderPhotoGallery(root, options) {
   const { items, eyebrow, title, copy } = options;
   if (!Array.isArray(items) || items.length === 0) return;
@@ -259,16 +332,33 @@ function renderPhotoGallery(root, options) {
     <div class="section-gallery-track">
       ${items
         .map(
-          (item) => `
-            <figure class="section-gallery-item">
+          (item, index) => `
+            <figure class="section-gallery-item${index === 0 ? " is-active" : ""}">
               <img src="${item.src}" alt="${item.alt}" loading="lazy" decoding="async" />
             </figure>
           `
         )
         .join("")}
     </div>
+    ${items.length > 1 ? `
+      <div class="section-gallery-dots" aria-label="${title} slide controls">
+        ${items
+          .map(
+            (_, index) => `
+              <button
+                class="gallery-dot${index === 0 ? " is-active" : ""}"
+                type="button"
+                aria-label="Show image ${index + 1} of ${items.length}"
+                aria-pressed="${index === 0 ? "true" : "false"}"
+              ></button>
+            `
+          )
+          .join("")}
+      </div>
+    ` : ""}
   `;
   root.appendChild(applyRevealMotion(section, root.children.length));
+  setupRotatingGallery(section);
 }
 
 function renderProjects(root) {
