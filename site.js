@@ -141,125 +141,25 @@ function fillBasicIdentity() {
 
 function renderLandingStoryStrip() {
   const root = document.getElementById("story-strip");
-  const featureFrame = document.getElementById("story-feature-frame");
-  const featureImage = document.getElementById("story-feature-image");
-  const featureCaption = document.getElementById("story-feature-caption");
-  const featureCount = document.getElementById("story-feature-count");
-  if (!root || !featureFrame || !featureImage || !featureCaption || !featureCount) return;
+  if (!root) return;
 
   const items = landingStoryImages();
   if (items.length === 0) {
-    featureFrame.closest(".story-showcase")?.style.setProperty("display", "none");
+    root.parentElement?.style.setProperty("display", "none");
     return;
   }
 
-  const prefersReducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
-  const storyButtons = [];
-  let activeIndex = 0;
-  let rotationTimer = null;
-
-  const syncActiveThumb = () => {
-    storyButtons.forEach((button, index) => {
-      const isActive = index === activeIndex;
-      button.classList.toggle("is-active", isActive);
-      button.setAttribute("aria-pressed", String(isActive));
-    });
-  };
-
-  const setFeature = (nextIndex, { scrollThumb = true } = {}) => {
-    activeIndex = (nextIndex + items.length) % items.length;
-    const item = items[activeIndex];
-    featureFrame.classList.add("is-transitioning");
-
-    const preload = new Image();
-    preload.decoding = "async";
-    preload.src = item.src;
-
-    const applyFeature = () => {
-      featureImage.src = item.src;
-      featureImage.alt = item.alt;
-      featureImage.hidden = false;
-      featureFrame.classList.remove("media-loading");
-      featureCaption.textContent = item.alt;
-      featureCount.textContent = `${activeIndex + 1} / ${items.length}`;
-      syncActiveThumb();
-
-      if (scrollThumb && storyButtons[activeIndex]) {
-        storyButtons[activeIndex].scrollIntoView({
-          behavior: prefersReducedMotion ? "auto" : "smooth",
-          block: "nearest",
-          inline: "center",
-        });
-      }
-
-      requestAnimationFrame(() => {
-        featureFrame.classList.remove("is-transitioning");
-      });
-    };
-
-    if (preload.complete) {
-      applyFeature();
-      return;
-    }
-
-    preload.addEventListener("load", applyFeature, { once: true });
-    preload.addEventListener(
-      "error",
-      () => {
-        featureFrame.classList.remove("media-loading");
-        featureFrame.classList.remove("is-transitioning");
-      },
-      { once: true }
-    );
-  };
-
-  const stopRotation = () => {
-    if (!rotationTimer) return;
-    window.clearInterval(rotationTimer);
-    rotationTimer = null;
-  };
-
-  const startRotation = () => {
-    if (prefersReducedMotion || items.length < 2 || rotationTimer) return;
-    rotationTimer = window.setInterval(() => {
-      setFeature(activeIndex + 1);
-    }, 3400);
-  };
-
+  const repeatedItems = [...items, ...items];
   root.innerHTML = "";
 
-  items.forEach((item, index) => {
-    const button = document.createElement("button");
-    button.type = "button";
-    button.className = "story-strip-item";
-    button.setAttribute("aria-label", `Show highlight ${index + 1}`);
-    button.setAttribute("aria-pressed", "false");
-    button.innerHTML = `
-      <img src="${item.src}" alt="${item.alt}" loading="${index < 5 ? "eager" : "lazy"}" decoding="async" />
+  repeatedItems.forEach((item, index) => {
+    const figure = document.createElement("figure");
+    figure.className = "story-strip-item";
+    figure.innerHTML = `
+      <img src="${item.src}" alt="${item.alt}" loading="lazy" decoding="async" />
     `;
-    button.addEventListener("click", () => {
-      stopRotation();
-      setFeature(index, { scrollThumb: false });
-      startRotation();
-    });
-    storyButtons.push(button);
-    root.appendChild(applyRevealMotion(button, index, 20));
+    root.appendChild(applyRevealMotion(figure, index, 20));
   });
-
-  featureFrame.addEventListener("mouseenter", stopRotation);
-  featureFrame.addEventListener("mouseleave", startRotation);
-  root.addEventListener("mouseenter", stopRotation);
-  root.addEventListener("mouseleave", startRotation);
-  document.addEventListener("visibilitychange", () => {
-    if (document.hidden) {
-      stopRotation();
-    } else {
-      startRotation();
-    }
-  });
-
-  setFeature(0, { scrollThumb: false });
-  startRotation();
 }
 
 function setupScrollProgress() {
