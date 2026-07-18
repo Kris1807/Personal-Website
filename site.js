@@ -149,14 +149,20 @@ function renderLandingStoryStrip() {
     return;
   }
 
-  const repeatedItems = [...items, ...items];
+  const visibleCount = window.innerWidth <= 720
+    ? Math.min(items.length, 2)
+    : window.innerWidth <= 1080
+      ? Math.min(items.length, 3)
+      : Math.min(items.length, 4);
+
+  root.style.setProperty("--story-columns", String(visibleCount));
   root.innerHTML = "";
 
-  repeatedItems.forEach((item, index) => {
+  items.slice(0, visibleCount).forEach((item, index) => {
     const figure = document.createElement("figure");
     figure.className = "story-strip-item";
     figure.innerHTML = `
-      <img src="${item.src}" alt="${item.alt}" loading="lazy" decoding="async" />
+      <img src="${item.src}" alt="${item.alt}" loading="eager" decoding="async" />
     `;
     root.appendChild(applyRevealMotion(figure, index, 20));
   });
