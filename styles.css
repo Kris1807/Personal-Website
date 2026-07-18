@@ -179,12 +179,22 @@ li {
 
 .hero-profile-card,
 .profile-card {
+  --card-tilt-x: 0deg;
+  --card-tilt-y: 0deg;
+  --card-shift-x: 0px;
+  --card-shift-y: 0px;
+  --card-image-shift-x: 0px;
+  --card-image-shift-y: 0px;
+  --card-scale: 1;
+  --card-image-scale: 1;
   width: min(100%, 360px);
   padding: 0.7rem;
   background: linear-gradient(180deg, rgba(248, 244, 237, 0.96), rgba(233, 228, 219, 0.92));
   border: 1px solid var(--border);
   border-radius: 28px;
   overflow: hidden;
+  transform-style: preserve-3d;
+  will-change: transform;
   transition:
     transform 220ms ease,
     box-shadow 220ms ease,
@@ -198,11 +208,13 @@ li {
   object-fit: cover;
   border-radius: 22px;
   border: 1px solid var(--border);
+  transform: translate3d(var(--card-image-shift-x), var(--card-image-shift-y), 0) scale(var(--card-image-scale));
+  transform-origin: center;
+  will-change: transform;
   transition: transform 280ms ease, filter 280ms ease, opacity 180ms ease;
 }
 
 .profile-card:hover .profile-image {
-  transform: scale(1.025);
   filter: saturate(1.04);
 }
 
@@ -941,6 +953,8 @@ body[data-page="landing"] .scroll-progress span {
 }
 
 .landing-visual-grid {
+  perspective: 1500px;
+  transform-style: preserve-3d;
   display: grid;
   grid-template-columns: minmax(0, 1.28fr) minmax(180px, 0.78fr);
   grid-template-rows: 1fr 1fr;
@@ -956,13 +970,26 @@ body[data-page="landing"] .scroll-progress span {
   width: 100%;
   margin: 0;
   box-shadow: 0 28px 54px rgba(7, 15, 31, 0.18);
+  transform:
+    translate3d(var(--card-shift-x), var(--card-shift-y), 0)
+    rotateX(var(--card-tilt-x))
+    rotateY(var(--card-tilt-y))
+    scale(var(--card-scale));
 }
 
 #landing-stage .hero-profile-card:hover {
-  transform: translateY(-3px);
+  --card-scale: 1.015;
 }
 
 .landing-support-card {
+  --card-tilt-x: 0deg;
+  --card-tilt-y: 0deg;
+  --card-shift-x: 0px;
+  --card-shift-y: 0px;
+  --card-image-shift-x: 0px;
+  --card-image-shift-y: 0px;
+  --card-scale: 1;
+  --card-image-scale: 1;
   margin: 0;
   padding: 0.7rem;
   border: 1px solid rgba(201, 191, 177, 0.9);
@@ -970,18 +997,29 @@ body[data-page="landing"] .scroll-progress span {
   background: linear-gradient(180deg, rgba(248, 244, 237, 0.95), rgba(227, 234, 244, 0.82));
   box-shadow: 0 20px 42px rgba(7, 15, 31, 0.14);
   overflow: hidden;
+  transform-style: preserve-3d;
+  will-change: transform;
   transition: transform 180ms ease, box-shadow 180ms ease;
 }
 
 #hero-athletics-card {
-  transform: translateY(calc(var(--support-shift) * -0.35));
+  transform:
+    translate3d(var(--card-shift-x), calc((var(--support-shift) * -0.35) + var(--card-shift-y)), 0)
+    rotateX(var(--card-tilt-x))
+    rotateY(var(--card-tilt-y))
+    scale(var(--card-scale));
 }
 
 #hero-education-card {
-  transform: translateY(calc(var(--support-shift) + 12px));
+  transform:
+    translate3d(var(--card-shift-x), calc(var(--support-shift) + 12px + var(--card-shift-y)), 0)
+    rotateX(var(--card-tilt-x))
+    rotateY(var(--card-tilt-y))
+    scale(var(--card-scale));
 }
 
 .landing-support-card:hover {
+  --card-scale: 1.015;
   box-shadow: 0 26px 48px rgba(7, 15, 31, 0.18);
 }
 
@@ -992,6 +1030,10 @@ body[data-page="landing"] .scroll-progress span {
   object-fit: cover;
   border-radius: 18px;
   border: 1px solid rgba(202, 194, 181, 0.94);
+  transform: translate3d(var(--card-image-shift-x), var(--card-image-shift-y), 0) scale(var(--card-image-scale));
+  transform-origin: center;
+  will-change: transform;
+  transition: transform 280ms ease, filter 280ms ease;
 }
 
 .landing-support-card .skeleton-avatar {
@@ -1030,20 +1072,117 @@ body[data-page="landing"] .scroll-progress span {
   overflow: hidden;
 }
 
-.story-strip-viewport {
+.story-showcase {
+  display: grid;
+  gap: 1rem;
+}
+
+.story-feature-frame {
+  margin: 0;
+  padding: 0.8rem;
+  border: 1px solid rgba(189, 201, 220, 0.62);
+  border-radius: 28px;
+  background: linear-gradient(180deg, rgba(248, 244, 237, 0.98), rgba(224, 232, 244, 0.9));
+  box-shadow: 0 18px 36px rgba(7, 15, 31, 0.14);
+}
+
+.story-feature-frame.is-transitioning #story-feature-image {
+  opacity: 0.3;
+  transform: scale(0.985);
+}
+
+.story-feature-frame:not(.media-loading) .story-feature-skeleton {
+  display: none;
+}
+
+.story-feature-visual {
+  position: relative;
   overflow: hidden;
+  border-radius: 22px;
+  aspect-ratio: 16 / 9;
+  background: linear-gradient(180deg, rgba(238, 232, 222, 0.94), rgba(220, 228, 239, 0.86));
+}
+
+.story-feature-skeleton,
+#story-feature-image {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+}
+
+#story-feature-image {
+  display: block;
+  object-fit: contain;
+  background: linear-gradient(180deg, rgba(244, 238, 229, 0.9), rgba(226, 233, 243, 0.72));
+  transition: opacity 240ms ease, transform 240ms ease;
+}
+
+.story-feature-meta {
+  display: grid;
+  grid-template-columns: 1fr auto;
+  gap: 0.45rem 1rem;
+  align-items: start;
+  padding: 0.95rem 0.15rem 0.1rem;
+}
+
+.story-feature-kicker,
+.story-feature-caption {
+  margin: 0;
+}
+
+.story-feature-kicker {
+  color: #17365f;
+  font-size: 0.78rem;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+}
+
+.story-feature-caption {
+  grid-column: 1 / 2;
+  color: #314867;
+  font-size: 0.98rem;
+  line-height: 1.58;
+}
+
+.story-feature-count {
+  grid-column: 2 / 3;
+  grid-row: 1 / span 2;
+  align-self: center;
+  justify-self: end;
+  padding: 0.48rem 0.78rem;
+  border: 1px solid rgba(84, 110, 150, 0.22);
+  border-radius: 999px;
+  background: rgba(251, 248, 242, 0.76);
+  color: #294973;
+  font-size: 0.84rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+}
+
+.story-strip-viewport {
+  overflow: auto hidden;
   padding: 0.4rem 0 0.1rem;
+  scrollbar-width: none;
+}
+
+.story-strip-viewport::-webkit-scrollbar {
+  display: none;
 }
 
 .story-strip-track {
   display: grid;
-  grid-template-columns: repeat(var(--story-columns, 4), minmax(0, 1fr));
+  grid-auto-flow: column;
+  grid-auto-columns: minmax(176px, 1fr);
   gap: 1rem;
-  width: 100%;
+  width: max-content;
   align-items: stretch;
 }
 
 .story-strip-item {
+  appearance: none;
+  padding: 0;
   min-width: 0;
   margin: 0;
   overflow: hidden;
@@ -1053,12 +1192,26 @@ body[data-page="landing"] .scroll-progress span {
   box-shadow: 0 14px 28px rgba(7, 15, 31, 0.12);
   transform: translateZ(0);
   backface-visibility: hidden;
+  cursor: pointer;
+  opacity: 0.74;
+  transition:
+    transform 180ms ease,
+    box-shadow 180ms ease,
+    border-color 180ms ease,
+    opacity 180ms ease;
+}
+
+.story-strip-item.is-active {
+  opacity: 1;
+  border-color: rgba(72, 102, 148, 0.58);
+  box-shadow: 0 22px 38px rgba(7, 15, 31, 0.18);
+  transform: translateY(-4px);
 }
 
 .story-strip-item img {
   display: block;
   width: 100%;
-  height: 212px;
+  height: 172px;
   object-fit: cover;
   transform: translateZ(0);
   backface-visibility: hidden;
@@ -1071,7 +1224,8 @@ body[data-page="landing"] .scroll-progress span {
 }
 
 .story-strip-skeleton {
-  min-height: 212px;
+  min-width: 176px;
+  min-height: 172px;
 }
 
 .landing-nav-card {
@@ -1204,11 +1358,29 @@ body[data-page="landing"] .scroll-progress span {
 
   #hero-athletics-card,
   #hero-education-card {
-    transform: none;
+    transform:
+      translate3d(var(--card-shift-x), var(--card-shift-y), 0)
+      rotateX(var(--card-tilt-x))
+      rotateY(var(--card-tilt-y))
+      scale(var(--card-scale));
+  }
+
+  .story-feature-visual {
+    aspect-ratio: 4 / 3;
+  }
+
+  .story-feature-meta {
+    grid-template-columns: 1fr;
+  }
+
+  .story-feature-count {
+    grid-column: 1 / 2;
+    grid-row: auto;
+    justify-self: start;
   }
 
   .story-strip-track {
-    grid-template-columns: repeat(var(--story-columns, 2), minmax(0, 1fr));
+    grid-auto-columns: minmax(150px, 1fr);
   }
 
   .story-strip-item {
@@ -1216,7 +1388,7 @@ body[data-page="landing"] .scroll-progress span {
   }
 
   .story-strip-item img {
-    height: 180px;
+    height: 146px;
   }
 
   .landing-grid {

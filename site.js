@@ -141,31 +141,125 @@ function fillBasicIdentity() {
 
 function renderLandingStoryStrip() {
   const root = document.getElementById("story-strip");
-  if (!root) return;
+  const featureFrame = document.getElementById("story-feature-frame");
+  const featureImage = document.getElementById("story-feature-image");
+  const featureCaption = document.getElementById("story-feature-caption");
+  const featureCount = document.getElementById("story-feature-count");
+  if (!root || !featureFrame || !featureImage || !featureCaption || !featureCount) return;
 
   const items = landingStoryImages();
   if (items.length === 0) {
-    root.parentElement?.style.setProperty("display", "none");
+    featureFrame.closest(".story-showcase")?.style.setProperty("display", "none");
     return;
   }
 
-  const visibleCount = window.innerWidth <= 720
-    ? Math.min(items.length, 2)
-    : window.innerWidth <= 1080
-      ? Math.min(items.length, 3)
-      : Math.min(items.length, 4);
+  const prefersReducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+  const storyButtons = [];
+  let activeIndex = 0;
+  let rotationTimer = null;
 
-  root.style.setProperty("--story-columns", String(visibleCount));
+  const syncActiveThumb = () => {
+    storyButtons.forEach((button, index) => {
+      const isActive = index === activeIndex;
+      button.classList.toggle("is-active", isActive);
+      button.setAttribute("aria-pressed", String(isActive));
+    });
+  };
+
+  const setFeature = (nextIndex, { scrollThumb = true } = {}) => {
+    activeIndex = (nextIndex + items.length) % items.length;
+    const item = items[activeIndex];
+    featureFrame.classList.add("is-transitioning");
+
+    const preload = new Image();
+    preload.decoding = "async";
+    preload.src = item.src;
+
+    const applyFeature = () => {
+      featureImage.src = item.src;
+      featureImage.alt = item.alt;
+      featureImage.hidden = false;
+      featureFrame.classList.remove("media-loading");
+      featureCaption.textContent = item.alt;
+      featureCount.textContent = `${activeIndex + 1} / ${items.length}`;
+      syncActiveThumb();
+
+      if (scrollThumb && storyButtons[activeIndex]) {
+        storyButtons[activeIndex].scrollIntoView({
+          behavior: prefersReducedMotion ? "auto" : "smooth",
+          block: "nearest",
+          inline: "center",
+        });
+      }
+
+      requestAnimationFrame(() => {
+        featureFrame.classList.remove("is-transitioning");
+      });
+    };
+
+    if (preload.complete) {
+      applyFeature();
+      return;
+    }
+
+    preload.addEventListener("load", applyFeature, { once: true });
+    preload.addEventListener(
+      "error",
+      () => {
+        featureFrame.classList.remove("media-loading");
+        featureFrame.classList.remove("is-transitioning");
+      },
+      { once: true }
+    );
+  };
+
+  const stopRotation = () => {
+    if (!rotationTimer) return;
+    window.clearInterval(rotationTimer);
+    rotationTimer = null;
+  };
+
+  const startRotation = () => {
+    if (prefersReducedMotion || items.length < 2 || rotationTimer) return;
+    rotationTimer = window.setInterval(() => {
+      setFeature(activeIndex + 1);
+    }, 3400);
+  };
+
   root.innerHTML = "";
 
-  items.slice(0, visibleCount).forEach((item, index) => {
-    const figure = document.createElement("figure");
-    figure.className = "story-strip-item";
-    figure.innerHTML = `
-      <img src="${item.src}" alt="${item.alt}" loading="eager" decoding="async" />
+  items.forEach((item, index) => {
+    const button = document.createElement("button");
+    button.type = "button";
+    button.className = "story-strip-item";
+    button.setAttribute("aria-label", `Show highlight ${index + 1}`);
+    button.setAttribute("aria-pressed", "false");
+    button.innerHTML = `
+      <img src="${item.src}" alt="${item.alt}" loading="${index < 5 ? "eager" : "lazy"}" decoding="async" />
     `;
-    root.appendChild(applyRevealMotion(figure, index, 20));
+    button.addEventListener("click", () => {
+      stopRotation();
+      setFeature(index, { scrollThumb: false });
+      startRotation();
+    });
+    storyButtons.push(button);
+    root.appendChild(applyRevealMotion(button, index, 20));
   });
+
+  featureFrame.addEventListener("mouseenter", stopRotation);
+  featureFrame.addEventListener("mouseleave", startRotation);
+  root.addEventListener("mouseenter", stopRotation);
+  root.addEventListener("mouseleave", startRotation);
+  document.addEventListener("visibilitychange", () => {
+    if (document.hidden) {
+      stopRotation();
+    } else {
+      startRotation();
+    }
+  });
+
+  setFeature(0, { scrollThumb: false });
+  startRotation();
 }
 
 function setupScrollProgress() {
@@ -220,6 +314,51 @@ function setupLandingMotion() {
   window.addEventListener("scroll", requestUpdate, { passive: true });
   window.addEventListener("resize", requestUpdate);
   update();
+}
+
+function setupHeroCardMotion() {
+  const prefersReducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+  const finePointer = window.matchMedia("(pointer: fine)").matches;
+  if (prefersReducedMotion || !finePointer) return;
+
+  const motionCards = [
+    { element: document.getElementById("profile-image-wrap"), tilt: 10, shift: 12, imageShift: 9 },
+    { element: document.getElementById("hero-athletics-card"), tilt: 8, shift: 10, imageShift: 7 },
+    { element: document.getElementById("hero-education-card"), tilt: 8, shift: 10, imageShift: 7 },
+  ].filter(({ element }) => element);
+
+  motionCards.forEach(({ element, tilt, shift, imageShift }) => {
+    const resetCard = () => {
+      element.style.setProperty("--card-tilt-x", "0deg");
+      element.style.setProperty("--card-tilt-y", "0deg");
+      element.style.setProperty("--card-shift-x", "0px");
+      element.style.setProperty("--card-shift-y", "0px");
+      element.style.setProperty("--card-image-shift-x", "0px");
+      element.style.setProperty("--card-image-shift-y", "0px");
+      element.style.setProperty("--card-scale", "1");
+      element.style.setProperty("--card-image-scale", "1");
+    };
+
+    const handleMove = (event) => {
+      const rect = element.getBoundingClientRect();
+      const horizontal = ((event.clientX - rect.left) / rect.width - 0.5) * 2;
+      const vertical = ((event.clientY - rect.top) / rect.height - 0.5) * 2;
+
+      element.style.setProperty("--card-tilt-x", `${(-vertical * tilt).toFixed(2)}deg`);
+      element.style.setProperty("--card-tilt-y", `${(horizontal * tilt).toFixed(2)}deg`);
+      element.style.setProperty("--card-shift-x", `${(horizontal * shift).toFixed(2)}px`);
+      element.style.setProperty("--card-shift-y", `${(vertical * shift).toFixed(2)}px`);
+      element.style.setProperty("--card-image-shift-x", `${(horizontal * imageShift).toFixed(2)}px`);
+      element.style.setProperty("--card-image-shift-y", `${(vertical * imageShift).toFixed(2)}px`);
+      element.style.setProperty("--card-scale", "1.01");
+      element.style.setProperty("--card-image-scale", "1.035");
+    };
+
+    resetCard();
+    element.addEventListener("pointermove", handleMove);
+    element.addEventListener("pointerleave", resetCard);
+    element.addEventListener("pointercancel", resetCard);
+  });
 }
 
 function renderContact() {
@@ -587,6 +726,7 @@ function init() {
     renderLandingNav();
     renderRelatedLinks();
     setupLandingMotion();
+    setupHeroCardMotion();
     finalizePageLoad();
     return;
   }
