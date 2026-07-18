@@ -100,6 +100,23 @@ function hydrateMediaImage(image, container, src) {
   }
 }
 
+async function copyText(value) {
+  if (navigator.clipboard && window.isSecureContext) {
+    await navigator.clipboard.writeText(value);
+    return;
+  }
+
+  const input = document.createElement("textarea");
+  input.value = value;
+  input.setAttribute("readonly", "");
+  input.style.position = "absolute";
+  input.style.left = "-9999px";
+  document.body.appendChild(input);
+  input.select();
+  document.execCommand("copy");
+  input.remove();
+}
+
 function fillBasicIdentity() {
   document.title = `${resume.name}`;
 
@@ -267,6 +284,40 @@ function renderContact() {
 
   root.innerHTML = "";
   resume.contact.forEach((entry, index) => {
+    const isEmailCopy = String(entry.url || "").startsWith("mailto:");
+
+    if (isEmailCopy) {
+      const button = document.createElement("button");
+      const originalLabel = entry.label;
+      let copyTimer = null;
+
+      button.type = "button";
+      button.className = "contact-copy-trigger";
+      button.textContent = originalLabel;
+      button.setAttribute("aria-label", `Copy email address ${originalLabel}`);
+      button.title = "Copy email address";
+
+      button.addEventListener("click", async () => {
+        try {
+          await copyText(originalLabel);
+          button.textContent = "Copied email";
+          button.classList.add("is-copied");
+        } catch (_error) {
+          button.textContent = "Copy failed";
+          button.classList.remove("is-copied");
+        }
+
+        window.clearTimeout(copyTimer);
+        copyTimer = window.setTimeout(() => {
+          button.textContent = originalLabel;
+          button.classList.remove("is-copied");
+        }, 1400);
+      });
+
+      root.appendChild(applyRevealMotion(button, index, 35));
+      return;
+    }
+
     const link = document.createElement("a");
     link.href = entry.url;
     link.textContent = entry.label;
@@ -393,83 +444,11 @@ function renderEducation(root) {
   });
 }
 
-function setupRotatingGallery(section) {
-  const prefersReducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
-  const track = section.querySelector(".section-gallery-track");
-  const slides = Array.from(section.querySelectorAll(".section-gallery-item"));
-  const dots = Array.from(section.querySelectorAll(".gallery-dot"));
-
-  if (!track || slides.length < 2) return;
-
-  let currentIndex = 0;
-  let timer = null;
-
-  const setActiveSlide = (index, behavior = "smooth") => {
-    currentIndex = (index + slides.length) % slides.length;
-
-    slides.forEach((slide, slideIndex) => {
-      slide.classList.toggle("is-active", slideIndex === currentIndex);
-    });
-
-    dots.forEach((dot, dotIndex) => {
-      const isActive = dotIndex === currentIndex;
-      dot.classList.toggle("is-active", isActive);
-      dot.setAttribute("aria-pressed", String(isActive));
-    });
-
-    const activeSlide = slides[currentIndex];
-    track.scrollTo({ left: activeSlide.offsetLeft, behavior });
-  };
-
-  const stopRotation = () => {
-    if (timer) {
-      window.clearInterval(timer);
-      timer = null;
-    }
-  };
-
-  const startRotation = () => {
-    if (prefersReducedMotion) return;
-    stopRotation();
-    timer = window.setInterval(() => {
-      setActiveSlide(currentIndex + 1);
-    }, 3600);
-  };
-
-  track.classList.add("is-rotating");
-
-  dots.forEach((dot, index) => {
-    dot.addEventListener("click", () => {
-      setActiveSlide(index);
-      startRotation();
-    });
-  });
-
-  section.addEventListener("mouseenter", stopRotation);
-  section.addEventListener("mouseleave", startRotation);
-  section.addEventListener("focusin", stopRotation);
-  section.addEventListener("focusout", (event) => {
-    if (!section.contains(event.relatedTarget)) {
-      startRotation();
-    }
-  });
-
-  document.addEventListener("visibilitychange", () => {
-    if (document.hidden) {
-      stopRotation();
-    } else {
-      startRotation();
-    }
-  });
-
-  setActiveSlide(0, "auto");
-  startRotation();
-}
-
 function renderPhotoGallery(root, options) {
   const { items, eyebrow, title, copy } = options;
   if (!Array.isArray(items) || items.length === 0) return;
 
+  const repeatedItems = items.length > 1 ? [...items, ...items] : items;
   const section = document.createElement("section");
   section.className = "card detail-card section-gallery-card";
   section.innerHTML = `
@@ -478,36 +457,21 @@ function renderPhotoGallery(root, options) {
       <h2>${title}</h2>
       <p class="gallery-copy">${copy}</p>
     </div>
-    <div class="section-gallery-track">
-      ${items
-        .map(
-          (item, index) => `
-            <figure class="section-gallery-item${index === 0 ? " is-active" : ""}">
-              <img src="${item.src}" alt="${item.alt}" loading="lazy" decoding="async" />
-            </figure>
-          `
-        )
-        .join("")}
-    </div>
-    ${items.length > 1 ? `
-      <div class="section-gallery-dots" aria-label="${title} slide controls">
-        ${items
+    <div class="section-gallery-viewport">
+      <div class="section-gallery-track${items.length > 1 ? " is-marquee" : ""}">
+        ${repeatedItems
           .map(
-            (_, index) => `
-              <button
-                class="gallery-dot${index === 0 ? " is-active" : ""}"
-                type="button"
-                aria-label="Show image ${index + 1} of ${items.length}"
-                aria-pressed="${index === 0 ? "true" : "false"}"
-              ></button>
+            (item) => `
+              <figure class="section-gallery-item">
+                <img src="${item.src}" alt="${item.alt}" loading="lazy" decoding="async" />
+              </figure>
             `
           )
           .join("")}
       </div>
-    ` : ""}
+    </div>
   `;
   root.appendChild(applyRevealMotion(section, root.children.length));
-  setupRotatingGallery(section);
 }
 
 function renderProjects(root) {
