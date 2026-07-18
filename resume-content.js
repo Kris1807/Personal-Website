@@ -218,10 +218,6 @@ const resume = {
       alt: "Kristian Pitshugin holding a European Championships medal.",
     },
     {
-      src: "assets/athletics/athletics-02.jpeg",
-      alt: "Kristian Pitshugin flexing poolside after competition.",
-    },
-    {
       src: "assets/athletics/athletics-03.jpeg",
       alt: "Kristian Pitshugin smiling in the pool after a race.",
     },
