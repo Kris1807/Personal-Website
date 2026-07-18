@@ -53,6 +53,11 @@ const formatText = (value) =>
 
 const isExternalLink = (url) => url.startsWith("http://") || url.startsWith("https://");
 
+const landingStoryImages = () => [
+  ...(resume.athleticsGallery || []).slice(0, 4),
+  ...(resume.educationGallery || []).slice(0, 2),
+];
+
 function applyRevealMotion(element, index = 0, step = 45) {
   if (!element) return element;
   element.classList.add("reveal-card");
@@ -69,6 +74,32 @@ function finalizePageLoad() {
   }
 }
 
+function hydrateMediaImage(image, container, src) {
+  if (!image || !container) return;
+
+  if (!src || String(src).trim() === "") {
+    container.style.display = "none";
+    return;
+  }
+
+  const revealImage = () => {
+    image.hidden = false;
+    container.classList.remove("media-loading");
+  };
+
+  image.addEventListener("load", revealImage, { once: true });
+  image.addEventListener(
+    "error",
+    () => container.classList.remove("media-loading"),
+    { once: true }
+  );
+  image.src = src;
+
+  if (image.complete) {
+    revealImage();
+  }
+}
+
 function fillBasicIdentity() {
   document.title = `${resume.name}`;
 
@@ -77,6 +108,10 @@ function fillBasicIdentity() {
   const summary = document.getElementById("summary");
   const image = document.getElementById("profile-image");
   const imageWrap = document.getElementById("profile-image-wrap");
+  const athleticsImage = document.getElementById("hero-athletics-image");
+  const athleticsWrap = document.getElementById("hero-athletics-card");
+  const educationImage = document.getElementById("hero-education-image");
+  const educationWrap = document.getElementById("hero-education-card");
 
   if (title) {
     title.textContent = resume.title;
@@ -91,26 +126,112 @@ function fillBasicIdentity() {
     summary.classList.remove("skeleton-text", "skeleton-summary");
   }
 
-  if (image && imageWrap) {
-    if (resume.profileImage && resume.profileImage.trim() !== "") {
-      const revealImage = () => {
-        image.hidden = false;
-        imageWrap.classList.remove("media-loading");
-      };
-      image.addEventListener("load", revealImage, { once: true });
-      image.addEventListener(
-        "error",
-        () => imageWrap.classList.remove("media-loading"),
-        { once: true }
-      );
-      image.src = resume.profileImage;
-      if (image.complete) {
-        revealImage();
-      }
-    } else {
-      imageWrap.style.display = "none";
-    }
+  hydrateMediaImage(image, imageWrap, resume.profileImage);
+  hydrateMediaImage(
+    athleticsImage,
+    athleticsWrap,
+    resume.athleticsGallery?.[0]?.src || ""
+  );
+  hydrateMediaImage(
+    educationImage,
+    educationWrap,
+    resume.educationGallery?.[0]?.src || ""
+  );
+}
+
+function renderLandingRoleStrip() {
+  const root = document.getElementById("landing-role-strip");
+  if (!root) return;
+
+  const roles = String(resume.title || "")
+    .split("|")
+    .map((entry) => entry.trim())
+    .filter(Boolean);
+
+  root.innerHTML = "";
+  roles.forEach((entry, index) => {
+    const chip = document.createElement("span");
+    chip.className = "landing-role-chip";
+    chip.textContent = entry;
+    root.appendChild(applyRevealMotion(chip, index, 32));
+  });
+}
+
+function renderLandingStoryStrip() {
+  const root = document.getElementById("story-strip");
+  if (!root) return;
+
+  const items = landingStoryImages();
+  if (items.length === 0) {
+    root.parentElement?.style.setProperty("display", "none");
+    return;
   }
+
+  const repeatedItems = [...items, ...items];
+  root.innerHTML = "";
+
+  repeatedItems.forEach((item, index) => {
+    const figure = document.createElement("figure");
+    figure.className = "story-strip-item";
+    figure.innerHTML = `
+      <img src="${item.src}" alt="${item.alt}" loading="lazy" decoding="async" />
+    `;
+    root.appendChild(applyRevealMotion(figure, index, 20));
+  });
+}
+
+function setupScrollProgress() {
+  const progressBar = document.getElementById("scroll-progress-bar");
+  if (!progressBar) return;
+
+  let ticking = false;
+
+  const update = () => {
+    const maxScroll = Math.max(1, document.documentElement.scrollHeight - window.innerHeight);
+    progressBar.style.transform = `scaleX(${window.scrollY / maxScroll})`;
+    ticking = false;
+  };
+
+  const requestUpdate = () => {
+    if (ticking) return;
+    ticking = true;
+    window.requestAnimationFrame(update);
+  };
+
+  window.addEventListener("scroll", requestUpdate, { passive: true });
+  window.addEventListener("resize", requestUpdate);
+  update();
+}
+
+function setupLandingMotion() {
+  const stage = document.getElementById("landing-stage");
+  if (!stage) return;
+
+  const prefersReducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+  if (prefersReducedMotion) return;
+
+  let ticking = false;
+
+  const update = () => {
+    const rect = stage.getBoundingClientRect();
+    const progress = Math.min(
+      1,
+      Math.max(0, (window.innerHeight - rect.top) / (window.innerHeight + rect.height))
+    );
+    stage.style.setProperty("--hero-shift", `${(progress * -20).toFixed(2)}px`);
+    stage.style.setProperty("--support-shift", `${(progress * -10).toFixed(2)}px`);
+    ticking = false;
+  };
+
+  const requestUpdate = () => {
+    if (ticking) return;
+    ticking = true;
+    window.requestAnimationFrame(update);
+  };
+
+  window.addEventListener("scroll", requestUpdate, { passive: true });
+  window.addEventListener("resize", requestUpdate);
+  update();
 }
 
 function renderContact() {
@@ -182,6 +303,7 @@ function renderLandingNav() {
     link.className = "nav-button";
     link.href = item.href;
     link.innerHTML = `
+      <span class="nav-button-index">${String(index + 1).padStart(2, "0")}</span>
       <span class="nav-button-label">${item.label}</span>
       <span class="nav-button-copy">${item.description}</span>
     `;
@@ -469,11 +591,15 @@ function renderSectionPage(sectionKey) {
 function init() {
   fillBasicIdentity();
   renderContact();
+  setupScrollProgress();
 
   const pageType = document.body.dataset.page;
   if (pageType === "landing") {
+    renderLandingRoleStrip();
+    renderLandingStoryStrip();
     renderLandingNav();
     renderRelatedLinks();
+    setupLandingMotion();
     finalizePageLoad();
     return;
   }

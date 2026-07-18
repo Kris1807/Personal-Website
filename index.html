@@ -10,12 +10,23 @@
   <link rel="stylesheet" href="styles.css" />
 </head>
 <body data-page="landing" class="is-loading">
-  <main class="landing-shell">
-    <section class="landing-hero card surface-hero">
+  <div class="scroll-progress" aria-hidden="true">
+    <span id="scroll-progress-bar"></span>
+  </div>
+
+  <main class="landing-shell landing-shell-refined">
+    <section class="landing-hero card surface-hero" id="landing-stage">
       <div class="landing-copy">
         <p class="eyebrow skeleton-text skeleton-eyebrow" id="title">Loading title</p>
         <h1 id="name" class="skeleton-text skeleton-name">Loading name</h1>
         <p class="lead skeleton-text skeleton-summary" id="summary">Loading summary</p>
+
+        <div id="landing-role-strip" class="landing-role-strip" aria-label="Core roles">
+          <span class="skeleton-chip" aria-hidden="true"></span>
+          <span class="skeleton-chip" aria-hidden="true"></span>
+          <span class="skeleton-chip" aria-hidden="true"></span>
+        </div>
+
         <div id="contact" class="contact contact-grid">
           <span class="skeleton-chip" aria-hidden="true"></span>
           <span class="skeleton-chip" aria-hidden="true"></span>
@@ -25,20 +36,49 @@
       </div>
 
       <div class="landing-visual">
-        <div id="profile-image-wrap" class="profile-card hero-profile-card media-loading">
-          <div class="skeleton-avatar" aria-hidden="true"></div>
-          <img id="profile-image" class="profile-image" alt="Kristian Pitshugin profile photo" hidden />
+        <div class="landing-visual-grid">
+          <div id="profile-image-wrap" class="profile-card hero-profile-card media-loading">
+            <div class="skeleton-avatar" aria-hidden="true"></div>
+            <img id="profile-image" class="profile-image" alt="Kristian Pitshugin profile photo" hidden />
+          </div>
+
+          <figure id="hero-athletics-card" class="landing-support-card media-loading">
+            <div class="skeleton-avatar" aria-hidden="true"></div>
+            <img id="hero-athletics-image" alt="Athletics highlight photo" hidden />
+            <figcaption>European medalist</figcaption>
+          </figure>
+
+          <figure id="hero-education-card" class="landing-support-card media-loading">
+            <div class="skeleton-avatar" aria-hidden="true"></div>
+            <img id="hero-education-image" alt="Education highlight photo" hidden />
+            <figcaption>UGA graduation</figcaption>
+          </figure>
         </div>
       </div>
     </section>
 
-    <section class="card nav-card">
+    <section class="card story-strip-card">
+      <div class="section-heading">
+        <p class="eyebrow">Visual Story</p>
+        <h2>A cleaner first impression with real moments behind it</h2>
+      </div>
+
+      <div class="story-strip-viewport">
+        <div id="story-strip" class="story-strip-track">
+          <span class="story-strip-skeleton skeleton-button" aria-hidden="true"></span>
+          <span class="story-strip-skeleton skeleton-button" aria-hidden="true"></span>
+          <span class="story-strip-skeleton skeleton-button" aria-hidden="true"></span>
+        </div>
+      </div>
+    </section>
+
+    <section class="card nav-card landing-nav-card">
       <div class="section-heading">
         <p class="eyebrow">Explore</p>
-        <h2>Choose a section</h2>
-        <p>Each page focuses on one part of the story, so the site stays easy to browse and never feels overloaded.</p>
+        <h2>Choose a chapter</h2>
+        <p>Each section opens separately, so the portfolio stays clear and easy to navigate while still feeling polished.</p>
       </div>
-      <div id="section-nav" class="button-grid">
+      <div id="section-nav" class="button-grid landing-grid">
         <span class="nav-button skeleton-button" aria-hidden="true"></span>
         <span class="nav-button skeleton-button" aria-hidden="true"></span>
         <span class="nav-button skeleton-button" aria-hidden="true"></span>
@@ -48,7 +88,7 @@
       </div>
     </section>
 
-    <section id="related-links-panel" class="card related-card">
+    <section id="related-links-panel" class="card related-card landing-links-card">
       <div class="section-heading compact-heading">
         <p class="eyebrow">Links</p>
         <h2>Related Links</h2>
