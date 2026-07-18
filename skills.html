@@ -9,13 +9,25 @@
   <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Fraunces:opsz,wght@9..144,600;9..144,700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="styles.css" />
 </head>
-<body data-page="section" data-section="skills">
-  <main class="page-shell">
-    <header class="page-hero card">
-      <a class="back-link" href="index.html">&larr; Back to home</a>
-      <p class="eyebrow" id="section-eyebrow"></p>
-      <h1 id="section-title"></h1>
-      <p class="lead section-lead" id="section-description"></p>
+<body data-page="section" data-section="skills" class="is-loading">
+  <div class="scroll-progress" aria-hidden="true">
+    <span id="scroll-progress-bar"></span>
+  </div>
+
+  <main class="page-shell page-shell-cinematic">
+    <header class="page-hero card section-hero" id="section-stage">
+      <div class="section-hero-copy">
+        <a class="back-link" href="index.html">&larr; Back to home</a>
+        <p class="eyebrow" id="section-eyebrow"></p>
+        <h1 id="section-title"></h1>
+        <p class="lead section-lead" id="section-description"></p>
+      </div>
+
+      <div class="section-hero-visual">
+        <aside id="section-spotlight" class="section-spotlight" aria-live="polite">
+          <div id="section-spotlight-body" class="section-spotlight-body"></div>
+        </aside>
+      </div>
     </header>
 
     <nav id="section-nav" class="section-nav"></nav>
