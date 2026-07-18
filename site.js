@@ -139,24 +139,6 @@ function fillBasicIdentity() {
   );
 }
 
-function renderLandingRoleStrip() {
-  const root = document.getElementById("landing-role-strip");
-  if (!root) return;
-
-  const roles = String(resume.title || "")
-    .split("|")
-    .map((entry) => entry.trim())
-    .filter(Boolean);
-
-  root.innerHTML = "";
-  roles.forEach((entry, index) => {
-    const chip = document.createElement("span");
-    chip.className = "landing-role-chip";
-    chip.textContent = entry;
-    root.appendChild(applyRevealMotion(chip, index, 32));
-  });
-}
-
 function renderLandingStoryStrip() {
   const root = document.getElementById("story-strip");
   if (!root) return;
@@ -595,7 +577,6 @@ function init() {
 
   const pageType = document.body.dataset.page;
   if (pageType === "landing") {
-    renderLandingRoleStrip();
     renderLandingStoryStrip();
     renderLandingNav();
     renderRelatedLinks();
