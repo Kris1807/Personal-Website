@@ -10,37 +10,12 @@
   <link rel="stylesheet" href="styles.css" />
 </head>
 <body data-page="landing" class="is-loading">
-  <div class="ambient-grid" aria-hidden="true"></div>
-  <div class="ambient-veil" aria-hidden="true"></div>
-  <div class="scroll-progress" aria-hidden="true">
-    <span id="scroll-progress-bar"></span>
-  </div>
-
   <main class="landing-shell">
-    <section class="landing-hero card surface-hero" id="landing-stage">
-      <div class="hero-backdrop" aria-hidden="true">
-        <span class="hero-orb hero-orb-one"></span>
-        <span class="hero-orb hero-orb-two"></span>
-        <span class="hero-orb hero-orb-three"></span>
-      </div>
-
+    <section class="landing-hero card surface-hero">
       <div class="landing-copy">
         <p class="eyebrow skeleton-text skeleton-eyebrow" id="title">Loading title</p>
         <h1 id="name" class="skeleton-text skeleton-name">Loading name</h1>
         <p class="lead skeleton-text skeleton-summary" id="summary">Loading summary</p>
-
-        <div id="role-strip" class="role-strip" aria-label="Primary focus areas">
-          <span class="skeleton-chip" aria-hidden="true"></span>
-          <span class="skeleton-chip" aria-hidden="true"></span>
-          <span class="skeleton-chip" aria-hidden="true"></span>
-        </div>
-
-        <div id="hero-kpis" class="hero-kpis" aria-label="Portfolio highlights">
-          <div class="hero-kpi skeleton-button" aria-hidden="true"></div>
-          <div class="hero-kpi skeleton-button" aria-hidden="true"></div>
-          <div class="hero-kpi skeleton-button" aria-hidden="true"></div>
-        </div>
-
         <div id="contact" class="contact contact-grid">
           <span class="skeleton-chip" aria-hidden="true"></span>
           <span class="skeleton-chip" aria-hidden="true"></span>
@@ -50,76 +25,36 @@
       </div>
 
       <div class="landing-visual">
-        <div class="hero-visual-stack" id="hero-visual-stack">
-          <figure class="hero-motion-card hero-card-athletics media-loading" data-parallax="0.16">
-            <div class="skeleton-avatar" aria-hidden="true"></div>
-            <img id="hero-athletics-image" alt="Athletics feature image" hidden />
-            <figcaption>International competition</figcaption>
-          </figure>
-
-          <div id="profile-image-wrap" class="profile-card hero-profile-card media-loading" data-parallax="0.06">
-            <div class="skeleton-avatar" aria-hidden="true"></div>
-            <img id="profile-image" class="profile-image" alt="Kristian Pitshugin profile photo" hidden />
-          </div>
-
-          <figure class="hero-motion-card hero-card-education media-loading" data-parallax="-0.1">
-            <div class="skeleton-avatar" aria-hidden="true"></div>
-            <img id="hero-education-image" alt="Education feature image" hidden />
-            <figcaption>UGA graduation</figcaption>
-          </figure>
-
-          <aside class="hero-quote card" data-parallax="0.12">
-            <p class="hero-quote-kicker">Current build mode</p>
-            <p class="hero-quote-copy">
-              AI application workflows, athlete operations systems, and research-backed product execution.
-            </p>
-          </aside>
+        <div id="profile-image-wrap" class="profile-card hero-profile-card media-loading">
+          <div class="skeleton-avatar" aria-hidden="true"></div>
+          <img id="profile-image" class="profile-image" alt="Kristian Pitshugin profile photo" hidden />
         </div>
       </div>
     </section>
 
-    <section class="card nav-card showcase-shell">
-      <div class="section-heading showcase-heading">
-        <p class="eyebrow">Interactive Portfolio</p>
-        <h2>Browse the story like a launch site</h2>
-        <p>
-          Scroll through focused chapters while a pinned preview stage reacts in real time.
-          The goal is clarity first, but with enough motion and depth to feel memorable.
-        </p>
+    <section class="card nav-card">
+      <div class="section-heading">
+        <p class="eyebrow">Explore</p>
+        <h2>Choose a section</h2>
+        <p>Each page focuses on one part of the story, so the site stays easy to browse and never feels overloaded.</p>
       </div>
-
-      <div class="showcase-layout">
-        <aside id="showcase-preview" class="showcase-preview">
-          <div class="preview-shell">
-            <p id="preview-index" class="preview-index">01</p>
-            <p id="preview-eyebrow" class="eyebrow">Experience</p>
-            <h3 id="preview-title">Professional systems, technical leadership, and research delivery.</h3>
-            <p id="preview-copy">
-              Focused product and research execution across AI tooling, athlete operations, and mobile data systems.
-            </p>
-            <div id="preview-meta" class="preview-meta"></div>
-            <div id="preview-media" class="preview-media"></div>
-            <a id="preview-link" class="preview-link" href="experience.html">Open section</a>
-          </div>
-        </aside>
-
-        <div id="section-nav" class="button-grid showcase-grid">
-          <span class="nav-button skeleton-button" aria-hidden="true"></span>
-          <span class="nav-button skeleton-button" aria-hidden="true"></span>
-          <span class="nav-button skeleton-button" aria-hidden="true"></span>
-          <span class="nav-button skeleton-button" aria-hidden="true"></span>
-          <span class="nav-button skeleton-button" aria-hidden="true"></span>
-          <span class="nav-button skeleton-button" aria-hidden="true"></span>
-        </div>
+      <div id="section-nav" class="button-grid">
+        <span class="nav-button skeleton-button" aria-hidden="true"></span>
+        <span class="nav-button skeleton-button" aria-hidden="true"></span>
+        <span class="nav-button skeleton-button" aria-hidden="true"></span>
+        <span class="nav-button skeleton-button" aria-hidden="true"></span>
+        <span class="nav-button skeleton-button" aria-hidden="true"></span>
+        <span class="nav-button skeleton-button" aria-hidden="true"></span>
       </div>
     </section>
 
-    <section id="related-links-panel" class="card related-card related-footer-card">
+    <section id="related-links-panel" class="card related-card">
       <div class="section-heading compact-heading">
         <p class="eyebrow">Links</p>
         <h2>Related Links</h2>
       </div>
       <div id="related-links" class="related-grid">
+        <span class="related-link skeleton-link" aria-hidden="true"></span>
         <span class="related-link skeleton-link" aria-hidden="true"></span>
         <span class="related-link skeleton-link" aria-hidden="true"></span>
       </div>
