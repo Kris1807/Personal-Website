@@ -656,14 +656,14 @@ function renderAthleticsGallery(root) {
 }
 
 const brainBankRows = [
-  { y: 136, left: 282, right: 418, count: 2 },
-  { y: 170, left: 236, right: 464, count: 3 },
-  { y: 206, left: 196, right: 504, count: 4 },
-  { y: 242, left: 176, right: 524, count: 4 },
-  { y: 278, left: 168, right: 532, count: 4 },
-  { y: 314, left: 182, right: 518, count: 4 },
-  { y: 350, left: 226, right: 474, count: 3 },
-  { y: 386, left: 236, right: 464, count: 3 },
+  { y: 138, left: 278, right: 422, count: 2 },
+  { y: 172, left: 228, right: 472, count: 3 },
+  { y: 208, left: 184, right: 516, count: 4 },
+  { y: 244, left: 162, right: 538, count: 4 },
+  { y: 280, left: 158, right: 542, count: 4 },
+  { y: 316, left: 170, right: 530, count: 4 },
+  { y: 352, left: 206, right: 494, count: 3 },
+  { y: 388, left: 220, right: 480, count: 3 },
 ];
 
 function shuffleArray(items) {
@@ -686,7 +686,10 @@ function flattenSkills() {
 }
 
 function estimateBrainTokenWidth(label) {
-  return Math.max(58, Math.min(110, 18 + label.length * 4.1));
+  const length = label.length;
+  if (length >= 21) return Math.min(156, 30 + length * 5.1);
+  if (length >= 16) return Math.min(142, 26 + length * 4.9);
+  return Math.max(64, Math.min(126, 22 + length * 4.6));
 }
 
 function computeBrainBankLayout(tokens) {
@@ -733,25 +736,36 @@ function createBrainBankToken(token) {
   group.setAttribute("tabindex", "0");
 
   shadow.setAttribute("x", String(-token.width / 2));
-  shadow.setAttribute("y", "-13");
+  shadow.setAttribute("y", "-14");
   shadow.setAttribute("width", String(token.width));
-  shadow.setAttribute("height", "26");
-  shadow.setAttribute("rx", "13");
-  shadow.setAttribute("ry", "13");
+  shadow.setAttribute("height", "28");
+  shadow.setAttribute("rx", "14");
+  shadow.setAttribute("ry", "14");
   shadow.setAttribute("class", "brain-bank-token-shadow");
 
   rect.setAttribute("x", String(-token.width / 2));
-  rect.setAttribute("y", "-14");
+  rect.setAttribute("y", "-15");
   rect.setAttribute("width", String(token.width));
-  rect.setAttribute("height", "26");
-  rect.setAttribute("rx", "13");
-  rect.setAttribute("ry", "13");
+  rect.setAttribute("height", "28");
+  rect.setAttribute("rx", "14");
+  rect.setAttribute("ry", "14");
   rect.setAttribute("class", "brain-bank-token-pill");
 
   text.setAttribute("text-anchor", "middle");
   text.setAttribute("dominant-baseline", "middle");
-  text.setAttribute("y", "-1");
+  text.setAttribute("y", "0");
   text.setAttribute("class", "brain-bank-token-text");
+  const labelLength = token.label.length;
+  const fontSize =
+    labelLength > 21 ? 0.5 :
+    labelLength > 18 ? 0.54 :
+    labelLength > 14 ? 0.6 :
+    0.68;
+  text.style.fontSize = `${fontSize}rem`;
+  if (labelLength > 11) {
+    text.setAttribute("textLength", String(Math.max(38, token.width - 18)));
+    text.setAttribute("lengthAdjust", "spacingAndGlyphs");
+  }
   text.textContent = token.label;
 
   title.textContent = `${token.label} · ${token.category}`;
@@ -815,33 +829,33 @@ function renderSkillBrainBank() {
   section.className = "brain-bank-panel";
   section.innerHTML = `
     <div class="brain-bank-stage">
-      <svg class="brain-bank-svg" viewBox="0 0 700 690" role="img" aria-label="Interactive snow globe filled with skills">
+      <svg class="brain-bank-svg" viewBox="0 0 700 728" role="img" aria-label="Interactive snow globe filled with skills">
         <defs>
-          <circle id="brain-bank-shape" cx="350" cy="240" r="184" />
+          <circle id="brain-bank-shape" cx="350" cy="236" r="206" />
           <clipPath id="brain-bank-clip">
             <use href="#brain-bank-shape" />
           </clipPath>
-          <radialGradient id="brain-bank-glass-fill" cx="42%" cy="22%" r="82%">
+          <radialGradient id="brain-bank-glass-fill" cx="42%" cy="21%" r="82%">
             <stop offset="0%" stop-color="#ffffff" stop-opacity="0.99" />
             <stop offset="24%" stop-color="#f8fcff" stop-opacity="0.96" />
-            <stop offset="58%" stop-color="#deeffd" stop-opacity="0.9" />
-            <stop offset="100%" stop-color="#bed8f2" stop-opacity="0.96" />
+            <stop offset="60%" stop-color="#deeffd" stop-opacity="0.9" />
+            <stop offset="100%" stop-color="#bed8f2" stop-opacity="0.97" />
           </radialGradient>
           <radialGradient id="brain-bank-core-glow" cx="50%" cy="30%" r="60%">
-            <stop offset="0%" stop-color="#ffffff" stop-opacity="0.58" />
-            <stop offset="46%" stop-color="#f6fbff" stop-opacity="0.18" />
+            <stop offset="0%" stop-color="#ffffff" stop-opacity="0.6" />
+            <stop offset="48%" stop-color="#f6fbff" stop-opacity="0.2" />
             <stop offset="100%" stop-color="#dceeff" stop-opacity="0" />
           </radialGradient>
           <linearGradient id="brain-bank-rim" x1="0%" x2="100%" y1="0%" y2="0%">
-            <stop offset="0%" stop-color="#89add6" />
-            <stop offset="28%" stop-color="#edf7ff" />
-            <stop offset="58%" stop-color="#ffffff" />
+            <stop offset="0%" stop-color="#88add6" />
+            <stop offset="26%" stop-color="#edf7ff" />
+            <stop offset="56%" stop-color="#ffffff" />
             <stop offset="82%" stop-color="#e4f2ff" />
             <stop offset="100%" stop-color="#6e97c8" />
           </linearGradient>
           <linearGradient id="brain-bank-base-fill" x1="0%" x2="100%" y1="0%" y2="100%">
             <stop offset="0%" stop-color="#ffffff" />
-            <stop offset="35%" stop-color="#f8fbff" />
+            <stop offset="34%" stop-color="#f8fbff" />
             <stop offset="72%" stop-color="#e4ecf4" />
             <stop offset="100%" stop-color="#cfd7df" />
           </linearGradient>
@@ -858,40 +872,40 @@ function renderSkillBrainBank() {
             <feColorMatrix in="blur" type="matrix" values="1 0 0 0 0  0 1 0 0 0  0 0 1 0 0  0 0 0 0.24 0" />
           </filter>
         </defs>
-        <ellipse class="brain-bank-floor-shadow" cx="350" cy="654" rx="168" ry="19" />
+        <ellipse class="brain-bank-floor-shadow" cx="350" cy="694" rx="184" ry="20" />
         <g filter="url(#brain-bank-shadow)">
+          <ellipse class="brain-bank-base-top" cx="350" cy="462" rx="172" ry="22" />
+          <path class="brain-bank-base-body" d="M228 462C238 494 244 535 238 576C274 594 314 604 350 604C386 604 426 594 462 576C456 535 462 494 472 462L454 458C425 469 389 474 350 474C311 474 275 469 246 458Z" />
+          <path class="brain-bank-base-foot" d="M252 576C284 587 317 593 350 593C383 593 416 587 448 576L476 638C434 654 392 662 350 662C308 662 266 654 224 638Z" />
+          <ellipse class="brain-bank-base-bottom" cx="350" cy="638" rx="154" ry="20" />
+          <path class="brain-bank-base-trim-line" d="M252 502C309 516 391 516 448 502" />
+          <path class="brain-bank-base-trim-line" d="M246 548C308 562 392 562 454 548" />
+          <path class="brain-bank-base-trim-line soft" d="M292 482C327 490 373 490 408 482" />
+          <path class="brain-bank-base-trim-line soft" d="M278 604C321 614 379 614 422 604" />
+          <path class="brain-bank-base-trim-line vertical" d="M286 486C284 528 289 574 300 622" />
+          <path class="brain-bank-base-trim-line vertical" d="M414 486C416 528 411 574 400 622" />
           <g clip-path="url(#brain-bank-clip)">
-            <circle class="brain-bank-fill" cx="350" cy="240" r="184" />
-            <ellipse class="brain-bank-core-glow" cx="350" cy="222" rx="150" ry="118" />
-            <ellipse class="brain-bank-snow-drift" cx="350" cy="408" rx="170" ry="32" />
-            <ellipse class="brain-bank-snow-shadow" cx="350" cy="414" rx="132" ry="18" />
-            <path class="brain-bank-sheen-primary" d="M196 118C230 88 278 94 301 132C316 156 314 191 292 214C265 242 221 253 194 236C164 218 165 147 196 118Z" />
-            <path class="brain-bank-sheen-secondary" d="M454 101C495 103 532 125 550 158C560 176 560 201 548 214C529 232 492 228 456 203C421 177 418 138 454 101Z" />
-            <path class="brain-bank-sheen-ribbon" d="M222 440C278 415 319 406 372 408C422 410 467 422 509 450L494 476C456 454 417 445 374 444C322 442 284 449 238 471Z" />
+            <circle class="brain-bank-fill" cx="350" cy="236" r="206" />
+            <ellipse class="brain-bank-core-glow" cx="350" cy="214" rx="166" ry="130" />
+            <ellipse class="brain-bank-snow-drift" cx="350" cy="420" rx="184" ry="31" />
+            <ellipse class="brain-bank-snow-shadow" cx="350" cy="425" rx="142" ry="17" />
+            <path class="brain-bank-sheen-primary" d="M182 112C220 80 274 88 300 128C316 154 314 190 290 216C260 248 212 259 182 240C148 220 149 143 182 112Z" />
+            <path class="brain-bank-sheen-secondary" d="M458 98C502 100 542 126 560 160C570 178 570 204 556 218C536 238 496 232 458 206C420 180 418 138 458 98Z" />
+            <path class="brain-bank-sheen-ribbon" d="M214 448C272 422 317 413 372 415C425 417 474 430 518 458L500 486C460 462 419 452 374 451C320 449 278 456 232 480Z" />
             <g class="brain-bank-flurries">
-              <circle cx="236" cy="128" r="3.2" />
-              <circle cx="288" cy="106" r="2.6" />
-              <circle cx="404" cy="124" r="3" />
-              <circle cx="472" cy="156" r="2.6" />
-              <circle cx="246" cy="206" r="2.4" />
-              <circle cx="444" cy="210" r="2.2" />
-              <circle cx="332" cy="144" r="2.1" />
-              <circle cx="388" cy="182" r="2.1" />
+              <circle cx="228" cy="122" r="3.1" />
+              <circle cx="280" cy="100" r="2.7" />
+              <circle cx="404" cy="118" r="3" />
+              <circle cx="476" cy="152" r="2.6" />
+              <circle cx="242" cy="208" r="2.3" />
+              <circle cx="448" cy="212" r="2.2" />
+              <circle cx="332" cy="136" r="2.1" />
+              <circle cx="388" cy="176" r="2.1" />
             </g>
             <g class="brain-bank-skill-layer" data-brain-bank-layer></g>
           </g>
-          <circle class="brain-bank-shell" cx="350" cy="240" r="184" />
-          <circle class="brain-bank-shell-glow" cx="350" cy="240" r="179" filter="url(#brain-bank-inner-glow)" />
-          <ellipse class="brain-bank-base-top" cx="350" cy="423" rx="150" ry="22" />
-          <path class="brain-bank-base-body" d="M224 425C236 455 243 495 238 528C275 548 314 558 350 558C386 558 425 548 462 528C457 495 464 455 476 425L454 424C430 438 394 446 350 446C306 446 270 438 246 424Z" />
-          <path class="brain-bank-base-foot" d="M248 528C280 541 314 547 350 547C386 547 420 541 452 528L476 573C434 590 392 598 350 598C308 598 266 590 224 573Z" />
-          <ellipse class="brain-bank-base-bottom" cx="350" cy="576" rx="146" ry="21" />
-          <path class="brain-bank-base-trim-line" d="M250 468C307 482 393 482 450 468" />
-          <path class="brain-bank-base-trim-line" d="M244 512C307 526 393 526 456 512" />
-          <path class="brain-bank-base-trim-line soft" d="M296 448C328 456 372 456 404 448" />
-          <path class="brain-bank-base-trim-line soft" d="M278 548C321 559 379 559 422 548" />
-          <path class="brain-bank-base-trim-line vertical" d="M288 452C286 492 290 534 300 582" />
-          <path class="brain-bank-base-trim-line vertical" d="M412 452C414 492 410 534 400 582" />
+          <circle class="brain-bank-shell" cx="350" cy="236" r="206" />
+          <circle class="brain-bank-shell-glow" cx="350" cy="236" r="200" filter="url(#brain-bank-inner-glow)" />
         </g>
       </svg>
     </div>
