@@ -46,12 +46,85 @@ const sectionOrder = [
   "skills",
 ];
 
+const galleryGroups = new Map();
+const lightboxState = {
+  root: null,
+  image: null,
+  caption: null,
+  counter: null,
+  prev: null,
+  next: null,
+  close: null,
+  thumbs: null,
+  currentGroupId: null,
+  currentIndex: 0,
+  returnFocusTo: null,
+};
+
 const formatText = (value) =>
   String(value ?? "")
     .replace(/\*\*(.*?)\*\*/g, "<strong>$1</strong>")
     .replace(/\n/g, "<br>");
 
 const isExternalLink = (url) => url.startsWith("http://") || url.startsWith("https://");
+
+function getSectionHeroMetrics(sectionKey) {
+  const scholarshipCount = resume.honors.filter((entry) =>
+    /scholarship/i.test(String(entry))
+  ).length;
+
+  switch (sectionKey) {
+    case "experience":
+      return [
+        { value: String(resume.experience.length).padStart(2, "0"), label: "Experience chapters" },
+        {
+          value: String(
+            resume.experience.filter((item) => /present/i.test(String(item.period))).length
+          ).padStart(2, "0"),
+          label: "Current roles",
+        },
+        { value: "AI · apps · research", label: "Delivery focus" },
+      ];
+    case "education":
+      return [
+        { value: "2026", label: "Latest graduation" },
+        { value: String(resume.education.length).padStart(2, "0"), label: "Academic blocks" },
+        { value: "Double Dawgs", label: "Program track" },
+      ];
+    case "projects":
+      return [
+        { value: String(resume.projects.length).padStart(2, "0"), label: "Featured builds" },
+        { value: "Web + AI + data", label: "Build range" },
+        { value: "Shipped work", label: "Delivery style" },
+      ];
+    case "honors":
+      return [
+        { value: String(resume.honors.length).padStart(2, "0"), label: "Recognitions" },
+        { value: String(scholarshipCount).padStart(2, "0"), label: "Scholarships" },
+        { value: "Academic + athletic", label: "Recognition span" },
+      ];
+    case "athletics":
+      return [
+        { value: String(resume.athletics.length).padStart(2, "0"), label: "Competition tiers" },
+        { value: "2024", label: "European medal year" },
+        { value: "UGA + ISR", label: "Team footprint" },
+      ];
+    case "skills":
+      return [
+        { value: `${flattenSkills().length}+`, label: "Tools inside" },
+        { value: String(resume.skills.length).padStart(2, "0"), label: "Skill groups" },
+        { value: "Code + systems", label: "Coverage" },
+      ];
+    default:
+      return [];
+  }
+}
+
+function registerGalleryGroup(items) {
+  const groupId = `gallery-${galleryGroups.size + 1}`;
+  galleryGroups.set(groupId, items.map((item, index) => ({ ...item, index })));
+  return groupId;
+}
 
 const landingStoryImages = () => [
   ...(resume.athleticsGallery || []).slice(0, 4),
@@ -117,6 +190,139 @@ async function copyText(value) {
   input.remove();
 }
 
+function showToast(message, tone = "success") {
+  let stack = document.querySelector(".toast-stack");
+  if (!stack) {
+    stack = document.createElement("div");
+    stack.className = "toast-stack";
+    stack.setAttribute("aria-live", "polite");
+    stack.setAttribute("aria-atomic", "false");
+    document.body.appendChild(stack);
+  }
+
+  const toast = document.createElement("div");
+  toast.className = `toast toast-${tone}`;
+  toast.textContent = message;
+  stack.appendChild(toast);
+
+  requestAnimationFrame(() => toast.classList.add("is-visible"));
+
+  window.setTimeout(() => {
+    toast.classList.remove("is-visible");
+    window.setTimeout(() => toast.remove(), 220);
+  }, 1900);
+}
+
+function setupPageTransitions() {
+  document.body.classList.remove("is-navigating");
+
+  document.addEventListener("click", (event) => {
+    const link = event.target.closest("a[href]");
+    if (!link) return;
+    if (event.defaultPrevented || event.button !== 0) return;
+    if (event.metaKey || event.ctrlKey || event.shiftKey || event.altKey) return;
+    if (link.target === "_blank" || link.hasAttribute("download")) return;
+
+    const href = link.getAttribute("href") || "";
+    if (!href || href.startsWith("#") || href.startsWith("mailto:") || href.startsWith("tel:")) {
+      return;
+    }
+
+    const url = new URL(link.href, window.location.href);
+    const current = new URL(window.location.href);
+    const isSameOrigin = url.origin === current.origin;
+    const isHtmlPage = /\.html?$/i.test(url.pathname);
+    const isSamePageHashOnly =
+      url.pathname === current.pathname &&
+      url.search === current.search &&
+      Boolean(url.hash);
+
+    if (!isSameOrigin || !isHtmlPage || isSamePageHashOnly) return;
+
+    event.preventDefault();
+    document.body.classList.add("is-navigating");
+    window.setTimeout(() => {
+      window.location.assign(url.href);
+    }, 190);
+  });
+
+  window.addEventListener("pageshow", () => {
+    document.body.classList.remove("is-navigating");
+  });
+}
+
+function setupLandingStageSpotlight() {
+  const stage = document.getElementById("landing-stage");
+  const prefersReducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+  const finePointer = window.matchMedia("(pointer: fine)").matches;
+  if (!stage || prefersReducedMotion || !finePointer) return;
+
+  const reset = () => {
+    stage.style.setProperty("--stage-spot-x", "76%");
+    stage.style.setProperty("--stage-spot-y", "18%");
+    stage.style.setProperty("--stage-spot-opacity", "0");
+  };
+
+  const handleMove = (event) => {
+    const rect = stage.getBoundingClientRect();
+    const x = ((event.clientX - rect.left) / rect.width) * 100;
+    const y = ((event.clientY - rect.top) / rect.height) * 100;
+    stage.style.setProperty("--stage-spot-x", `${x.toFixed(2)}%`);
+    stage.style.setProperty("--stage-spot-y", `${y.toFixed(2)}%`);
+    stage.style.setProperty("--stage-spot-opacity", "1");
+  };
+
+  reset();
+  stage.addEventListener("pointermove", handleMove);
+  stage.addEventListener("pointerleave", reset);
+  stage.addEventListener("pointercancel", reset);
+}
+
+function setupInteractiveSurfaces(root = document) {
+  const prefersReducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+  const finePointer = window.matchMedia("(pointer: fine)").matches;
+  if (prefersReducedMotion || !finePointer) return;
+
+  const surfaces = root.querySelectorAll(
+    ".nav-button, .page-hero, .detail-card, .story-strip-card, .related-card, .landing-support-card, .hero-profile-card, .brain-bank-button"
+  );
+
+  surfaces.forEach((surface) => {
+    if (surface.dataset.spotlightReady === "true") return;
+    surface.dataset.spotlightReady = "true";
+    surface.classList.add("surface-interactive");
+
+    let spotlight = surface.querySelector(":scope > .surface-spotlight");
+    if (!spotlight) {
+      spotlight = document.createElement("span");
+      spotlight.className = "surface-spotlight";
+      spotlight.setAttribute("aria-hidden", "true");
+      surface.appendChild(spotlight);
+    }
+
+    const reset = () => {
+      surface.style.setProperty("--spot-x", "50%");
+      surface.style.setProperty("--spot-y", "50%");
+      surface.style.setProperty("--spot-alpha", "0");
+    };
+
+    const update = (event) => {
+      const rect = surface.getBoundingClientRect();
+      const x = ((event.clientX - rect.left) / rect.width) * 100;
+      const y = ((event.clientY - rect.top) / rect.height) * 100;
+      surface.style.setProperty("--spot-x", `${x.toFixed(2)}%`);
+      surface.style.setProperty("--spot-y", `${y.toFixed(2)}%`);
+      surface.style.setProperty("--spot-alpha", "1");
+    };
+
+    reset();
+    surface.addEventListener("pointermove", update);
+    surface.addEventListener("pointerenter", update);
+    surface.addEventListener("pointerleave", reset);
+    surface.addEventListener("pointercancel", reset);
+  });
+}
+
 function fillBasicIdentity() {
   document.title = `${resume.name}`;
 
@@ -178,6 +384,7 @@ function setupMarqueeScroller(section, options = {}) {
   let frameId = 0;
   let lastTick = 0;
   let paused = prefersReducedMotion;
+  let inView = true;
   let resumeTimer = 0;
 
   const getLoopWidth = () => track.scrollWidth / 2;
@@ -220,7 +427,7 @@ function setupMarqueeScroller(section, options = {}) {
     const delta = timestamp - lastTick;
     lastTick = timestamp;
 
-    if (!paused) {
+    if (!paused && inView) {
       viewport.scrollLeft += (baseSpeed * delta) / 1000;
       normalizeScroll();
     }
@@ -250,6 +457,19 @@ function setupMarqueeScroller(section, options = {}) {
     }
   });
 
+  const observer = new IntersectionObserver(
+    ([entry]) => {
+      inView = entry?.isIntersecting !== false;
+      if (!inView) {
+        pauseRoller();
+      } else {
+        queueResume(220);
+      }
+    },
+    { threshold: 0.12 }
+  );
+  observer.observe(section);
+
   normalizeScroll();
   frameId = window.requestAnimationFrame(tick);
 
@@ -272,23 +492,135 @@ function renderLandingStoryStrip() {
     return;
   }
 
-  const repeatedItems = items.length > 1 ? [...items, ...items] : items;
-  root.dataset.repeated = String(items.length > 1);
-  root.dataset.speed = "36";
-  root.dataset.step = "0.84";
-  root.innerHTML = "";
+  const section = root.closest(".story-strip-card");
+  const viewport = section?.querySelector("[data-marquee-viewport]");
+  if (!section || !viewport) return;
 
-  repeatedItems.forEach((item, index) => {
-    const figure = document.createElement("figure");
-    figure.className = "story-strip-item";
-    figure.innerHTML = `
-      <img src="${item.src}" alt="${item.alt}" loading="lazy" decoding="async" />
-    `;
-    root.appendChild(applyRevealMotion(figure, index, 20));
+  const buttons = Array.from(root.querySelectorAll(".story-strip-trigger"));
+  if (buttons.length === 0) return;
+
+  const galleryGroupId = registerGalleryGroup(items);
+  buttons.forEach((button, index) => {
+    button.dataset.galleryGroup = galleryGroupId;
+    button.dataset.galleryIndex = String(index % items.length);
+    button.setAttribute("aria-label", `Open story image ${index % items.length + 1}`);
   });
 
-  const section = root.closest(".story-strip-card");
-  if (section) setupMarqueeScroller(section);
+  if (section.dataset.storyStripReady === "true") return;
+  section.dataset.storyStripReady = "true";
+
+  const controls = Array.from(section.querySelectorAll(".marquee-control"));
+  const prefersReducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+  let resumeTimer = 0;
+  let autoTimer = 0;
+  let currentIndex = 0;
+
+  const visibleCount = () => {
+    if (window.innerWidth <= 720) return 1;
+    if (window.innerWidth <= 1080) return 2;
+    return 4;
+  };
+
+  const maxIndex = () => Math.max(0, items.length - visibleCount());
+
+  const stepWidth = () => {
+    const firstItem = root.querySelector(".story-strip-item");
+    if (!firstItem) return 0;
+    const gap = Number.parseFloat(window.getComputedStyle(root).gap || "0") || 0;
+    return firstItem.getBoundingClientRect().width + gap;
+  };
+
+  const syncControls = () => {
+    const enabled = items.length > visibleCount();
+    controls.forEach((control) => {
+      control.hidden = !enabled;
+      control.disabled = !enabled;
+    });
+  };
+
+  const goToIndex = (nextIndex, behavior = "smooth") => {
+    currentIndex = Math.max(0, Math.min(maxIndex(), nextIndex));
+    const offset = stepWidth() * currentIndex;
+    viewport.scrollTo({ left: offset, behavior });
+  };
+
+  const clearAuto = () => {
+    window.clearTimeout(resumeTimer);
+    window.clearInterval(autoTimer);
+    resumeTimer = 0;
+    autoTimer = 0;
+  };
+
+  const shift = (direction) => {
+    const limit = maxIndex();
+    if (limit === 0) return;
+    const next = currentIndex + direction;
+    if (next < 0) {
+      goToIndex(limit);
+    } else if (next > limit) {
+      goToIndex(0);
+    } else {
+      goToIndex(next);
+    }
+  };
+
+  const startAuto = () => {
+    clearAuto();
+    if (prefersReducedMotion || maxIndex() === 0) return;
+    autoTimer = window.setInterval(() => {
+      shift(1);
+    }, 3200);
+  };
+
+  const pauseAuto = () => {
+    clearAuto();
+  };
+
+  const queueResume = () => {
+    if (prefersReducedMotion || maxIndex() === 0) return;
+    window.clearTimeout(resumeTimer);
+    resumeTimer = window.setTimeout(() => {
+      startAuto();
+    }, 1400);
+  };
+
+  controls.forEach((control) => {
+    control.addEventListener("click", () => {
+      shift(Number(control.dataset.direction || 1));
+      queueResume();
+    });
+  });
+
+  section.addEventListener("mouseenter", pauseAuto);
+  section.addEventListener("mouseleave", queueResume);
+  section.addEventListener("focusin", pauseAuto);
+  section.addEventListener("focusout", (event) => {
+    if (!section.contains(event.relatedTarget)) {
+      queueResume();
+    }
+  });
+
+  document.addEventListener("visibilitychange", () => {
+    if (document.hidden) {
+      pauseAuto();
+    } else {
+      queueResume();
+    }
+  });
+
+  window.addEventListener(
+    "resize",
+    () => {
+      syncControls();
+      goToIndex(currentIndex, "auto");
+      startAuto();
+    },
+    { passive: true }
+  );
+
+  syncControls();
+  goToIndex(0, "auto");
+  startAuto();
 }
 
 function setupScrollProgress() {
@@ -414,9 +746,11 @@ function renderContact() {
           await copyText(originalLabel);
           button.textContent = "Copied email";
           button.classList.add("is-copied");
+          showToast("Email copied to clipboard");
         } catch (_error) {
           button.textContent = "Copy failed";
           button.classList.remove("is-copied");
+          showToast("Email copy failed", "error");
         }
 
         window.clearTimeout(copyTimer);
@@ -482,6 +816,32 @@ function renderSectionNav(currentKey) {
   });
 }
 
+function renderSectionHeroStats(sectionKey) {
+  const hero = document.querySelector(".page-hero");
+  if (!hero) return;
+
+  const stats = getSectionHeroMetrics(sectionKey);
+  if (stats.length === 0) return;
+
+  hero.querySelector(".page-hero-stats")?.remove();
+
+  const rail = document.createElement("div");
+  rail.className = "page-hero-stats";
+  rail.setAttribute("aria-label", `${sectionMeta[sectionKey]?.label || "Section"} quick facts`);
+  rail.innerHTML = stats
+    .map(
+      (stat) => `
+        <article class="page-hero-stat">
+          <span class="page-hero-stat-value">${stat.value}</span>
+          <span class="page-hero-stat-label">${stat.label}</span>
+        </article>
+      `
+    )
+    .join("");
+
+  hero.appendChild(applyRevealMotion(rail, 1, 0));
+}
+
 function renderLandingNav() {
   const root = document.getElementById("section-nav");
   if (!root) return;
@@ -511,22 +871,37 @@ function createCard(innerHtml, index = 0) {
 function renderExperience(root) {
   root.innerHTML = "";
   resume.experience.forEach((item, index) => {
+    const [location = item.period, dates = ""] = String(item.period || "").split(" | ");
+    const isCurrent = /present/i.test(String(item.period || ""));
     root.appendChild(
       createCard(
         `
         <div class="experience-card-layout">
+          <div class="experience-sequence">
+            <span class="experience-sequence-index">${String(index + 1).padStart(2, "0")}</span>
+            <span class="experience-sequence-line" aria-hidden="true"></span>
+          </div>
           <div class="experience-copy">
+            <div class="experience-meta-row">
+              <p class="meta experience-location">${location}</p>
+              <span class="experience-status-chip">${isCurrent ? "Current" : "Completed"}</span>
+            </div>
+            ${dates ? `<p class="experience-period-chip">${dates}</p>` : ""}
             <h2>${item.role} · ${item.company}</h2>
-            <p class="meta">${item.period}</p>
-            ${item.description ? `<p>${formatText(item.description)}</p>` : ""}
+            ${item.impact ? `<p class="experience-impact">${formatText(item.impact)}</p>` : ""}
+            ${Array.isArray(item.focusAreas) && item.focusAreas.length > 0
+              ? `<div class="experience-focuses">${item.focusAreas
+                  .map((entry) => `<span class="experience-focus-chip">${formatText(entry)}</span>`)
+                  .join("")}</div>`
+              : ""}
             ${Array.isArray(item.highlights) && item.highlights.length > 0
-              ? `<ul>${item.highlights.map((entry) => `<li>${formatText(entry)}</li>`).join("")}</ul>`
+              ? `<ul class="experience-list">${item.highlights.map((entry) => `<li>${formatText(entry)}</li>`).join("")}</ul>`
               : ""}
           </div>
           ${item.image ? `
             <div class="experience-media-wrap">
               <div class="experience-media-frame">
-                <img class="experience-media" src="${item.image}" alt="${item.imageAlt || `${item.company} visual`}" loading="lazy" decoding="async" />
+                <img class="experience-media" src="${item.image}" alt="${item.imageAlt || `${item.company} visual`}" loading="eager" decoding="async" />
               </div>
             </div>
           ` : ""}
@@ -561,6 +936,7 @@ function renderPhotoGallery(root, options) {
   if (!Array.isArray(items) || items.length === 0) return;
 
   const repeatedItems = items.length > 1 ? [...items, ...items] : items;
+  const galleryGroupId = registerGalleryGroup(items);
   const section = document.createElement("section");
   section.className = "card detail-card section-gallery-card";
   section.innerHTML = `
@@ -577,9 +953,18 @@ function renderPhotoGallery(root, options) {
         <div class="section-gallery-track" data-marquee-track data-repeated="${items.length > 1 ? "true" : "false"}" data-speed="34" data-step="0.82">
         ${repeatedItems
           .map(
-            (item) => `
+            (item, index) => `
               <figure class="section-gallery-item">
-                <img src="${item.src}" alt="${item.alt}" loading="lazy" decoding="async" />
+                <button
+                  type="button"
+                  class="gallery-trigger"
+                  data-gallery-group="${galleryGroupId}"
+                  data-gallery-index="${index % items.length}"
+                  aria-label="Open ${title} image ${index % items.length + 1}"
+                >
+                  <img src="${item.src}" alt="${item.alt}" loading="eager" decoding="async" />
+                  <span class="gallery-zoom-badge">Open photo</span>
+                </button>
               </figure>
             `
           )
@@ -652,6 +1037,140 @@ function renderAthleticsGallery(root) {
     eyebrow: "Photo Highlights",
     title: "Athletics Gallery",
     copy: "Selected race-day, national-team, and college competition moments.",
+  });
+}
+
+function ensureGalleryLightbox() {
+  if (lightboxState.root) return lightboxState;
+
+  const root = document.createElement("div");
+  root.className = "gallery-lightbox";
+  root.hidden = true;
+  root.innerHTML = `
+    <div class="gallery-lightbox-backdrop" data-gallery-close></div>
+    <div class="gallery-lightbox-dialog" role="dialog" aria-modal="true" aria-label="Image viewer">
+      <button type="button" class="gallery-lightbox-close" data-gallery-close aria-label="Close image viewer">&times;</button>
+      <button type="button" class="gallery-lightbox-nav gallery-lightbox-prev" data-gallery-step="-1" aria-label="Previous image">&larr;</button>
+      <figure class="gallery-lightbox-frame">
+        <img class="gallery-lightbox-image" alt="" />
+        <figcaption class="gallery-lightbox-meta">
+          <span class="gallery-lightbox-counter"></span>
+          <p class="gallery-lightbox-caption"></p>
+        </figcaption>
+      </figure>
+      <button type="button" class="gallery-lightbox-nav gallery-lightbox-next" data-gallery-step="1" aria-label="Next image">&rarr;</button>
+      <div class="gallery-lightbox-thumbs" aria-label="Image choices"></div>
+    </div>
+  `;
+
+  document.body.appendChild(root);
+
+  lightboxState.root = root;
+  lightboxState.image = root.querySelector(".gallery-lightbox-image");
+  lightboxState.caption = root.querySelector(".gallery-lightbox-caption");
+  lightboxState.counter = root.querySelector(".gallery-lightbox-counter");
+  lightboxState.prev = root.querySelector(".gallery-lightbox-prev");
+  lightboxState.next = root.querySelector(".gallery-lightbox-next");
+  lightboxState.close = root.querySelector(".gallery-lightbox-close");
+  lightboxState.thumbs = root.querySelector(".gallery-lightbox-thumbs");
+
+  root.addEventListener("click", (event) => {
+    if (event.target.matches("[data-gallery-close]")) {
+      closeGalleryLightbox();
+      return;
+    }
+
+    const thumb = event.target.closest("[data-gallery-thumb]");
+    if (thumb) {
+      updateGalleryLightboxView(Number(thumb.dataset.galleryThumb));
+      return;
+    }
+
+    const step = event.target.closest("[data-gallery-step]");
+    if (step) {
+      updateGalleryLightboxView(lightboxState.currentIndex + Number(step.dataset.galleryStep || 0));
+    }
+  });
+
+  document.addEventListener("keydown", (event) => {
+    if (!lightboxState.root || lightboxState.root.hidden) return;
+    if (event.key === "Escape") closeGalleryLightbox();
+    if (event.key === "ArrowLeft") updateGalleryLightboxView(lightboxState.currentIndex - 1);
+    if (event.key === "ArrowRight") updateGalleryLightboxView(lightboxState.currentIndex + 1);
+  });
+
+  return lightboxState;
+}
+
+function updateGalleryLightboxView(nextIndex) {
+  const items = galleryGroups.get(lightboxState.currentGroupId) || [];
+  if (items.length === 0) return;
+
+  const normalizedIndex = (nextIndex + items.length) % items.length;
+  const item = items[normalizedIndex];
+  if (!item) return;
+
+  lightboxState.currentIndex = normalizedIndex;
+  lightboxState.image.src = item.src;
+  lightboxState.image.alt = item.alt || "";
+  lightboxState.caption.textContent = item.alt || "";
+  lightboxState.counter.textContent = `${normalizedIndex + 1} / ${items.length}`;
+
+  Array.from(lightboxState.thumbs.children).forEach((thumb, index) => {
+    thumb.classList.toggle("is-active", index === normalizedIndex);
+  });
+}
+
+function openGalleryLightbox(groupId, index, trigger) {
+  const items = galleryGroups.get(groupId);
+  if (!items || items.length === 0) return;
+
+  const state = ensureGalleryLightbox();
+  state.currentGroupId = groupId;
+  state.returnFocusTo = trigger || null;
+  state.thumbs.innerHTML = items
+    .map(
+      (item, itemIndex) => `
+        <button
+          type="button"
+          class="gallery-lightbox-thumb"
+          data-gallery-thumb="${itemIndex}"
+          aria-label="View image ${itemIndex + 1}"
+        >
+          <img src="${item.src}" alt="${item.alt}" loading="eager" decoding="async" />
+        </button>
+      `
+    )
+    .join("");
+
+  state.root.hidden = false;
+  requestAnimationFrame(() => state.root.classList.add("is-open"));
+  document.body.classList.add("lightbox-open");
+  updateGalleryLightboxView(index);
+  state.close.focus();
+}
+
+function closeGalleryLightbox() {
+  if (!lightboxState.root || lightboxState.root.hidden) return;
+  lightboxState.root.classList.remove("is-open");
+  document.body.classList.remove("lightbox-open");
+  window.setTimeout(() => {
+    lightboxState.root.hidden = true;
+    lightboxState.image.removeAttribute("src");
+  }, 180);
+  lightboxState.returnFocusTo?.focus?.();
+}
+
+function setupGalleryLightbox() {
+  ensureGalleryLightbox();
+  document.addEventListener("click", (event) => {
+    const trigger = event.target.closest(".gallery-trigger");
+    if (!trigger) return;
+    openGalleryLightbox(
+      trigger.dataset.galleryGroup,
+      Number(trigger.dataset.galleryIndex || 0),
+      trigger
+    );
   });
 }
 
@@ -821,6 +1340,38 @@ function setupSkillBrainBank(section) {
   });
 }
 
+function setupBrainBankMotion(section) {
+  const stage = section.querySelector(".brain-bank-stage");
+  const prefersReducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+  const finePointer = window.matchMedia("(pointer: fine)").matches;
+  if (!stage || prefersReducedMotion || !finePointer) return;
+
+  const reset = () => {
+    stage.style.setProperty("--globe-tilt-x", "0deg");
+    stage.style.setProperty("--globe-tilt-y", "0deg");
+    stage.style.setProperty("--globe-shift-x", "0px");
+    stage.style.setProperty("--globe-shift-y", "0px");
+    stage.style.setProperty("--globe-scale", "1");
+  };
+
+  const handleMove = (event) => {
+    const rect = stage.getBoundingClientRect();
+    const horizontal = ((event.clientX - rect.left) / rect.width - 0.5) * 2;
+    const vertical = ((event.clientY - rect.top) / rect.height - 0.5) * 2;
+
+    stage.style.setProperty("--globe-tilt-x", `${(-vertical * 5).toFixed(2)}deg`);
+    stage.style.setProperty("--globe-tilt-y", `${(horizontal * 7).toFixed(2)}deg`);
+    stage.style.setProperty("--globe-shift-x", `${(horizontal * 8).toFixed(2)}px`);
+    stage.style.setProperty("--globe-shift-y", `${(vertical * 6).toFixed(2)}px`);
+    stage.style.setProperty("--globe-scale", "1.012");
+  };
+
+  reset();
+  stage.addEventListener("pointermove", handleMove);
+  stage.addEventListener("pointerleave", reset);
+  stage.addEventListener("pointercancel", reset);
+}
+
 function renderSkillBrainBank() {
   const allSkills = flattenSkills();
   if (allSkills.length === 0) return null;
@@ -914,6 +1465,7 @@ function renderSkillBrainBank() {
 
   const revealedSection = applyRevealMotion(section, 0);
   setupSkillBrainBank(revealedSection);
+  setupBrainBankMotion(revealedSection);
   return revealedSection;
 }
 
@@ -967,6 +1519,7 @@ function renderSectionPage(sectionKey) {
   if (description) description.textContent = meta.description;
 
   renderSectionNav(sectionKey);
+  renderSectionHeroStats(sectionKey);
 
   if (sectionKey === "experience") renderExperience(content);
   if (sectionKey === "education") {
@@ -986,6 +1539,8 @@ function init() {
   fillBasicIdentity();
   renderContact();
   setupScrollProgress();
+  setupPageTransitions();
+  setupGalleryLightbox();
 
   const pageType = document.body.dataset.page;
   if (pageType === "landing") {
@@ -994,6 +1549,8 @@ function init() {
     renderRelatedLinks();
     setupLandingMotion();
     setupHeroCardMotion();
+    setupLandingStageSpotlight();
+    setupInteractiveSurfaces(document);
     finalizePageLoad();
     return;
   }
@@ -1002,6 +1559,7 @@ function init() {
     renderSectionPage(document.body.dataset.section);
   }
 
+  setupInteractiveSurfaces(document);
   finalizePageLoad();
 }
 

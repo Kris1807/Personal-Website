@@ -29,6 +29,8 @@ const resume = {
       period: "Remote | July 2026 - Present",
       image: "assets/experience/intelliverse.jpeg",
       imageAlt: "IntelliVerse visual mark.",
+      impact: "Contributing to live AI product workflows through feature delivery, testing, and technical iteration.",
+      focusAreas: ["AI features", "Testing", "Workflow design"],
       highlights: [
         "Contribute to the development, testing, and improvement of AI-driven application features and technical workflows in collaboration with the development team.",
       ],
@@ -39,6 +41,8 @@ const resume = {
       period: "Athens, GA | April 2026 - Present",
       image: "assets/experience/uga.webp",
       imageAlt: "University of Georgia logo.",
+      impact: "Building internal recruiting and roster-analysis tools that support staff planning and athlete operations.",
+      focusAreas: ["Recruiting", "Roster analytics", "Staff tools"],
       highlights: [
         "Develop a recruiting and roster-analysis application with athlete management, roster projections, recruiting priorities, and collaborative staff tools.",
         "Begin a formal Graduate Assistant appointment in August 2026, supporting team operations and athlete development.",
@@ -50,6 +54,8 @@ const resume = {
       period: "Athens, GA | Aug 2025 - May 2026",
       image: "assets/experience/cooldawgs.png",
       imageAlt: "CoolDawgs research team logo.",
+      impact: "Led the mobile build for an award-winning research system tied to live Bluetooth sensor data.",
+      focusAreas: ["React Native", "Sensor systems", "Data visualization"],
       highlights: [
         "Led development of a React Native application that collected and visualized data from Bluetooth-connected environmental sensors.",
         "Built temperature summaries and interactive charts for multidisciplinary research recognized with the CURO Best Paper Award.",
