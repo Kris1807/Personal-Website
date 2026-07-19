@@ -655,8 +655,225 @@ function renderAthleticsGallery(root) {
   });
 }
 
+const brainBankRows = [
+  { y: 96, left: 214, right: 506, count: 2 },
+  { y: 138, left: 146, right: 574, count: 3 },
+  { y: 180, left: 118, right: 602, count: 3 },
+  { y: 224, left: 98, right: 622, count: 4 },
+  { y: 268, left: 90, right: 630, count: 4 },
+  { y: 312, left: 102, right: 618, count: 4 },
+  { y: 356, left: 132, right: 588, count: 3 },
+  { y: 398, left: 184, right: 536, count: 2 },
+  { y: 438, left: 234, right: 486, count: 2 },
+];
+
+function shuffleArray(items) {
+  const shuffled = [...items];
+  for (let index = shuffled.length - 1; index > 0; index -= 1) {
+    const randomIndex = Math.floor(Math.random() * (index + 1));
+    [shuffled[index], shuffled[randomIndex]] = [shuffled[randomIndex], shuffled[index]];
+  }
+  return shuffled;
+}
+
+function flattenSkills() {
+  return resume.skills.flatMap((group) =>
+    group.items.map((label) => ({
+      label,
+      category: group.category,
+      tone: group.category.toLowerCase().replace(/[^a-z0-9]+/g, "-")
+    }))
+  );
+}
+
+function estimateBrainTokenWidth(label) {
+  return Math.max(72, Math.min(136, 26 + label.length * 4.9));
+}
+
+function computeBrainBankLayout(tokens) {
+  const placements = [];
+  let cursor = 0;
+
+  brainBankRows.forEach((row) => {
+    const rowTokens = tokens.slice(cursor, cursor + row.count);
+    if (rowTokens.length === 0) return;
+
+    const widths = rowTokens.map((token) => token.width);
+    const totalWidth = widths.reduce((sum, width) => sum + width, 0);
+    const available = row.right - row.left;
+    const baseGap = rowTokens.length > 1 ? (available - totalWidth) / (rowTokens.length - 1) : 0;
+    const gap = rowTokens.length > 1 ? Math.max(10, Math.min(26, baseGap)) : 0;
+    const occupied = totalWidth + gap * Math.max(0, rowTokens.length - 1);
+    let x = row.left + Math.max(0, (available - occupied) / 2);
+
+    rowTokens.forEach((token, tokenIndex) => {
+      const width = widths[tokenIndex];
+      placements.push({
+        x: x + width / 2,
+        y: row.y + (Math.random() * 8 - 4),
+        rotate: Math.random() * 12 - 6,
+      });
+      x += width + gap;
+    });
+
+    cursor += row.count;
+  });
+
+  return placements;
+}
+
+function createBrainBankToken(token) {
+  const svgNs = "http://www.w3.org/2000/svg";
+  const group = document.createElementNS(svgNs, "g");
+  const shadow = document.createElementNS(svgNs, "rect");
+  const rect = document.createElementNS(svgNs, "rect");
+  const text = document.createElementNS(svgNs, "text");
+  const title = document.createElementNS(svgNs, "title");
+
+  group.classList.add("brain-bank-token", `tone-${token.tone}`);
+  group.setAttribute("tabindex", "0");
+
+  shadow.setAttribute("x", String(-token.width / 2));
+  shadow.setAttribute("y", "-14");
+  shadow.setAttribute("width", String(token.width));
+  shadow.setAttribute("height", "30");
+  shadow.setAttribute("rx", "15");
+  shadow.setAttribute("ry", "15");
+  shadow.setAttribute("class", "brain-bank-token-shadow");
+
+  rect.setAttribute("x", String(-token.width / 2));
+  rect.setAttribute("y", "-16");
+  rect.setAttribute("width", String(token.width));
+  rect.setAttribute("height", "30");
+  rect.setAttribute("rx", "15");
+  rect.setAttribute("ry", "15");
+  rect.setAttribute("class", "brain-bank-token-pill");
+
+  text.setAttribute("text-anchor", "middle");
+  text.setAttribute("dominant-baseline", "middle");
+  text.setAttribute("y", "-1");
+  text.setAttribute("class", "brain-bank-token-text");
+  text.textContent = token.label;
+
+  title.textContent = `${token.label} · ${token.category}`;
+
+  group.append(title, shadow, rect, text);
+  return group;
+}
+
+function setupSkillBrainBank(section) {
+  const layer = section.querySelector("[data-brain-bank-layer]");
+  const button = section.querySelector("[data-brain-bank-shuffle]");
+  if (!layer || !button) return;
+
+  const tokens = flattenSkills().map((entry) => ({
+    ...entry,
+    width: estimateBrainTokenWidth(entry.label),
+  }));
+
+  const tokenViews = tokens.map((token) => {
+    const node = createBrainBankToken(token);
+    layer.appendChild(node);
+    return { ...token, node };
+  });
+
+  const placeTokens = (orderedTokens, { instant = false } = {}) => {
+    const placements = computeBrainBankLayout(orderedTokens);
+    orderedTokens.forEach((token, index) => {
+      const placement = placements[index];
+      if (!placement) return;
+
+      if (instant) {
+        token.node.style.transitionDuration = "0ms";
+      } else {
+        token.node.style.removeProperty("transition-duration");
+      }
+
+      token.node.style.transform = `translate(${placement.x}px, ${placement.y}px) rotate(${placement.rotate}deg)`;
+      token.node.style.setProperty("--token-delay", `${index * 18}ms`);
+    });
+  };
+
+  let currentOrder = shuffleArray(tokenViews);
+  placeTokens(currentOrder, { instant: true });
+
+  button.addEventListener("click", () => {
+    currentOrder = shuffleArray(currentOrder);
+    section.classList.add("is-shuffling");
+    placeTokens(currentOrder);
+    window.clearTimeout(section._brainBankTimer);
+    section._brainBankTimer = window.setTimeout(() => {
+      section.classList.remove("is-shuffling");
+    }, 680);
+  });
+}
+
+function renderSkillBrainBank(root) {
+  const allSkills = flattenSkills();
+  if (allSkills.length === 0) return;
+
+  const section = document.createElement("section");
+  section.className = "card detail-card brain-bank-card";
+  section.innerHTML = `
+    <div class="brain-bank-layout">
+      <div class="brain-bank-copy">
+        <p class="eyebrow">Interactive Vault</p>
+        <h2>Brain Bank</h2>
+        <p class="brain-bank-lead">A transparent brain piggy bank packed with the languages, frameworks, platforms, and tools I rely on most.</p>
+        <button type="button" class="brain-bank-button" data-brain-bank-shuffle>Shuffle Skills</button>
+      </div>
+      <div class="brain-bank-stage">
+        <svg class="brain-bank-svg" viewBox="0 0 720 520" role="img" aria-labelledby="brain-bank-title brain-bank-desc">
+          <title id="brain-bank-title">Transparent brain bank filled with skills</title>
+          <desc id="brain-bank-desc">An interactive glass brain holding Kristian Pitshugin's skills. Use the shuffle button to rearrange them.</desc>
+          <defs>
+            <path id="brain-bank-shape" d="M181 108C207 63 255 42 304 54C338 24 392 24 430 56C486 37 549 54 589 98C632 146 650 208 640 268C653 332 633 392 594 432C553 474 493 488 434 470C396 495 330 498 284 474C220 489 159 470 119 428C82 388 67 334 78 276C65 216 82 154 122 114C139 97 158 94 181 108Z" />
+            <clipPath id="brain-bank-clip">
+              <use href="#brain-bank-shape" />
+            </clipPath>
+            <linearGradient id="brain-bank-glass-fill" x1="0%" x2="100%" y1="0%" y2="100%">
+              <stop offset="0%" stop-color="rgba(248, 244, 237, 0.9)" />
+              <stop offset="55%" stop-color="rgba(203, 218, 241, 0.32)" />
+              <stop offset="100%" stop-color="rgba(247, 238, 223, 0.84)" />
+            </linearGradient>
+            <linearGradient id="brain-bank-rim" x1="0%" x2="100%" y1="0%" y2="0%">
+              <stop offset="0%" stop-color="#9bb5dd" />
+              <stop offset="50%" stop-color="#f3e3c9" />
+              <stop offset="100%" stop-color="#6f92c3" />
+            </linearGradient>
+            <filter id="brain-bank-shadow" x="-20%" y="-20%" width="140%" height="160%">
+              <feDropShadow dx="0" dy="18" stdDeviation="18" flood-color="rgba(7,15,31,0.16)" />
+            </filter>
+          </defs>
+          <ellipse class="brain-bank-floor-shadow" cx="362" cy="484" rx="220" ry="22" />
+          <g filter="url(#brain-bank-shadow)">
+            <g clip-path="url(#brain-bank-clip)">
+              <rect class="brain-bank-fill" x="70" y="42" width="580" height="434" rx="190" />
+              <rect class="brain-bank-sheen" x="96" y="64" width="118" height="332" rx="56" />
+              <g class="brain-bank-skill-layer" data-brain-bank-layer></g>
+            </g>
+            <use href="#brain-bank-shape" class="brain-bank-shell" />
+            <path class="brain-bank-ridge" d="M214 122C187 146 181 180 209 206" />
+            <path class="brain-bank-ridge" d="M288 92C255 132 258 182 298 226" />
+            <path class="brain-bank-ridge" d="M356 84C334 128 334 186 356 238" />
+            <path class="brain-bank-ridge" d="M432 96C464 136 468 188 442 234" />
+            <path class="brain-bank-ridge" d="M506 122C535 152 540 192 514 220" />
+            <rect class="brain-bank-slot" x="310" y="36" width="100" height="14" rx="7" />
+            <circle class="brain-bank-coin" cx="534" cy="88" r="20" />
+            <text class="brain-bank-coin-mark" x="534" y="89">K</text>
+          </g>
+        </svg>
+      </div>
+    </div>
+  `;
+
+  root.appendChild(applyRevealMotion(section, root.children.length));
+  setupSkillBrainBank(section);
+}
+
 function renderSkills(root) {
   root.innerHTML = "";
+  renderSkillBrainBank(root);
   resume.skills.forEach((item, index) => {
     root.appendChild(
       createCard(

@@ -511,6 +511,182 @@ li {
   gap: 0.55rem;
 }
 
+.brain-bank-card {
+  overflow: hidden;
+  background:
+    radial-gradient(circle at 16% 18%, rgba(113, 151, 212, 0.18), transparent 24%),
+    radial-gradient(circle at 84% 14%, rgba(236, 216, 181, 0.24), transparent 26%),
+    linear-gradient(180deg, rgba(249, 246, 239, 0.99), rgba(223, 232, 244, 0.9));
+}
+
+.brain-bank-layout {
+  display: grid;
+  grid-template-columns: minmax(240px, 0.78fr) minmax(0, 1.22fr);
+  gap: 1.4rem;
+  align-items: center;
+}
+
+.brain-bank-copy {
+  display: grid;
+  gap: 0.9rem;
+  align-content: center;
+}
+
+.brain-bank-copy .eyebrow {
+  margin-bottom: 0;
+}
+
+.brain-bank-lead {
+  margin: 0;
+  color: var(--muted);
+  font-size: 1.02rem;
+  line-height: 1.7;
+}
+
+.brain-bank-button {
+  appearance: none;
+  justify-self: start;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0.88rem 1.2rem;
+  border: 1px solid rgba(91, 120, 163, 0.34);
+  border-radius: 999px;
+  background: linear-gradient(180deg, rgba(20, 50, 90, 0.96), rgba(35, 74, 125, 0.92));
+  color: #f8f3ea;
+  font: inherit;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  cursor: pointer;
+  box-shadow: 0 18px 32px rgba(13, 28, 52, 0.2);
+  transition: transform 0.18s ease, box-shadow 0.18s ease, background 0.18s ease;
+}
+
+.brain-bank-button:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 22px 36px rgba(13, 28, 52, 0.24);
+  background: linear-gradient(180deg, rgba(26, 62, 110, 0.98), rgba(46, 89, 146, 0.94));
+}
+
+.brain-bank-button:focus-visible {
+  outline: 2px solid rgba(29, 71, 120, 0.28);
+  outline-offset: 3px;
+}
+
+.brain-bank-stage {
+  position: relative;
+}
+
+.brain-bank-svg {
+  display: block;
+  width: min(100%, 720px);
+  margin-inline: auto;
+  overflow: visible;
+}
+
+.brain-bank-floor-shadow {
+  fill: rgba(17, 35, 64, 0.08);
+}
+
+.brain-bank-fill {
+  fill: url(#brain-bank-glass-fill);
+}
+
+.brain-bank-sheen {
+  fill: rgba(255, 255, 255, 0.28);
+}
+
+.brain-bank-shell {
+  fill: rgba(255, 255, 255, 0.08);
+  stroke: url(#brain-bank-rim);
+  stroke-width: 7;
+}
+
+.brain-bank-ridge {
+  fill: none;
+  stroke: rgba(34, 68, 110, 0.18);
+  stroke-linecap: round;
+  stroke-width: 12;
+}
+
+.brain-bank-slot {
+  fill: rgba(17, 34, 61, 0.62);
+}
+
+.brain-bank-coin {
+  fill: rgba(243, 226, 194, 0.95);
+  stroke: rgba(179, 147, 88, 0.72);
+  stroke-width: 3;
+}
+
+.brain-bank-coin-mark {
+  fill: #7d5e28;
+  font-family: "Space Grotesk", sans-serif;
+  font-size: 1.1rem;
+  font-weight: 700;
+  text-anchor: middle;
+  dominant-baseline: middle;
+}
+
+.brain-bank-token {
+  transition: transform 620ms cubic-bezier(0.22, 1, 0.36, 1), filter 220ms ease;
+}
+
+.brain-bank-token:focus-visible {
+  outline: none;
+}
+
+.brain-bank-token:hover,
+.brain-bank-token:focus-visible {
+  filter: brightness(1.06) drop-shadow(0 12px 18px rgba(7, 15, 31, 0.18));
+}
+
+.brain-bank-token-shadow {
+  fill: rgba(7, 15, 31, 0.08);
+}
+
+.brain-bank-token-pill {
+  stroke-width: 1.4;
+}
+
+.brain-bank-token-text {
+  fill: #102845;
+  font-family: "Space Grotesk", sans-serif;
+  font-size: 0.68rem;
+  font-weight: 700;
+  letter-spacing: 0.02em;
+  pointer-events: none;
+}
+
+.brain-bank-token.tone-programming-languages .brain-bank-token-pill {
+  fill: rgba(112, 152, 214, 0.34);
+  stroke: rgba(72, 111, 171, 0.52);
+}
+
+.brain-bank-token.tone-frameworks-libraries .brain-bank-token-pill {
+  fill: rgba(241, 224, 189, 0.52);
+  stroke: rgba(182, 150, 93, 0.5);
+}
+
+.brain-bank-token.tone-databases-platforms .brain-bank-token-pill {
+  fill: rgba(186, 218, 211, 0.44);
+  stroke: rgba(91, 139, 126, 0.46);
+}
+
+.brain-bank-token.tone-tools-hardware .brain-bank-token-pill {
+  fill: rgba(214, 204, 235, 0.46);
+  stroke: rgba(123, 108, 162, 0.46);
+}
+
+.brain-bank-token.tone-languages .brain-bank-token-pill {
+  fill: rgba(242, 208, 209, 0.54);
+  stroke: rgba(176, 118, 122, 0.44);
+}
+
+.brain-bank-card.is-shuffling .brain-bank-button {
+  transform: translateY(-1px) scale(0.99);
+}
+
 .chip,
 .skeleton-chip {
   display: inline-flex;
@@ -746,6 +922,20 @@ li {
 
   .thesis-grid {
     grid-template-columns: 1fr;
+  }
+}
+
+@media (max-width: 900px) {
+  .brain-bank-layout {
+    grid-template-columns: 1fr;
+  }
+
+  .brain-bank-copy {
+    order: 2;
+  }
+
+  .brain-bank-stage {
+    order: 1;
   }
 }
 
@@ -1278,6 +1468,19 @@ body[data-page="landing"] .scroll-progress span {
       rotateX(var(--card-tilt-x))
       rotateY(var(--card-tilt-y))
       scale(var(--card-scale));
+  }
+
+  .brain-bank-card {
+    padding: 1rem;
+  }
+
+  .brain-bank-token-text {
+    font-size: 0.6rem;
+  }
+
+  .brain-bank-button {
+    width: 100%;
+    justify-self: stretch;
   }
 
   .story-strip-item {
