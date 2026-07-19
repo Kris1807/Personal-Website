@@ -564,21 +564,17 @@ function renderPhotoGallery(root, options) {
   const section = document.createElement("section");
   section.className = "card detail-card section-gallery-card";
   section.innerHTML = `
-    <div class="section-gallery-header marquee-header">
-      <div class="compact-heading">
-        <p class="eyebrow">${eyebrow}</p>
-        <h2>${title}</h2>
-        <p class="gallery-copy">${copy}</p>
-      </div>
-      ${items.length > 1 ? `
-        <div class="marquee-controls" aria-label="${title} controls">
-          <button type="button" class="marquee-control" data-direction="-1" aria-label="Scroll ${title} backward">&larr;</button>
-          <button type="button" class="marquee-control" data-direction="1" aria-label="Scroll ${title} forward">&rarr;</button>
-        </div>
-      ` : ""}
+    <div class="compact-heading">
+      <p class="eyebrow">${eyebrow}</p>
+      <h2>${title}</h2>
+      <p class="gallery-copy">${copy}</p>
     </div>
-    <div class="section-gallery-viewport" data-marquee-viewport>
-      <div class="section-gallery-track" data-marquee-track data-repeated="${items.length > 1 ? "true" : "false"}" data-speed="34" data-step="0.82">
+    <div class="marquee-stage">
+      ${items.length > 1 ? `
+        <button type="button" class="marquee-control marquee-control-side marquee-control-prev" data-direction="-1" aria-label="Scroll ${title} backward">&larr;</button>
+      ` : ""}
+      <div class="section-gallery-viewport" data-marquee-viewport>
+        <div class="section-gallery-track" data-marquee-track data-repeated="${items.length > 1 ? "true" : "false"}" data-speed="34" data-step="0.82">
         ${repeatedItems
           .map(
             (item) => `
@@ -588,7 +584,11 @@ function renderPhotoGallery(root, options) {
             `
           )
           .join("")}
+        </div>
       </div>
+      ${items.length > 1 ? `
+        <button type="button" class="marquee-control marquee-control-side marquee-control-next" data-direction="1" aria-label="Scroll ${title} forward">&rarr;</button>
+      ` : ""}
     </div>
   `;
   root.appendChild(applyRevealMotion(section, root.children.length));

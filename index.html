@@ -52,23 +52,21 @@
     </section>
 
     <section class="card story-strip-card">
-      <div class="story-strip-header marquee-header">
-        <div class="section-heading">
-          <p class="eyebrow">Visual Story</p>
-          <h2>Some moments behind my achievements</h2>
-        </div>
-        <div class="marquee-controls" aria-label="Visual story controls">
-          <button type="button" class="marquee-control" data-direction="-1" aria-label="Scroll visual story backward">&larr;</button>
-          <button type="button" class="marquee-control" data-direction="1" aria-label="Scroll visual story forward">&rarr;</button>
-        </div>
+      <div class="section-heading">
+        <p class="eyebrow">Visual Story</p>
+        <h2>Some moments behind my achievements</h2>
       </div>
 
-      <div class="story-strip-viewport" data-marquee-viewport>
-        <div id="story-strip" class="story-strip-track" data-marquee-track>
-          <span class="story-strip-skeleton skeleton-button" aria-hidden="true"></span>
-          <span class="story-strip-skeleton skeleton-button" aria-hidden="true"></span>
-          <span class="story-strip-skeleton skeleton-button" aria-hidden="true"></span>
+      <div class="marquee-stage">
+        <button type="button" class="marquee-control marquee-control-side marquee-control-prev" data-direction="-1" aria-label="Scroll visual story backward">&larr;</button>
+        <div class="story-strip-viewport" data-marquee-viewport>
+          <div id="story-strip" class="story-strip-track" data-marquee-track>
+            <span class="story-strip-skeleton skeleton-button" aria-hidden="true"></span>
+            <span class="story-strip-skeleton skeleton-button" aria-hidden="true"></span>
+            <span class="story-strip-skeleton skeleton-button" aria-hidden="true"></span>
+          </div>
         </div>
+        <button type="button" class="marquee-control marquee-control-side marquee-control-next" data-direction="1" aria-label="Scroll visual story forward">&rarr;</button>
       </div>
     </section>
 
