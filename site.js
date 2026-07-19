@@ -656,15 +656,15 @@ function renderAthleticsGallery(root) {
 }
 
 const brainBankRows = [
-  { y: 96, left: 214, right: 506, count: 2 },
-  { y: 138, left: 146, right: 574, count: 3 },
-  { y: 180, left: 118, right: 602, count: 3 },
-  { y: 224, left: 98, right: 622, count: 4 },
-  { y: 268, left: 90, right: 630, count: 4 },
-  { y: 312, left: 102, right: 618, count: 4 },
-  { y: 356, left: 132, right: 588, count: 3 },
-  { y: 398, left: 184, right: 536, count: 2 },
-  { y: 438, left: 234, right: 486, count: 2 },
+  { y: 112, left: 224, right: 466, count: 2 },
+  { y: 150, left: 168, right: 522, count: 3 },
+  { y: 188, left: 132, right: 558, count: 3 },
+  { y: 226, left: 108, right: 582, count: 4 },
+  { y: 264, left: 96, right: 594, count: 4 },
+  { y: 302, left: 108, right: 582, count: 4 },
+  { y: 340, left: 136, right: 554, count: 3 },
+  { y: 380, left: 182, right: 508, count: 2 },
+  { y: 418, left: 226, right: 464, count: 2 },
 ];
 
 function shuffleArray(items) {
@@ -808,74 +808,79 @@ function setupSkillBrainBank(section) {
   });
 }
 
-function renderSkillBrainBank(root) {
+function renderSkillBrainBank() {
   const allSkills = flattenSkills();
-  if (allSkills.length === 0) return;
+  if (allSkills.length === 0) return null;
 
   const section = document.createElement("section");
-  section.className = "card detail-card brain-bank-card";
+  section.className = "brain-bank-panel";
   section.innerHTML = `
-    <div class="brain-bank-layout">
-      <div class="brain-bank-copy">
-        <p class="eyebrow">Interactive Vault</p>
-        <h2>Brain Bank</h2>
-        <p class="brain-bank-lead">A transparent brain piggy bank packed with the languages, frameworks, platforms, and tools I rely on most.</p>
-        <button type="button" class="brain-bank-button" data-brain-bank-shuffle>Shuffle Skills</button>
-      </div>
-      <div class="brain-bank-stage">
-        <svg class="brain-bank-svg" viewBox="0 0 720 520" role="img" aria-labelledby="brain-bank-title brain-bank-desc">
-          <title id="brain-bank-title">Transparent brain bank filled with skills</title>
-          <desc id="brain-bank-desc">An interactive glass brain holding Kristian Pitshugin's skills. Use the shuffle button to rearrange them.</desc>
-          <defs>
-            <path id="brain-bank-shape" d="M181 108C207 63 255 42 304 54C338 24 392 24 430 56C486 37 549 54 589 98C632 146 650 208 640 268C653 332 633 392 594 432C553 474 493 488 434 470C396 495 330 498 284 474C220 489 159 470 119 428C82 388 67 334 78 276C65 216 82 154 122 114C139 97 158 94 181 108Z" />
-            <clipPath id="brain-bank-clip">
-              <use href="#brain-bank-shape" />
-            </clipPath>
-            <linearGradient id="brain-bank-glass-fill" x1="0%" x2="100%" y1="0%" y2="100%">
-              <stop offset="0%" stop-color="rgba(248, 244, 237, 0.9)" />
-              <stop offset="55%" stop-color="rgba(203, 218, 241, 0.32)" />
-              <stop offset="100%" stop-color="rgba(247, 238, 223, 0.84)" />
-            </linearGradient>
-            <linearGradient id="brain-bank-rim" x1="0%" x2="100%" y1="0%" y2="0%">
-              <stop offset="0%" stop-color="#9bb5dd" />
-              <stop offset="50%" stop-color="#f3e3c9" />
-              <stop offset="100%" stop-color="#6f92c3" />
-            </linearGradient>
-            <filter id="brain-bank-shadow" x="-20%" y="-20%" width="140%" height="160%">
-              <feDropShadow dx="0" dy="18" stdDeviation="18" flood-color="rgba(7,15,31,0.16)" />
-            </filter>
-          </defs>
-          <ellipse class="brain-bank-floor-shadow" cx="362" cy="484" rx="220" ry="22" />
-          <g filter="url(#brain-bank-shadow)">
-            <g clip-path="url(#brain-bank-clip)">
-              <rect class="brain-bank-fill" x="70" y="42" width="580" height="434" rx="190" />
-              <rect class="brain-bank-sheen" x="96" y="64" width="118" height="332" rx="56" />
-              <g class="brain-bank-skill-layer" data-brain-bank-layer></g>
-            </g>
-            <use href="#brain-bank-shape" class="brain-bank-shell" />
-            <path class="brain-bank-ridge" d="M214 122C187 146 181 180 209 206" />
-            <path class="brain-bank-ridge" d="M288 92C255 132 258 182 298 226" />
-            <path class="brain-bank-ridge" d="M356 84C334 128 334 186 356 238" />
-            <path class="brain-bank-ridge" d="M432 96C464 136 468 188 442 234" />
-            <path class="brain-bank-ridge" d="M506 122C535 152 540 192 514 220" />
-            <rect class="brain-bank-slot" x="310" y="36" width="100" height="14" rx="7" />
-            <circle class="brain-bank-coin" cx="534" cy="88" r="20" />
-            <text class="brain-bank-coin-mark" x="534" y="89">K</text>
+    <div class="brain-bank-stage">
+      <svg class="brain-bank-svg" viewBox="0 0 690 560" role="img" aria-labelledby="brain-bank-title brain-bank-desc">
+        <title id="brain-bank-title">Transparent brain bank filled with skills</title>
+        <desc id="brain-bank-desc">An interactive glass brain holding Kristian Pitshugin's skills. Use the shuffle button to rearrange them.</desc>
+        <defs>
+          <path id="brain-bank-shape" d="M203 143C188 105 212 72 255 66C283 33 338 18 390 36C438 18 495 31 528 66C574 70 608 106 611 152C639 187 648 241 635 286C646 336 633 390 599 426C571 459 531 473 488 468C451 501 393 516 336 506C293 515 248 504 214 476C166 474 127 449 102 407C77 364 74 316 87 272C73 228 84 181 116 150C142 123 171 118 203 143Z" />
+          <clipPath id="brain-bank-clip">
+            <use href="#brain-bank-shape" />
+          </clipPath>
+          <linearGradient id="brain-bank-glass-fill" x1="6%" x2="96%" y1="4%" y2="100%">
+            <stop offset="0%" stop-color="#f8f6f1" stop-opacity="0.92" />
+            <stop offset="42%" stop-color="#dbe6f7" stop-opacity="0.58" />
+            <stop offset="76%" stop-color="#f5ebda" stop-opacity="0.68" />
+            <stop offset="100%" stop-color="#d3e0f2" stop-opacity="0.78" />
+          </linearGradient>
+          <linearGradient id="brain-bank-rim" x1="0%" x2="100%" y1="0%" y2="0%">
+            <stop offset="0%" stop-color="#88a8d6" />
+            <stop offset="48%" stop-color="#f2dfc0" />
+            <stop offset="100%" stop-color="#6b8ec1" />
+          </linearGradient>
+          <filter id="brain-bank-shadow" x="-20%" y="-20%" width="140%" height="160%">
+            <feDropShadow dx="0" dy="22" stdDeviation="18" flood-color="#09182d" flood-opacity="0.18" />
+          </filter>
+        </defs>
+        <ellipse class="brain-bank-floor-shadow" cx="350" cy="522" rx="214" ry="22" />
+        <g filter="url(#brain-bank-shadow)">
+          <g clip-path="url(#brain-bank-clip)">
+            <rect class="brain-bank-fill" x="78" y="34" width="544" height="464" rx="188" />
+            <rect class="brain-bank-sheen" x="110" y="78" width="92" height="304" rx="44" />
+            <g class="brain-bank-skill-layer" data-brain-bank-layer></g>
           </g>
-        </svg>
-      </div>
+          <use href="#brain-bank-shape" class="brain-bank-shell" />
+          <path class="brain-bank-divider" d="M347 78C330 126 329 182 343 244C355 297 358 352 350 430" />
+          <path class="brain-bank-ridge" d="M228 136C194 162 186 208 217 238C241 262 244 300 220 328" />
+          <path class="brain-bank-ridge" d="M282 106C256 138 254 182 278 214C295 239 300 276 286 306" />
+          <path class="brain-bank-ridge" d="M332 86C315 122 315 166 330 204C342 235 344 274 333 312" />
+          <path class="brain-bank-ridge" d="M240 364C267 382 292 394 320 410" />
+          <path class="brain-bank-ridge" d="M472 136C506 162 514 208 483 238C459 262 456 300 480 328" />
+          <path class="brain-bank-ridge" d="M418 106C444 138 446 182 422 214C405 239 400 276 414 306" />
+          <path class="brain-bank-ridge" d="M368 86C385 122 385 166 370 204C358 235 356 274 367 312" />
+          <path class="brain-bank-ridge" d="M460 364C433 382 408 394 380 410" />
+          <path class="brain-bank-stem" d="M324 448C327 480 337 502 350 512C364 502 373 480 376 448" />
+          <rect class="brain-bank-slot" x="296" y="26" width="108" height="14" rx="7" />
+          <circle class="brain-bank-coin" cx="528" cy="86" r="18" />
+        </g>
+      </svg>
     </div>
+    <button type="button" class="brain-bank-button" data-brain-bank-shuffle>Shuffle Skills</button>
   `;
 
-  root.appendChild(applyRevealMotion(section, root.children.length));
-  setupSkillBrainBank(section);
+  const revealedSection = applyRevealMotion(section, 0);
+  setupSkillBrainBank(revealedSection);
+  return revealedSection;
 }
 
 function renderSkills(root) {
   root.innerHTML = "";
-  renderSkillBrainBank(root);
+
+  const layout = document.createElement("div");
+  layout.className = "skills-stack-layout";
+
+  const cardsColumn = document.createElement("div");
+  cardsColumn.className = "skills-cards-column";
+
   resume.skills.forEach((item, index) => {
-    root.appendChild(
+    cardsColumn.appendChild(
       createCard(
         `
         <h2>${item.category}</h2>
@@ -885,6 +890,19 @@ function renderSkills(root) {
       )
     );
   });
+
+  const brainRail = document.createElement("aside");
+  brainRail.className = "skills-brain-rail";
+  const brainBank = renderSkillBrainBank();
+
+  if (brainBank) {
+    brainRail.appendChild(brainBank);
+    layout.append(cardsColumn, brainRail);
+  } else {
+    layout.append(cardsColumn);
+  }
+
+  root.appendChild(layout);
 }
 
 function renderSectionPage(sectionKey) {
