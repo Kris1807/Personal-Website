@@ -156,6 +156,112 @@ function fillBasicIdentity() {
   );
 }
 
+function setupMarqueeScroller(section, options = {}) {
+  const viewport = section.querySelector("[data-marquee-viewport]");
+  const track = section.querySelector("[data-marquee-track]");
+  if (!viewport || !track) return;
+
+  const controls = Array.from(section.querySelectorAll(".marquee-control"));
+  const prefersReducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+  const isRepeated = track.dataset.repeated === "true";
+  const baseSpeed = Number(track.dataset.speed || options.speed || 34);
+  const stepRatio = Number(track.dataset.step || options.step || 0.86);
+
+  if (!isRepeated) {
+    controls.forEach((control) => {
+      control.hidden = true;
+      control.disabled = true;
+    });
+    return;
+  }
+
+  let frameId = 0;
+  let lastTick = 0;
+  let paused = prefersReducedMotion;
+  let resumeTimer = 0;
+
+  const getLoopWidth = () => track.scrollWidth / 2;
+
+  const normalizeScroll = () => {
+    const loopWidth = getLoopWidth();
+    if (!loopWidth) return;
+
+    while (viewport.scrollLeft >= loopWidth) {
+      viewport.scrollLeft -= loopWidth;
+    }
+
+    while (viewport.scrollLeft < 0) {
+      viewport.scrollLeft += loopWidth;
+    }
+  };
+
+  const queueResume = (delay = 1500) => {
+    if (prefersReducedMotion) return;
+    window.clearTimeout(resumeTimer);
+    resumeTimer = window.setTimeout(() => {
+      paused = false;
+    }, delay);
+  };
+
+  const pauseRoller = () => {
+    window.clearTimeout(resumeTimer);
+    paused = true;
+  };
+
+  const nudge = (direction) => {
+    pauseRoller();
+    viewport.scrollLeft += direction * Math.max(220, viewport.clientWidth * stepRatio);
+    normalizeScroll();
+    queueResume();
+  };
+
+  const tick = (timestamp) => {
+    if (!lastTick) lastTick = timestamp;
+    const delta = timestamp - lastTick;
+    lastTick = timestamp;
+
+    if (!paused) {
+      viewport.scrollLeft += (baseSpeed * delta) / 1000;
+      normalizeScroll();
+    }
+
+    frameId = window.requestAnimationFrame(tick);
+  };
+
+  controls.forEach((control) => {
+    const direction = Number(control.dataset.direction || 1);
+    control.addEventListener("click", () => nudge(direction));
+  });
+
+  section.addEventListener("mouseenter", pauseRoller);
+  section.addEventListener("mouseleave", () => queueResume(240));
+  section.addEventListener("focusin", pauseRoller);
+  section.addEventListener("focusout", (event) => {
+    if (!section.contains(event.relatedTarget)) {
+      queueResume(240);
+    }
+  });
+
+  document.addEventListener("visibilitychange", () => {
+    if (document.hidden) {
+      pauseRoller();
+    } else {
+      queueResume(240);
+    }
+  });
+
+  normalizeScroll();
+  frameId = window.requestAnimationFrame(tick);
+
+  window.addEventListener(
+    "resize",
+    () => {
+      normalizeScroll();
+    },
+    { passive: true }
+  );
+}
+
 function renderLandingStoryStrip() {
   const root = document.getElementById("story-strip");
   if (!root) return;
@@ -166,7 +272,10 @@ function renderLandingStoryStrip() {
     return;
   }
 
-  const repeatedItems = [...items, ...items];
+  const repeatedItems = items.length > 1 ? [...items, ...items] : items;
+  root.dataset.repeated = String(items.length > 1);
+  root.dataset.speed = "36";
+  root.dataset.step = "0.84";
   root.innerHTML = "";
 
   repeatedItems.forEach((item, index) => {
@@ -177,6 +286,9 @@ function renderLandingStoryStrip() {
     `;
     root.appendChild(applyRevealMotion(figure, index, 20));
   });
+
+  const section = root.closest(".story-strip-card");
+  if (section) setupMarqueeScroller(section);
 }
 
 function setupScrollProgress() {
@@ -452,13 +564,21 @@ function renderPhotoGallery(root, options) {
   const section = document.createElement("section");
   section.className = "card detail-card section-gallery-card";
   section.innerHTML = `
-    <div class="compact-heading">
-      <p class="eyebrow">${eyebrow}</p>
-      <h2>${title}</h2>
-      <p class="gallery-copy">${copy}</p>
+    <div class="section-gallery-header marquee-header">
+      <div class="compact-heading">
+        <p class="eyebrow">${eyebrow}</p>
+        <h2>${title}</h2>
+        <p class="gallery-copy">${copy}</p>
+      </div>
+      ${items.length > 1 ? `
+        <div class="marquee-controls" aria-label="${title} controls">
+          <button type="button" class="marquee-control" data-direction="-1" aria-label="Scroll ${title} backward">&larr;</button>
+          <button type="button" class="marquee-control" data-direction="1" aria-label="Scroll ${title} forward">&rarr;</button>
+        </div>
+      ` : ""}
     </div>
-    <div class="section-gallery-viewport">
-      <div class="section-gallery-track${items.length > 1 ? " is-marquee" : ""}">
+    <div class="section-gallery-viewport" data-marquee-viewport>
+      <div class="section-gallery-track" data-marquee-track data-repeated="${items.length > 1 ? "true" : "false"}" data-speed="34" data-step="0.82">
         ${repeatedItems
           .map(
             (item) => `
@@ -472,6 +592,7 @@ function renderPhotoGallery(root, options) {
     </div>
   `;
   root.appendChild(applyRevealMotion(section, root.children.length));
+  setupMarqueeScroller(section, { speed: 34, step: 0.82 });
 }
 
 function renderProjects(root) {
