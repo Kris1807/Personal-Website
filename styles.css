@@ -567,11 +567,15 @@ body[data-section="skills"] .section-content-wrap {
 
 .brain-bank-sheen-primary,
 .brain-bank-sheen-secondary {
-  fill: rgba(255, 255, 255, 0.3);
+  fill: rgba(255, 255, 255, 0.36);
 }
 
 .brain-bank-sheen-ribbon {
-  fill: rgba(255, 255, 255, 0.14);
+  fill: rgba(255, 255, 255, 0.18);
+}
+
+.brain-bank-frost-cap {
+  fill: rgba(245, 251, 255, 0.44);
 }
 
 .brain-bank-shell {
@@ -586,36 +590,18 @@ body[data-section="skills"] .section-content-wrap {
   stroke-width: 6;
 }
 
-.brain-bank-divider {
+.brain-bank-facet {
   fill: none;
-  stroke: rgba(31, 63, 104, 0.18);
-  stroke-linecap: round;
-  stroke-width: 9;
-}
-
-.brain-bank-ridge {
-  fill: none;
-  stroke: rgba(34, 68, 110, 0.2);
+  stroke: rgba(88, 130, 188, 0.28);
   stroke-linecap: round;
   stroke-width: 10;
 }
 
-.brain-bank-ridge-soft {
+.brain-bank-facet-soft {
   fill: none;
-  stroke: rgba(34, 68, 110, 0.14);
+  stroke: rgba(124, 160, 209, 0.18);
   stroke-linecap: round;
   stroke-width: 8;
-}
-
-.brain-bank-stem {
-  fill: none;
-  stroke: rgba(34, 68, 110, 0.22);
-  stroke-linecap: round;
-  stroke-width: 12;
-}
-
-.brain-bank-slot {
-  fill: rgba(17, 34, 61, 0.62);
 }
 
 .brain-bank-button {
