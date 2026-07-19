@@ -554,7 +554,7 @@ body[data-section="skills"] .section-content-wrap {
 }
 
 .brain-bank-floor-shadow {
-  fill: rgba(17, 35, 64, 0.08);
+  fill: rgba(17, 35, 64, 0.14);
 }
 
 .brain-bank-fill {
@@ -565,43 +565,68 @@ body[data-section="skills"] .section-content-wrap {
   fill: url(#brain-bank-core-glow);
 }
 
+.brain-bank-snow-drift {
+  fill: rgba(248, 252, 255, 0.96);
+}
+
+.brain-bank-snow-shadow {
+  fill: rgba(188, 213, 238, 0.24);
+}
+
 .brain-bank-sheen-primary,
 .brain-bank-sheen-secondary {
-  fill: rgba(255, 255, 255, 0.36);
+  fill: rgba(255, 255, 255, 0.42);
 }
 
 .brain-bank-sheen-ribbon {
-  fill: rgba(255, 255, 255, 0.18);
+  fill: rgba(255, 255, 255, 0.16);
 }
 
-.brain-bank-frost-cap {
-  fill: rgba(245, 251, 255, 0.44);
+.brain-bank-flurries circle {
+  fill: rgba(255, 255, 255, 0.88);
 }
 
 .brain-bank-shell {
-  fill: rgba(255, 255, 255, 0.08);
+  fill: rgba(255, 255, 255, 0.05);
   stroke: url(#brain-bank-rim);
   stroke-width: 8;
 }
 
 .brain-bank-shell-glow {
   fill: none;
-  stroke: rgba(255, 255, 255, 0.24);
-  stroke-width: 6;
+  stroke: rgba(255, 255, 255, 0.26);
+  stroke-width: 5;
 }
 
-.brain-bank-facet {
-  fill: none;
-  stroke: rgba(88, 130, 188, 0.28);
-  stroke-linecap: round;
-  stroke-width: 10;
+.brain-bank-base-top,
+.brain-bank-base-bottom {
+  fill: url(#brain-bank-base-trim);
+  stroke: rgba(188, 199, 212, 0.94);
+  stroke-width: 2;
 }
 
-.brain-bank-facet-soft {
+.brain-bank-base-body,
+.brain-bank-base-foot {
+  fill: url(#brain-bank-base-fill);
+  stroke: rgba(188, 199, 212, 0.94);
+  stroke-width: 2;
+}
+
+.brain-bank-base-trim-line {
   fill: none;
-  stroke: rgba(124, 160, 209, 0.18);
+  stroke: rgba(186, 197, 209, 0.96);
   stroke-linecap: round;
-  stroke-width: 8;
+  stroke-width: 3;
+}
+
+.brain-bank-base-trim-line.soft {
+  stroke-width: 2;
+  opacity: 0.8;
+}
+
+.brain-bank-base-trim-line.vertical {
+  stroke-width: 2.4;
+  opacity: 0.86;
 }
 
 .brain-bank-button {
@@ -660,7 +685,7 @@ body[data-section="skills"] .section-content-wrap {
 .brain-bank-token-text {
   fill: #102845;
   font-family: "Space Grotesk", sans-serif;
-  font-size: 0.82rem;
+  font-size: 0.72rem;
   font-weight: 700;
   letter-spacing: 0.02em;
   pointer-events: none;
@@ -1481,7 +1506,7 @@ body[data-page="landing"] .scroll-progress span {
   }
 
   .brain-bank-token-text {
-    font-size: 0.68rem;
+    font-size: 0.62rem;
   }
 
   .brain-bank-button {
