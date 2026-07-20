@@ -224,15 +224,23 @@ const resume = {
     },
     {
       name: "CNN Project",
+      featured: true,
       category: "Applied AI / vision",
-      role: "Model training and evaluation",
+      role: "Model design, training, and evaluation",
       summary:
-        "Convolutional neural network project focused on training, evaluation, and model-interpretability workflows.",
-      highlights: [
-        "Built training and evaluation flows around dataset handling, reporting, and iterative performance improvement.",
-        "Added Grad-CAM style visualization to inspect how the model forms predictions instead of treating outputs as a black box.",
+        "End-to-end convolutional neural network project built from scratch to train, evaluate, and interpret image-based predictions through a deployable demo workflow.",
+      problem:
+        "The project needed more than a model that produced predictions. It required a full training pipeline, repeatable evaluation, and visibility into how the network was making decisions so performance could be improved with confidence.",
+      solution:
+        "Built the project as a complete applied-AI system with dataset handling, custom training loops, evaluation reporting, Grad-CAM interpretability views, and a live inference demo for presenting model behavior clearly.",
+      decisions: [
+        "Structured the workflow around repeatable training and evaluation so model changes could be compared intentionally instead of by isolated trial and error.",
+        "Added interpretability tooling to inspect activation focus and understand why predictions were made, not just whether they were correct.",
+        "Connected the trained model to a live demo experience so the project could be used as a practical product artifact rather than remaining a notebook-only experiment.",
       ],
-      stack: ["Python", "Deep learning", "Grad-CAM"],
+      stack: ["Python", "CNNs", "Model training", "Evaluation", "Grad-CAM"],
+      outcome:
+        "Produced an impressive end-to-end vision project that demonstrates model training from scratch, iterative performance analysis, and interpretable predictions in a deployable format.",
       links: [
         {
           label: "Live demo",

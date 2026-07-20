@@ -354,39 +354,43 @@ function injectSiteHeader() {
   header.innerHTML = `
     <div class="site-header-inner">
       <a class="site-brand" href="index.html" aria-label="Go to Kristian Pitshugin home page">
-        <span class="site-brand-mark">KP</span>
+        <span class="site-brand-mark"><span class="site-brand-mark-inner">KP</span></span>
         <span class="site-brand-copy">
           <strong>${resume.name}</strong>
           <span>Software engineer · AI graduate student</span>
         </span>
       </a>
 
+      <div class="site-header-panel" id="site-header-panel">
+        <nav class="site-nav" aria-label="Primary">
+          <ul class="site-pill-list" role="list">
+            ${navItems
+              .map(
+                (item) => `
+                  <li class="site-pill-item">
+                    <a
+                      class="site-nav-link js-pill-link${currentKey === item.key ? " is-active" : ""}"
+                      href="${item.href}"
+                      ${currentKey === item.key ? 'aria-current="page"' : ""}
+                    >
+                      ${item.label}
+                    </a>
+                  </li>
+                `
+              )
+              .join("")}
+          </ul>
+        </nav>
+        <div class="site-header-actions">
+          <a class="site-header-action js-pill-link" href="${getResumeDownloadLink()}" download>Resume</a>
+        </div>
+      </div>
+
       <button type="button" class="site-menu-toggle" aria-expanded="false" aria-controls="site-header-panel">
         <span></span>
         <span></span>
         <span class="site-menu-label">Menu</span>
       </button>
-
-      <div class="site-header-panel" id="site-header-panel">
-        <nav class="site-nav" aria-label="Primary">
-          ${navItems
-            .map(
-              (item) => `
-                <a
-                  class="site-nav-link${currentKey === item.key ? " is-active" : ""}"
-                  href="${item.href}"
-                  ${currentKey === item.key ? 'aria-current="page"' : ""}
-                >
-                  ${item.label}
-                </a>
-              `
-            )
-            .join("")}
-        </nav>
-        <div class="site-header-actions">
-          <a class="site-header-action" href="${getResumeDownloadLink()}" download>Resume</a>
-        </div>
-      </div>
     </div>
   `;
 
@@ -423,7 +427,11 @@ function setupSiteHeader() {
   });
 
   header.addEventListener("click", (event) => {
-    if (event.target.closest(".site-nav-link") || event.target.closest(".site-header-action")) {
+    if (
+      event.target.closest(".site-nav-link") ||
+      event.target.closest(".site-header-action") ||
+      event.target.closest(".site-brand")
+    ) {
       closeMenu();
     }
   });
@@ -442,6 +450,263 @@ function setupSiteHeader() {
 
   syncScrolledState();
   window.addEventListener("scroll", syncScrolledState, { passive: true });
+
+  setupPillNavMotion(header);
+}
+
+let gsapLoaderPromise = null;
+
+function ensureGsap() {
+  if (window.gsap) return Promise.resolve(window.gsap);
+  if (gsapLoaderPromise) return gsapLoaderPromise;
+
+  gsapLoaderPromise = new Promise((resolve, reject) => {
+    const existing = document.querySelector('script[data-gsap-loader="portfolio-pill-nav"]');
+    if (existing) {
+      existing.addEventListener("load", () => resolve(window.gsap), { once: true });
+      existing.addEventListener("error", () => reject(new Error("Unable to load GSAP")), {
+        once: true,
+      });
+      return;
+    }
+
+    const script = document.createElement("script");
+    script.src = "https://cdn.jsdelivr.net/npm/gsap@3.12.7/dist/gsap.min.js";
+    script.async = true;
+    script.dataset.gsapLoader = "portfolio-pill-nav";
+    script.onload = () => {
+      if (window.gsap) {
+        resolve(window.gsap);
+      } else {
+        reject(new Error("GSAP loaded without a global export"));
+      }
+    };
+    script.onerror = () => reject(new Error("Unable to load GSAP"));
+    document.head.appendChild(script);
+  }).catch((error) => {
+    console.warn("Pill nav motion is running in fallback mode.", error);
+    return null;
+  });
+
+  return gsapLoaderPromise;
+}
+
+function decoratePillTarget(target) {
+  if (!target || target.dataset.pillDecorated === "true") return;
+  const label = target.textContent.trim();
+  if (!label) return;
+
+  target.dataset.pillDecorated = "true";
+  target.classList.add("site-pill-link");
+  target.textContent = "";
+
+  const circle = document.createElement("span");
+  circle.className = "site-pill-circle";
+  circle.setAttribute("aria-hidden", "true");
+
+  const stack = document.createElement("span");
+  stack.className = "site-pill-label-stack";
+
+  const baseLabel = document.createElement("span");
+  baseLabel.className = "site-pill-label";
+  baseLabel.textContent = label;
+
+  const hoverLabel = document.createElement("span");
+  hoverLabel.className = "site-pill-label-hover";
+  hoverLabel.setAttribute("aria-hidden", "true");
+  hoverLabel.textContent = label;
+
+  stack.append(baseLabel, hoverLabel);
+  target.append(circle, stack);
+}
+
+function decoratePillTargets(header) {
+  header.querySelectorAll(".site-nav-link, .site-header-action").forEach((target) => {
+    decoratePillTarget(target);
+  });
+}
+
+function setupPillTimeline(target, gsap, ease) {
+  const circle = target.querySelector(".site-pill-circle");
+  const label = target.querySelector(".site-pill-label");
+  const hoverLabel = target.querySelector(".site-pill-label-hover");
+  if (!circle || !label || !hoverLabel) return;
+
+  const { width, height } = target.getBoundingClientRect();
+  if (!width || !height) return;
+
+  const radius = ((width * width) / 4 + height * height) / (2 * height);
+  const diameter = Math.ceil(2 * radius) + 2;
+  const delta =
+    Math.ceil(radius - Math.sqrt(Math.max(0, radius * radius - (width * width) / 4))) + 1;
+  const originY = diameter - delta;
+
+  circle.style.width = `${diameter}px`;
+  circle.style.height = `${diameter}px`;
+  circle.style.bottom = `-${delta}px`;
+
+  gsap.set(circle, {
+    xPercent: -50,
+    scale: 0,
+    transformOrigin: `50% ${originY}px`,
+  });
+  gsap.set(label, { y: 0 });
+  gsap.set(hoverLabel, { y: height + 12, opacity: 0 });
+
+  target._pillTimeline?.kill?.();
+
+  const timeline = gsap.timeline({ paused: true });
+  timeline.to(
+    circle,
+    {
+      scale: 1.12,
+      xPercent: -50,
+      duration: 0.72,
+      ease,
+      overwrite: "auto",
+    },
+    0
+  );
+  timeline.to(
+    label,
+    {
+      y: -(height + 8),
+      duration: 0.72,
+      ease,
+      overwrite: "auto",
+    },
+    0
+  );
+  timeline.to(
+    hoverLabel,
+    {
+      y: 0,
+      opacity: 1,
+      duration: 0.72,
+      ease,
+      overwrite: "auto",
+    },
+    0
+  );
+
+  target._pillTimeline = timeline;
+  target.classList.add("pill-motion-ready");
+
+  if (target.dataset.pillBound === "true") return;
+  target.dataset.pillBound = "true";
+
+  target.addEventListener("mouseenter", () => {
+    if (target.classList.contains("is-active")) return;
+    const activeTimeline = target._pillTimeline;
+    if (!activeTimeline) return;
+    target._pillTween?.kill?.();
+    target._pillTween = activeTimeline.tweenTo(activeTimeline.duration(), {
+      duration: 0.28,
+      ease,
+      overwrite: "auto",
+    });
+  });
+
+  target.addEventListener("mouseleave", () => {
+    if (target.classList.contains("is-active")) return;
+    const activeTimeline = target._pillTimeline;
+    if (!activeTimeline) return;
+    target._pillTween?.kill?.();
+    target._pillTween = activeTimeline.tweenTo(0, {
+      duration: 0.2,
+      ease,
+      overwrite: "auto",
+    });
+  });
+}
+
+function setupPillNavMotion(header) {
+  if (!header) return;
+
+  decoratePillTargets(header);
+
+  if (header.dataset.pillObserverReady !== "true") {
+    const observer = new MutationObserver(() => {
+      decoratePillTargets(header);
+      if (window.gsap) activatePillNavMotion(header, window.gsap);
+    });
+    const actionContainer = header.querySelector(".site-header-actions");
+    if (actionContainer) {
+      observer.observe(actionContainer, { childList: true, subtree: true });
+    }
+    header.dataset.pillObserverReady = "true";
+  }
+
+  if (header.dataset.logoBound !== "true") {
+    const brand = header.querySelector(".site-brand");
+    const mark = header.querySelector(".site-brand-mark-inner");
+    if (brand && mark) {
+      brand.addEventListener("mouseenter", () => {
+        if (!window.gsap) return;
+        window.gsap.to(mark, {
+          rotate: 360,
+          duration: 0.55,
+          ease: "power2.out",
+          overwrite: "auto",
+        });
+      });
+    }
+    header.dataset.logoBound = "true";
+  }
+
+  if (header.dataset.gsapRequested === "true") return;
+  header.dataset.gsapRequested = "true";
+
+  ensureGsap().then((gsap) => {
+    if (!gsap) return;
+    activatePillNavMotion(header, gsap);
+  });
+}
+
+function activatePillNavMotion(header, gsap) {
+  if (!header || !gsap) return;
+
+  const ease = "power2.easeOut";
+  const layout = () => {
+    decoratePillTargets(header);
+    header.querySelectorAll(".site-nav-link, .site-header-action").forEach((target) => {
+      setupPillTimeline(target, gsap, ease);
+    });
+  };
+
+  layout();
+  header.classList.add("has-pill-motion");
+
+  if (header.dataset.pillResizeBound !== "true") {
+    const onResize = () => window.requestAnimationFrame(layout);
+    window.addEventListener("resize", onResize);
+    if (document.fonts?.ready) {
+      document.fonts.ready.then(() => window.requestAnimationFrame(layout)).catch(() => {});
+    }
+    header.dataset.pillResizeBound = "true";
+  }
+
+  if (header.dataset.pillIntroPlayed !== "true") {
+    const introTargets = [
+      header.querySelector(".site-brand"),
+      ...header.querySelectorAll(".site-pill-item"),
+      ...header.querySelectorAll(".site-header-action"),
+    ].filter(Boolean);
+
+    gsap.fromTo(
+      introTargets,
+      { opacity: 0, y: -12 },
+      {
+        opacity: 1,
+        y: 0,
+        duration: 0.56,
+        stagger: 0.045,
+        ease,
+        clearProps: "opacity,transform",
+      }
+    );
+    header.dataset.pillIntroPlayed = "true";
+  }
 }
 
 function fillBasicIdentity() {
@@ -507,7 +772,7 @@ function renderHeroActions() {
     {
       label: "Download resume",
       href: getResumeDownloadLink(),
-      className: "hero-action",
+      className: "hero-action is-primary",
       download: true,
     },
   ];

@@ -105,22 +105,9 @@ class PortfolioAssistant {
 
   createLaunchers() {
     const copy = getCopy(this.language);
-    const headerActions = document.querySelector(".site-header-actions");
-    const headerButton = createElement("button", "site-header-action assistant-header-trigger", {
-      type: "button",
-      text: copy.launcher,
-      "aria-label": copy.openAria
-    });
-    headerButton.addEventListener("click", () => this.open(headerButton));
-    this.nodes.headerButton = headerButton;
-
-    if (headerActions) {
-      headerActions.prepend(headerButton);
-    }
-
     const mobileButton = createElement("button", "assistant-mobile-trigger", {
       type: "button",
-      text: copy.mobileLauncher,
+      text: copy.launcher,
       "aria-label": copy.openAria
     });
     mobileButton.addEventListener("click", () => this.open(mobileButton));
@@ -305,12 +292,8 @@ class PortfolioAssistant {
     this.nodes.root.lang = this.language;
     this.nodes.root.classList.toggle("is-hebrew", this.language === "he");
 
-    if (this.nodes.headerButton) {
-      this.nodes.headerButton.textContent = copy.launcher;
-      this.nodes.headerButton.setAttribute("aria-label", copy.openAria);
-    }
     if (this.nodes.mobileButton) {
-      this.nodes.mobileButton.textContent = copy.mobileLauncher;
+      this.nodes.mobileButton.textContent = copy.launcher;
       this.nodes.mobileButton.setAttribute("aria-label", copy.openAria);
     }
 
@@ -481,6 +464,13 @@ class PortfolioAssistant {
     window.requestAnimationFrame(() => {
       if (this.hasChosenLanguage && this.apiClient.hasEndpoint()) {
         this.focusComposer();
+      } else if (this.hasChosenLanguage) {
+        const firstFallbackLink = this.nodes.fallbackLinks?.querySelector("a");
+        if (firstFallbackLink) {
+          firstFallbackLink.focus();
+        } else {
+          this.nodes.closeButton?.focus?.();
+        }
       } else {
         const firstOption = this.nodes.languageOptionButtons[0];
         firstOption?.focus();
