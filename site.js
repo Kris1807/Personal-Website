@@ -53,6 +53,50 @@ const sectionOrder = [
 ];
 
 const galleryGroups = new Map();
+const sourceAnchorIds = {
+  experience: {
+    intelliverse: "experience-intelliverse",
+    "university-of-georgia-swimming-diving": "experience-uga-swimming-diving",
+    "cooldawgs-research-team-university-of-georgia": "experience-cooldawgs-research-team"
+  },
+  education: {
+    "master-of-science-in-artificial-intelligence-double-dawgs-program": "education-ms-ai",
+    "bachelor-of-science-in-computer-science-area-of-emphasis-in-artificial-intelligence": "education-bs-cs",
+    "minor-in-business": "education-business-minor",
+    "relevant-coursework-credentials": "education-credentials"
+  },
+  projects: {
+    "roster-lab-app": "project-roster-lab-app",
+    "patient-record-app": "project-patient-record-app",
+    "cinema-ticketing-website": "project-cinema-ticketing-website",
+    docompare: "project-docompare",
+    "cnn-project": "project-cnn-project",
+    "personal-profile-website": "project-personal-profile-website"
+  },
+  athletics: {
+    "uga-swimming-and-diving": "athletics-uga",
+    "international-israel-national-team": "athletics-israel-national-team",
+    "national-greater-jerusalem-swimming-club": "athletics-greater-jerusalem"
+  }
+};
+
+function slugifyAnchor(value) {
+  return String(value ?? "")
+    .toLowerCase()
+    .normalize("NFKD")
+    .replace(/[̀-ͯ]/g, "")
+    .replace(/[&]/g, " and ")
+    .replace(/['’]/g, "")
+    .replace(/[^a-z0-9]+/g, "-")
+    .replace(/^-+|-+$/g, "");
+}
+
+function getSourceAnchorId(section, value) {
+  const scoped = sourceAnchorIds[section] || {};
+  const key = slugifyAnchor(value);
+  return scoped[key] || section + "-" + key;
+}
+
 const lightboxState = {
   root: null,
   dialog: null,
@@ -699,9 +743,8 @@ function renderExperience(root) {
   resume.experience.forEach((item, index) => {
     const [location = item.period, dates = ""] = String(item.period || "").split(" | ");
     const isCurrent = /present/i.test(String(item.period || ""));
-    root.appendChild(
-      createCard(
-        `
+    const card = createCard(
+      `
         <div class="experience-card-layout">
           <div class="experience-sequence">
             <span class="experience-sequence-index">${String(index + 1).padStart(2, "0")}</span>
@@ -737,9 +780,10 @@ function renderExperience(root) {
             : ""}
         </div>
       `,
-        index
-      )
+      index
     );
+    card.id = getSourceAnchorId("experience", item.company);
+    root.appendChild(card);
   });
 }
 
@@ -749,19 +793,19 @@ function renderEducation(root) {
   grid.className = "education-grid";
 
   resume.education.forEach((item, index) => {
-    grid.appendChild(
-      createCard(
-        `
+    const card = createCard(
+      `
         <h2>${formatText(item.degree)}</h2>
         <p class="meta">${item.school} · ${item.period}</p>
         ${Array.isArray(item.details) && item.details.length > 0
           ? `<ul>${item.details.map((entry) => `<li>${formatText(entry)}</li>`).join("")}</ul>`
           : ""}
       `,
-        index,
-        "education-card"
-      )
+      index,
+      "education-card"
     );
+    card.id = getSourceAnchorId("education", item.degree);
+    grid.appendChild(card);
   });
 
   root.appendChild(grid);
@@ -770,6 +814,7 @@ function renderEducation(root) {
 function createFeaturedProjectCard(item, index) {
   const article = document.createElement("article");
   article.className = "card detail-card project-feature";
+  article.id = getSourceAnchorId("projects", item.name);
   article.innerHTML = `
     <div class="project-feature-main">
       <div class="project-feature-kicker-row">
@@ -820,6 +865,7 @@ function createFeaturedProjectCard(item, index) {
 function createSecondaryProjectCard(item, index) {
   const article = document.createElement("article");
   article.className = "card detail-card project-secondary-card";
+  article.id = getSourceAnchorId("projects", item.name);
   article.innerHTML = `
     <div class="project-secondary-head">
       <span class="project-feature-category">${item.category}</span>
@@ -900,17 +946,17 @@ function renderAthletics(root) {
   stack.className = "athletics-stack";
 
   resume.athletics.forEach((item, index) => {
-    stack.appendChild(
-      createCard(
-        `
+    const card = createCard(
+      `
         <h2>${item.organization}</h2>
         <p class="meta">${item.period}</p>
         <ul>${item.achievements.map((entry) => `<li>${formatText(entry)}</li>`).join("")}</ul>
       `,
-        index,
-        "athletics-card"
-      )
+      index,
+      "athletics-card"
     );
+    card.id = getSourceAnchorId("athletics", item.organization);
+    stack.appendChild(card);
   });
 
   root.appendChild(stack);

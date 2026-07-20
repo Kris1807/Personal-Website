@@ -1,0 +1,252 @@
+[
+  {
+    "id": "source-portfolio-about",
+    "type": "portfolio",
+    "label_en": "Portfolio — About",
+    "label_he": "תיק העבודות — אודות",
+    "section_en": "About",
+    "section_he": "אודות",
+    "url": "index.html#about-section",
+    "last_verified": "2026-07-20"
+  },
+  {
+    "id": "source-portfolio-links",
+    "type": "portfolio",
+    "label_en": "Portfolio — Links",
+    "label_he": "תיק העבודות — קישורים",
+    "section_en": "Selected links",
+    "section_he": "קישורים נבחרים",
+    "url": "index.html#related-links-panel",
+    "last_verified": "2026-07-20"
+  },
+  {
+    "id": "source-external-resume",
+    "type": "portfolio",
+    "label_en": "Resume PDF",
+    "label_he": "קובץ קורות החיים",
+    "section_en": "Resume",
+    "section_he": "קורות חיים",
+    "url": "Kristian-Pitshugin-Resume.pdf",
+    "last_verified": "2026-07-20"
+  },
+  {
+    "id": "source-external-github",
+    "type": "portfolio",
+    "label_en": "GitHub profile",
+    "label_he": "פרופיל GitHub",
+    "section_en": "GitHub",
+    "section_he": "GitHub",
+    "url": "https://github.com/Kris1807",
+    "last_verified": "2026-07-20"
+  },
+  {
+    "id": "source-external-linkedin",
+    "type": "portfolio",
+    "label_en": "LinkedIn profile",
+    "label_he": "פרופיל LinkedIn",
+    "section_en": "LinkedIn",
+    "section_he": "LinkedIn",
+    "url": "https://www.linkedin.com/in/kristian-pitshugin-3461001a9/",
+    "last_verified": "2026-07-20"
+  },
+  {
+    "id": "source-portfolio-experience-intelliverse",
+    "type": "portfolio",
+    "label_en": "Portfolio — IntelliVerse",
+    "label_he": "תיק העבודות — IntelliVerse",
+    "section_en": "Experience",
+    "section_he": "ניסיון",
+    "url": "experience.html#experience-intelliverse",
+    "last_verified": "2026-07-20"
+  },
+  {
+    "id": "source-portfolio-experience-uga-swim",
+    "type": "portfolio",
+    "label_en": "Portfolio — UGA Swimming & Diving",
+    "label_he": "תיק העבודות — שחייה וצלילה UGA",
+    "section_en": "Experience",
+    "section_he": "ניסיון",
+    "url": "experience.html#experience-uga-swimming-diving",
+    "last_verified": "2026-07-20"
+  },
+  {
+    "id": "source-portfolio-experience-cooldawgs",
+    "type": "portfolio",
+    "label_en": "Portfolio — CoolDawgs research",
+    "label_he": "תיק העבודות — מחקר CoolDawgs",
+    "section_en": "Experience",
+    "section_he": "ניסיון",
+    "url": "experience.html#experience-cooldawgs-research-team",
+    "last_verified": "2026-07-20"
+  },
+  {
+    "id": "source-portfolio-project-roster-lab",
+    "type": "portfolio",
+    "label_en": "Portfolio — Roster Lab App",
+    "label_he": "תיק העבודות — Roster Lab App",
+    "section_en": "Projects",
+    "section_he": "פרויקטים",
+    "url": "projects.html#project-roster-lab-app",
+    "last_verified": "2026-07-20"
+  },
+  {
+    "id": "source-portfolio-project-patient-record",
+    "type": "portfolio",
+    "label_en": "Portfolio — Patient Record App",
+    "label_he": "תיק העבודות — Patient Record App",
+    "section_en": "Projects",
+    "section_he": "פרויקטים",
+    "url": "projects.html#project-patient-record-app",
+    "last_verified": "2026-07-20"
+  },
+  {
+    "id": "source-portfolio-project-cinema",
+    "type": "portfolio",
+    "label_en": "Portfolio — Cinema Ticketing Website",
+    "label_he": "תיק העבודות — אתר כרטיסי קולנוע",
+    "section_en": "Projects",
+    "section_he": "פרויקטים",
+    "url": "projects.html#project-cinema-ticketing-website",
+    "last_verified": "2026-07-20"
+  },
+  {
+    "id": "source-portfolio-project-docompare",
+    "type": "portfolio",
+    "label_en": "Portfolio — DoCompare",
+    "label_he": "תיק העבודות — DoCompare",
+    "section_en": "Projects",
+    "section_he": "פרויקטים",
+    "url": "projects.html#project-docompare",
+    "last_verified": "2026-07-20"
+  },
+  {
+    "id": "source-portfolio-project-cnn",
+    "type": "portfolio",
+    "label_en": "Portfolio — CNN Project",
+    "label_he": "תיק העבודות — פרויקט CNN",
+    "section_en": "Projects",
+    "section_he": "פרויקטים",
+    "url": "projects.html#project-cnn-project",
+    "last_verified": "2026-07-20"
+  },
+  {
+    "id": "source-portfolio-project-website",
+    "type": "portfolio",
+    "label_en": "Portfolio — Personal Profile Website",
+    "label_he": "תיק העבודות — אתר הפרופיל האישי",
+    "section_en": "Projects",
+    "section_he": "פרויקטים",
+    "url": "projects.html#project-personal-profile-website",
+    "last_verified": "2026-07-20"
+  },
+  {
+    "id": "source-portfolio-education-ms-ai",
+    "type": "portfolio",
+    "label_en": "Portfolio — M.S. in Artificial Intelligence",
+    "label_he": "תיק העבודות — תואר מוסמך בבינה מלאכותית",
+    "section_en": "Education",
+    "section_he": "השכלה",
+    "url": "education.html#education-ms-ai",
+    "last_verified": "2026-07-20"
+  },
+  {
+    "id": "source-portfolio-education-bs-cs",
+    "type": "portfolio",
+    "label_en": "Portfolio — B.S. in Computer Science",
+    "label_he": "תיק העבודות — תואר ראשון במדעי המחשב",
+    "section_en": "Education",
+    "section_he": "השכלה",
+    "url": "education.html#education-bs-cs",
+    "last_verified": "2026-07-20"
+  },
+  {
+    "id": "source-portfolio-education-business",
+    "type": "portfolio",
+    "label_en": "Portfolio — Business minor",
+    "label_he": "תיק העבודות — מינור בעסקים",
+    "section_en": "Education",
+    "section_he": "השכלה",
+    "url": "education.html#education-business-minor",
+    "last_verified": "2026-07-20"
+  },
+  {
+    "id": "source-portfolio-education-credentials",
+    "type": "portfolio",
+    "label_en": "Portfolio — Credentials",
+    "label_he": "תיק העבודות — הסמכות",
+    "section_en": "Education",
+    "section_he": "השכלה",
+    "url": "education.html#education-credentials",
+    "last_verified": "2026-07-20"
+  },
+  {
+    "id": "source-portfolio-honors",
+    "type": "portfolio",
+    "label_en": "Portfolio — Honors",
+    "label_he": "תיק העבודות — הישגים והצטיינויות",
+    "section_en": "Honors",
+    "section_he": "הצטיינויות",
+    "url": "honors.html#section-content",
+    "last_verified": "2026-07-20"
+  },
+  {
+    "id": "source-portfolio-athletics-uga",
+    "type": "portfolio",
+    "label_en": "Portfolio — UGA Swimming and Diving",
+    "label_he": "תיק העבודות — שחייה וצלילה UGA",
+    "section_en": "Athletics",
+    "section_he": "שחייה תחרותית",
+    "url": "athletics.html#athletics-uga",
+    "last_verified": "2026-07-20"
+  },
+  {
+    "id": "source-portfolio-athletics-israel",
+    "type": "portfolio",
+    "label_en": "Portfolio — Israel National Team",
+    "label_he": "תיק העבודות — נבחרת ישראל",
+    "section_en": "Athletics",
+    "section_he": "שחייה תחרותית",
+    "url": "athletics.html#athletics-israel-national-team",
+    "last_verified": "2026-07-20"
+  },
+  {
+    "id": "source-portfolio-athletics-club",
+    "type": "portfolio",
+    "label_en": "Portfolio — Greater Jerusalem Swimming Club",
+    "label_he": "תיק העבודות — מועדון השחייה ירושלים רבתי",
+    "section_en": "Athletics",
+    "section_he": "שחייה תחרותית",
+    "url": "athletics.html#athletics-greater-jerusalem",
+    "last_verified": "2026-07-20"
+  },
+  {
+    "id": "source-wikipedia-biography",
+    "type": "wikipedia",
+    "label_en": "Wikipedia — Biography",
+    "label_he": "ויקיפדיה — ביוגרפיה",
+    "section_en": "Biography",
+    "section_he": "ביוגרפיה",
+    "url": "https://he.wikipedia.org/wiki/%D7%9B%D7%A8%D7%99%D7%A1%D7%98%D7%99%D7%90%D7%9F_%D7%A4%D7%99%D7%A6%27%D7%95%D7%92%D7%99%D7%9F",
+    "last_verified": "2026-07-20"
+  },
+  {
+    "id": "source-wikipedia-competitive-record",
+    "type": "wikipedia",
+    "label_en": "Wikipedia — Competitive record",
+    "label_he": "ויקיפדיה — הישגים תחרותיים",
+    "section_en": "Competitive record",
+    "section_he": "הישגים תחרותיים",
+    "url": "https://he.wikipedia.org/wiki/%D7%9B%D7%A8%D7%99%D7%A1%D7%98%D7%99%D7%90%D7%9F_%D7%A4%D7%99%D7%A6%27%D7%95%D7%92%D7%99%D7%9F",
+    "last_verified": "2026-07-20"
+  },
+  {
+    "id": "source-wikidata-identity",
+    "type": "wikidata",
+    "label_en": "Wikidata — Identity and public facts",
+    "label_he": "ויקינתונים — זהות ועובדות ציבוריות",
+    "section_en": "Identity",
+    "section_he": "זהות",
+    "url": "https://www.wikidata.org/wiki/Q106348288",
+    "last_verified": "2026-07-20"
+  }
+]
