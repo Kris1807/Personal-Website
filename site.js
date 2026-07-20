@@ -769,7 +769,7 @@ function renderEducation(root) {
 
 function createFeaturedProjectCard(item, index) {
   const article = document.createElement("article");
-  article.className = `card detail-card project-feature${index % 2 === 1 ? " is-reversed" : ""}`;
+  article.className = "card detail-card project-feature";
   article.innerHTML = `
     <div class="project-feature-main">
       <div class="project-feature-kicker-row">
@@ -867,8 +867,8 @@ function renderProjects(root) {
     secondarySection.className = "projects-secondary-section";
     secondarySection.innerHTML = `
       <div class="section-heading section-heading-tight">
-        <p class="eyebrow">Additional work</p>
-        <h2>Supporting builds</h2>
+        <p class="eyebrow">Supporting projects</p>
+        <h2>Additional builds</h2>
       </div>
       <div class="project-secondary-grid"></div>
     `;
