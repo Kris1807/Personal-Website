@@ -39,7 +39,7 @@ export function getServerConfig() {
   cachedConfig = {
     openAiKey,
     mockMode,
-    model: String(process.env.OPENAI_MODEL ?? "gpt-5.6-terra").trim() || "gpt-5.6-terra",
+    model: String(process.env.OPENAI_MODEL ?? "gpt-5").trim() || "gpt-5",
     timeoutMs: parseNumber(process.env.KRIS_ASSISTANT_TIMEOUT_MS, 15000),
     maxInputChars: parseNumber(process.env.KRIS_ASSISTANT_MAX_INPUT_CHARS, 700),
     maxTurns: parseNumber(process.env.KRIS_ASSISTANT_MAX_TURNS, 8),
