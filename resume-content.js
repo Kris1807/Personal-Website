@@ -1,10 +1,70 @@
 const resume = {
   name: "Kristian Pitshugin",
-  title:
-    "Athlete | Computer Science B.S. | AI M.S. Student | Researcher | Full-Stack Developer",
+  title: "Software Engineer · AI Graduate Student · Former NCAA Division I Athlete",
+  positioning:
+    "Building reliable product systems across AI, research, healthcare, and athlete operations.",
   profileImage: "profile.JPG",
   summary:
-    "Computer Science graduate and Double Dawgs M.S. in Artificial Intelligence student focused on full-stack product development, healthcare-oriented research, and data-driven systems. Experience spans AI application work, recruiting and roster-analysis platforms, and production-style applications built with React, Next.js, Django, Supabase, and PostgreSQL.",
+    "Double Dawgs M.S. in Artificial Intelligence student at the University of Georgia with experience spanning AI application workflows, internal athlete tools, research delivery, and full-stack product engineering. I care about systems that are structured, trustworthy, and clear under real-world use.",
+  resumeFile: "Kristian-Pitshugin-Resume.pdf",
+  heroHighlights: [
+    "UGA Double Dawgs",
+    "Israeli national team",
+    "Research lead",
+    "Full-stack delivery",
+  ],
+  heroCards: {
+    athletics: {
+      label: "European medalist",
+      detail: "Israel national team",
+      image: "assets/athletics/athletics-01.jpeg",
+      alt: "Kristian Pitshugin holding a European Championships medal.",
+    },
+    education: {
+      label: "UGA graduation",
+      detail: "B.S. Computer Science",
+      image: "assets/education/education-01.jpeg",
+      alt: "Kristian Pitshugin at graduation in cap and gown holding his diploma.",
+    },
+  },
+  about: {
+    eyebrow: "About",
+    heading:
+      "Engineering shaped by research discipline, competitive sport, and long-horizon execution.",
+    intro:
+      "I move between product building, applied AI, and team leadership. That mix shows up in how I work: precise with details, calm under pressure, and focused on making complex systems usable for real people.",
+    stats: [
+      {
+        value: "B.S. CS + M.S. AI",
+        label: "Academic track at UGA",
+      },
+      {
+        value: "NCAA / ISR",
+        label: "College and international competition",
+      },
+      {
+        value: "AI · product · research",
+        label: "Work shaped by delivery and technical depth",
+      },
+    ],
+    notes: [
+      {
+        title: "Engineering",
+        copy:
+          "I like systems that feel dependable in real usage, whether that means a clinical workflow, a recruiting platform, or an internal decision tool with complex state behind it.",
+      },
+      {
+        title: "Research and AI",
+        copy:
+          "My research and AI work sit close to implementation. I care less about prototypes that look impressive once and more about workflows that stay useful after repeated use.",
+      },
+      {
+        title: "Leadership",
+        copy:
+          "Swimming and research both taught me to communicate clearly, make tradeoffs visible, and keep a team moving without lowering the quality bar.",
+      },
+    ],
+  },
   relatedLinks: [
     { label: "Thesis Sources", url: "thesis-sources.html" },
     {
@@ -29,7 +89,8 @@ const resume = {
       period: "Remote | July 2026 - Present",
       image: "assets/experience/intelliverse.jpeg",
       imageAlt: "IntelliVerse visual mark.",
-      impact: "Contributing to live AI product workflows through feature delivery, testing, and technical iteration.",
+      impact:
+        "Contributing to live AI product workflows through feature delivery, testing, and technical iteration.",
       focusAreas: ["AI features", "Testing", "Workflow design"],
       highlights: [
         "Contribute to the development, testing, and improvement of AI-driven application features and technical workflows in collaboration with the development team.",
@@ -41,7 +102,8 @@ const resume = {
       period: "Athens, GA | April 2026 - Present",
       image: "assets/experience/uga.webp",
       imageAlt: "University of Georgia logo.",
-      impact: "Building internal recruiting and roster-analysis tools that support staff planning and athlete operations.",
+      impact:
+        "Building internal recruiting and roster-analysis tools that support staff planning and athlete operations.",
       focusAreas: ["Recruiting", "Roster analytics", "Staff tools"],
       highlights: [
         "Develop a recruiting and roster-analysis application with athlete management, roster projections, recruiting priorities, and collaborative staff tools.",
@@ -54,7 +116,8 @@ const resume = {
       period: "Athens, GA | Aug 2025 - May 2026",
       image: "assets/experience/cooldawgs.png",
       imageAlt: "CoolDawgs research team logo.",
-      impact: "Led the mobile build for an award-winning research system tied to live Bluetooth sensor data.",
+      impact:
+        "Led the mobile build for an award-winning research system tied to live Bluetooth sensor data.",
       focusAreas: ["React Native", "Sensor systems", "Data visualization"],
       highlights: [
         "Led development of a React Native application that collected and visualized data from Bluetooth-connected environmental sensors.",
@@ -64,71 +127,136 @@ const resume = {
   ],
   projects: [
     {
-      name: "Cinema Ticketing Website",
-      description: "Full-stack developer.",
-      highlights: [
-        "Developed a full-stack movie ticket booking platform with dynamic seat selection, checkout flow, and reservation logic.",
-        "Implemented seat states including available, held, and booked to prevent double-booking and handle concurrent users.",
-        "Designed server-side temporary seat holds that automatically expire if checkout is not completed.",
-        "Contributed frontend components for booking, payment, saved cards, navigation, and user interaction.",
+      name: "Roster Lab App",
+      featured: true,
+      category: "Athlete operations",
+      role: "Product designer / full-stack developer",
+      summary:
+        "Recruiting and roster-analysis platform for swim staff to manage athlete data, projections, and recruiting priorities in one shared workflow.",
+      problem:
+        "Staff planning depended on fragmented spreadsheets and manual comparison across current athletes, projected departures, and recruiting needs.",
+      solution:
+        "Built a shared decision platform with searchable roster views, recruiting dashboards, scenario analysis, and team-strength projections.",
+      decisions: [
+        "Structured the product around eligibility, event profile, and projected roster turnover instead of static athlete records.",
+        "Separated input workflows from analysis views so staff could move between roster maintenance and what-if planning without losing context.",
+        "Used a typed Next.js + Prisma stack to keep shared data reliable and easy to extend as recruiting logic evolves.",
       ],
-      link: "https://film-hub-theta.vercel.app/",
+      stack: ["Next.js", "TypeScript", "Tailwind CSS", "Prisma", "PostgreSQL"],
+      outcome:
+        "Turned roster planning into a repeatable product workflow that supports staff alignment, recruiting conversations, and long-range team decisions.",
+      links: [
+        {
+          label: "Live product",
+          url: "https://swimming-stats.vercel.app/",
+        },
+      ],
     },
     {
       name: "Patient Record App",
-      description: "Full-stack medical records platform.",
-      highlights: [
-        "Built a secure patient record management system for patient intake, treatment sessions, appointments, and PDF exports.",
-        "Implemented authentication, row-level security, patient search/filtering, automatic age calculation, and session numbering.",
-        "Designed relational database schemas for patients, reports, and appointments with protected multi-user access.",
-        "Added reusable clinical note templates and PDF summary exports, including support for Hebrew notes.",
-        "Stack: React/Next.js, Supabase Auth, PostgreSQL.",
+      featured: true,
+      category: "Healthcare workflows",
+      role: "Full-stack developer",
+      summary:
+        "Clinical records platform for patient intake, treatment tracking, appointments, and exportable summaries.",
+      problem:
+        "The workflow needed faster record entry and better structure without losing safeguards around privacy, data integrity, and repeat session tracking.",
+      solution:
+        "Built a secure patient management system with structured reports, reusable note templates, appointment tracking, and PDF exports.",
+      decisions: [
+        "Used Supabase authentication and row-level security to keep records protected in a multi-user environment.",
+        "Modeled patients, treatment reports, and appointments as related entities so summaries, numbering, and history stay consistent.",
+        "Added export and reusable documentation flows to make the system useful beyond raw data storage.",
       ],
-      link: "https://keepatients.vercel.app/",
+      stack: ["React", "Next.js", "Supabase Auth", "PostgreSQL", "PDF export"],
+      outcome:
+        "Created a structured workflow for patient records that balances speed of use with data integrity and practical reporting needs.",
+      links: [
+        {
+          label: "Live product",
+          url: "https://keepatients.vercel.app/",
+        },
+      ],
+    },
+    {
+      name: "Cinema Ticketing Website",
+      featured: true,
+      category: "Booking systems",
+      role: "Full-stack developer",
+      summary:
+        "Movie ticketing platform designed around seat state, checkout flow, and concurrency-safe reservation logic.",
+      problem:
+        "Ticket selection only works when inventory stays accurate under simultaneous users, expiring holds, and partially completed checkouts.",
+      solution:
+        "Built a booking experience with dynamic seat states, temporary holds, reusable checkout flows, and protection against double booking.",
+      decisions: [
+        "Modeled seats as available, held, or booked so the UI could reflect real booking state instead of optimistic assumptions.",
+        "Handled temporary holds on the server and expired them automatically when checkout was abandoned.",
+        "Kept booking, payment, and account interactions modular so the full flow remained maintainable as the feature set expanded.",
+      ],
+      stack: ["Django", "JavaScript", "Supabase", "Booking logic"],
+      outcome:
+        "Delivered a reliable reservation flow that protects inventory accuracy while still feeling responsive to the user.",
+      links: [
+        {
+          label: "Live product",
+          url: "https://film-hub-theta.vercel.app/",
+        },
+      ],
     },
     {
       name: "DoCompare",
-      description: "Document comparison web application.",
+      category: "Document intelligence",
+      role: "Product developer",
+      summary:
+        "Side-by-side document comparison app for reviewing legal-style text differences with protected access and downloadable outputs.",
       highlights: [
-        "Built a lightweight web app for comparing two legal-style documents side by side.",
-        "Added protected account access so document data is only visible after sign-in.",
-        "Implemented quoted-difference review, downloadable reports, and per-user cached comparisons.",
         "Supports PDF, DOCX, TXT, and Markdown uploads with Supabase-backed storage workflows.",
+        "Includes quoted-difference review, per-user protected access, and downloadable comparison reports.",
       ],
-      link: "https://do-compare-879rlbsk4-kris-projects-c44a0f3c.vercel.app/",
-    },
-    {
-      name: "Roster Lab App",
-      description: "Full-stack developer.",
-      highlights: [
-        "Developed a swim team recruiting and roster analysis platform for managing athletes, commits, roster turnover, and recruiting priorities.",
-        "Built analytics for roster projections, team strength scoring, recruiting needs, and what-if recruit simulations.",
-        "Implemented searchable roster views, best-time tables, filtering/sorting, CSV/XLSX import, and CSV export.",
-        "Added shared authentication with role-based admin access for collaborative staff use.",
-        "Stack: Next.js, TypeScript, Tailwind CSS, Prisma, PostgreSQL.",
+      stack: ["Next.js", "Supabase", "File processing"],
+      links: [
+        {
+          label: "Live product",
+          url: "https://do-compare-879rlbsk4-kris-projects-c44a0f3c.vercel.app/",
+        },
       ],
-      link: "https://swimming-stats.vercel.app/",
     },
     {
       name: "CNN Project",
-      description: "Deep learning and model evaluation project.",
+      category: "Applied AI / vision",
+      role: "Model training and evaluation",
+      summary:
+        "Convolutional neural network project focused on training, evaluation, and model-interpretability workflows.",
       highlights: [
-        "Built a convolutional neural network project centered on model training, evaluation, and iterative performance improvement.",
-        "Implemented supporting workflows for dataset handling, evaluation output, and model analysis.",
-        "Added Grad-CAM style visualization tooling to inspect how the model makes predictions.",
+        "Built training and evaluation flows around dataset handling, reporting, and iterative performance improvement.",
+        "Added Grad-CAM style visualization to inspect how the model forms predictions instead of treating outputs as a black box.",
       ],
-      link: "https://faceimp.onrender.com/",
+      stack: ["Python", "Deep learning", "Grad-CAM"],
+      links: [
+        {
+          label: "Live demo",
+          url: "https://faceimp.onrender.com/",
+        },
+      ],
     },
     {
       name: "Personal Profile Website",
-      description: "GitHub Pages portfolio site.",
+      category: "Portfolio systems",
+      role: "Design and frontend implementation",
+      summary:
+        "Personal portfolio built to present experience, projects, athletics, and thesis work in a clearer, more editorial format.",
       highlights: [
-        "Designed and deployed a responsive personal portfolio website using GitHub Pages.",
-        "Implemented modular, data-driven sections for education, experience, projects, honors, athletics, and skills.",
-        "Added dedicated page structure for thesis references and future academic source tracking.",
-        "Stack: HTML, CSS, JavaScript, Git, GitHub Pages.",
+        "Moved the site from a single résumé-style page into a multi-page portfolio with dedicated sections and image-driven storytelling.",
+        "Built a data-driven structure so content updates flow through shared rendering logic instead of being hardcoded page by page.",
       ],
-      link: "https://kris1807.github.io/Personal-Website/",
+      stack: ["HTML", "CSS", "JavaScript", "GitHub Pages"],
+      links: [
+        {
+          label: "Live site",
+          url: "https://kris1807.github.io/Personal-Website/",
+        },
+      ],
     },
   ],
   education: [

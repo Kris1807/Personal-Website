@@ -19,7 +19,20 @@
       <div class="landing-copy">
         <p class="eyebrow skeleton-text skeleton-eyebrow" id="title">Loading title</p>
         <h1 id="name" class="skeleton-text skeleton-name">Loading name</h1>
+        <p id="positioning" class="hero-positioning skeleton-text skeleton-summary">Loading positioning</p>
         <p class="lead skeleton-text skeleton-summary" id="summary">Loading summary</p>
+
+        <div id="hero-actions" class="hero-actions" aria-label="Primary actions">
+          <span class="skeleton-link" aria-hidden="true"></span>
+          <span class="skeleton-link" aria-hidden="true"></span>
+        </div>
+
+        <div id="hero-highlights" class="hero-highlights" aria-label="Quick highlights">
+          <span class="skeleton-chip" aria-hidden="true"></span>
+          <span class="skeleton-chip" aria-hidden="true"></span>
+          <span class="skeleton-chip" aria-hidden="true"></span>
+          <span class="skeleton-chip" aria-hidden="true"></span>
+        </div>
 
         <div id="contact" class="contact contact-grid">
           <span class="skeleton-chip" aria-hidden="true"></span>
@@ -39,15 +52,56 @@
           <figure id="hero-athletics-card" class="landing-support-card media-loading">
             <div class="skeleton-avatar" aria-hidden="true"></div>
             <img id="hero-athletics-image" alt="Athletics highlight photo" hidden />
-            <figcaption>European medalist</figcaption>
+            <figcaption>
+              <span id="hero-athletics-label">European medalist</span>
+              <strong id="hero-athletics-detail">Israel national team</strong>
+            </figcaption>
           </figure>
 
           <figure id="hero-education-card" class="landing-support-card media-loading">
             <div class="skeleton-avatar" aria-hidden="true"></div>
             <img id="hero-education-image" alt="Education highlight photo" hidden />
-            <figcaption>UGA graduation</figcaption>
+            <figcaption>
+              <span id="hero-education-label">UGA graduation</span>
+              <strong id="hero-education-detail">B.S. Computer Science</strong>
+            </figcaption>
           </figure>
         </div>
+      </div>
+
+      <button type="button" class="hero-scroll-cue" data-scroll-target="#about-section" aria-label="Scroll to the next section">
+        <span>Explore the full story</span>
+        <strong>Scroll</strong>
+      </button>
+    </section>
+
+    <section class="card landing-about" id="about-section">
+      <div class="section-heading about-heading">
+        <p class="eyebrow" id="about-eyebrow">About</p>
+        <h2 id="about-heading">Loading about heading</h2>
+      </div>
+
+      <div class="about-layout">
+        <div class="about-intro-column">
+          <p id="about-intro" class="about-lead">Loading about intro</p>
+          <div id="about-stats" class="about-stats"></div>
+        </div>
+        <div id="about-notes" class="about-notes"></div>
+      </div>
+    </section>
+
+    <section class="card nav-card landing-nav-card" id="chapters-section">
+      <div class="section-heading">
+        <p class="eyebrow">Explore</p>
+        <h2>Choose a chapter</h2>
+      </div>
+      <div id="section-nav" class="button-grid landing-grid">
+        <span class="nav-button skeleton-button" aria-hidden="true"></span>
+        <span class="nav-button skeleton-button" aria-hidden="true"></span>
+        <span class="nav-button skeleton-button" aria-hidden="true"></span>
+        <span class="nav-button skeleton-button" aria-hidden="true"></span>
+        <span class="nav-button skeleton-button" aria-hidden="true"></span>
+        <span class="nav-button skeleton-button" aria-hidden="true"></span>
       </div>
     </section>
 
@@ -63,37 +117,37 @@
           <div id="story-strip" class="story-strip-track" data-marquee-track>
             <figure class="story-strip-item">
               <button type="button" class="gallery-trigger story-strip-trigger">
-                <img src="assets/athletics/athletics-01.jpeg" alt="Kristian Pitshugin holding a European Championships medal." loading="eager" decoding="async" />
+                <img src="assets/athletics/athletics-01.jpeg" alt="Kristian Pitshugin holding a European Championships medal." loading="lazy" decoding="async" />
                 <span class="gallery-zoom-badge">Open photo</span>
               </button>
             </figure>
             <figure class="story-strip-item">
               <button type="button" class="gallery-trigger story-strip-trigger">
-                <img src="assets/athletics/athletics-03.jpeg" alt="Kristian Pitshugin smiling in the pool after a race." loading="eager" decoding="async" />
+                <img src="assets/athletics/athletics-03.jpeg" alt="Kristian Pitshugin smiling in the pool after a race." loading="lazy" decoding="async" />
                 <span class="gallery-zoom-badge">Open photo</span>
               </button>
             </figure>
             <figure class="story-strip-item">
               <button type="button" class="gallery-trigger story-strip-trigger">
-                <img src="assets/athletics/athletics-04.jpeg" alt="Kristian Pitshugin racing breaststroke in competition." loading="eager" decoding="async" />
+                <img src="assets/athletics/athletics-04.jpeg" alt="Kristian Pitshugin racing breaststroke in competition." loading="lazy" decoding="async" />
                 <span class="gallery-zoom-badge">Open photo</span>
               </button>
             </figure>
             <figure class="story-strip-item">
               <button type="button" class="gallery-trigger story-strip-trigger">
-                <img src="assets/athletics/athletics-05.jpeg" alt="Kristian Pitshugin powering through a breaststroke race." loading="eager" decoding="async" />
+                <img src="assets/athletics/athletics-05.jpeg" alt="Kristian Pitshugin powering through a breaststroke race." loading="lazy" decoding="async" />
                 <span class="gallery-zoom-badge">Open photo</span>
               </button>
             </figure>
             <figure class="story-strip-item">
               <button type="button" class="gallery-trigger story-strip-trigger">
-                <img src="assets/education/education-01.jpeg" alt="Kristian Pitshugin at graduation in cap and gown holding his diploma." loading="eager" decoding="async" />
+                <img src="assets/education/education-01.jpeg" alt="Kristian Pitshugin at graduation in cap and gown holding his diploma." loading="lazy" decoding="async" />
                 <span class="gallery-zoom-badge">Open photo</span>
               </button>
             </figure>
             <figure class="story-strip-item">
               <button type="button" class="gallery-trigger story-strip-trigger">
-                <img src="assets/education/education-02.jpeg" alt="Kristian Pitshugin at Sanford Stadium during graduation ceremonies." loading="eager" decoding="async" />
+                <img src="assets/education/education-02.jpeg" alt="Kristian Pitshugin at Sanford Stadium during graduation ceremonies." loading="lazy" decoding="async" />
                 <span class="gallery-zoom-badge">Open photo</span>
               </button>
             </figure>
@@ -103,28 +157,12 @@
       </div>
     </section>
 
-    <section class="card nav-card landing-nav-card">
-      <div class="section-heading">
-        <p class="eyebrow">Explore</p>
-        <h2>Choose a chapter</h2>
-      </div>
-      <div id="section-nav" class="button-grid landing-grid">
-        <span class="nav-button skeleton-button" aria-hidden="true"></span>
-        <span class="nav-button skeleton-button" aria-hidden="true"></span>
-        <span class="nav-button skeleton-button" aria-hidden="true"></span>
-        <span class="nav-button skeleton-button" aria-hidden="true"></span>
-        <span class="nav-button skeleton-button" aria-hidden="true"></span>
-        <span class="nav-button skeleton-button" aria-hidden="true"></span>
-      </div>
-    </section>
-
     <section id="related-links-panel" class="card related-card landing-links-card">
       <div class="section-heading compact-heading">
-        <p class="eyebrow">Links</p>
-        <h2>Related Links</h2>
+        <p class="eyebrow">Resources</p>
+        <h2>Selected links</h2>
       </div>
       <div id="related-links" class="related-grid">
-        <span class="related-link skeleton-link" aria-hidden="true"></span>
         <span class="related-link skeleton-link" aria-hidden="true"></span>
         <span class="related-link skeleton-link" aria-hidden="true"></span>
       </div>
