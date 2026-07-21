@@ -2,6 +2,8 @@
   const { hostname, protocol } = window.location;
   const isFile = protocol === "file:";
   const isLocal = hostname === "localhost" || hostname === "127.0.0.1";
+  const isGithubPages = hostname === "kris1807.github.io";
+  const hostedAssistantUrl = "https://krispitshugin.com/api/assistant";
   const configuredApiUrl = typeof window.__KRIS_ASSISTANT_API_URL__ === "string"
     ? window.__KRIS_ASSISTANT_API_URL__.trim()
     : "";
@@ -15,7 +17,9 @@
 
   const defaultApiUrl = configuredApiUrl || ((isFile || isLocal)
     ? "http://127.0.0.1:8788/api/assistant"
-    : "/api/assistant");
+    : isGithubPages
+      ? hostedAssistantUrl
+      : "/api/assistant");
 
   window.__KRIS_ASSISTANT_CONFIG__ = Object.freeze({
     apiUrl: defaultApiUrl,

@@ -1,5 +1,7 @@
 const DEFAULT_ALLOWED_ORIGINS = [
   "https://kris1807.github.io",
+  "https://krispitshugin.com",
+  "https://www.krispitshugin.com",
   "http://localhost:8124",
   "http://127.0.0.1:8124",
   "http://localhost:8788",
