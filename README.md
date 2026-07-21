@@ -4,7 +4,7 @@ Personal portfolio website for Kristian "Kris" Pitshugin, now extended with a se
 
 ## Live portfolio
 
-- Frontend: [https://kris1807.github.io/Personal-Website/](https://kris1807.github.io/Personal-Website/)
+- Frontend: [https://krispitshugin.com/](https://krispitshugin.com/)
 - Repository: [https://github.com/Kris1807/Personal-Website](https://github.com/Kris1807/Personal-Website)
 
 ## Stack

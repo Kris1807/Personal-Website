@@ -262,7 +262,7 @@ const resume = {
       links: [
         {
           label: "Live site",
-          url: "https://kris1807.github.io/Personal-Website/",
+          url: "https://krispitshugin.com/",
         },
       ],
     },
