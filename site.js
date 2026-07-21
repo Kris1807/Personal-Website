@@ -1810,6 +1810,145 @@ function setupHeroCardMotion() {
   });
 }
 
+const borderGlowSelector = [
+  ".card",
+  ".profile-card",
+  ".hero-profile-card",
+  ".landing-support-card",
+  ".nav-button",
+  ".story-strip-item",
+  ".section-gallery-item",
+  ".about-stat",
+  ".about-note",
+  ".page-hero-stat",
+  ".project-story-block",
+  ".project-meta-panel",
+  ".brain-bank-panel",
+  ".assistant-panel-frame"
+].join(", ");
+
+function clampValue(value, min, max) {
+  return Math.max(min, Math.min(max, value));
+}
+
+function getCenterOfElement(element) {
+  const { width, height } = element.getBoundingClientRect();
+  return [width / 2, height / 2];
+}
+
+function getEdgeProximity(element, x, y) {
+  const [cx, cy] = getCenterOfElement(element);
+  const dx = x - cx;
+  const dy = y - cy;
+  let kx = Infinity;
+  let ky = Infinity;
+  if (dx !== 0) kx = cx / Math.abs(dx);
+  if (dy !== 0) ky = cy / Math.abs(dy);
+  return Math.min(Math.max(1 / Math.min(kx, ky), 0), 1);
+}
+
+function getCursorAngle(element, x, y) {
+  const [cx, cy] = getCenterOfElement(element);
+  const dx = x - cx;
+  const dy = y - cy;
+  if (dx === 0 && dy === 0) return 0;
+  const radians = Math.atan2(dy, dx);
+  let degrees = radians * (180 / Math.PI) + 90;
+  if (degrees < 0) degrees += 360;
+  return degrees;
+}
+
+function resetBorderGlowState(element) {
+  element.style.setProperty("--border-glow-progress", "0");
+  element.style.setProperty("--border-glow-fill-progress", "0");
+  element.style.setProperty("--cursor-angle", "45deg");
+}
+
+function updateBorderGlowState(element, event) {
+  const rect = element.getBoundingClientRect();
+  const x = event.clientX - rect.left;
+  const y = event.clientY - rect.top;
+  const edge = getEdgeProximity(element, x, y);
+  const angle = getCursorAngle(element, x, y);
+  const edgePercent = edge * 100;
+  const edgeSensitivity = element._borderGlowEdgeSensitivity || 28;
+  const colorSensitivity = element._borderGlowColorSensitivity || 46;
+  const edgeProgress = clampValue((edgePercent - edgeSensitivity) / (100 - edgeSensitivity), 0, 1);
+  const fillProgress = clampValue((edgePercent - colorSensitivity) / (100 - colorSensitivity), 0, 1);
+
+  element.style.setProperty("--border-glow-progress", edgeProgress.toFixed(4));
+  element.style.setProperty("--border-glow-fill-progress", fillProgress.toFixed(4));
+  element.style.setProperty("--cursor-angle", `${angle.toFixed(3)}deg`);
+}
+
+function enhanceBorderGlowTarget(element, motionEnabled) {
+  if (!element || element.dataset.borderGlowReady === "true") return;
+
+  element.dataset.borderGlowReady = "true";
+  element.classList.add("card-border-glow-target");
+
+  const mesh = document.createElement("span");
+  mesh.className = "card-border-glow-mesh";
+  mesh.setAttribute("aria-hidden", "true");
+
+  const edge = document.createElement("span");
+  edge.className = "card-border-glow-edge";
+  edge.setAttribute("aria-hidden", "true");
+
+  element.append(mesh, edge);
+
+  const styles = getComputedStyle(element);
+  element._borderGlowEdgeSensitivity =
+    Number.parseFloat(styles.getPropertyValue("--edge-sensitivity")) || 28;
+  element._borderGlowColorSensitivity =
+    Number.parseFloat(styles.getPropertyValue("--color-sensitivity")) ||
+    element._borderGlowEdgeSensitivity + 18;
+
+  resetBorderGlowState(element);
+  if (!motionEnabled) return;
+
+  const handleMove = (event) => updateBorderGlowState(element, event);
+  const handleLeave = () => resetBorderGlowState(element);
+
+  element.addEventListener("pointermove", handleMove);
+  element.addEventListener("pointerleave", handleLeave);
+  element.addEventListener("pointercancel", handleLeave);
+}
+
+function enhanceBorderGlowRoot(root, motionEnabled) {
+  if (!root) return;
+
+  if (root.matches?.(borderGlowSelector)) {
+    enhanceBorderGlowTarget(root, motionEnabled);
+  }
+
+  root.querySelectorAll?.(borderGlowSelector).forEach((element) => {
+    enhanceBorderGlowTarget(element, motionEnabled);
+  });
+}
+
+function setupCardBorderGlow() {
+  const prefersReducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+  const finePointer = window.matchMedia("(pointer: fine)").matches;
+  const motionEnabled = !prefersReducedMotion && finePointer;
+
+  enhanceBorderGlowRoot(document, motionEnabled);
+
+  if (document.body.dataset.borderGlowObserverReady === "true") return;
+
+  const observer = new MutationObserver((mutations) => {
+    mutations.forEach((mutation) => {
+      mutation.addedNodes.forEach((node) => {
+        if (!(node instanceof Element)) return;
+        enhanceBorderGlowRoot(node, motionEnabled);
+      });
+    });
+  });
+
+  observer.observe(document.body, { childList: true, subtree: true });
+  document.body.dataset.borderGlowObserverReady = "true";
+}
+
 const brainBankRows = [
   { y: 146, left: 250, right: 450, count: 2 },
   { y: 184, left: 212, right: 488, count: 3 },
@@ -2188,6 +2327,7 @@ function init() {
     setupScrollProgress();
     setupLandingMotion();
     setupHeroCardMotion();
+    setupCardBorderGlow();
     finalizePageLoad();
     return;
   }
@@ -2196,6 +2336,7 @@ function init() {
     renderSectionPage(document.body.dataset.section);
   }
 
+  setupCardBorderGlow();
   finalizePageLoad();
 }
 

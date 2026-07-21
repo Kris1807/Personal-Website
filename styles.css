@@ -9,6 +9,10 @@
   --border: #cfc4b5;
   --shadow: 0 24px 64px rgba(7, 15, 31, 0.26);
   --shadow-hover: 0 32px 78px rgba(7, 15, 31, 0.32);
+  --glow-mesh-one: rgba(152, 186, 232, 0.92);
+  --glow-mesh-two: rgba(241, 222, 189, 0.86);
+  --glow-mesh-three: rgba(34, 73, 126, 0.9);
+  --glow-ring: 212 78% 85%;
   --skeleton-base: rgba(217, 206, 191, 0.72);
   --skeleton-highlight: rgba(251, 247, 241, 0.98);
 }
@@ -1634,6 +1638,137 @@ body.lightbox-open {
   pointer-events: none;
   mix-blend-mode: screen;
   transition: opacity 220ms ease;
+}
+
+.card-border-glow-target {
+  --edge-sensitivity: 28;
+  --color-sensitivity: 46;
+  --glow-fill-opacity: 0.32;
+  --glow-edge-opacity: 0.88;
+  --glow-mesh-one-local: var(--glow-mesh-one);
+  --glow-mesh-two-local: var(--glow-mesh-two);
+  --glow-mesh-three-local: var(--glow-mesh-three);
+  --glow-ring-hsl: var(--glow-ring);
+  --border-glow-progress: 0;
+  --border-glow-fill-progress: 0;
+  --cursor-angle: 45deg;
+}
+
+.card-border-glow-target > .card-border-glow-mesh,
+.card-border-glow-target > .card-border-glow-edge {
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  pointer-events: none;
+  z-index: 0;
+  opacity: 0;
+  transition: opacity 240ms ease, filter 240ms ease;
+}
+
+.card-border-glow-target > .card-border-glow-mesh {
+  background:
+    radial-gradient(circle at 16% 18%, var(--glow-mesh-one-local) 0, transparent 36%),
+    radial-gradient(circle at 84% 14%, var(--glow-mesh-two-local) 0, transparent 38%),
+    radial-gradient(circle at 50% 100%, var(--glow-mesh-three-local) 0, transparent 54%);
+  mix-blend-mode: soft-light;
+  filter: saturate(1.06) blur(0.35px);
+  opacity: calc(var(--glow-fill-opacity) * var(--border-glow-fill-progress));
+  -webkit-mask-image:
+    conic-gradient(
+      from calc(var(--cursor-angle) - 74deg) at center,
+      transparent 0deg,
+      rgba(0, 0, 0, 0.98) 54deg,
+      rgba(0, 0, 0, 0.98) 148deg,
+      transparent 214deg,
+      transparent 360deg
+    ),
+    radial-gradient(circle at center, transparent 30%, black 72%);
+  mask-image:
+    conic-gradient(
+      from calc(var(--cursor-angle) - 74deg) at center,
+      transparent 0deg,
+      rgba(0, 0, 0, 0.98) 54deg,
+      rgba(0, 0, 0, 0.98) 148deg,
+      transparent 214deg,
+      transparent 360deg
+    ),
+    radial-gradient(circle at center, transparent 30%, black 72%);
+  -webkit-mask-composite: source-over;
+  mask-composite: intersect;
+}
+
+.card-border-glow-target > .card-border-glow-edge {
+  inset: -1px;
+  padding: 1px;
+  background:
+    conic-gradient(
+      from calc(var(--cursor-angle) - 84deg),
+      rgba(255, 255, 255, 0) 0deg,
+      rgba(255, 255, 255, 0) 34deg,
+      rgba(255, 255, 255, 0.92) 78deg,
+      var(--glow-mesh-one-local) 116deg,
+      var(--glow-mesh-two-local) 154deg,
+      var(--glow-mesh-three-local) 184deg,
+      rgba(255, 255, 255, 0) 230deg,
+      rgba(255, 255, 255, 0) 360deg
+    );
+  opacity: calc(var(--glow-edge-opacity) * var(--border-glow-progress));
+  filter:
+    drop-shadow(0 0 14px hsl(var(--glow-ring-hsl) / 0.16))
+    drop-shadow(0 0 24px hsl(var(--glow-ring-hsl) / 0.08));
+  -webkit-mask:
+    linear-gradient(#000 0 0) content-box,
+    linear-gradient(#000 0 0);
+  -webkit-mask-composite: xor;
+  mask-composite: exclude;
+}
+
+.card-border-glow-target > :not(.card-border-glow-mesh):not(.card-border-glow-edge):not(.surface-spotlight) {
+  position: relative;
+  z-index: 1;
+}
+
+.page-hero.card-border-glow-target,
+.surface-hero.card-border-glow-target,
+.landing-nav-card.card-border-glow-target,
+.landing-links-card.card-border-glow-target,
+.story-strip-card.card-border-glow-target,
+.brain-bank-panel.card-border-glow-target {
+  --glow-fill-opacity: 0.4;
+  --glow-edge-opacity: 0.96;
+}
+
+.landing-support-card.card-border-glow-target,
+.hero-profile-card.card-border-glow-target,
+.profile-card.card-border-glow-target,
+.story-strip-item.card-border-glow-target,
+.section-gallery-item.card-border-glow-target {
+  --edge-sensitivity: 22;
+  --color-sensitivity: 38;
+  --glow-fill-opacity: 0.44;
+  --glow-edge-opacity: 1;
+}
+
+.nav-button.card-border-glow-target,
+.project-feature.card-border-glow-target {
+  --edge-sensitivity: 24;
+  --color-sensitivity: 40;
+  --glow-fill-opacity: 0.38;
+  --glow-edge-opacity: 0.92;
+}
+
+.page-hero-stat.card-border-glow-target,
+.about-stat.card-border-glow-target,
+.about-note.card-border-glow-target,
+.project-story-block.card-border-glow-target,
+.project-meta-panel.card-border-glow-target {
+  --edge-sensitivity: 20;
+  --color-sensitivity: 34;
+  --glow-fill-opacity: 0.24;
+  --glow-edge-opacity: 0.74;
+  --glow-mesh-one-local: rgba(184, 208, 238, 0.82);
+  --glow-mesh-two-local: rgba(244, 228, 201, 0.76);
+  --glow-mesh-three-local: rgba(63, 104, 160, 0.72);
 }
 
 .page-shell {
