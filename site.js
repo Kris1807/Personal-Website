@@ -1285,7 +1285,16 @@ function renderEducationGallery(root) {
     items: resume.educationGallery,
     eyebrow: "Photo Highlights",
     title: "Education Gallery",
-    copy: "Graduation and campus moments that represent the academic side of the story.",
+    copy: "Graduation, campus, and academic-recognition moments that support the education story.",
+  });
+}
+
+function renderHonorsGallery(root) {
+  renderPhotoGallery(root, {
+    items: resume.honorsGallery,
+    eyebrow: "Recognition Archive",
+    title: "Honors Gallery",
+    copy: "Certificates, framed recognitions, and achievement moments across academics, research, and athletics.",
   });
 }
 
@@ -2298,7 +2307,10 @@ function renderSectionPage(sectionKey) {
     renderEducationGallery(content);
   }
   if (sectionKey === "projects") renderProjects(content);
-  if (sectionKey === "honors") renderHonors(content);
+  if (sectionKey === "honors") {
+    renderHonors(content);
+    renderHonorsGallery(content);
+  }
   if (sectionKey === "athletics") {
     renderAthletics(content);
     renderAthleticsGallery(content);
