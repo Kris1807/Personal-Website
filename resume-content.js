@@ -278,6 +278,7 @@ const resume = {
         "Bachelor of Science in Computer Science\nArea of Emphasis in Artificial Intelligence",
       school: "University of Georgia, School of Computing",
       period: "Graduated May 2026",
+      details: ["Magna Cum Laude"],
     },
     {
       degree: "Minor in Business",
@@ -289,7 +290,8 @@ const resume = {
       school: "University of Georgia / Independent Study",
       period: "Current",
       details: [
-        "Google Cybersecurity Certificate",
+        "Google Cybersecurity Professional Certificate",
+        "Kaggle Intermediate Machine Learning certificate",
         "Swimming & Diving Team Scholarship",
       ],
     },
@@ -326,6 +328,18 @@ const resume = {
     {
       src: "assets/honors/honors-04.jpeg",
       alt: "Southeastern Conference Academic Honor Roll certificate awarded to Kristian Pitshugin for 2025-2026.",
+    },
+    {
+      src: "assets/education/education-05.png",
+      alt: "Bachelor of Science diploma from the University of Georgia awarded to Kristian Pitshugin in May 2026.",
+    },
+    {
+      src: "assets/education/education-06.jpg",
+      alt: "Google Cybersecurity Professional Certificate awarded to Kristian Pitshugin.",
+    },
+    {
+      src: "assets/education/education-07.png",
+      alt: "Kaggle Intermediate Machine Learning certificate awarded to Kristian Pitshugin.",
     },
   ],
   honors: [
