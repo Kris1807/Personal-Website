@@ -824,6 +824,21 @@ body[data-section="skills"] .section-content-wrap {
   object-fit: cover;
 }
 
+.section-gallery-item.is-document {
+  background: linear-gradient(180deg, rgba(252, 248, 242, 0.98), rgba(232, 240, 249, 0.94));
+}
+
+.section-gallery-item.is-document .gallery-trigger {
+  background: linear-gradient(180deg, rgba(251, 248, 241, 0.98), rgba(236, 243, 251, 0.95));
+}
+
+.section-gallery-item.is-document img {
+  box-sizing: border-box;
+  object-fit: contain;
+  padding: clamp(0.75rem, 1.4vw, 1rem);
+  background: linear-gradient(180deg, rgba(255, 252, 247, 0.96), rgba(240, 246, 252, 0.96));
+}
+
 
 .thesis-grid {
   display: grid;
@@ -2090,8 +2105,18 @@ body.lightbox-open {
   display: block;
   width: 100%;
   max-height: min(72vh, 820px);
+  box-sizing: border-box;
   object-fit: contain;
   background: #edf4fd;
+}
+
+.gallery-lightbox-frame.is-document {
+  background: linear-gradient(180deg, rgba(252, 248, 242, 0.98), rgba(230, 239, 248, 0.96));
+}
+
+.gallery-lightbox-frame.is-document .gallery-lightbox-image {
+  padding: clamp(0.8rem, 1.6vw, 1.25rem);
+  background: linear-gradient(180deg, rgba(255, 252, 247, 0.96), rgba(239, 245, 252, 0.98));
 }
 
 .gallery-lightbox-meta {
@@ -2189,6 +2214,13 @@ body.lightbox-open {
   width: 100%;
   height: 74px;
   object-fit: cover;
+}
+
+.gallery-lightbox-thumb.is-document img {
+  box-sizing: border-box;
+  object-fit: contain;
+  padding: 0.28rem;
+  background: linear-gradient(180deg, rgba(255, 252, 247, 0.96), rgba(239, 245, 252, 0.98));
 }
 
 .gallery-lightbox-thumb.is-active {

@@ -1252,7 +1252,7 @@ function renderPhotoGallery(root, options) {
           ${repeatedItems
             .map(
               (item, index) => `
-                <figure class="section-gallery-item">
+                <figure class="section-gallery-item${item.fit === "document" ? " is-document" : ""}">
                   <button
                     type="button"
                     class="gallery-trigger"
@@ -1344,6 +1344,7 @@ function ensureGalleryLightbox() {
 
   lightboxState.root = root;
   lightboxState.dialog = root.querySelector(".gallery-lightbox-dialog");
+  lightboxState.frame = root.querySelector(".gallery-lightbox-frame");
   lightboxState.image = root.querySelector(".gallery-lightbox-image");
   lightboxState.caption = root.querySelector(".gallery-lightbox-caption");
   lightboxState.counter = root.querySelector(".gallery-lightbox-counter");
@@ -1423,6 +1424,7 @@ function updateGalleryLightboxView(nextIndex) {
   lightboxState.currentIndex = normalizedIndex;
   lightboxState.image.src = item.src;
   lightboxState.image.alt = item.alt || "";
+  lightboxState.frame?.classList.toggle("is-document", item.fit === "document");
   lightboxState.caption.textContent = item.alt || "";
   lightboxState.counter.textContent = `${normalizedIndex + 1} / ${items.length}`;
 
@@ -1443,7 +1445,7 @@ function openGalleryLightbox(groupId, index, trigger) {
       (item, itemIndex) => `
         <button
           type="button"
-          class="gallery-lightbox-thumb"
+          class="gallery-lightbox-thumb${item.fit === "document" ? " is-document" : ""}"
           data-gallery-thumb="${itemIndex}"
           aria-label="View image ${itemIndex + 1}"
         >
@@ -1832,7 +1834,6 @@ const borderGlowSelector = [
   ".page-hero-stat",
   ".project-story-block",
   ".project-meta-panel",
-  ".brain-bank-panel",
   ".assistant-panel-frame"
 ].join(", ");
 
