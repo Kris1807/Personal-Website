@@ -314,22 +314,22 @@ const resume = {
       alt: "Kristian Pitshugin under the University of Georgia arch in graduation attire.",
     },
     {
-      src: "assets/honors/honors-01-landscape-v3.jpeg",
+      src: "assets/honors/honors-01-landscape-v4.jpeg",
       alt: "University of Georgia Presidential Scholar certificate awarded to Kristian Pitshugin for Fall 2024.",
       fit: "document",
     },
     {
-      src: "assets/honors/honors-02-landscape-v3.jpeg",
+      src: "assets/honors/honors-02-landscape-v4.jpeg",
       alt: "University of Georgia Scholar Athlete certificate recognizing Kristian Pitshugin for the 2024-2025 academic year.",
       fit: "document",
     },
     {
-      src: "assets/honors/honors-03-landscape-v3.jpeg",
+      src: "assets/honors/honors-03-landscape-v4.jpeg",
       alt: "University of Georgia Academic Achievement certificate recognizing Kristian Pitshugin for the 2023-2024 academic year.",
       fit: "document",
     },
     {
-      src: "assets/honors/honors-04-landscape-v3.jpeg",
+      src: "assets/honors/honors-04-landscape-v4.jpeg",
       alt: "Southeastern Conference Academic Honor Roll certificate awarded to Kristian Pitshugin for 2025-2026.",
       fit: "document",
     },
@@ -361,27 +361,27 @@ const resume = {
   ],
   honorsGallery: [
     {
-      src: "assets/honors/honors-01-landscape-v3.jpeg",
+      src: "assets/honors/honors-01-landscape-v4.jpeg",
       alt: "University of Georgia Presidential Scholar certificate awarded to Kristian Pitshugin for Fall 2024.",
       fit: "document",
     },
     {
-      src: "assets/honors/honors-02-landscape-v3.jpeg",
+      src: "assets/honors/honors-02-landscape-v4.jpeg",
       alt: "University of Georgia Scholar Athlete certificate recognizing Kristian Pitshugin for the 2024-2025 academic year.",
       fit: "document",
     },
     {
-      src: "assets/honors/honors-03-landscape-v3.jpeg",
+      src: "assets/honors/honors-03-landscape-v4.jpeg",
       alt: "University of Georgia Academic Achievement certificate recognizing Kristian Pitshugin for the 2023-2024 academic year.",
       fit: "document",
     },
     {
-      src: "assets/honors/honors-04-landscape-v3.jpeg",
+      src: "assets/honors/honors-04-landscape-v4.jpeg",
       alt: "Southeastern Conference Academic Honor Roll certificate awarded to Kristian Pitshugin for 2025-2026.",
       fit: "document",
     },
     {
-      src: "assets/honors/honors-05-landscape-v3.jpeg",
+      src: "assets/honors/honors-05-landscape-v4.jpeg",
       alt: "CURO Best Paper recognition certificate for the VIPR CoolDawgs wearable sensor and mobile application project.",
       fit: "document",
     },
@@ -390,7 +390,7 @@ const resume = {
       alt: "Kristian Pitshugin's wall of medals, trophies, and framed recognitions.",
     },
     {
-      src: "assets/honors/honors-07-landscape-v3.jpeg",
+      src: "assets/honors/honors-07-landscape-v4.jpeg",
       alt: "Framed SEC Academic Honor Roll certificate displayed among Kristian Pitshugin's honors.",
       fit: "document",
     },
