@@ -314,37 +314,37 @@ const resume = {
       alt: "Kristian Pitshugin under the University of Georgia arch in graduation attire.",
     },
     {
-      src: "assets/honors/honors-01-landscape-v2.jpeg",
+      src: "assets/honors/honors-01-landscape-v3.jpeg",
       alt: "University of Georgia Presidential Scholar certificate awarded to Kristian Pitshugin for Fall 2024.",
       fit: "document",
     },
     {
-      src: "assets/honors/honors-02-landscape-v2.jpeg",
+      src: "assets/honors/honors-02-landscape-v3.jpeg",
       alt: "University of Georgia Scholar Athlete certificate recognizing Kristian Pitshugin for the 2024-2025 academic year.",
       fit: "document",
     },
     {
-      src: "assets/honors/honors-03-landscape-v2.jpeg",
+      src: "assets/honors/honors-03-landscape-v3.jpeg",
       alt: "University of Georgia Academic Achievement certificate recognizing Kristian Pitshugin for the 2023-2024 academic year.",
       fit: "document",
     },
     {
-      src: "assets/honors/honors-04-landscape-v2.jpeg",
+      src: "assets/honors/honors-04-landscape-v3.jpeg",
       alt: "Southeastern Conference Academic Honor Roll certificate awarded to Kristian Pitshugin for 2025-2026.",
       fit: "document",
     },
     {
-      src: "assets/education/education-05-landscape-v2.png",
+      src: "assets/education/education-05-landscape-v3.png",
       alt: "Bachelor of Science diploma from the University of Georgia awarded to Kristian Pitshugin in May 2026.",
       fit: "document",
     },
     {
-      src: "assets/education/education-06-landscape-v2.jpg",
+      src: "assets/education/education-06-landscape-v3.jpg",
       alt: "Google Cybersecurity Professional Certificate awarded to Kristian Pitshugin.",
       fit: "document",
     },
     {
-      src: "assets/education/education-07-landscape-v2.png",
+      src: "assets/education/education-07-landscape-v3.png",
       alt: "Kaggle Intermediate Machine Learning certificate awarded to Kristian Pitshugin.",
       fit: "document",
     },
@@ -361,27 +361,27 @@ const resume = {
   ],
   honorsGallery: [
     {
-      src: "assets/honors/honors-01-landscape-v2.jpeg",
+      src: "assets/honors/honors-01-landscape-v3.jpeg",
       alt: "University of Georgia Presidential Scholar certificate awarded to Kristian Pitshugin for Fall 2024.",
       fit: "document",
     },
     {
-      src: "assets/honors/honors-02-landscape-v2.jpeg",
+      src: "assets/honors/honors-02-landscape-v3.jpeg",
       alt: "University of Georgia Scholar Athlete certificate recognizing Kristian Pitshugin for the 2024-2025 academic year.",
       fit: "document",
     },
     {
-      src: "assets/honors/honors-03-landscape-v2.jpeg",
+      src: "assets/honors/honors-03-landscape-v3.jpeg",
       alt: "University of Georgia Academic Achievement certificate recognizing Kristian Pitshugin for the 2023-2024 academic year.",
       fit: "document",
     },
     {
-      src: "assets/honors/honors-04-landscape-v2.jpeg",
+      src: "assets/honors/honors-04-landscape-v3.jpeg",
       alt: "Southeastern Conference Academic Honor Roll certificate awarded to Kristian Pitshugin for 2025-2026.",
       fit: "document",
     },
     {
-      src: "assets/honors/honors-05-landscape-v2.jpeg",
+      src: "assets/honors/honors-05-landscape-v3.jpeg",
       alt: "CURO Best Paper recognition certificate for the VIPR CoolDawgs wearable sensor and mobile application project.",
       fit: "document",
     },
@@ -390,7 +390,7 @@ const resume = {
       alt: "Kristian Pitshugin's wall of medals, trophies, and framed recognitions.",
     },
     {
-      src: "assets/honors/honors-07-landscape-v2.jpeg",
+      src: "assets/honors/honors-07-landscape-v3.jpeg",
       alt: "Framed SEC Academic Honor Roll certificate displayed among Kristian Pitshugin's honors.",
       fit: "document",
     },
