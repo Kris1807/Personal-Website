@@ -296,7 +296,70 @@ const resume = {
       ],
     },
   ],
-  educationGallery: [],
+  educationGallery: [
+    {
+      src: "assets/education/edu-grad-indoor.jpeg",
+      alt: "Kristian Pitshugin at indoor graduation ceremony.",
+    },
+    {
+      src: "assets/education/edu-grad-stadium.jpeg",
+      alt: "Kristian Pitshugin at Sanford Stadium during graduation ceremonies.",
+    },
+    {
+      src: "assets/education/edu-grad-arch.jpeg",
+      alt: "Kristian Pitshugin in graduation attire beneath the University of Georgia arch.",
+    },
+    {
+      src: "assets/education/edu-presidential-scholar-fall-2024.jpeg",
+      alt: "University of Georgia Presidential Scholar certificate awarded to Kristian Pitshugin for Fall 2024.",
+      fit: "document",
+    },
+    {
+      src: "assets/education/edu-scholar-athlete-2024-2025.jpeg",
+      alt: "University of Georgia Scholar Athlete certificate recognizing Kristian Pitshugin for the 2024-2025 academic year.",
+      fit: "document",
+    },
+    {
+      src: "assets/education/edu-academic-achievement-2023-2024.jpeg",
+      alt: "University of Georgia Academic Achievement certificate recognizing Kristian Pitshugin for the 2023-2024 academic year.",
+      fit: "document",
+    },
+    {
+      src: "assets/education/edu-sec-honor-roll-2025.jpeg",
+      alt: "Southeastern Conference Academic Honor Roll certificate awarded to Kristian Pitshugin for 2025.",
+      fit: "document",
+    },
+    {
+      src: "assets/education/edu-sec-honor-roll-2025-2026.jpeg",
+      alt: "Southeastern Conference Academic Honor Roll certificate awarded to Kristian Pitshugin for 2025-2026.",
+      fit: "document",
+    },
+    {
+      src: "assets/education/edu-sec-honor-roll-2023.jpeg",
+      alt: "Southeastern Conference Academic Honor Roll certificate awarded to Kristian Pitshugin for 2023.",
+      fit: "document",
+    },
+    {
+      src: "assets/education/edu-curo-best-paper-2026.jpeg",
+      alt: "CURO Best Paper recognition for the VIPR CoolDawgs wearable sensor and mobile application project.",
+      fit: "document",
+    },
+    {
+      src: "assets/education/edu-bs-diploma.png",
+      alt: "Bachelor of Science diploma awarded to Kristian Pitshugin from the University of Georgia.",
+      fit: "document",
+    },
+    {
+      src: "assets/education/edu-kaggle-intermediate-ml.png",
+      alt: "Kaggle Intermediate Machine Learning certificate of completion for Kristian Pitshugin.",
+      fit: "document",
+    },
+    {
+      src: "assets/education/edu-google-cybersecurity-v2.jpg",
+      alt: "Google Cybersecurity Professional Certificate V2 awarded to Kristian Pitshugin.",
+      fit: "document",
+    },
+  ],
   honorsGallery: [],
   skills: [
     {
