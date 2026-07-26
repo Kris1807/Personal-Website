@@ -360,7 +360,43 @@ const resume = {
       fit: "document",
     },
   ],
-  honorsGallery: [],
+  honorsGallery: [
+    {
+      src: "assets/honors/honors-sec-academic-honor-roll-2025.jpeg",
+      alt: "Southeastern Conference Academic Honor Roll recognition awarded to Kristian Pitshugin for 2025.",
+      fit: "document",
+    },
+    {
+      src: "assets/honors/honors-uga-presidential-scholar-fall-2024.jpeg",
+      alt: "University of Georgia Presidential Scholar recognition awarded to Kristian Pitshugin for Fall 2024.",
+      fit: "document",
+    },
+    {
+      src: "assets/honors/honors-uga-scholar-athlete-2024-2025.jpeg",
+      alt: "University of Georgia Scholar Athlete recognition awarded to Kristian Pitshugin for the 2024-2025 academic year.",
+      fit: "document",
+    },
+    {
+      src: "assets/honors/honors-uga-academic-achievement-2023-2024.jpeg",
+      alt: "University of Georgia Academic Achievement recognition awarded to Kristian Pitshugin for the 2023-2024 academic year.",
+      fit: "document",
+    },
+    {
+      src: "assets/honors/honors-sec-academic-honor-roll-2025-2026.jpeg",
+      alt: "Southeastern Conference Academic Honor Roll recognition awarded to Kristian Pitshugin for 2025-2026, presented by Allstate.",
+      fit: "document",
+    },
+    {
+      src: "assets/honors/honors-curo-best-paper-2026.jpeg",
+      alt: "2026 CURO Symposium Best Paper recognition for the VIPR CoolDawgs wearable sensor and mobile application project.",
+      fit: "document",
+    },
+    {
+      src: "assets/honors/honors-sec-academic-honor-roll-2023-framed.jpeg",
+      alt: "Framed Southeastern Conference Academic Honor Roll recognition awarded to Kristian Pitshugin for 2023.",
+      fit: "document",
+    },
+  ],
   skills: [
     {
       category: "Programming Languages",
