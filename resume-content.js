@@ -1,4 +1,4 @@
-const resume = {
+const portfolioResumeData = {
   name: "Kristian Pitshugin",
   title: "Software Engineer · AI Graduate Student · Former NCAA Division I Athlete",
   positioning:
@@ -451,5 +451,5 @@ const resume = {
 };
 
 if (typeof globalThis !== "undefined") {
-  globalThis.resume = resume;
+  globalThis.resume = portfolioResumeData;
 }

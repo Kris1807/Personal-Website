@@ -1,3 +1,9 @@
+const portfolioData = globalThis.resume;
+
+if (!portfolioData) {
+  throw new Error("Portfolio content failed to load.");
+}
+
 const sectionMeta = {
   experience: {
     label: "Experience",
@@ -120,55 +126,55 @@ const formatText = (value) =>
 const isExternalLink = (url) => /^(https?:)?\/\//.test(String(url || ""));
 
 const getResumeDownloadLink = () =>
-  resume.resumeFile ||
-  resume.relatedLinks.find((entry) => entry.download)?.url ||
+  portfolioData.resumeFile ||
+  portfolioData.relatedLinks.find((entry) => entry.download)?.url ||
   "index.html";
 
 const getEmailEntry = () =>
-  resume.contact.find((entry) => String(entry.url || "").startsWith("mailto:"));
+  portfolioData.contact.find((entry) => String(entry.url || "").startsWith("mailto:"));
 
 const clampIndex = (value, min, max) => Math.max(min, Math.min(max, value));
 
 function getSectionHeroMetrics(sectionKey) {
-  const featuredProjects = resume.projects.filter((item) => item.featured).length;
-  const activeRoles = resume.experience.filter((item) => /present/i.test(String(item.period))).length;
-  const scholarshipCount = resume.honors.filter((entry) => /scholarship/i.test(String(entry))).length;
+  const featuredProjects = portfolioData.projects.filter((item) => item.featured).length;
+  const activeRoles = portfolioData.experience.filter((item) => /present/i.test(String(item.period))).length;
+  const scholarshipCount = portfolioData.honors.filter((entry) => /scholarship/i.test(String(entry))).length;
 
   switch (sectionKey) {
     case "experience":
       return [
-        { value: String(resume.experience.length).padStart(2, "0"), label: "Roles" },
+        { value: String(portfolioData.experience.length).padStart(2, "0"), label: "Roles" },
         { value: String(activeRoles).padStart(2, "0"), label: "Current" },
         { value: "AI · apps · research", label: "Focus" },
       ];
     case "education":
       return [
         { value: "2026", label: "Latest degree" },
-        { value: String(resume.education.length).padStart(2, "0"), label: "Academic blocks" },
+        { value: String(portfolioData.education.length).padStart(2, "0"), label: "Academic blocks" },
         { value: "Double Dawgs", label: "Program" },
       ];
     case "projects":
       return [
         { value: String(featuredProjects).padStart(2, "0"), label: "Featured case studies" },
-        { value: String(resume.projects.length).padStart(2, "0"), label: "Total builds" },
+        { value: String(portfolioData.projects.length).padStart(2, "0"), label: "Total builds" },
         { value: "Product · AI · data", label: "Range" },
       ];
     case "honors":
       return [
-        { value: String(resume.honors.length).padStart(2, "0"), label: "Recognitions" },
+        { value: String(portfolioData.honors.length).padStart(2, "0"), label: "Recognitions" },
         { value: String(scholarshipCount).padStart(2, "0"), label: "Scholarships" },
         { value: "Academic + athletic", label: "Span" },
       ];
     case "athletics":
       return [
-        { value: String(resume.athletics.length).padStart(2, "0"), label: "Competition tiers" },
+        { value: String(portfolioData.athletics.length).padStart(2, "0"), label: "Competition tiers" },
         { value: "2024", label: "European medal year" },
         { value: "UGA + ISR", label: "Footprint" },
       ];
     case "skills":
       return [
         { value: `${flattenSkills().length}+`, label: "Tools inside" },
-        { value: String(resume.skills.length).padStart(2, "0"), label: "Skill groups" },
+        { value: String(portfolioData.skills.length).padStart(2, "0"), label: "Skill groups" },
         { value: "Code + systems", label: "Coverage" },
       ];
     default:
@@ -183,8 +189,8 @@ function registerGalleryGroup(items) {
 }
 
 const landingStoryImages = () => [
-  ...(resume.athleticsGallery || []).slice(0, 4),
-  ...(resume.educationGallery || []).slice(0, 2),
+  ...(portfolioData.athleticsGallery || []).slice(0, 4),
+  ...(portfolioData.educationGallery || []).slice(0, 2),
 ];
 
 function applyRevealMotion(element, index = 0, step = 42) {
@@ -356,7 +362,7 @@ function injectSiteHeader() {
       <a class="site-brand" href="index.html" aria-label="Go to Kristian Pitshugin home page">
         <span class="site-brand-mark"><span class="site-brand-mark-inner">KP</span></span>
         <span class="site-brand-copy">
-          <strong>${resume.name}</strong>
+          <strong>${portfolioData.name}</strong>
           <span>Software engineer · AI graduate student</span>
         </span>
       </a>
@@ -722,24 +728,24 @@ function fillBasicIdentity() {
   const educationWrap = document.getElementById("hero-education-card");
 
   if (title) {
-    title.textContent = resume.title;
+    title.textContent = portfolioData.title;
     title.classList.remove("skeleton-text", "skeleton-eyebrow");
   }
   if (name) {
-    name.textContent = resume.name;
+    name.textContent = portfolioData.name;
     name.classList.remove("skeleton-text", "skeleton-name");
   }
   if (positioning) {
-    positioning.textContent = resume.positioning;
+    positioning.textContent = portfolioData.positioning;
     positioning.classList.remove("skeleton-text", "skeleton-summary");
   }
   if (summary) {
-    summary.textContent = resume.summary;
+    summary.textContent = portfolioData.summary;
     summary.classList.remove("skeleton-text", "skeleton-summary");
   }
 
-  const athleticsCard = resume.heroCards?.athletics;
-  const educationCard = resume.heroCards?.education;
+  const athleticsCard = portfolioData.heroCards?.athletics;
+  const educationCard = portfolioData.heroCards?.education;
 
   const athleticsLabel = document.getElementById("hero-athletics-label");
   const athleticsDetail = document.getElementById("hero-athletics-detail");
@@ -751,10 +757,10 @@ function fillBasicIdentity() {
   if (educationLabel && educationCard?.label) educationLabel.textContent = educationCard.label;
   if (educationDetail && educationCard?.detail) educationDetail.textContent = educationCard.detail;
 
-  hydrateMediaImage(image, imageWrap, resume.profileImage);
-  hydrateMediaImage(athleticsImage, athleticsWrap, athleticsCard?.image || resume.athleticsGallery?.[0]?.src || "");
+  hydrateMediaImage(image, imageWrap, portfolioData.profileImage);
+  hydrateMediaImage(athleticsImage, athleticsWrap, athleticsCard?.image || portfolioData.athleticsGallery?.[0]?.src || "");
   if (athleticsImage && athleticsCard?.alt) athleticsImage.alt = athleticsCard.alt;
-  hydrateMediaImage(educationImage, educationWrap, educationCard?.image || resume.educationGallery?.[0]?.src || "");
+  hydrateMediaImage(educationImage, educationWrap, educationCard?.image || portfolioData.educationGallery?.[0]?.src || "");
   if (educationImage && educationCard?.alt) educationImage.alt = educationCard.alt;
 }
 
@@ -792,7 +798,7 @@ function renderHeroHighlights() {
   if (!root) return;
   root.innerHTML = "";
 
-  (resume.heroHighlights || []).forEach((entry, index) => {
+  (portfolioData.heroHighlights || []).forEach((entry, index) => {
     const chip = document.createElement("span");
     chip.className = "chip hero-chip";
     chip.textContent = entry;
@@ -805,7 +811,7 @@ function renderContact() {
   if (!root) return;
 
   root.innerHTML = "";
-  resume.contact.forEach((entry, index) => {
+  portfolioData.contact.forEach((entry, index) => {
     const isEmailCopy = String(entry.url || "").startsWith("mailto:");
 
     if (isEmailCopy) {
@@ -859,14 +865,14 @@ function renderLandingAbout() {
   const intro = document.getElementById("about-intro");
   const statsRoot = document.getElementById("about-stats");
   const notesRoot = document.getElementById("about-notes");
-  if (!eyebrow || !heading || !intro || !statsRoot || !notesRoot || !resume.about) return;
+  if (!eyebrow || !heading || !intro || !statsRoot || !notesRoot || !portfolioData.about) return;
 
-  eyebrow.textContent = resume.about.eyebrow;
-  heading.textContent = resume.about.heading;
-  intro.textContent = resume.about.intro;
+  eyebrow.textContent = portfolioData.about.eyebrow;
+  heading.textContent = portfolioData.about.heading;
+  intro.textContent = portfolioData.about.intro;
 
   statsRoot.innerHTML = "";
-  (resume.about.stats || []).forEach((item, index) => {
+  (portfolioData.about.stats || []).forEach((item, index) => {
     const article = document.createElement("article");
     article.className = "about-stat";
     article.innerHTML = `
@@ -877,7 +883,7 @@ function renderLandingAbout() {
   });
 
   notesRoot.innerHTML = "";
-  (resume.about.notes || []).forEach((item, index) => {
+  (portfolioData.about.notes || []).forEach((item, index) => {
     const article = document.createElement("article");
     article.className = "about-note";
     article.innerHTML = `
@@ -893,13 +899,13 @@ function renderRelatedLinks() {
   const root = document.getElementById("related-links");
   if (!panel || !root) return;
 
-  if (!Array.isArray(resume.relatedLinks) || resume.relatedLinks.length === 0) {
+  if (!Array.isArray(portfolioData.relatedLinks) || portfolioData.relatedLinks.length === 0) {
     panel.style.display = "none";
     return;
   }
 
   root.innerHTML = "";
-  resume.relatedLinks.forEach((entry, index) => {
+  portfolioData.relatedLinks.forEach((entry, index) => {
     const link = document.createElement("a");
     link.className = "related-link";
     link.href = entry.url;
@@ -1005,7 +1011,7 @@ function renderLinkCluster(links, className = "project-link-cluster") {
 
 function renderExperience(root) {
   root.innerHTML = "";
-  resume.experience.forEach((item, index) => {
+  portfolioData.experience.forEach((item, index) => {
     const [location = item.period, dates = ""] = String(item.period || "").split(" | ");
     const isCurrent = /present/i.test(String(item.period || ""));
     const card = createCard(
@@ -1057,7 +1063,7 @@ function renderEducation(root) {
   const grid = document.createElement("div");
   grid.className = "education-grid";
 
-  resume.education.forEach((item, index) => {
+  portfolioData.education.forEach((item, index) => {
     const card = createCard(
       `
         <h2>${formatText(item.degree)}</h2>
@@ -1153,8 +1159,8 @@ function createSecondaryProjectCard(item, index) {
 function renderProjects(root) {
   root.innerHTML = "";
 
-  const featured = resume.projects.filter((item) => item.featured);
-  const secondary = resume.projects.filter((item) => !item.featured);
+  const featured = portfolioData.projects.filter((item) => item.featured);
+  const secondary = portfolioData.projects.filter((item) => !item.featured);
 
   if (featured.length > 0) {
     const featuredSection = document.createElement("section");
@@ -1198,7 +1204,7 @@ function renderHonors(root) {
   const grid = document.createElement("div");
   grid.className = "honors-grid";
 
-  resume.honors.forEach((item, index) => {
+  portfolioData.honors.forEach((item, index) => {
     grid.appendChild(createCard(`<p>${formatText(item)}</p>`, index, "honor-card"));
   });
 
@@ -1210,7 +1216,7 @@ function renderAthletics(root) {
   const stack = document.createElement("div");
   stack.className = "athletics-stack";
 
-  resume.athletics.forEach((item, index) => {
+  portfolioData.athletics.forEach((item, index) => {
     const card = createCard(
       `
         <h2>${item.organization}</h2>
@@ -1282,7 +1288,7 @@ function renderPhotoGallery(root, options) {
 
 function renderEducationGallery(root) {
   renderPhotoGallery(root, {
-    items: resume.educationGallery,
+    items: portfolioData.educationGallery,
     eyebrow: "Photo Highlights",
     title: "Education Gallery",
     copy: "Graduation, campus, and academic-recognition moments that support the education story.",
@@ -1291,7 +1297,7 @@ function renderEducationGallery(root) {
 
 function renderHonorsGallery(root) {
   renderPhotoGallery(root, {
-    items: resume.honorsGallery,
+    items: portfolioData.honorsGallery,
     eyebrow: "Recognition Archive",
     title: "Honors Gallery",
     copy: "Certificates, framed recognitions, and achievement moments across academics, research, and athletics.",
@@ -1300,7 +1306,7 @@ function renderHonorsGallery(root) {
 
 function renderAthleticsGallery(root) {
   renderPhotoGallery(root, {
-    items: resume.athleticsGallery,
+    items: portfolioData.athleticsGallery,
     eyebrow: "Photo Highlights",
     title: "Athletics Gallery",
     copy: "Selected race-day, national-team, and college competition moments.",
@@ -1980,7 +1986,7 @@ function shuffleArray(items) {
 }
 
 function flattenSkills() {
-  return resume.skills.flatMap((group) =>
+  return portfolioData.skills.flatMap((group) =>
     group.items.map((label) => ({
       label,
       category: group.category,
@@ -2259,7 +2265,7 @@ function renderSkills(root) {
   const cardsColumn = document.createElement("div");
   cardsColumn.className = "skills-cards-column";
 
-  resume.skills.forEach((item, index) => {
+  portfolioData.skills.forEach((item, index) => {
     cardsColumn.appendChild(
       createCard(
         `
@@ -2294,7 +2300,7 @@ function renderSectionPage(sectionKey) {
 
   if (!meta || !content) return;
 
-  document.title = `${meta.label} | ${resume.name}`;
+  document.title = `${meta.label} | ${portfolioData.name}`;
   if (title) title.textContent = meta.label;
   if (eyebrow) eyebrow.textContent = meta.eyebrow;
   if (description) description.textContent = meta.description;
@@ -2328,7 +2334,7 @@ function init() {
 
   const pageType = document.body.dataset.page;
   if (pageType === "landing") {
-    document.title = resume.name;
+    document.title = portfolioData.name;
     fillBasicIdentity();
     renderHeroActions();
     renderHeroHighlights();
