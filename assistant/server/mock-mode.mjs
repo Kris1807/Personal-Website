@@ -5,19 +5,25 @@ function pickCategory(entries) {
   return entries[0]?.category || "general";
 }
 
-function uniqueTexts(entries, language) {
-  const seen = new Set();
-  const key = language === "he" ? "content_he" : "content_en";
-  return entries
-    .map((entry) => String(entry[key] || entry.content_en || "").trim())
-    .filter((entry) => {
-      if (!entry || seen.has(entry)) return false;
-      seen.add(entry);
-      return true;
-    });
+function content(entry, language) {
+  return String(language === "he" ? entry.content_he || entry.content_en : entry.content_en || entry.content_he).trim();
 }
 
-export function createMockReply({ language = "en", entries = [], supported = false }) {
+function buildMockAnswer(entry, language, intent) {
+  if (intent === "technologies" && entry.technologies?.length) {
+    return language === "he"
+      ? `${entry.title} נבנה עם ${entry.technologies.join(", ")}.`
+      : `${entry.title} uses ${entry.technologies.join(", ")}.`;
+  }
+  if (intent === "date" && entry.dates?.length) {
+    return language === "he"
+      ? `השנה הרלוונטית היא ${entry.dates[0]}.`
+      : `The relevant year is ${entry.dates[0]}.`;
+  }
+  return content(entry, language);
+}
+
+export function createMockReply({ language = "en", entries = [], supported = false, intent = "general" }) {
   if (!supported || entries.length === 0) {
     return {
       answer: unsupportedReply(language),
@@ -29,19 +35,14 @@ export function createMockReply({ language = "en", entries = [], supported = fal
   }
 
   const category = pickCategory(entries);
-  const snippets = uniqueTexts(entries.slice(0, 3), language);
-  const intro = language === "he"
-    ? "לפי המידע המאומת בתיק העבודות של כריס ובמקורות הציבוריים המאושרים, "
-    : "Based on Kris’s verified portfolio and approved public sources, ";
-
-  const answer = `${intro}${snippets.join(" ")}`;
-  const sourceIds = entries.map((entry) => entry.source_id).filter(Boolean);
+  const answer = buildMockAnswer(entries[0], language, intent);
+  const sourceIds = [entries[0].source_id].filter(Boolean);
 
   return {
     answer,
     supported: true,
     language,
     sources: resolveSources(sourceIds, language),
-    suggestedFollowUps: getSuggestedFollowUps(language, category)
+    suggestedFollowUps: getSuggestedFollowUps(language, category).slice(0, 2)
   };
 }

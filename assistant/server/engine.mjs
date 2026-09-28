@@ -5,8 +5,9 @@ import { injectionReply, getSuggestedFollowUps, unsupportedReply } from "./messa
 import { requestModelReply } from "./openai-client.mjs";
 import { detectInjectionAttempt, retrieveRelevantEntries } from "./retrieve.mjs";
 import { parseModelPayload } from "./validation.mjs";
+import { shapeAnswer } from "./response-shape.mjs";
 
-export async function answerPortfolioQuestion({ language, message, history, pageContext, previousSourceIds }) {
+export async function answerPortfolioQuestion({ language, message, history, pageContext, previousSourceIds }, modelRequester = requestModelReply) {
   const config = getServerConfig();
 
   if (detectInjectionAttempt(message)) {
@@ -22,6 +23,7 @@ export async function answerPortfolioQuestion({ language, message, history, page
   const retrieval = retrieveRelevantEntries({
     query: message,
     language,
+    history,
     pageContext,
     previousSourceIds
   });
@@ -40,35 +42,29 @@ export async function answerPortfolioQuestion({ language, message, history, page
     return createMockReply({
       language,
       entries: retrieval.entries,
-      supported: retrieval.supported
+      supported: retrieval.supported,
+      intent: retrieval.intent
     });
   }
 
   const allowedSourceIds = new Set(retrieval.entries.map((entry) => entry.source_id));
 
-  try {
-    const raw = await requestModelReply({
-      language,
-      message,
-      history,
-      entries: retrieval.entries,
-      pageContext
-    });
+  const raw = await modelRequester({
+    language,
+    message,
+    history,
+    entries: retrieval.entries,
+    pageContext
+  });
 
-    const parsed = parseModelPayload(raw, allowedSourceIds, language);
-    return {
-      ...parsed,
-      sources: resolveSources(parsed.sourceIds, language),
-      suggestedFollowUps:
-        parsed.suggestedFollowUps.length > 0
-          ? parsed.suggestedFollowUps
-          : getSuggestedFollowUps(language, retrieval.entries[0]?.category)
-    };
-  } catch (_error) {
-    return createMockReply({
-      language,
-      entries: retrieval.entries,
-      supported: retrieval.supported
-    });
-  }
+  const parsed = parseModelPayload(raw, allowedSourceIds, language);
+  return {
+    ...parsed,
+    answer: shapeAnswer(parsed.answer, message, language),
+    sources: resolveSources(parsed.sourceIds, language),
+    suggestedFollowUps:
+      parsed.suggestedFollowUps.length > 0
+        ? parsed.suggestedFollowUps.slice(0, 2)
+        : getSuggestedFollowUps(language, retrieval.entries[0]?.category).slice(0, 2)
+  };
 }

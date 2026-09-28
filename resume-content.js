@@ -194,7 +194,7 @@ const portfolioResumeData = {
         "Handled temporary holds on the server and expired them automatically when checkout was abandoned.",
         "Kept booking, payment, and account interactions modular so the full flow remained maintainable as the feature set expanded.",
       ],
-      stack: ["Django", "JavaScript", "Supabase", "Booking logic"],
+      stack: ["Django", "JavaScript", "Supabase"],
       outcome:
         "Delivered a reliable reservation flow that protects inventory accuracy while still feeling responsive to the user.",
       links: [
@@ -298,109 +298,199 @@ const portfolioResumeData = {
   ],
   educationGallery: [
     {
-      image: 'assets/gallery-20260726-final/education/graduation-indoor.jpeg',
+      src: 'assets/gallery-20260726-final/education/graduation-indoor.jpeg',
       alt: 'Kristian Pitshugin at University of Georgia graduation ceremony indoors.',
       caption: 'Graduation ceremony at the University of Georgia.',
     },
     {
-      image: 'assets/gallery-20260726-final/education/graduation-stadium.jpeg',
+      src: 'assets/gallery-20260726-final/education/graduation-stadium.jpeg',
       alt: 'Kristian Pitshugin at graduation in Sanford Stadium.',
       caption: 'Graduation at Sanford Stadium.',
     },
     {
-      image: 'assets/gallery-20260726-final/education/graduation-classic-center.jpeg',
+      src: 'assets/gallery-20260726-final/education/graduation-classic-center.jpeg',
       alt: 'Kristian Pitshugin outside the Classic Center after graduation.',
       caption: 'Graduation day at the Classic Center.',
     },
     {
-      image: 'assets/gallery-20260726-final/education/graduation-arch.jpeg',
+      src: 'assets/gallery-20260726-final/education/graduation-arch.jpeg',
       alt: 'Kristian Pitshugin in graduation attire under the University of Georgia arch.',
       caption: 'Graduation day under the Arch.',
     },
     {
-      image: 'assets/gallery-20260726-final/education/bs-computer-science-diploma.png',
+      src: 'assets/gallery-20260726-final/education/bs-computer-science-diploma.png',
       alt: 'Bachelor of Science diploma for Kristian Pitshugin from the University of Georgia.',
       caption: 'B.S. in Computer Science, Magna Cum Laude.',
       fit: 'document',
     },
     {
-      image: 'assets/gallery-20260726-final/education/presidential-scholar-fall-2024.jpeg',
+      src: 'assets/gallery-20260726-final/education/presidential-scholar-fall-2024.jpeg',
       alt: 'University of Georgia Presidential Scholar certificate awarded to Kristian Pitshugin for Fall 2024.',
       caption: 'Presidential Scholar recognition for Fall 2024.',
       fit: 'document',
     },
     {
-      image: 'assets/gallery-20260726-final/education/scholar-athlete-2024-2025.jpeg',
+      src: 'assets/gallery-20260726-final/education/scholar-athlete-2024-2025.jpeg',
       alt: 'University of Georgia Scholar Athlete certificate recognizing Kristian Pitshugin for the 2024-2025 academic year.',
       caption: 'Scholar Athlete recognition for the 2024-2025 academic year.',
       fit: 'document',
     },
     {
-      image: 'assets/gallery-20260726-final/education/academic-achievement-2023-2024.jpeg',
+      src: 'assets/gallery-20260726-final/education/academic-achievement-2023-2024.jpeg',
       alt: 'University of Georgia Academic Achievement certificate recognizing Kristian Pitshugin for the 2023-2024 academic year.',
       caption: 'Academic Achievement recognition for the 2023-2024 academic year.',
       fit: 'document',
     },
     {
-      image: 'assets/gallery-20260726-final/education/intermediate-machine-learning.png',
+      src: 'assets/gallery-20260726-final/education/intermediate-machine-learning.png',
       alt: 'Kaggle Intermediate Machine Learning certificate awarded to Kristian Pitshugin.',
       caption: 'Kaggle Intermediate Machine Learning certificate.',
       fit: 'document',
     },
     {
-      image: 'assets/gallery-20260726-final/education/google-cybersecurity-v2.jpg',
+      src: 'assets/gallery-20260726-final/education/google-cybersecurity-v2.jpg',
       alt: 'Google Cybersecurity Professional Certificate V2 issued to Kristian Pitshugin.',
       caption: 'Google Cybersecurity Professional Certificate V2.',
       fit: 'document',
     },
   ],
+  honors: [
+    "Morton S. Hodgson, Jr. Men's Swimming and Diving Scholarship",
+    "Carey Louis Davis Scholarship",
+    "UGA Presidential Scholar (Fall 2024)",
+    "UGA Scholar Athlete recognition (2024-2025)",
+    "UGA Academic Achievement recognition (2023-2024)",
+    "SEC Academic Honor Roll (2025-2026)",
+    "J. Reid Parker Director of Athletics Honor Roll for receiving multiple 4.0 semesters",
+    "2026 CURO Symposium Best Paper in Technology, Engineering, and Math for the VIPR CoolDawgs wearable sensor and mobile application project",
+  ],
   honorsGallery: [
     {
-      image: 'assets/gallery-20260726-final/honors/sec-academic-honor-roll-2025.jpeg',
+      src: 'assets/gallery-20260726-final/honors/sec-academic-honor-roll-2025.jpeg',
       alt: 'Framed Southeastern Conference Academic Honor Roll certificate awarded to Kristian Pitshugin for 2025.',
       caption: 'Framed SEC Academic Honor Roll recognition for 2025.',
       fit: 'document',
     },
     {
-      image: 'assets/gallery-20260726-final/honors/presidential-scholar-fall-2024.jpeg',
+      src: 'assets/gallery-20260726-final/honors/presidential-scholar-fall-2024.jpeg',
       alt: 'University of Georgia Presidential Scholar certificate awarded to Kristian Pitshugin for Fall 2024.',
       caption: 'UGA Presidential Scholar recognition for Fall 2024.',
       fit: 'document',
     },
     {
-      image: 'assets/gallery-20260726-final/honors/scholar-athlete-2024-2025.jpeg',
+      src: 'assets/gallery-20260726-final/honors/scholar-athlete-2024-2025.jpeg',
       alt: 'University of Georgia Scholar Athlete certificate recognizing Kristian Pitshugin for the 2024-2025 academic year.',
       caption: 'Scholar Athlete recognition for the 2024-2025 academic year.',
       fit: 'document',
     },
     {
-      image: 'assets/gallery-20260726-final/honors/academic-achievement-2023-2024.jpeg',
+      src: 'assets/gallery-20260726-final/honors/academic-achievement-2023-2024.jpeg',
       alt: 'University of Georgia Academic Achievement certificate recognizing Kristian Pitshugin for the 2023-2024 academic year.',
       caption: 'Academic Achievement recognition for the 2023-2024 academic year.',
       fit: 'document',
     },
     {
-      image: 'assets/gallery-20260726-final/honors/sec-academic-honor-roll-2025-2026.jpeg',
+      src: 'assets/gallery-20260726-final/honors/sec-academic-honor-roll-2025-2026.jpeg',
       alt: 'Southeastern Conference Academic Honor Roll certificate awarded to Kristian Pitshugin for 2025-2026.',
       caption: 'SEC Academic Honor Roll for 2025-2026.',
       fit: 'document',
     },
     {
-      image: 'assets/gallery-20260726-final/honors/curo-best-paper-2026.jpeg',
+      src: 'assets/gallery-20260726-final/honors/curo-best-paper-2026.jpeg',
       alt: 'CURO Best Paper certificate for the VIPR CoolDawgs wearable sensor and mobile application project.',
       caption: '2026 CURO Symposium Best Paper in Technology, Engineering and Math.',
       fit: 'document',
     },
     {
-      image: 'assets/gallery-20260726-final/honors/sec-academic-honor-roll-2023.jpeg',
+      src: 'assets/gallery-20260726-final/honors/sec-academic-honor-roll-2023.jpeg',
       alt: 'Framed Southeastern Conference Academic Honor Roll certificate awarded to Kristian Pitshugin for 2023.',
       caption: 'Framed SEC Academic Honor Roll recognition for 2023.',
       fit: 'document',
     },
     {
-      image: 'assets/gallery-20260726-final/honors/medal-wall.jpeg',
+      src: 'assets/gallery-20260726-final/honors/medal-wall.jpeg',
       alt: 'Wall display of Kristian Pitshugin medals, trophies, and framed recognitions.',
       caption: 'Medal wall and framed recognitions from athletics and academics.',
+    },
+  ],
+  athletics: [
+    {
+      organization: "UGA Swimming and Diving",
+      period: "August 2022 - May 2025",
+      achievements: [
+        "All American for 2023 and 2025",
+        "8th place at the SEC conference",
+        "6th and 8th place at NCAA as a relay swimmer",
+        "Part of the school records in the 200 and 400 IM relays",
+        "8th fastest result in the 100Y breaststroke",
+        "Fastest 50Y breaststroke in school history",
+      ],
+    },
+    {
+      organization: "International - Israel National Team",
+      period: "September 2019 - Present",
+      achievements: [
+        "3rd place at the European Championships 2024",
+        "One of only three Israeli swimmers to make two semifinals at World Championships",
+        "10th and 14th place at the World Championships 2022",
+        "Two gold medals at Switzerland Olympic Trials competition",
+        "Part of 2 Israeli relay records for the national team",
+      ],
+    },
+    {
+      organization: "National - Greater Jerusalem Swimming Club",
+      period: "September 2019 - Present",
+      achievements: [
+        "Only swimmer in club history to win a medal at European Championships",
+        "Israeli record holder in 3 individual events and 2 additional relay events",
+        "Israeli champion since 2020 in both short-course and long-course pools",
+      ],
+    },
+  ],
+  athleticsGallery: [
+    {
+      src: "assets/athletics/athletics-01.jpeg",
+      alt: "Kristian Pitshugin holding a European Championships medal.",
+    },
+    {
+      src: "assets/athletics/athletics-03.jpeg",
+      alt: "Kristian Pitshugin smiling in the pool after a race.",
+    },
+    {
+      src: "assets/athletics/athletics-04.jpeg",
+      alt: "Kristian Pitshugin racing breaststroke in competition.",
+    },
+    {
+      src: "assets/athletics/athletics-05.jpeg",
+      alt: "Kristian Pitshugin powering through a breaststroke race.",
+    },
+    {
+      src: "assets/athletics/athletics-06.jpeg",
+      alt: "Overhead action shot of Kristian Pitshugin in the pool during competition.",
+    },
+    {
+      src: "assets/athletics/athletics-07.jpeg",
+      alt: "Kristian Pitshugin focused before a race in UGA gear.",
+    },
+    {
+      src: "assets/athletics/athletics-08.jpeg",
+      alt: "Kristian Pitshugin seated on deck before competition.",
+    },
+    {
+      src: "assets/athletics/athletics-09.jpeg",
+      alt: "Kristian Pitshugin walking onto the World Aquatics competition deck.",
+    },
+    {
+      src: "assets/athletics/athletics-10.jpeg",
+      alt: "Kristian Pitshugin waving at the European Championships venue.",
+    },
+    {
+      src: "assets/athletics/athletics-11.jpeg",
+      alt: "Kristian Pitshugin at the wall after a race in the pool.",
+    },
+    {
+      src: "assets/athletics/athletics-12.jpeg",
+      alt: "Kristian Pitshugin racing breaststroke for Israel.",
     },
   ],
   skills: [

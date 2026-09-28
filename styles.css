@@ -1145,6 +1145,71 @@ body[data-page="landing"] .scroll-progress span {
   padding-top: 2.3rem;
 }
 
+.landing-portfolio-intro {
+  padding: clamp(1.4rem, 4vw, 2.2rem);
+  scroll-margin-top: 6.5rem;
+}
+
+.landing-portfolio-intro .section-heading {
+  max-width: 54rem;
+  margin-bottom: 0;
+}
+
+.landing-portfolio {
+  display: grid;
+  gap: clamp(3.5rem, 8vw, 6.5rem);
+}
+
+.landing-portfolio-chapter {
+  display: grid;
+  gap: 1.25rem;
+  scroll-margin-top: 6.5rem;
+}
+
+.landing-chapter-heading {
+  max-width: 52rem;
+  padding: 0 0.35rem;
+}
+
+.landing-chapter-heading .eyebrow,
+.landing-portfolio .section-heading-tight .eyebrow {
+  color: #f3c978;
+  text-shadow: 0 1px 18px rgba(243, 201, 120, 0.18);
+}
+
+.landing-chapter-heading h2 {
+  margin-bottom: 0.55rem;
+  color: #f9f4ea;
+  font-size: clamp(2.25rem, 5vw, 4rem);
+}
+
+.landing-chapter-heading p:last-child {
+  max-width: 46rem;
+  color: rgba(231, 238, 248, 0.82);
+}
+
+.landing-portfolio .section-heading-tight h2 {
+  color: #dcecff;
+}
+
+.landing-portfolio .section-content-wrap {
+  max-width: none;
+}
+
+.landing-portfolio .skills-stack-layout {
+  grid-template-columns: minmax(0, 1fr) minmax(390px, 500px);
+}
+
+@media (max-width: 980px) {
+  .landing-portfolio .skills-stack-layout {
+    grid-template-columns: 1fr;
+  }
+
+  .landing-portfolio .skills-brain-rail {
+    position: static;
+  }
+}
+
 #landing-stage {
   position: relative;
   display: grid;

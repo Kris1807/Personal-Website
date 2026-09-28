@@ -1,4 +1,4 @@
-import { afterEach, beforeEach, describe, expect, it } from "vitest";
+import { afterEach, beforeEach, describe, expect, it, vi } from "vitest";
 import { answerPortfolioQuestion } from "../server/engine.mjs";
 import { resetServerConfig } from "../server/config.mjs";
 import { handleAssistantHttpRequest } from "../server/http-handler.mjs";
@@ -53,6 +53,38 @@ describe("assistant engine", () => {
     expect(response.supported).toBe(false);
     expect(response.sources).toEqual([]);
   });
+
+  it("enforces a requested one-sentence answer", async () => {
+    process.env.KRIS_ASSISTANT_MOCK_MODE = "false";
+    resetServerConfig();
+    const response = await answerPortfolioQuestion({
+      language: "en",
+      message: "What technologies did he use for Film-Hub in one sentence?",
+      history: [],
+      pageContext: null,
+      previousSourceIds: []
+    }, async () => JSON.stringify({
+      answer: "Film-Hub uses Django, JavaScript, and Supabase. It handles seat reservations.",
+      supported: true,
+      source_ids: ["source-portfolio-project-cinema"],
+      suggested_follow_ups: ["What does it do?", "Is it live?", "Who built it?"]
+    }));
+
+    expect(response.answer).toBe("Film-Hub uses Django, JavaScript, and Supabase.");
+    expect(response.suggestedFollowUps).toHaveLength(2);
+  });
+
+  it("does not disguise provider failures as successful answers", async () => {
+    process.env.KRIS_ASSISTANT_MOCK_MODE = "false";
+    resetServerConfig();
+    await expect(answerPortfolioQuestion({
+      language: "en",
+      message: "What did Kris study at the University of Georgia?",
+      history: [],
+      pageContext: null,
+      previousSourceIds: []
+    }, async () => { throw Object.assign(new Error("provider down"), { code: "UPSTREAM" }); })).rejects.toMatchObject({ code: "UPSTREAM" });
+  });
 });
 
 describe("assistant http handler", () => {
@@ -60,7 +92,7 @@ describe("assistant http handler", () => {
     const response = await handleAssistantHttpRequest({
       method: "POST",
       headers: { origin: "https://malicious.example" },
-      bodyText: JSON.stringify({ language: "en", message: "What did Kris study?" }),
+      bodyText: JSON.stringify({ language: "en", message: "What did Kris study at the University of Georgia?" }),
       remoteAddress: "1.1.1.1"
     });
 
@@ -90,5 +122,21 @@ describe("assistant http handler", () => {
     });
 
     expect(response.status).toBe(400);
+  });
+
+  it("returns an honest unavailable response when no provider is configured", async () => {
+    process.env.KRIS_ASSISTANT_MOCK_MODE = "false";
+    resetServerConfig();
+    const log = vi.spyOn(console, "error").mockImplementation(() => {});
+    const response = await handleAssistantHttpRequest({
+      method: "POST",
+      headers: { origin: "http://127.0.0.1:8124" },
+      bodyText: JSON.stringify({ language: "en", message: "What did Kris study at the University of Georgia?" }),
+      remoteAddress: "4.4.4.4"
+    });
+    log.mockRestore();
+
+    expect(response.status).toBe(503);
+    expect(JSON.parse(response.body).error).toMatch(/unavailable/i);
   });
 });

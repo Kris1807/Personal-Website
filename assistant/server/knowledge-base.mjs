@@ -1,38 +1,32 @@
 import { readFileSync } from "node:fs";
+import { normalizeSearchText, searchTokens } from "./text-normalize.mjs";
 
 const compiledKnowledgeUrl = new URL("../knowledge/compiled-knowledge.json", import.meta.url);
 const sourceCatalogUrl = new URL("../knowledge/source-catalog.json", import.meta.url);
 
 let cachedKnowledge = null;
 
-function normalizeText(value) {
-  return String(value ?? "")
-    .toLowerCase()
-    .normalize("NFKD")
-    .replace(/[\u0300-\u036f]/g, "")
-    .replace(/['’]/g, "")
-    .replace(/[^\p{L}\p{N}\s-]/gu, " ")
-    .replace(/\s+/g, " ")
-    .trim();
-}
-
-function tokenize(value) {
-  return normalizeText(value)
-    .split(" ")
-    .filter((entry) => entry.length > 1);
-}
-
 function hydrateEntry(entry) {
-  const searchEn = [entry.title, entry.content_en, ...(entry.keywords_en || [])].join(" ");
-  const searchHe = [entry.title, entry.content_he, ...(entry.keywords_he || [])].join(" ");
+  const aliases = Array.isArray(entry.aliases) ? entry.aliases : [];
+  const topics = Array.isArray(entry.topics) ? entry.topics : [];
+  const technologies = Array.isArray(entry.technologies) ? entry.technologies : [];
+  const dates = Array.isArray(entry.dates) ? entry.dates : [];
+  const keywords = [...(entry.keywords_en || []), ...(entry.keywords_he || [])];
+  const searchEn = [entry.title, entry.content_en, ...aliases, ...topics, ...technologies, ...dates, ...(entry.keywords_en || [])].join(" ");
+  const searchHe = [entry.title, entry.content_he, ...aliases, ...topics, ...technologies, ...dates, ...(entry.keywords_he || [])].join(" ");
 
   return {
     ...entry,
-    search_en: normalizeText(searchEn),
-    search_he: normalizeText(searchHe),
-    tokens_en: tokenize(searchEn),
-    tokens_he: tokenize(searchHe),
-    tokens_all: tokenize(`${searchEn} ${searchHe}`)
+    normalized_title: normalizeSearchText(entry.title),
+    normalized_aliases: aliases.map(normalizeSearchText).filter(Boolean),
+    search_text: normalizeSearchText(`${searchEn} ${searchHe}`),
+    search_en: normalizeSearchText(searchEn),
+    search_he: normalizeSearchText(searchHe),
+    tokens_en: searchTokens(searchEn),
+    tokens_he: searchTokens(searchHe),
+    tokens_all: searchTokens(`${searchEn} ${searchHe}`),
+    tokens_title: searchTokens(entry.title),
+    tokens_keywords: searchTokens(keywords.join(" "))
   };
 }
 

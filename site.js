@@ -350,9 +350,10 @@ function injectSiteHeader() {
 
   const pageType = document.body.dataset.page;
   const currentKey = pageType === "section" ? document.body.dataset.section : "home";
+  const landingHref = (key) => pageType === "landing" ? `#portfolio-${key}` : sectionMeta[key].href;
   const navItems = [
     { key: "home", label: "Home", href: "index.html" },
-    ...sectionOrder.map((key) => ({ key, label: sectionMeta[key].label, href: sectionMeta[key].href })),
+    ...sectionOrder.map((key) => ({ key, label: sectionMeta[key].label, href: landingHref(key) })),
   ];
 
   const header = document.createElement("header");
@@ -458,6 +459,69 @@ function setupSiteHeader() {
   window.addEventListener("scroll", syncScrolledState, { passive: true });
 
   setupPillNavMotion(header);
+  setupLandingNavScrollSpy(header);
+}
+
+function setupLandingNavScrollSpy(header) {
+  if (!header || document.body.dataset.page !== "landing") return;
+
+  const homeLink = header.querySelector('.site-nav-link[href="index.html"]');
+  const chapterLinks = sectionOrder
+    .map((key) => ({
+      key,
+      link: header.querySelector(`.site-nav-link[href="#portfolio-${key}"]`),
+      section: document.getElementById(`portfolio-${key}`),
+    }))
+    .filter(({ link, section }) => link && section);
+
+  if (!homeLink || chapterLinks.length === 0) return;
+
+  let activeKey = null;
+  let frame = 0;
+
+  const setActiveKey = (nextKey) => {
+    if (nextKey === activeKey) return;
+    activeKey = nextKey;
+
+    [homeLink, ...chapterLinks.map(({ link }) => link)].forEach((link) => {
+      const linkKey = link === homeLink ? "home" : link.getAttribute("href").replace("#portfolio-", "");
+      const isActive = linkKey === nextKey;
+      link.classList.toggle("is-active", isActive);
+      if (isActive) {
+        link.setAttribute("aria-current", "location");
+      } else {
+        link.removeAttribute("aria-current");
+      }
+    });
+  };
+
+  const update = () => {
+    frame = 0;
+    const headerBottom = header.getBoundingClientRect().bottom || 88;
+    const readingLine = Math.min(
+      window.innerHeight * 0.42,
+      headerBottom + Math.max(96, window.innerHeight * 0.14)
+    );
+    let nextKey = "home";
+
+    chapterLinks.forEach(({ key, section }) => {
+      if (section.getBoundingClientRect().top <= readingLine) nextKey = key;
+    });
+
+    const atPageBottom = window.scrollY + window.innerHeight >= document.documentElement.scrollHeight - 4;
+    if (atPageBottom) nextKey = chapterLinks[chapterLinks.length - 1].key;
+    setActiveKey(nextKey);
+  };
+
+  const requestUpdate = () => {
+    if (frame) return;
+    frame = window.requestAnimationFrame(update);
+  };
+
+  update();
+  window.addEventListener("scroll", requestUpdate, { passive: true });
+  window.addEventListener("resize", requestUpdate);
+  window.addEventListener("pageshow", requestUpdate);
 }
 
 let gsapLoaderPromise = null;
@@ -970,17 +1034,44 @@ function renderLandingNav() {
     const item = sectionMeta[key];
     const link = document.createElement("a");
     link.className = "nav-button";
-    link.href = item.href;
-    link.setAttribute("aria-label", `Open ${item.label}`);
+    link.href = `#portfolio-${key}`;
+    link.setAttribute("aria-label", `Jump to ${item.label}`);
     link.innerHTML = `
       <span class="nav-button-index">${String(index + 1).padStart(2, "0")}</span>
       <span class="nav-button-eyebrow">${item.eyebrow}</span>
       <span class="nav-button-label">${item.label}</span>
       <span class="nav-button-copy">${item.description}</span>
-      <span class="nav-button-arrow">Open</span>
+      <span class="nav-button-arrow">View below</span>
     `;
     root.appendChild(applyRevealMotion(link, index, 40));
   });
+}
+
+function renderLandingPortfolio() {
+  const roots = {
+    experience: document.getElementById("landing-experience"),
+    education: document.getElementById("landing-education"),
+    projects: document.getElementById("landing-projects"),
+    honors: document.getElementById("landing-honors"),
+    athletics: document.getElementById("landing-athletics"),
+    skills: document.getElementById("landing-skills"),
+  };
+
+  if (roots.experience) renderExperience(roots.experience);
+  if (roots.education) {
+    renderEducation(roots.education);
+    renderEducationGallery(roots.education);
+  }
+  if (roots.projects) renderProjects(roots.projects);
+  if (roots.honors) {
+    renderHonors(roots.honors);
+    renderHonorsGallery(roots.honors);
+  }
+  if (roots.athletics) {
+    renderAthletics(roots.athletics);
+    renderAthleticsGallery(roots.athletics);
+  }
+  if (roots.skills) renderSkills(roots.skills);
 }
 
 function createCard(innerHtml, index = 0, className = "") {
@@ -2342,6 +2433,7 @@ function init() {
     renderContact();
     renderLandingNav();
     renderLandingStoryStrip();
+    renderLandingPortfolio();
     renderRelatedLinks();
     setupScrollProgress();
     setupLandingMotion();

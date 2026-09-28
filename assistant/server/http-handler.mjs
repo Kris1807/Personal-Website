@@ -102,6 +102,11 @@ export async function handleAssistantHttpRequest({ method, headers, bodyText = "
     return jsonResponse(200, response, origin, config);
   } catch (error) {
     const isTimeout = error?.name === "AbortError" || error?.code === "ETIMEDOUT";
+    console.error("[portfolio-assistant] request failed", {
+      name: error?.name || "Error",
+      code: error?.code || "UNKNOWN",
+      status: Number.isInteger(error?.status) ? error.status : undefined
+    });
     return jsonResponse(
       isTimeout ? 504 : 503,
       { error: isTimeout ? timeoutReply(request.language) : unavailableReply(request.language) },

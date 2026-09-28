@@ -35,7 +35,6 @@ export async function requestModelReply({ language, message, history, entries, p
       },
       body: JSON.stringify({
         model: config.model,
-        temperature: 0.15,
         max_output_tokens: config.maxOutputTokens,
         input: [
           {
@@ -54,11 +53,16 @@ export async function requestModelReply({ language, message, history, entries, p
     });
 
     if (!response.ok) {
-      const errorBody = await response.text().catch(() => "");
+      const payload = await response.json().catch(() => ({}));
+      const providerCode = String(payload?.error?.code || payload?.error?.type || "").trim();
       const error = new Error(`OpenAI request failed with ${response.status}`);
-      error.code = response.status === 429 ? "OPENAI_RATE_LIMIT" : "OPENAI_UPSTREAM_ERROR";
+      error.code = providerCode === "credit_balance_exhausted" || providerCode === "insufficient_quota"
+        ? "OPENAI_INSUFFICIENT_QUOTA"
+        : response.status === 429
+          ? "OPENAI_RATE_LIMIT"
+          : "OPENAI_UPSTREAM_ERROR";
+      error.providerCode = providerCode || undefined;
       error.status = response.status;
-      error.body = errorBody;
       throw error;
     }
 

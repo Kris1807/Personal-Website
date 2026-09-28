@@ -1,5 +1,5 @@
-import { AssistantApiClient, AssistantApiError } from "./api-client.js";
-import { detectPreferredLanguage, getCopy, getSuggestedQuestions } from "./i18n.js";
+import { PortfolioSearchClient, PortfolioSearchError } from "./local-search-client.js?v=20260928-2";
+import { detectPreferredLanguage, getCopy, getSuggestedQuestions } from "./i18n.js?v=20260928-2";
 
 function slugify(value) {
   return String(value ?? "")
@@ -42,10 +42,9 @@ function splitParagraphs(text) {
 
 function getAssistantConfig() {
   return globalThis.__KRIS_ASSISTANT_CONFIG__ || {
-    apiUrl: "",
-    sessionStorageKey: "kris-assistant-session-v1",
-    languageStorageKey: "kris-assistant-language-v1",
-    fallbackLinks: []
+    knowledgeBaseUrl: "assistant/knowledge/search-index.json?v=20260928-2",
+    sessionStorageKey: "kris-portfolio-search-session-v2",
+    languageStorageKey: "kris-assistant-language-v1"
   };
 }
 
@@ -82,9 +81,9 @@ function normalizeMessage(entry) {
 }
 
 class PortfolioAssistant {
-  constructor({ apiClient = null } = {}) {
+  constructor({ searchClient = null } = {}) {
     this.config = getAssistantConfig();
-    this.apiClient = apiClient || new AssistantApiClient({ apiUrl: this.config.apiUrl });
+    this.searchClient = searchClient || new PortfolioSearchClient({ indexUrl: this.config.knowledgeBaseUrl });
     this.language = getLauncherLanguage(this.config);
     this.hasChosenLanguage = Boolean(window.localStorage.getItem(this.config.languageStorageKey));
     this.messages = [];
@@ -127,29 +126,34 @@ class PortfolioAssistant {
     const panel = createElement("aside", "assistant-panel", {
       role: "dialog",
       "aria-modal": "true",
-      "aria-labelledby": "assistant-title",
-      "aria-describedby": "assistant-subtitle"
+      "aria-labelledby": "assistant-title"
     });
 
     panel.innerHTML = `
       <div class="assistant-panel-frame">
         <header class="assistant-header">
           <div class="assistant-title-lockup">
-            <span class="assistant-kicker"></span>
             <h2 id="assistant-title"></h2>
-            <p id="assistant-subtitle" class="assistant-subtitle"></p>
           </div>
           <div class="assistant-header-controls">
             <div class="assistant-language-switch" role="group" aria-label="${copy.selectLanguageAria}">
               <button type="button" class="assistant-language-button" data-language="en">English</button>
               <button type="button" class="assistant-language-button" data-language="he">עברית</button>
             </div>
+            <details class="assistant-info">
+              <summary aria-label="About this assistant">i</summary>
+              <div class="assistant-info-popover">
+                <strong class="assistant-info-title"></strong>
+                <p class="assistant-disclosure-copy"></p>
+                <p class="assistant-disclosure-copy assistant-privacy-copy"></p>
+              </div>
+            </details>
             <button type="button" class="assistant-clear-button"></button>
             <button type="button" class="assistant-close-button" aria-label="${copy.closeAria}">&times;</button>
           </div>
         </header>
 
-        <div class="assistant-status-rail" aria-live="polite"></div>
+        <div class="assistant-status-rail" aria-live="polite" role="status"></div>
 
         <div class="assistant-body">
           <section class="assistant-language-screen">
@@ -172,16 +176,6 @@ class PortfolioAssistant {
               <div class="assistant-block-heading"></div>
               <div class="assistant-suggestions"></div>
             </section>
-            <section class="assistant-fallback-block" hidden>
-              <h3 class="assistant-fallback-title"></h3>
-              <p class="assistant-fallback-copy"></p>
-              <div class="assistant-fallback-links"></div>
-            </section>
-            <details class="assistant-disclosure">
-              <summary></summary>
-              <p class="assistant-disclosure-copy"></p>
-              <p class="assistant-disclosure-copy assistant-privacy-copy"></p>
-            </details>
           </section>
         </div>
 
@@ -203,7 +197,6 @@ class PortfolioAssistant {
     this.nodes.panel = panel;
     this.nodes.statusRail = panel.querySelector(".assistant-status-rail");
     this.nodes.title = panel.querySelector("#assistant-title");
-    this.nodes.subtitle = panel.querySelector("#assistant-subtitle");
     this.nodes.closeButton = panel.querySelector(".assistant-close-button");
     this.nodes.clearButton = panel.querySelector(".assistant-clear-button");
     this.nodes.languageButtons = Array.from(panel.querySelectorAll(".assistant-language-button"));
@@ -215,15 +208,13 @@ class PortfolioAssistant {
     this.nodes.conversation = panel.querySelector(".assistant-conversation");
     this.nodes.emptyTitle = panel.querySelector(".assistant-empty-title");
     this.nodes.emptyCopy = panel.querySelector(".assistant-empty-copy");
+    this.nodes.emptyState = panel.querySelector(".assistant-empty-state");
     this.nodes.messages = panel.querySelector(".assistant-messages");
     this.nodes.suggestionsHeading = panel.querySelector(".assistant-block-heading");
     this.nodes.suggestions = panel.querySelector(".assistant-suggestions");
-    this.nodes.fallbackBlock = panel.querySelector(".assistant-fallback-block");
-    this.nodes.fallbackTitle = panel.querySelector(".assistant-fallback-title");
-    this.nodes.fallbackCopy = panel.querySelector(".assistant-fallback-copy");
-    this.nodes.fallbackLinks = panel.querySelector(".assistant-fallback-links");
-    this.nodes.disclosure = panel.querySelector(".assistant-disclosure");
-    this.nodes.disclosureSummary = panel.querySelector(".assistant-disclosure summary");
+    this.nodes.suggestionsBlock = panel.querySelector(".assistant-suggestions-block");
+    this.nodes.disclosure = panel.querySelector(".assistant-info");
+    this.nodes.disclosureSummary = panel.querySelector(".assistant-info-title");
     this.nodes.disclosureCopy = panel.querySelector(".assistant-disclosure-copy");
     this.nodes.privacyCopy = panel.querySelector(".assistant-privacy-copy");
     this.nodes.form = panel.querySelector(".assistant-composer");
@@ -298,7 +289,6 @@ class PortfolioAssistant {
     }
 
     this.nodes.title.textContent = copy.title;
-    this.nodes.subtitle.textContent = copy.subtitle;
     this.nodes.languageKicker.textContent = copy.languageScreenKicker;
     this.nodes.languageTitle.textContent = copy.chooseLanguage;
     this.nodes.languageBody.textContent = copy.chooseLanguageBody;
@@ -307,6 +297,8 @@ class PortfolioAssistant {
     this.nodes.closeButton.setAttribute("aria-label", copy.closeAria);
     this.nodes.emptyTitle.textContent = copy.emptyTitle;
     this.nodes.emptyCopy.textContent = copy.emptyBody;
+    this.nodes.emptyState.hidden = this.messages.length > 0;
+    this.nodes.suggestionsBlock.hidden = this.messages.length > 0;
     this.nodes.suggestionsHeading.textContent = copy.suggestedTitle;
     this.nodes.disclosureSummary.textContent = copy.disclosureSummary;
     this.nodes.disclosureCopy.textContent = copy.disclosureBody;
@@ -314,8 +306,6 @@ class PortfolioAssistant {
     this.nodes.label.textContent = copy.promptLabel;
     this.nodes.textarea.placeholder = copy.promptPlaceholder;
     this.nodes.sendButton.textContent = copy.send;
-    this.nodes.fallbackTitle.textContent = copy.unavailableTitle;
-    this.nodes.fallbackCopy.textContent = copy.unavailableBody;
 
     this.nodes.languageButtons.forEach((button) => {
       const nextLanguage = button.dataset.language;
@@ -330,10 +320,8 @@ class PortfolioAssistant {
 
     this.nodes.languageScreen.hidden = this.hasChosenLanguage;
     this.nodes.conversation.hidden = !this.hasChosenLanguage;
-    this.nodes.form.hidden = !this.hasChosenLanguage || !this.apiClient.hasEndpoint();
-    this.nodes.fallbackBlock.hidden = this.apiClient.hasEndpoint();
+    this.nodes.form.hidden = !this.hasChosenLanguage;
 
-    this.renderFallbackLinks();
     this.renderSuggestions();
     this.renderMessages();
     this.updateStatus(this.isBusy ? copy.working : copy.readyPrompt);
@@ -341,26 +329,9 @@ class PortfolioAssistant {
     this.saveSession();
   }
 
-  renderFallbackLinks() {
-    this.nodes.fallbackLinks.innerHTML = "";
-    (this.config.fallbackLinks || []).forEach((entry) => {
-      const label = this.language === "he"
-        ? entry.label_he || entry.label || entry.label_en
-        : entry.label_en || entry.label || entry.label_he;
-
-      const link = createElement("a", "assistant-source-chip", {
-        href: entry.url,
-        text: label,
-        target: "_blank",
-        rel: "noreferrer noopener"
-      });
-      this.nodes.fallbackLinks.appendChild(link);
-    });
-  }
-
   renderSuggestions() {
     this.nodes.suggestions.innerHTML = "";
-    getSuggestedQuestions(this.language).slice(0, 6).forEach((question) => {
+    getSuggestedQuestions(this.language).slice(0, 3).forEach((question) => {
       const button = createElement("button", "assistant-suggestion", {
         type: "button",
         text: question,
@@ -371,6 +342,10 @@ class PortfolioAssistant {
   }
 
   renderMessages() {
+    const scrollContainer = this.nodes.conversation;
+    const previousTop = scrollContainer.scrollTop;
+    const previousHeight = scrollContainer.scrollHeight;
+    const wasNearBottom = previousHeight - previousTop - scrollContainer.clientHeight < 80;
     this.nodes.messages.innerHTML = "";
 
     if (this.messages.length === 0) {
@@ -391,8 +366,8 @@ class PortfolioAssistant {
             ? "אתם"
             : "You"
           : this.language === "he"
-            ? "העוזר"
-            : "Assistant"
+            ? "תוצאה"
+            : "Result"
       });
       const content = createElement("div", "assistant-message-copy");
       splitParagraphs(message.content).forEach((paragraph) => {
@@ -402,9 +377,9 @@ class PortfolioAssistant {
       article.append(label, content);
 
       if (Array.isArray(message.sources) && message.sources.length > 0) {
-        const footer = createElement("footer", "assistant-message-footer");
-        footer.appendChild(createElement("span", "assistant-message-footer-label", {
-          text: getCopy(this.language).sourceLabel
+        const footer = createElement("details", "assistant-message-footer");
+        footer.appendChild(createElement("summary", "assistant-message-footer-label", {
+          text: `${getCopy(this.language).sourceLabel} (${message.sources.length})`
         }));
 
         const chips = createElement("div", "assistant-source-list");
@@ -435,7 +410,7 @@ class PortfolioAssistant {
 
       if (Array.isArray(message.suggestedFollowUps) && message.suggestedFollowUps.length > 0) {
         const followUps = createElement("div", "assistant-followups");
-        message.suggestedFollowUps.slice(0, 3).forEach((entry) => {
+        message.suggestedFollowUps.slice(0, 2).forEach((entry) => {
           followUps.appendChild(
             createElement("button", "assistant-followup-button", {
               type: "button",
@@ -450,7 +425,12 @@ class PortfolioAssistant {
       this.nodes.messages.appendChild(article);
     });
 
-    this.nodes.messages.scrollTop = this.nodes.messages.scrollHeight;
+    if (this.shouldScrollToLatest || wasNearBottom || previousHeight === 0) {
+      scrollContainer.scrollTop = scrollContainer.scrollHeight;
+    } else {
+      scrollContainer.scrollTop = previousTop;
+    }
+    this.shouldScrollToLatest = false;
   }
 
   open(trigger = null) {
@@ -462,15 +442,8 @@ class PortfolioAssistant {
     this.render();
 
     window.requestAnimationFrame(() => {
-      if (this.hasChosenLanguage && this.apiClient.hasEndpoint()) {
+      if (this.hasChosenLanguage) {
         this.focusComposer();
-      } else if (this.hasChosenLanguage) {
-        const firstFallbackLink = this.nodes.fallbackLinks?.querySelector("a");
-        if (firstFallbackLink) {
-          firstFallbackLink.focus();
-        } else {
-          this.nodes.closeButton?.focus?.();
-        }
       } else {
         const firstOption = this.nodes.languageOptionButtons[0];
         firstOption?.focus();
@@ -558,7 +531,7 @@ class PortfolioAssistant {
   autoResizeTextarea() {
     if (!this.nodes.textarea) return;
     this.nodes.textarea.style.height = "auto";
-    const nextHeight = Math.min(this.nodes.textarea.scrollHeight, 168);
+    const nextHeight = Math.min(this.nodes.textarea.scrollHeight, 112);
     this.nodes.textarea.style.height = `${nextHeight}px`;
   }
 
@@ -609,6 +582,7 @@ class PortfolioAssistant {
 
   addMessage(entry) {
     this.messages.push(normalizeMessage(entry));
+    this.shouldScrollToLatest = true;
     this.renderMessages();
     this.saveSession();
   }
@@ -640,7 +614,7 @@ class PortfolioAssistant {
     this.render();
 
     try {
-      const response = await this.apiClient.ask({
+      const response = await this.searchClient.ask({
         language: this.language,
         message,
         history: this.getHistoryPayload(),
@@ -661,9 +635,9 @@ class PortfolioAssistant {
       });
       this.lastRetryTarget = "";
     } catch (error) {
-      const fallbackText = error instanceof AssistantApiError
+      const fallbackText = error instanceof PortfolioSearchError
         ? error.message
-        : getCopy(this.language).networkError;
+        : getCopy(this.language).searchError;
 
       this.addMessage({
         id: createMessageId("assistant"),

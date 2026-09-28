@@ -36,7 +36,7 @@ export function getServerConfig() {
   if (cachedConfig) return cachedConfig;
 
   const openAiKey = String(process.env.OPENAI_API_KEY ?? "").trim();
-  const mockMode = parseBoolean(process.env.KRIS_ASSISTANT_MOCK_MODE, !openAiKey) || !openAiKey;
+  const mockMode = parseBoolean(process.env.KRIS_ASSISTANT_MOCK_MODE, false);
 
   cachedConfig = {
     openAiKey,

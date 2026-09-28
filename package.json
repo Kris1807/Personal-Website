@@ -4,7 +4,6 @@
   "type": "module",
   "scripts": {
     "dev:site": "python3 -m http.server 8124",
-    "dev:api": "node assistant/scripts/dev-api.mjs",
     "build:knowledge": "node assistant/scripts/build-knowledge.mjs",
     "refresh:knowledge": "node assistant/scripts/refresh-public-knowledge.mjs",
     "test": "vitest run",

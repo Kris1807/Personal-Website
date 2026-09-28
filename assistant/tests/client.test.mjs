@@ -2,10 +2,9 @@
 import { beforeEach, describe, expect, it, vi } from "vitest";
 
 const assistantConfig = {
-  apiUrl: "http://127.0.0.1:8788/api/assistant",
-  sessionStorageKey: "kris-assistant-session-v1",
-  languageStorageKey: "kris-assistant-language-v1",
-  fallbackLinks: [{ label_en: "Resume PDF", label_he: "קובץ קורות החיים", url: "Kristian-Pitshugin-Resume.pdf" }]
+  knowledgeBaseUrl: "assistant/knowledge/search-index.json",
+  sessionStorageKey: "kris-portfolio-search-session-v2",
+  languageStorageKey: "kris-assistant-language-v1"
 };
 
 const flush = () => new Promise((resolve) => setTimeout(resolve, 0));
@@ -23,20 +22,20 @@ describe("assistant client", () => {
 
   it("renders in RTL when Hebrew is selected", async () => {
     const mod = await import("../client/assistant-client.js?rtl=" + Date.now());
-    const apiClient = { hasEndpoint: () => true, ask: vi.fn() };
-    const assistant = mod.bootAssistant({ apiClient });
+    const searchClient = { ask: vi.fn() };
+    const assistant = mod.bootAssistant({ searchClient });
 
     assistant.open();
     assistant.nodes.languageOptionButtons[1].click();
 
     expect(assistant.nodes.root.dir).toBe("rtl");
-    expect(assistant.nodes.title.textContent).toContain("כריס");
+    expect(assistant.nodes.title.textContent).toContain("חיפוש");
   });
 
   it("keeps the composer hidden until a language is chosen", async () => {
     const mod = await import("../client/assistant-client.js?chooser=" + Date.now());
-    const apiClient = { hasEndpoint: () => true, ask: vi.fn() };
-    const assistant = mod.bootAssistant({ apiClient });
+    const searchClient = { ask: vi.fn() };
+    const assistant = mod.bootAssistant({ searchClient });
 
     assistant.open();
 
@@ -46,41 +45,44 @@ describe("assistant client", () => {
     expect(assistant.nodes.languageKicker.textContent).toBe("Language setup");
   });
 
-  it("renders validated source chips after a successful answer", async () => {
+  it("renders compact starters, follow-ups, and collapsed sources", async () => {
     const mod = await import("../client/assistant-client.js?source=" + Date.now());
-    const apiClient = {
-      hasEndpoint: () => true,
+    const searchClient = {
       ask: vi.fn().mockResolvedValue({
         answer: "Kris studied computer science and artificial intelligence at the University of Georgia.",
         supported: true,
         language: "en",
         sources: [{ id: "source-portfolio-education-ms-ai", label: "Portfolio — M.S. in Artificial Intelligence", url: "education.html#education-ms-ai" }],
-        suggestedFollowUps: ["Which projects connect to AI?"]
+        suggestedFollowUps: ["Which projects connect to AI?", "What was his degree?", "Where did he study?"]
       })
     };
-    const assistant = mod.bootAssistant({ apiClient });
+    const assistant = mod.bootAssistant({ searchClient });
 
     assistant.open();
     assistant.nodes.languageOptionButtons[0].click();
+    expect(document.querySelectorAll(".assistant-suggestion")).toHaveLength(3);
     assistant.nodes.textarea.value = "What did Kris study?";
     assistant.handleSubmit();
     await flush();
     await flush();
 
-    expect(apiClient.ask).toHaveBeenCalledTimes(1);
+    expect(searchClient.ask).toHaveBeenCalledTimes(1);
     expect(document.querySelector('.assistant-source-chip[href*="education.html#education-ms-ai"]')).not.toBeNull();
+    expect(document.querySelector(".assistant-message-footer").open).toBe(false);
+    expect(document.querySelectorAll(".assistant-followup-button")).toHaveLength(2);
+    expect(assistant.nodes.emptyState.hidden).toBe(true);
+    expect(assistant.nodes.suggestionsBlock.hidden).toBe(true);
   });
 
-  it("shows fallback links when there is no endpoint", async () => {
-    const mod = await import("../client/assistant-client.js?fallback=" + Date.now());
-    const apiClient = { hasEndpoint: () => false, ask: vi.fn() };
-    const assistant = mod.bootAssistant({ apiClient });
+  it("keeps search available without an API endpoint", async () => {
+    const mod = await import("../client/assistant-client.js?local=" + Date.now());
+    const searchClient = { ask: vi.fn() };
+    const assistant = mod.bootAssistant({ searchClient });
 
     assistant.open();
     assistant.nodes.languageOptionButtons[0].click();
 
-    expect(assistant.nodes.fallbackBlock.hidden).toBe(false);
-    expect(assistant.nodes.form.hidden).toBe(true);
-    expect(assistant.nodes.fallbackLinks.textContent).toContain("Resume");
+    expect(assistant.nodes.form.hidden).toBe(false);
+    expect(document.querySelector(".assistant-fallback-block")).toBeNull();
   });
 });

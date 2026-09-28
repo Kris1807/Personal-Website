@@ -1,118 +1,110 @@
 const COPY = {
   en: {
     direction: "ltr",
-    launcher: "Ask about Kris",
-    mobileLauncher: "Ask about Kris",
-    title: "Ask about Kris",
-    subtitle:
-      "Explore Kris’s engineering work, AI studies, projects, and competitive swimming career through verified portfolio and public sources.",
+    launcher: "Search Kris’s portfolio",
+    mobileLauncher: "Search Kris’s portfolio",
+    title: "Portfolio search",
     languageLabel: "Language",
     languageScreenKicker: "Language setup",
     chooseLanguage: "Choose your language",
     chooseLanguageBody:
-      "This assistant answers only from Kris’s portfolio and approved public sources, with source links included for verification.",
+      "Search Kris’s portfolio and approved public facts in English or Hebrew. Every answer includes its source when available.",
     languageEnglish: "English",
     languageHebrew: "עברית",
     newChat: "Clear",
     close: "Close",
     send: "Send",
     retry: "Retry",
-    working: "Thinking…",
-    readyPrompt: "Grounded answers only",
-    promptLabel: "Ask a verified question about Kris",
-    promptPlaceholder: "Ask about Kris’s work, education, projects, leadership, or swimming career…",
-    emptyTitle: "Start with a grounded question",
+    working: "Searching…",
+    readyPrompt: "Local portfolio search",
+    promptLabel: "Search Kris’s portfolio",
+    promptPlaceholder: "Ask about Kris…",
+    emptyTitle: "Search the portfolio",
     emptyBody:
-      "You can ask about Kris’s software engineering background, AI studies, student-athlete experience, leadership, projects, education, or competitive swimming record.",
+      "Ask about a project, technology, degree, role, date, contact detail, or swimming achievement.",
     suggestedTitle: "Suggested questions",
     sourceLabel: "Sources",
-    disclosureSummary: "How the assistant works",
+    disclosureSummary: "About portfolio search",
     disclosureBody:
-      "This assistant uses information from Kris’s portfolio and approved public sources, including Wikipedia and Wikidata. AI responses can still contain mistakes, so source links are provided for verification.",
+      "This feature searches a prebuilt index of Kris’s portfolio and verified Hebrew Wikipedia facts. It uses curated answer templates and does not contact an AI service.",
     privacySummary: "Privacy note",
     privacyBody:
-      "Questions stay in the current browsing session only. The assistant does not ask for sensitive personal information.",
-    unavailableTitle: "Assistant unavailable",
-    unavailableBody:
-      "The AI assistant is temporarily offline. The rest of the portfolio still works, and you can open these links directly in the meantime.",
+      "Questions and conversation context stay in this browser session. No question is sent to a backend service.",
     languageRestart: "Language changed. Starting a fresh conversation.",
     unsupportedTitle: "Need a better angle?",
     unsupportedBody:
       "Try asking about Kris’s engineering work, AI education, projects, swimming achievements, scholarships, or leadership experience.",
-    networkError: "The request could not be completed. Please try again in a moment.",
-    focusTitle: "Assistant conversation",
+    searchError: "The portfolio search data could not be loaded. Please refresh and try again.",
+    focusTitle: "Portfolio search conversation",
     clearConfirmation: "Conversation cleared.",
-    openAria: "Open the Kris assistant",
-    closeAria: "Close the Kris assistant",
+    openAria: "Open portfolio search",
+    closeAria: "Close portfolio search",
     clearAria: "Clear conversation",
-    selectLanguageAria: "Choose assistant language"
+    selectLanguageAria: "Choose search language"
   },
   he: {
     direction: "rtl",
-    launcher: "שאלו על כריס",
-    mobileLauncher: "שאלו על כריס",
-    title: "שאלו על כריס",
-    subtitle:
-      "גלו מידע על הניסיון של כריס בהנדסת תוכנה, לימודי בינה מלאכותית, פרויקטים וקריירת השחייה התחרותית שלו, על בסיס מקורות מאומתים.",
+    launcher: "חיפוש בתיק העבודות",
+    mobileLauncher: "חיפוש בתיק העבודות",
+    title: "חיפוש בפורטפוליו",
     languageLabel: "שפה",
     languageScreenKicker: "בחירת שפה",
     chooseLanguage: "בחרו שפה",
     chooseLanguageBody:
-      "העוזר הזה משיב רק על סמך תיק העבודות של כריס ומקורות ציבוריים מאושרים, עם קישורי מקור לצורך אימות.",
+      "חפשו בתיק העבודות של כריס ובעובדות ציבוריות מאושרות בעברית או באנגלית. לכל תשובה מצורף מקור כשאפשר.",
     languageEnglish: "English",
     languageHebrew: "עברית",
     newChat: "ניקוי",
     close: "סגירה",
     send: "שליחה",
     retry: "נסו שוב",
-    working: "חושב…",
-    readyPrompt: "תשובות מאומתות בלבד",
-    promptLabel: "שאלו שאלה מאומתת על כריס",
-    promptPlaceholder: "שאלו על העבודה של כריס, ההשכלה, הפרויקטים, המנהיגות או קריירת השחייה…",
-    emptyTitle: "התחילו עם שאלה מבוססת",
+    working: "מחפש…",
+    readyPrompt: "חיפוש מקומי בפורטפוליו",
+    promptLabel: "חיפוש בתיק העבודות של כריס",
+    promptPlaceholder: "שאלו על כריס…",
+    emptyTitle: "חיפוש בתיק העבודות",
     emptyBody:
-      "אפשר לשאול על הרקע של כריס בהנדסת תוכנה, לימודי הבינה המלאכותית, חוויית הספורטאי-סטודנט, המנהיגות, הפרויקטים, ההשכלה או הישגי השחייה שלו.",
+      "אפשר לשאול על פרויקט, טכנולוגיה, תואר, תפקיד, תאריך, פרטי קשר או הישג בשחייה.",
     suggestedTitle: "שאלות מוצעות",
     sourceLabel: "מקורות",
-    disclosureSummary: "איך העוזר עובד",
+    disclosureSummary: "על החיפוש בפורטפוליו",
     disclosureBody:
-      "העוזר משיב על סמך מידע מתיק העבודות של כריס וממקורות ציבוריים מאושרים, כולל ויקיפדיה וויקינתונים. תשובות AI עדיין עלולות לכלול שגיאות, ולכן מצורפים קישורי מקור לצורך אימות.",
+      "הכלי מחפש באינדקס מוכן מראש של תיק העבודות של כריס ושל עובדות מאומתות מוויקיפדיה העברית. הוא משתמש בתבניות תשובה ערוכות ואינו פונה לשירות AI.",
     privacySummary: "הערת פרטיות",
     privacyBody:
-      "השאלות נשמרות רק במהלך הסשן הנוכחי בדפדפן. העוזר לא מבקש מידע אישי רגיש.",
-    unavailableTitle: "העוזר אינו זמין כרגע",
-    unavailableBody:
-      "העוזר מבוסס ה-AI אינו זמין כרגע. שאר תיק העבודות ממשיך לפעול, ואפשר לפתוח בינתיים את הקישורים הישירים האלו.",
+      "השאלות והקשר השיחה נשמרים רק בסשן הנוכחי בדפדפן. שום שאלה לא נשלחת לשרת יישומים.",
     languageRestart: "השפה הוחלפה. מתחילים שיחה חדשה.",
     unsupportedTitle: "רוצים לחדד את השאלה?",
     unsupportedBody:
       "נסו לשאול על העבודה ההנדסית של כריס, לימודי ה-AI, הפרויקטים, הישגי השחייה, המלגות או הניסיון המנהיגותי שלו.",
-    networkError: "לא היה אפשר להשלים את הבקשה. נסו שוב בעוד רגע.",
-    focusTitle: "שיחת העוזר",
+    searchError: "לא היה אפשר לטעון את נתוני החיפוש. רעננו את העמוד ונסו שוב.",
+    focusTitle: "שיחת החיפוש בפורטפוליו",
     clearConfirmation: "השיחה נוקתה.",
-    openAria: "פתחו את העוזר של כריס",
-    closeAria: "סגרו את העוזר של כריס",
+    openAria: "פתיחת החיפוש בפורטפוליו",
+    closeAria: "סגירת החיפוש בפורטפוליו",
     clearAria: "ניקוי השיחה",
-    selectLanguageAria: "בחירת שפת העוזר"
+    selectLanguageAria: "בחירת שפת החיפוש"
   }
 };
 
 const SUGGESTIONS = {
   en: [
-    "What is Kris’s background in software engineering?",
+    "What are Kris’s most technically interesting projects?",
+    "How does Roster Lab score swimmers?",
     "Which AI and machine-learning projects has Kris worked on?",
-    "How did competitive swimming shape his professional approach?",
-    "What did Kris study at the University of Georgia?",
     "What are his major swimming achievements?",
-    "Which project best demonstrates his full-stack experience?"
+    "What did Kris study at the University of Georgia?",
+    "What does his facial-expression recognition project do?",
+    "What is Kris’s thesis about?"
   ],
   he: [
-    "מהו הרקע של כריס בהנדסת תוכנה?",
+    "מהם הפרויקטים המעניינים ביותר מבחינה טכנית?",
+    "איך Roster Lab מדרג שחיינים?",
     "על אילו פרויקטים בבינה מלאכותית ובלמידת מכונה הוא עבד?",
-    "כיצד השחייה התחרותית השפיעה על הגישה המקצועית שלו?",
+    "מהם הישגי השחייה המרכזיים של כריס?",
     "מה כריס למד באוניברסיטת ג׳ורג׳יה?",
-    "מהם ההישגים המרכזיים שלו בשחייה?",
-    "איזה פרויקט מדגים בצורה הטובה ביותר את הניסיון שלו בפיתוח מלא?"
+    "מה עושה פרויקט זיהוי הבעות הפנים שלו?",
+    "על מה התזה של כריס?"
   ]
 };
 

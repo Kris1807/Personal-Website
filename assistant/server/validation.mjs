@@ -93,7 +93,7 @@ export function parseModelPayload(rawText, allowedSourceIds, language = "en") {
 
   const supported = Boolean(parsed.supported);
   const suggestedFollowUps = Array.isArray(parsed.suggested_follow_ups)
-    ? parsed.suggested_follow_ups.map(trimString).filter(Boolean).slice(0, 3)
+    ? parsed.suggested_follow_ups.map(trimString).filter(Boolean).slice(0, 2)
     : [];
 
   const sourceIds = Array.isArray(parsed.source_ids)

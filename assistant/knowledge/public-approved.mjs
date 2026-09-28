@@ -11,7 +11,7 @@ export const publicApprovedFacts = [
     source_id: "source-wikipedia-biography",
     source_name: "Hebrew Wikipedia",
     source_section: "Biography",
-    last_verified: "2026-07-20",
+    last_verified: "2026-09-27",
     confidence: "public_reference",
     is_sensitive: false,
     keywords_en: ["born", "Israeli swimmer", "biography", "Kiryat Ata"],
@@ -29,7 +29,7 @@ export const publicApprovedFacts = [
     source_id: "source-wikipedia-competitive-record",
     source_name: "Hebrew Wikipedia",
     source_section: "Competitive record",
-    last_verified: "2026-07-20",
+    last_verified: "2026-09-27",
     confidence: "public_reference",
     is_sensitive: false,
     keywords_en: ["European Championships", "bronze", "Belgrade", "Israeli champion", "records", "breaststroke"],
@@ -47,28 +47,10 @@ export const publicApprovedFacts = [
     source_id: "source-wikipedia-competitive-record",
     source_name: "Hebrew Wikipedia",
     source_section: "Competitive record",
-    last_verified: "2026-07-20",
+    last_verified: "2026-09-27",
     confidence: "public_reference",
     is_sensitive: false,
     keywords_en: ["World Championships", "semifinals", "2022", "10th", "14th"],
     keywords_he: ["אליפות העולם", "חצי גמר", "2022", "מקום 10", "מקום 14"]
-  },
-  {
-    id: "public-wikidata-identity",
-    category: "public",
-    page: "public",
-    title: "Wikidata identity facts",
-    content_en:
-      "The linked Wikidata record lists Kristian Pitshugin with the English alias Kris Pitshugin, identifies him as an Israeli swimmer, and ties the public record to item Q106348288.",
-    content_he:
-      "הרשומה המקושרת בוויקינתונים מציינת את Kristian Pitshugin עם הכינוי האנגלי Kris Pitshugin, מזהה אותו כשחיין ישראלי, ומקשרת את הרישום הציבורי לפריט Q106348288.",
-    source_id: "source-wikidata-identity",
-    source_name: "Wikidata",
-    source_section: "Identity",
-    last_verified: "2026-07-20",
-    confidence: "public_reference",
-    is_sensitive: false,
-    keywords_en: ["Wikidata", "Q106348288", "Kris Pitshugin", "alias", "Israeli swimmer"],
-    keywords_he: ["ויקינתונים", "Q106348288", "כריס פיצ'וגין", "כינוי", "שחיין ישראלי"]
   }
 ];

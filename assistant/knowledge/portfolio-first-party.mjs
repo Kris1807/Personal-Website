@@ -14,6 +14,8 @@ export const portfolioFirstParty = [
     last_verified: "2026-07-20",
     confidence: "first_party",
     is_sensitive: false,
+    aliases: ["Kris's software engineering background", "software engineering background", "engineering background"],
+    topics: ["software engineering", "full-stack product engineering", "AI applications"],
     keywords_en: ["software engineering", "AI student", "UGA", "Double Dawgs", "portfolio", "full-stack"],
     keywords_he: ["הנדסת תוכנה", "בינה מלאכותית", "אוניברסיטת ג׳ורג׳יה", "Double Dawgs", "פול סטאק", "תיק עבודות"]
   },
@@ -86,6 +88,8 @@ export const portfolioFirstParty = [
     last_verified: "2026-07-20",
     confidence: "first_party",
     is_sensitive: false,
+    aliases: ["IntelliVerse", "AI and App Development Intern"],
+    topics: ["software engineering", "AI applications", "application development"],
     keywords_en: ["IntelliVerse", "internship", "AI features", "workflow design", "testing"],
     keywords_he: ["IntelliVerse", "התמחות", "פיצ'רי AI", "תהליכי עבודה", "בדיקות"]
   },
@@ -104,6 +108,8 @@ export const portfolioFirstParty = [
     last_verified: "2026-07-20",
     confidence: "first_party",
     is_sensitive: false,
+    aliases: ["UGA Swimming app", "roster analysis app", "recruiting app"],
+    topics: ["software engineering", "full-stack development", "athlete operations"],
     keywords_en: ["UGA Swimming", "graduate assistant", "roster analysis", "recruiting", "staff tools"],
     keywords_he: ["UGA", "שחייה", "עוזר הוראה", "ניתוח סגל", "גיוס", "כלי צוות"]
   },
@@ -122,6 +128,8 @@ export const portfolioFirstParty = [
     last_verified: "2026-07-20",
     confidence: "first_party",
     is_sensitive: false,
+    aliases: ["CoolDawgs", "Cool Dawgs", "wearable sensor project"],
+    topics: ["software engineering", "mobile development", "research"],
     keywords_en: ["CoolDawgs", "research", "React Native", "Bluetooth", "CURO", "best paper"],
     keywords_he: ["CoolDawgs", "מחקר", "React Native", "בלוטות'", "CURO", "מאמר מצטיין"]
   },
@@ -140,6 +148,9 @@ export const portfolioFirstParty = [
     last_verified: "2026-07-20",
     confidence: "first_party",
     is_sensitive: false,
+    aliases: ["Roster Lab", "Roster Lab App"],
+    topics: ["full-stack project", "athlete operations", "recruiting"],
+    technologies: ["Next.js", "TypeScript", "Tailwind CSS", "Prisma", "PostgreSQL"],
     keywords_en: ["Roster Lab", "recruiting", "roster", "Next.js", "Prisma", "PostgreSQL", "athlete operations"],
     keywords_he: ["Roster Lab", "גיוס", "סגל", "Next.js", "Prisma", "PostgreSQL", "תפעול ספורטאים"]
   },
@@ -158,6 +169,9 @@ export const portfolioFirstParty = [
     last_verified: "2026-07-20",
     confidence: "first_party",
     is_sensitive: false,
+    aliases: ["Patient Record App", "patient records app", "KeePatients"],
+    topics: ["full-stack project", "healthcare workflows"],
+    technologies: ["React", "Next.js", "Supabase Auth", "PostgreSQL", "PDF export"],
     keywords_en: ["Patient Record", "healthcare", "Supabase", "RLS", "PDF export", "clinical workflow"],
     keywords_he: ["Patient Record", "בריאות", "Supabase", "אבטחת שורות", "PDF", "תהליך קליני"]
   },
@@ -165,19 +179,22 @@ export const portfolioFirstParty = [
     id: "portfolio-project-cinema",
     category: "projects",
     page: "projects",
-    title: "Cinema Ticketing Website",
+    title: "Film-Hub — Cinema Ticketing Website",
     content_en:
-      "Cinema Ticketing Website is a booking system focused on dynamic seat state, temporary holds, and concurrency-safe reservations. The portfolio describes a Django-based product that protects inventory accuracy while preserving a responsive user flow.",
+      "Film-Hub, listed in the portfolio as Cinema Ticketing Website, is a booking system built with Django, JavaScript, and Supabase. Its functionality includes dynamic seat state, temporary holds, booking logic, and concurrency-safe reservations.",
     content_he:
-      "Cinema Ticketing Website הוא מערכת הזמנת כרטיסים שמתמקדת במצב מושבים דינמי, החזקות זמניות והזמנות בטוחות תחת עומס במקביל. לפי תיק העבודות, זהו מוצר מבוסס Django ששומר על דיוק המלאי ועדיין מספק חוויית משתמש מהירה.",
+      "Film-Hub, שמופיע בתיק העבודות בשם Cinema Ticketing Website, הוא מערכת הזמנת כרטיסים שנבנתה עם Django, JavaScript ו-Supabase. הפונקציונליות שלה כוללת מצב מושבים דינמי, החזקות זמניות, לוגיקת הזמנות והזמנות בטוחות תחת עומס במקביל.",
     source_id: "source-portfolio-project-cinema",
     source_name: "Portfolio",
     source_section: "Projects",
     last_verified: "2026-07-20",
     confidence: "first_party",
     is_sensitive: false,
-    keywords_en: ["cinema", "ticketing", "booking", "Django", "concurrency", "seats"],
-    keywords_he: ["קולנוע", "כרטיסים", "הזמנות", "Django", "קונקרנציה", "מושבים"]
+    aliases: ["Film-Hub", "Film Hub", "Cinema Ticketing Website", "film-hub-theta"],
+    topics: ["full-stack project", "booking system", "cinema ticketing"],
+    technologies: ["Django", "JavaScript", "Supabase"],
+    keywords_en: ["Film-Hub", "Film Hub", "cinema", "ticketing", "booking", "Django", "JavaScript", "Supabase", "concurrency", "seats", "technologies", "tech stack"],
+    keywords_he: ["Film-Hub", "Film Hub", "קולנוע", "כרטיסים", "הזמנות", "Django", "JavaScript", "Supabase", "קונקרנציה", "מושבים", "טכנולוגיות"]
   },
   {
     id: "portfolio-project-docompare",
@@ -194,6 +211,9 @@ export const portfolioFirstParty = [
     last_verified: "2026-07-20",
     confidence: "first_party",
     is_sensitive: false,
+    aliases: ["DoCompare", "Do Compare"],
+    topics: ["full-stack project", "document intelligence"],
+    technologies: ["Next.js", "Supabase", "File processing"],
     keywords_en: ["DoCompare", "documents", "comparison", "PDF", "DOCX", "protected access"],
     keywords_he: ["DoCompare", "מסמכים", "השוואה", "PDF", "DOCX", "גישה מוגנת"]
   },
@@ -203,17 +223,102 @@ export const portfolioFirstParty = [
     page: "projects",
     title: "CNN Project",
     content_en:
-      "CNN Project is an applied AI and computer-vision build focused on model training, evaluation, and interpretability. The portfolio mentions dataset handling, iterative performance improvement, and Grad-CAM style visualization.",
+      "The facial-expression recognition project is a real-time computer-vision application that classifies seven expressions from uploaded images or a live webcam feed. It includes image preprocessing, model training and held-out evaluation, confidence-ranked predictions, and optional Grad-CAM views for interpreting the model's focus.",
     content_he:
-      "פרויקט ה-CNN הוא פרויקט יישומי בבינה מלאכותית ובראייה ממוחשבת שמתמקד באימון מודל, הערכה ופרשנות. תיק העבודות מזכיר טיפול בנתונים, שיפור ביצועים איטרטיבי והמחשות בסגנון Grad-CAM.",
+      "פרויקט זיהוי הבעות הפנים הוא יישום ראייה ממוחשבת בזמן אמת שמסווג שבע הבעות מתמונות שהועלו או מווידאו חי ממצלמת רשת. הוא כולל עיבוד מקדים של תמונות, אימון והערכה על סט בדיקה, תחזיות מדורגות לפי ביטחון ותצוגות Grad-CAM אופציונליות לפרשנות מוקד המודל.",
     source_id: "source-portfolio-project-cnn",
     source_name: "Portfolio",
     source_section: "Projects",
     last_verified: "2026-07-20",
     confidence: "first_party",
     is_sensitive: false,
-    keywords_en: ["CNN", "computer vision", "AI", "deep learning", "Grad-CAM", "training"],
-    keywords_he: ["CNN", "ראייה ממוחשבת", "בינה מלאכותית", "למידה עמוקה", "Grad-CAM", "אימון"]
+    aliases: ["CNN Project", "facial-expression recognition", "emotion classification", "computer vision project", "machine-learning project", "machine learning project"],
+    topics: ["AI project", "machine learning", "computer vision"],
+    technologies: ["Python", "CNNs", "Model training", "Evaluation", "Grad-CAM"],
+    keywords_en: ["CNN", "computer vision", "AI", "deep learning", "facial expression", "emotion classification", "webcam", "live camera", "real-time inference", "confidence", "Grad-CAM", "training", "evaluation"],
+    keywords_he: ["CNN", "ראייה ממוחשבת", "בינה מלאכותית", "למידה עמוקה", "הבעות פנים", "סיווג רגשות", "מצלמה", "זמן אמת", "ביטחון", "Grad-CAM", "אימון", "הערכה"]
+  },
+  {
+    id: "repository-roster-lab-scoring",
+    category: "projects",
+    page: "projects",
+    title: "Roster Lab performance scoring",
+    content_en:
+      "Roster Lab scores swimmers with an event-normalized Competitive Fitness model. It uses SCY benchmarks based on NCAA Division I records, qualification standards, and multi-year Top 3, Top 8, and Top 16 placement cutoffs; SCM and LCM swims use World Aquatics benchmarks instead of being converted to SCY. Each swimmer's score averages the strongest three eligible individual events, with missing events excluded rather than treated as zero.",
+    content_he:
+      "Roster Lab מדרג שחיינים באמצעות מודל Competitive Fitness מנורמל לפי משחה. זמני SCY מושווים לשיאי NCAA Division I, לתקני העפלה ולספי Top 3, Top 8 ו-Top 16 רב-שנתיים; זמני SCM ו-LCM מושווים למדדי World Aquatics במקום להיות מומרים ל-SCY. הציון של כל שחיין הוא ממוצע של שלושת המשחים האישיים החזקים ביותר שניתנים לניקוד, ונתונים חסרים אינם נחשבים לאפס.",
+    source_id: "source-repo-roster-lab",
+    source_name: "Roster Lab repository",
+    source_section: "README — Scoring model",
+    last_verified: "2026-09-28",
+    confidence: "first_party",
+    is_sensitive: false,
+    aliases: ["Roster Lab scoring", "Competitive Fitness", "swimmer scoring", "sports analytics software", "ranking algorithms"],
+    topics: ["sports analytics", "performance normalization", "ranking algorithms", "swimming data"],
+    technologies: ["Next.js", "TypeScript", "PostgreSQL", "Prisma", "Recharts"],
+    keywords_en: ["Roster Lab", "score swimmers", "SCY", "SCM", "LCM", "NCAA", "A cut", "Top 3", "Top 8", "Top 16", "records", "benchmarks", "normalize", "ranking", "sports analytics"],
+    keywords_he: ["Roster Lab", "ניקוד שחיינים", "SCY", "SCM", "LCM", "NCAA", "שיאים", "מדדים", "נרמול", "דירוג", "אנליטיקת ספורט"]
+  },
+  {
+    id: "repository-thesis-or-staffing",
+    category: "projects",
+    page: "education",
+    title: "M.S. thesis — operating-room staffing optimization",
+    content_en:
+      "Kris's M.S. thesis system addresses six-week operating-room staffing with coverage-first, surrogate-assisted NSGA-II. It builds schedules under hard constraints, then explores Pareto tradeoffs among workload imbalance, fatigue risk, recovery quality, and worker preference violations; selected and final policies receive exact schedule evaluations.",
+    content_he:
+      "מערכת התזה של כריס עוסקת בשיבוץ כוח אדם לחדרי ניתוח לאורך שישה שבועות באמצעות NSGA-II בסיוע מודל חלופי ותעדוף כיסוי. המערכת בונה סידורים תחת אילוצים קשיחים ולאחר מכן בוחנת פשרות פארטו בין חוסר איזון בעומס, סיכון לעייפות, איכות התאוששות והפרת העדפות עובדים; מדיניות נבחרת והאוכלוסייה הסופית נבדקות בהערכה מדויקת.",
+    source_id: "source-repo-thesis-or",
+    source_name: "OR staffing thesis repository",
+    source_section: "README — System at a glance",
+    last_verified: "2026-09-28",
+    confidence: "first_party",
+    is_sensitive: false,
+    aliases: ["Kris's thesis", "MS thesis", "operating-room staffing", "OR staffing", "physician scheduling", "clinical worker scheduling", "NSGA-II"],
+    topics: ["multi-objective optimization", "evolutionary computation", "healthcare scheduling", "surrogate-assisted optimization"],
+    keywords_en: ["thesis", "research", "optimization", "evolutionary algorithms", "NSGA-II", "operating room", "staffing", "scheduling", "Pareto", "fairness", "fatigue", "recovery", "preferences", "constraints", "surrogate"],
+    keywords_he: ["תזה", "מחקר", "אופטימיזציה", "אלגוריתמים אבולוציוניים", "NSGA-II", "חדרי ניתוח", "שיבוץ", "פארטו", "הוגנות", "עייפות", "התאוששות", "העדפות", "אילוצים"]
+  },
+  {
+    id: "repository-medgemma-grounding",
+    category: "projects",
+    page: "projects",
+    title: "MedGemma visual-grounding research",
+    content_en:
+      "The MedGemma project is a research scaffold for testing visual grounding in a medical vision-language model. Its implemented patch-occlusion pipeline is designed around CheXlocalize chest X-rays, radiologist-drawn pleural-effusion contours, signed influence maps, spatial nulls, and patient-cluster bootstrap intervals. The repository explicitly notes that real-data grounding experiments have not yet been run.",
+    content_he:
+      "פרויקט MedGemma הוא תשתית מחקר לבדיקת grounding חזותי במודל רפואי משולב ראייה ושפה. צינור ה-patch occlusion הממומש מיועד לצילומי חזה מ-CheXlocalize, לקווי מתאר של תפליט פלאורלי שסומנו בידי רדיולוגים, למפות השפעה חתומות, לבקרות מרחביות ולרווחי סמך באתחול לפי אשכולות מטופלים. המאגר מציין במפורש שניסויי grounding על נתונים אמיתיים עדיין לא הורצו.",
+    source_id: "source-repo-medgemma",
+    source_name: "MedGemma grounding repository",
+    source_section: "README — Patch-occlusion grounding",
+    last_verified: "2026-09-28",
+    confidence: "first_party",
+    is_sensitive: false,
+    aliases: ["MedGemma", "medical AI project", "medical vision-language model", "visual grounding", "CheXlocalize", "patch occlusion"],
+    topics: ["medical AI", "vision-language models", "interpretability", "visual grounding"],
+    technologies: ["Python", "PyTorch", "Hugging Face Transformers"],
+    keywords_en: ["MedGemma", "medical AI", "vision language", "chest X-ray", "CheXlocalize", "pleural effusion", "radiologist", "visual grounding", "patch occlusion", "causal influence", "interpretability", "PyTorch", "Hugging Face"],
+    keywords_he: ["MedGemma", "בינה מלאכותית רפואית", "מודל ראייה ושפה", "צילום חזה", "CheXlocalize", "תפליט פלאורלי", "רדיולוג", "grounding חזותי", "patch occlusion", "פרשנות", "PyTorch", "Hugging Face"]
+  },
+  {
+    id: "repository-malware-coevolution",
+    category: "projects",
+    page: "projects",
+    title: "Malware attacker-defender coevolution",
+    content_en:
+      "Kris also worked on an evolutionary-computation research project for malware detection. Using static malware feature data such as EMBER, the project coevolves attacker candidates that mutate features to evade detection and defender candidates that adapt their classifications, creating an adversarial evaluation loop without generating executable malware.",
+    content_he:
+      "כריס עבד גם על פרויקט מחקר בחישוב אבולוציוני לזיהוי נוזקות. באמצעות נתוני מאפיינים סטטיים של נוזקות כגון EMBER, הפרויקט מפתח במקביל מועמדי תקיפה שמשנים מאפיינים כדי לחמוק מזיהוי ומועמדי הגנה שמתאימים את הסיווג שלהם, וכך יוצר לולאת הערכה יריבותית בלי לייצר נוזקה שניתנת להרצה.",
+    source_id: "source-repo-malware-coevolution",
+    source_name: "Malware coevolution repository",
+    source_section: "Research question and abstract",
+    last_verified: "2026-09-28",
+    confidence: "first_party",
+    is_sensitive: false,
+    aliases: ["malware coevolution", "EA in Cyber", "evolutionary computation malware", "attacker defender coevolution"],
+    topics: ["evolutionary computation", "adversarial optimization", "malware detection"],
+    keywords_en: ["malware", "cybersecurity", "coevolution", "attacker", "defender", "EMBER", "evolutionary computation", "genetic", "adversarial", "detection"],
+    keywords_he: ["נוזקה", "סייבר", "קו-אבולוציה", "תוקף", "מגן", "EMBER", "חישוב אבולוציוני", "גנטי", "יריבותי", "זיהוי"]
   },
   {
     id: "portfolio-project-website",
@@ -356,6 +461,9 @@ export const portfolioFirstParty = [
     last_verified: "2026-07-20",
     confidence: "first_party",
     is_sensitive: false,
+    aliases: ["European medal", "European Championships bronze", "Israel National Team"],
+    topics: ["international swimming", "European Championships", "medal"],
+    dates: ["2024", "2022"],
     keywords_en: ["Israel National Team", "European Championships", "World Championships", "relay records"],
     keywords_he: ["נבחרת ישראל", "אליפות אירופה", "אליפות העולם", "שיאי שליחים"]
   },
@@ -374,6 +482,8 @@ export const portfolioFirstParty = [
     last_verified: "2026-07-20",
     confidence: "first_party",
     is_sensitive: false,
+    aliases: ["Greater Jerusalem Swimming Club", "Jerusalem swimming club"],
+    topics: ["club swimming", "Israeli records", "Israeli championships"],
     keywords_en: ["Greater Jerusalem", "club", "Israeli record", "Israeli champion"],
     keywords_he: ["ירושלים רבתי", "מועדון", "שיא ישראל", "אלוף ישראל"]
   }

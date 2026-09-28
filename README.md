@@ -1,6 +1,6 @@
 # Kristian Pitshugin Portfolio
 
-Personal portfolio website for Kristian "Kris" Pitshugin, now extended with a secure bilingual AI assistant grounded only in approved portfolio and public-reference sources.
+Personal portfolio website for Kristian "Kris" Pitshugin, including a bilingual client-side search assistant grounded only in approved portfolio and public-reference sources.
 
 ## Live portfolio
 
@@ -10,49 +10,26 @@ Personal portfolio website for Kristian "Kris" Pitshugin, now extended with a se
 ## Stack
 
 - Static frontend: HTML, CSS, vanilla JavaScript
-- Secure assistant backend: serverless-compatible Node endpoint at `api/assistant.mjs`
-- Knowledge layer: curated first-party portfolio facts plus approved Hebrew Wikipedia and Wikidata snapshots
+- Portfolio search: deterministic client-side matching with curated English and Hebrew answer templates
+- Knowledge layer: curated first-party portfolio facts plus the approved Hebrew Wikipedia snapshot
 - Tests: Vitest + JSDOM
 
 ## Architecture overview
 
-The assistant is split into focused layers:
+Portfolio search is split into focused layers:
 
 1. `assistant/client/*`
-   - launcher, bilingual panel, UI state, localized copy, source-chip rendering, and browser API client
-2. `assistant/server/*`
-   - request validation, rate limiting, retrieval, grounding, prompt construction, response validation, and error handling
-3. `assistant/knowledge/*`
-   - source catalog, curated first-party facts, approved public facts, and compiled retrieval data
-4. `assistant/scripts/*`
-   - knowledge build, public refresh, and local dev API startup
+   - launcher, bilingual panel, local search matching, conversation context, localized copy, and source rendering
+2. `assistant/knowledge/*`
+   - source catalog, curated first-party facts, approved public facts, and the generated static search index
+3. `assistant/scripts/*`
+   - development-time knowledge build and optional public-source refresh
 
-This keeps the GitHub Pages frontend static while moving the model call to a secure server-side endpoint.
+The browser loads `assistant/knowledge/search-index.json` as a static asset. Visitor questions never call a model, paid API, or application backend.
 
-## Security model
+## Privacy and security model
 
-GitHub Pages cannot safely store an OpenAI API key. The assistant therefore never exposes credentials in:
-
-- HTML
-- client-side JavaScript
-- public environment variables
-- browser storage
-- source maps
-- network responses
-
-The backend implements:
-
-- strict CORS allowlisting
-- request body limits
-- per-message limits
-- conversation-turn limits
-- in-memory rate limiting
-- timeout handling
-- prompt-injection rejection
-- approved-source retrieval only
-- server-side response validation
-- safe, allowlisted source URL mapping
-- graceful fallback when the backend is unavailable
+The search feature has no credential or model dependency. Questions and lightweight conversation context remain in session storage in the visitor's browser. Local `.env*` files remain ignored by Git and are not included in public site assets.
 
 ## Knowledge grounding and source priority
 
@@ -60,15 +37,15 @@ Approved knowledge comes from:
 
 1. curated first-party portfolio knowledge
 2. current portfolio content
-3. approved public references from Hebrew Wikipedia and linked Wikidata
+3. the approved Hebrew Wikipedia reference
 
 Priority order:
 
 1. first-party curated knowledge
 2. portfolio website content
-3. Wikipedia/Wikidata
+3. Hebrew Wikipedia
 
-The assistant is intentionally scoped to verified Kris-related information only. Unsupported questions are refused naturally in the selected language instead of answered speculatively.
+Search is intentionally scoped to verified Kris-related information only. Unsupported questions return an unavailable response instead of a generic biography or speculative answer.
 
 ## Local development
 
@@ -78,20 +55,10 @@ The assistant is intentionally scoped to verified Kris-related information only.
 npm install
 ```
 
-### Prepare environment
-
-Copy `.env.example` to `.env`. If you do not set `OPENAI_API_KEY`, the assistant runs in grounded mock mode by default.
-
-### Build the compiled knowledge
+### Build the static search index
 
 ```bash
 npm run build:knowledge
-```
-
-### Start the local API
-
-```bash
-npm run dev:api
 ```
 
 ### Start the static frontend
@@ -102,28 +69,13 @@ python3 -m http.server 8124
 
 Open: `http://127.0.0.1:8124/index.html`
 
-The assistant also supports `file://` preview mode by automatically targeting the local API when the site is opened directly from disk.
-
-## Environment variables
-
-Required for real model calls:
-
-- `OPENAI_API_KEY`
-
-Optional configuration:
-
-- `OPENAI_MODEL`
-- `KRIS_ASSISTANT_ALLOWED_ORIGINS`
-- `KRIS_ASSISTANT_RATE_LIMIT_WINDOW_MS`
-- `KRIS_ASSISTANT_RATE_LIMIT_MAX`
-- `KRIS_ASSISTANT_TIMEOUT_MS`
-- `KRIS_ASSISTANT_MAX_INPUT_CHARS`
-- `KRIS_ASSISTANT_MAX_TURNS`
-- `KRIS_ASSISTANT_MAX_OUTPUT_TOKENS`
-- `KRIS_ASSISTANT_MAX_BODY_BYTES`
-- `KRIS_ASSISTANT_MOCK_MODE`
+No environment variables or API keys are required for portfolio search.
 
 ## Knowledge refresh
+
+Edit focused answer facts and aliases in `assistant/knowledge/search-facts.mjs`. Edit source-backed portfolio entries in `assistant/knowledge/portfolio-first-party.mjs`, approved public-reference facts in `assistant/knowledge/public-approved.mjs`, and source links in `assistant/knowledge/source-catalog.mjs`.
+
+The generated `assistant/knowledge/search-index.json` currently contains 78 focused facts. Do not edit that generated file directly.
 
 Refresh public-source snapshots:
 
@@ -136,7 +88,7 @@ Then review:
 - `assistant/knowledge/public-approved.mjs`
 - `assistant/knowledge/source-catalog.mjs`
 
-After approval, rebuild the compiled retrieval data:
+After approval, rebuild the compiled knowledge and static search index:
 
 ```bash
 npm run build:knowledge
@@ -146,7 +98,7 @@ This workflow keeps manually curated portfolio facts separate from refreshable p
 
 ## Tests
 
-Run without spending API credits:
+Run locally:
 
 ```bash
 npm test
@@ -154,49 +106,34 @@ npm test
 
 The tests currently cover:
 
-- supported grounded answers
-- prompt-injection rejection
-- disallowed origins
-- rate limiting
-- empty input handling
+- education, programming languages, backend/database skills, and professional links
+- Film-Hub technologies, authentication, database integration, and booking workflows
+- CoolDawgs research, sensor data, technology, responsibilities, and leadership
+- AI/ML, CNN training and evaluation, Grad-CAM, evolutionary computation, and thesis methods
+- swimming medals, locations, records, UGA achievements, and multi-turn context
+- English and Hebrew recruiter questions, aliases, contextual follow-ups, and RTL rendering
+- ambiguous and unsupported questions, including plausible unsupported credentials
+- operation without an API key or application backend
 - language switching
-- RTL rendering
-- validated source-chip rendering
-- fallback UI when the endpoint is unavailable
+- collapsed source rendering
 
 ## Deployment
 
-### Frontend on GitHub Pages
-
-The static site can remain on GitHub Pages. To enable the assistant there, point `window.__KRIS_ASSISTANT_API_URL__` to a deployed backend endpoint.
-
-### Full deployment on Vercel
-
-This repository also includes `vercel.json` and `api/assistant.mjs`, so the entire site can be deployed to Vercel with the assistant backend mounted at `/api/assistant`.
-
-### Backend-only deployment
-
-You can also deploy only the backend and keep the frontend on GitHub Pages. In that case:
-
-1. deploy the serverless endpoint
-2. set server-side environment variables there
-3. add the GitHub Pages origin to `KRIS_ASSISTANT_ALLOWED_ORIGINS`
-4. configure the frontend API URL
+The portfolio search assistant is part of the static site and works on GitHub Pages or any static host. The former `/api/assistant` route is retired and returns HTTP 410 if reached.
 
 ## Troubleshooting
 
-### Assistant says it is unavailable
+### Search data does not load
 
-- confirm the backend is running
-- confirm the resolved API URL is correct
-- confirm the current origin is allowlisted
+- run `npm run build:knowledge`
+- confirm `assistant/knowledge/search-index.json` is served with the static site
 
 ### Source links do not land on the right card
 
 - re-run `npm run build:knowledge`
 - verify the anchor ids in the rendered section cards still match `assistant/knowledge/source-catalog.mjs`
 
-### The assistant refuses too often
+### Search refuses too often
 
 - verify that the requested fact exists in approved sources
-- update curated first-party knowledge rather than broadening model freedom
+- add a focused fact or paraphrase to the curated search knowledge instead of introducing a generic fallback

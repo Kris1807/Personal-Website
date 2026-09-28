@@ -1,0 +1,3599 @@
+{
+  "version": 1,
+  "facts": [
+    {
+      "id": "fact-projects-overview",
+      "subject": "projects",
+      "category": "projects",
+      "intents": [
+        "projects"
+      ],
+      "aliases": [
+        "projects",
+        "portfolio projects",
+        "built work",
+        "פרויקטים",
+        "עבודות"
+      ],
+      "keywords_en": [
+        "projects",
+        "apps",
+        "products",
+        "builds",
+        "full stack"
+      ],
+      "keywords_he": [
+        "פרויקטים",
+        "אפליקציות",
+        "מוצרים",
+        "פיתוח",
+        "פול סטאק"
+      ],
+      "answer_en": "Kris’s portfolio spans sports analytics, real-time computer vision, healthcare optimization, medical-AI interpretability, research software, and full-stack products. Representative projects are Roster Lab, live facial-expression recognition, his operating-room staffing thesis, MedGemma grounding research, and CoolDawgs.",
+      "answer_he": "תיק העבודות של כריס משלב אנליטיקת ספורט, ראייה ממוחשבת בזמן אמת, אופטימיזציה רפואית, פרשנות של AI רפואי, תוכנת מחקר ומוצרי full-stack. פרויקטים מייצגים הם Roster Lab, זיהוי הבעות פנים בזמן אמת, תזת שיבוץ חדרי הניתוח, מחקר MedGemma ו-CoolDawgs.",
+      "source_ids": [
+        "source-repo-roster-lab",
+        "source-portfolio-project-cnn",
+        "source-repo-thesis-or",
+        "source-repo-medgemma",
+        "source-portfolio-experience-cooldawgs"
+      ],
+      "priority": 34
+    },
+    {
+      "id": "fact-ai-ml-projects",
+      "subject": "ai-projects",
+      "category": "projects",
+      "intents": [
+        "projects",
+        "ai"
+      ],
+      "aliases": [
+        "AI projects",
+        "AI work",
+        "AI and machine learning projects",
+        "machine learning projects",
+        "ML projects",
+        "פרויקטי AI",
+        "עבודת AI",
+        "פרויקטים בבינה מלאכותית",
+        "פרויקטים בלמידת מכונה"
+      ],
+      "keywords_en": [
+        "ai",
+        "artificial intelligence",
+        "machine learning",
+        "ml",
+        "deep learning",
+        "cnn",
+        "computer vision",
+        "projects"
+      ],
+      "keywords_he": [
+        "בינה מלאכותית",
+        "למידת מכונה",
+        "למידה עמוקה",
+        "ראייה ממוחשבת",
+        "cnn",
+        "פרויקטים"
+      ],
+      "answer_en": "Kris’s AI/ML work includes real-time facial-expression recognition with CNNs and Grad-CAM, surrogate-assisted NSGA-II for operating-room staffing, MedGemma visual-grounding research, and attacker-defender coevolution for malware detection.",
+      "answer_he": "עבודת ה-AI/ML של כריס כוללת זיהוי הבעות פנים בזמן אמת עם CNN ו-Grad-CAM, אופטימיזציית NSGA-II בסיוע מודל חלופי לשיבוץ חדרי ניתוח, מחקר grounding חזותי ב-MedGemma וקו-אבולוציה של תוקף ומגן לזיהוי נוזקות.",
+      "source_ids": [
+        "source-portfolio-project-cnn",
+        "source-repo-thesis-or",
+        "source-repo-medgemma",
+        "source-repo-malware-coevolution"
+      ],
+      "priority": 44
+    },
+    {
+      "id": "fact-portfolio-technical-synthesis",
+      "subject": "portfolio-synthesis",
+      "category": "about",
+      "intents": [
+        "projects",
+        "background",
+        "engineering"
+      ],
+      "aliases": [
+        "strongest projects",
+        "most technically interesting projects",
+        "what kind of engineer",
+        "what makes his portfolio different",
+        "technical portfolio",
+        "הפרויקטים החזקים",
+        "הפרויקטים המעניינים ביותר",
+        "איזה מהנדס",
+        "מה מייחד את תיק העבודות"
+      ],
+      "keywords_en": [
+        "strongest",
+        "interesting",
+        "distinctive",
+        "engineer",
+        "portfolio",
+        "technical",
+        "software engineering",
+        "machine learning",
+        "computer vision",
+        "optimization",
+        "sports analytics"
+      ],
+      "keywords_he": [
+        "חזקים",
+        "מעניינים",
+        "ייחודי",
+        "מהנדס",
+        "פורטפוליו",
+        "טכני",
+        "הנדסת תוכנה",
+        "למידת מכונה",
+        "ראייה ממוחשבת",
+        "אופטימיזציה",
+        "אנליטיקת ספורט"
+      ],
+      "answer_en": "Kris works across software engineering, machine learning, computer vision, optimization research, and sports analytics. The clearest examples are Roster Lab, real-time facial-expression recognition, his operating-room staffing thesis, MedGemma grounding research, and the CoolDawgs sensor application.",
+      "answer_he": "כריס עובד על פני הנדסת תוכנה, למידת מכונה, ראייה ממוחשבת, מחקר אופטימיזציה ואנליטיקת ספורט. הדוגמאות הברורות ביותר הן Roster Lab, זיהוי הבעות פנים בזמן אמת, תזת שיבוץ חדרי הניתוח, מחקר MedGemma ואפליקציית החיישנים CoolDawgs.",
+      "source_ids": [
+        "source-repo-roster-lab",
+        "source-portfolio-project-cnn",
+        "source-repo-thesis-or",
+        "source-repo-medgemma",
+        "source-portfolio-experience-cooldawgs"
+      ],
+      "priority": 48
+    },
+    {
+      "id": "fact-roster-lab-overview",
+      "subject": "repository-roster-lab-scoring",
+      "category": "projects",
+      "intents": [
+        "projects",
+        "methodology",
+        "data",
+        "ranking"
+      ],
+      "aliases": [
+        "What is Roster Lab",
+        "Roster Lab",
+        "sports analytics software",
+        "sports-tech project",
+        "ranking algorithms",
+        "מהו Roster Lab",
+        "תוכנת אנליטיקת ספורט",
+        "אלגוריתמי דירוג"
+      ],
+      "keywords_en": [
+        "Roster Lab",
+        "sports tech",
+        "sports analytics",
+        "ranking",
+        "swimmer performance",
+        "recruiting",
+        "roster analysis"
+      ],
+      "keywords_he": [
+        "Roster Lab",
+        "טכנולוגיית ספורט",
+        "אנליטיקת ספורט",
+        "דירוג",
+        "ביצועי שחיינים",
+        "גיוס",
+        "ניתוח סגל"
+      ],
+      "answer_en": "Roster Lab is a full-stack recruiting and roster-analysis application for college swimming. It combines athlete records, roster projections, scenario planning, event-group analytics, and normalized performance scoring so staff can compare swimmers and identify recruiting needs.",
+      "answer_he": "Roster Lab היא אפליקציית full-stack לגיוס ולניתוח סגל בשחייה מכללתית. היא משלבת נתוני ספורטאים, תחזיות סגל, תכנון תרחישים, ניתוח קבוצות משחים וניקוד ביצועים מנורמל, כדי שהצוות יוכל להשוות שחיינים ולזהות צורכי גיוס.",
+      "source_ids": [
+        "source-portfolio-project-roster-lab",
+        "source-repo-roster-lab"
+      ],
+      "priority": 56
+    },
+    {
+      "id": "fact-roster-lab-scoring-method",
+      "subject": "repository-roster-lab-scoring",
+      "category": "projects",
+      "intents": [
+        "methodology",
+        "data",
+        "ranking"
+      ],
+      "aliases": [
+        "How does Roster Lab score swimmers",
+        "How does he compare swimmers from different events",
+        "Roster Lab scoring",
+        "Competitive Fitness",
+        "איך Roster Lab מדרג שחיינים",
+        "איך הוא משווה שחיינים ממשחים שונים"
+      ],
+      "keywords_en": [
+        "score",
+        "scoring",
+        "compare",
+        "different events",
+        "Competitive Fitness",
+        "SCY",
+        "SCM",
+        "LCM",
+        "NCAA",
+        "Top 3",
+        "Top 8",
+        "Top 16",
+        "A cut",
+        "World Aquatics",
+        "normalize"
+      ],
+      "keywords_he": [
+        "ניקוד",
+        "דירוג",
+        "השוואה",
+        "משחים שונים",
+        "SCY",
+        "SCM",
+        "LCM",
+        "NCAA",
+        "World Aquatics",
+        "נרמול"
+      ],
+      "answer_en": "Roster Lab normalizes each swim against course-specific benchmarks: NCAA Division I record, qualification, and multi-year Top 3/8/16 anchors for SCY, and World Aquatics references for SCM/LCM. It keeps the best normalized course score per event and averages a swimmer’s strongest three eligible individual events.",
+      "answer_he": "Roster Lab מנרמל כל תוצאה מול מדדים ייעודיים למסלול: שיא NCAA Division I, תקן העפלה וספי Top 3/8/16 רב-שנתיים ל-SCY, ומדדי World Aquatics ל-SCM/LCM. הוא שומר לכל משחה את הציון המנורמל הגבוה ביותר ומחשב ממוצע של שלושת המשחים האישיים החזקים ביותר של השחיין.",
+      "source_ids": [
+        "source-repo-roster-lab"
+      ],
+      "priority": 64
+    },
+    {
+      "id": "fact-roster-lab-data",
+      "subject": "repository-roster-lab-scoring",
+      "category": "projects",
+      "intents": [
+        "authentication",
+        "data"
+      ],
+      "aliases": [
+        "What data does Roster Lab use",
+        "Roster Lab data",
+        "איזה מידע Roster Lab משתמש"
+      ],
+      "keywords_en": [
+        "data",
+        "times",
+        "SCY",
+        "SCM",
+        "LCM",
+        "benchmarks",
+        "records",
+        "qualifying",
+        "roster",
+        "eligibility"
+      ],
+      "keywords_he": [
+        "נתונים",
+        "זמנים",
+        "SCY",
+        "SCM",
+        "LCM",
+        "מדדים",
+        "שיאים",
+        "סגל",
+        "זכאות"
+      ],
+      "answer_en": "Roster Lab uses swimmer profiles, eligibility and roster-planning data, and best times in SCY, SCM, and LCM. Its versioned benchmark catalog includes NCAA records, qualification standards, multi-year placement cutoffs, and World Aquatics metric-course references.",
+      "answer_he": "Roster Lab משתמש בפרופילי שחיינים, נתוני זכאות ותכנון סגל, ובזמנים מיטביים ב-SCY, SCM ו-LCM. קטלוג המדדים המתועד שלו כולל שיאי NCAA, תקני העפלה, ספי מיקום רב-שנתיים ומדדי World Aquatics למסלולים מטריים.",
+      "source_ids": [
+        "source-repo-roster-lab"
+      ],
+      "priority": 64
+    },
+    {
+      "id": "fact-cnn-realtime",
+      "subject": "portfolio-project-cnn",
+      "category": "projects",
+      "intents": [
+        "projects",
+        "ai",
+        "realtime",
+        "interpretability"
+      ],
+      "aliases": [
+        "computer-vision application",
+        "what did he build with CNNs",
+        "real-time ML experience",
+        "facial-expression recognition",
+        "live camera input",
+        "model interpretability",
+        "Grad-CAM",
+        "יישום ראייה ממוחשבת",
+        "זיהוי הבעות פנים",
+        "קלט מצלמה חי",
+        "פרשנות מודלים"
+      ],
+      "keywords_en": [
+        "CNN",
+        "computer vision",
+        "facial expression",
+        "emotion",
+        "live",
+        "real-time",
+        "webcam",
+        "camera",
+        "inference",
+        "confidence",
+        "Grad-CAM",
+        "interpretability",
+        "deployed model"
+      ],
+      "keywords_he": [
+        "CNN",
+        "ראייה ממוחשבת",
+        "הבעות פנים",
+        "רגש",
+        "זמן אמת",
+        "מצלמה",
+        "הסקה",
+        "ביטחון",
+        "Grad-CAM",
+        "פרשנות"
+      ],
+      "answer_en": "Kris built a real-time facial-expression recognition application that classifies seven emotions from a live webcam or uploaded image. The project connects preprocessing, CNN training, held-out evaluation, confidence-ranked predictions, and optional Grad-CAM visualization in a usable browser interface.",
+      "answer_he": "כריס בנה אפליקציה לזיהוי הבעות פנים בזמן אמת שמסווגת שבעה רגשות מווידאו חי או מתמונה שהועלתה. הפרויקט מחבר עיבוד מקדים, אימון CNN, הערכה על סט בדיקה, תחזיות מדורגות לפי ביטחון והמחשת Grad-CAM אופציונלית בממשק דפדפן שימושי.",
+      "source_ids": [
+        "source-portfolio-project-cnn",
+        "source-repo-cnn"
+      ],
+      "priority": 60
+    },
+    {
+      "id": "fact-thesis-overview",
+      "subject": "repository-thesis-or-staffing",
+      "category": "projects",
+      "intents": [
+        "projects",
+        "research",
+        "optimization",
+        "ai"
+      ],
+      "aliases": [
+        "What is Kris's thesis",
+        "what is his thesis",
+        "what is he researching",
+        "operating-room staffing",
+        "multi-objective optimization",
+        "evolutionary algorithms",
+        "NSGA-II",
+        "מה התזה של כריס",
+        "מה הוא חוקר",
+        "אופטימיזציה רב-מטרתית"
+      ],
+      "keywords_en": [
+        "thesis",
+        "research",
+        "operating room",
+        "staffing",
+        "scheduling",
+        "NSGA-II",
+        "evolutionary",
+        "multi-objective",
+        "Pareto",
+        "fairness",
+        "fatigue",
+        "recovery",
+        "preferences",
+        "surrogate"
+      ],
+      "keywords_he": [
+        "תזה",
+        "מחקר",
+        "חדרי ניתוח",
+        "שיבוץ",
+        "NSGA-II",
+        "אבולוציוני",
+        "רב-מטרתי",
+        "פארטו",
+        "הוגנות",
+        "עייפות",
+        "התאוששות",
+        "העדפות"
+      ],
+      "answer_en": "Kris’s M.S. thesis applies coverage-first, surrogate-assisted NSGA-II to six-week operating-room staffing. It searches for feasible schedules while exposing Pareto tradeoffs among workload fairness, fatigue risk, recovery quality, and worker preferences, then exactly evaluates selected and final policies.",
+      "answer_he": "התזה של כריס מיישמת NSGA-II בסיוע מודל חלופי ותעדוף כיסוי לשיבוץ כוח אדם בחדרי ניתוח לאורך שישה שבועות. היא מחפשת סידורים ישימים תוך הצגת פשרות פארטו בין הוגנות בעומס, סיכון לעייפות, איכות התאוששות והעדפות עובדים, ולאחר מכן מבצעת הערכה מדויקת למדיניות נבחרת וסופית.",
+      "source_ids": [
+        "source-repo-thesis-or"
+      ],
+      "priority": 62
+    },
+    {
+      "id": "fact-medgemma-grounding",
+      "subject": "repository-medgemma-grounding",
+      "category": "projects",
+      "intents": [
+        "projects",
+        "ai",
+        "interpretability",
+        "research"
+      ],
+      "aliases": [
+        "MedGemma project",
+        "medical AI",
+        "vision-language models",
+        "visual grounding",
+        "looking at the right region",
+        "AI interpretability",
+        "פרויקט MedGemma",
+        "בינה מלאכותית רפואית",
+        "grounding חזותי",
+        "פרשנות AI"
+      ],
+      "keywords_en": [
+        "MedGemma",
+        "medical AI",
+        "vision-language",
+        "chest X-ray",
+        "CheXlocalize",
+        "pleural effusion",
+        "radiologist",
+        "grounding",
+        "patch occlusion",
+        "right region",
+        "interpretability"
+      ],
+      "keywords_he": [
+        "MedGemma",
+        "בינה מלאכותית רפואית",
+        "ראייה ושפה",
+        "צילום חזה",
+        "CheXlocalize",
+        "תפליט פלאורלי",
+        "רדיולוג",
+        "grounding",
+        "patch occlusion",
+        "פרשנות"
+      ],
+      "answer_en": "The MedGemma project tests whether a medical vision-language model relies on the correct chest-X-ray regions. Its implemented patch-occlusion pipeline compares changes in pleural-effusion predictions with CheXlocalize radiologist contours; the repository is careful to state that real-data grounding runs have not yet been completed.",
+      "answer_he": "פרויקט MedGemma בודק אם מודל רפואי משולב ראייה ושפה מסתמך על האזורים הנכונים בצילום חזה. צינור ה-patch occlusion הממומש משווה שינויים בתחזיות לתפליט פלאורלי מול קווי מתאר של רדיולוגים מ-CheXlocalize; המאגר מציין בזהירות שהרצות grounding על נתונים אמיתיים עדיין לא הושלמו.",
+      "source_ids": [
+        "source-repo-medgemma"
+      ],
+      "priority": 60
+    },
+    {
+      "id": "fact-cooldawgs-research",
+      "subject": "portfolio-experience-cooldawgs",
+      "category": "experience",
+      "intents": [
+        "roles",
+        "leadership",
+        "projects",
+        "research"
+      ],
+      "aliases": [
+        "CoolDawgs",
+        "technical team",
+        "research software",
+        "sensor data",
+        "mobile development",
+        "צוות טכני",
+        "תוכנת מחקר",
+        "נתוני חיישנים",
+        "פיתוח מובייל"
+      ],
+      "keywords_en": [
+        "CoolDawgs",
+        "lead",
+        "leadership",
+        "team",
+        "research",
+        "software",
+        "mobile",
+        "React Native",
+        "Bluetooth",
+        "sensor",
+        "temperature",
+        "charts"
+      ],
+      "keywords_he": [
+        "CoolDawgs",
+        "הובלה",
+        "צוות",
+        "מחקר",
+        "תוכנה",
+        "מובייל",
+        "React Native",
+        "Bluetooth",
+        "חיישן",
+        "טמפרטורה",
+        "גרפים"
+      ],
+      "answer_en": "On CoolDawgs, Kris served as team lead and mobile developer for a research system built around Bluetooth environmental sensors. He led the React Native application work, including sensor-data integration, temperature summaries, and interactive charts, while coordinating delivery with a multidisciplinary research team.",
+      "answer_he": "ב-CoolDawgs כריס שימש כראש צוות וכמפתח מובייל במערכת מחקר המבוססת על חיישני סביבה ב-Bluetooth. הוא הוביל את עבודת אפליקציית React Native, כולל שילוב נתוני חיישנים, סיכומי טמפרטורה וגרפים אינטראקטיביים, ותיאם את הביצוע עם צוות מחקר רב-תחומי.",
+      "source_ids": [
+        "source-portfolio-experience-cooldawgs"
+      ],
+      "priority": 58
+    },
+    {
+      "id": "fact-malware-coevolution",
+      "subject": "repository-malware-coevolution",
+      "category": "projects",
+      "intents": [
+        "projects",
+        "ai",
+        "research",
+        "optimization"
+      ],
+      "aliases": [
+        "malware coevolution",
+        "malware detection",
+        "evolutionary computation",
+        "attacker-defender coevolution",
+        "EMBER",
+        "קו-אבולוציה של נוזקות",
+        "זיהוי נוזקות",
+        "חישוב אבולוציוני",
+        "EMBER"
+      ],
+      "keywords_en": [
+        "malware",
+        "cybersecurity",
+        "coevolution",
+        "attacker",
+        "defender",
+        "EMBER",
+        "evolutionary computation",
+        "adversarial optimization",
+        "genetic operators",
+        "detection"
+      ],
+      "keywords_he": [
+        "נוזקה",
+        "סייבר",
+        "קו-אבולוציה",
+        "תוקף",
+        "מגן",
+        "EMBER",
+        "חישוב אבולוציוני",
+        "אופטימיזציה יריבותית",
+        "זיהוי"
+      ],
+      "answer_en": "Kris’s evolutionary-computation work also includes attacker-defender coevolution for malware detection. The research uses static feature data such as EMBER so attacker candidates can evolve evasive feature changes while defender candidates adapt their classifications, without producing executable malware.",
+      "answer_he": "עבודתו של כריס בחישוב אבולוציוני כוללת גם קו-אבולוציה של תוקף ומגן לזיהוי נוזקות. המחקר משתמש בנתוני מאפיינים סטטיים כגון EMBER, כך שמועמדי תקיפה מפתחים שינויי מאפיינים חמקניים ומועמדי הגנה מתאימים את הסיווג שלהם, בלי לייצר נוזקה שניתנת להרצה.",
+      "source_ids": [
+        "source-repo-malware-coevolution"
+      ],
+      "priority": 52
+    },
+    {
+      "id": "fact-education-bs-degree",
+      "subject": "education-bs",
+      "category": "education",
+      "intents": [
+        "education"
+      ],
+      "aliases": [
+        "bachelor's degree",
+        "bachelors degree",
+        "undergraduate degree",
+        "degree does Kris have",
+        "what degree does he have",
+        "תואר ראשון",
+        "איזה תואר יש לכריס"
+      ],
+      "keywords_en": [
+        "bachelor",
+        "BS",
+        "computer science",
+        "undergraduate",
+        "degree",
+        "UGA",
+        "May 2026",
+        "magna cum laude"
+      ],
+      "keywords_he": [
+        "תואר ראשון",
+        "מדעי המחשב",
+        "UGA",
+        "מאי 2026",
+        "בהצטיינות"
+      ],
+      "answer_en": "Kris earned a B.S. in Computer Science from the University of Georgia in May 2026, with an area of emphasis in Artificial Intelligence; the portfolio lists him as magna cum laude.",
+      "answer_he": "כריס סיים במאי 2026 תואר ראשון במדעי המחשב באוניברסיטת ג׳ורג׳יה, עם דגש בבינה מלאכותית; לפי תיק העבודות הוא סיים בהצטיינות magna cum laude.",
+      "source_ids": [
+        "source-portfolio-education-bs-cs"
+      ],
+      "priority": 48
+    },
+    {
+      "id": "fact-education-ms-status",
+      "subject": "education-ms",
+      "category": "education",
+      "intents": [
+        "education",
+        "research"
+      ],
+      "aliases": [
+        "does he have a master's",
+        "masters degree",
+        "master's degree",
+        "what is he studying now",
+        "current graduate status",
+        "Double Dawgs",
+        "תואר שני",
+        "מה הוא לומד עכשיו",
+        "סטודנט לתואר שני"
+      ],
+      "keywords_en": [
+        "master",
+        "MS",
+        "artificial intelligence",
+        "Double Dawgs",
+        "graduate student",
+        "current",
+        "December 2026"
+      ],
+      "keywords_he": [
+        "תואר שני",
+        "בינה מלאכותית",
+        "Double Dawgs",
+        "סטודנט לתואר שני",
+        "דצמבר 2026"
+      ],
+      "answer_en": "Kris is pursuing an M.S. in Artificial Intelligence through UGA’s Double Dawgs program, with expected completion in December 2026.",
+      "answer_he": "כריס לומד לתואר מוסמך בבינה מלאכותית במסגרת תוכנית Double Dawgs של UGA, עם סיום צפוי בדצמבר 2026.",
+      "source_ids": [
+        "source-portfolio-education-ms-ai"
+      ],
+      "priority": 52
+    },
+    {
+      "id": "fact-education-graduation-date",
+      "subject": "education-ms",
+      "category": "education",
+      "intents": [
+        "date",
+        "education"
+      ],
+      "aliases": [
+        "when does Kris graduate",
+        "when will he graduate",
+        "expected graduation",
+        "expected completion",
+        "מתי כריס מסיים",
+        "מתי הוא יסיים את התואר",
+        "מועד סיום"
+      ],
+      "keywords_en": [
+        "when",
+        "graduate",
+        "graduation",
+        "completion",
+        "December 2026",
+        "master"
+      ],
+      "keywords_he": [
+        "מתי",
+        "מסיים",
+        "סיום",
+        "דצמבר 2026",
+        "תואר שני"
+      ],
+      "answer_en": "Kris completed his B.S. in May 2026 and expects to complete his M.S. in Artificial Intelligence in December 2026.",
+      "answer_he": "כריס סיים את התואר הראשון במאי 2026 וצפוי להשלים את התואר המוסמך בבינה מלאכותית בדצמבר 2026.",
+      "source_ids": [
+        "source-portfolio-education-bs-cs",
+        "source-portfolio-education-ms-ai"
+      ],
+      "priority": 58
+    },
+    {
+      "id": "fact-education-business-minor",
+      "subject": "education-business",
+      "category": "education",
+      "intents": [
+        "education"
+      ],
+      "aliases": [
+        "business minor",
+        "did he study business",
+        "minor",
+        "מינור בעסקים",
+        "האם למד עסקים"
+      ],
+      "keywords_en": [
+        "business",
+        "minor",
+        "UGA",
+        "May 2026"
+      ],
+      "keywords_he": [
+        "עסקים",
+        "מינור",
+        "UGA",
+        "מאי 2026"
+      ],
+      "answer_en": "Kris completed a Business minor at the University of Georgia alongside his Computer Science degree in May 2026.",
+      "answer_he": "כריס השלים מינור בעסקים באוניברסיטת ג׳ורג׳יה לצד התואר במדעי המחשב במאי 2026.",
+      "source_ids": [
+        "source-portfolio-education-business"
+      ],
+      "priority": 46
+    },
+    {
+      "id": "fact-programming-languages",
+      "subject": "skills-programming-languages",
+      "category": "projects",
+      "intents": [
+        "technologies"
+      ],
+      "aliases": [
+        "programming languages",
+        "what languages does he use",
+        "what languages does Kris know",
+        "coding languages",
+        "שפות תכנות",
+        "באילו שפות תכנות כריס משתמש",
+        "אילו שפות הוא יודע"
+      ],
+      "keywords_en": [
+        "programming",
+        "languages",
+        "Python",
+        "Java",
+        "C",
+        "C++",
+        "JavaScript",
+        "TypeScript",
+        "SQL",
+        "Assembly"
+      ],
+      "keywords_he": [
+        "תכנות",
+        "שפות",
+        "Python",
+        "Java",
+        "C",
+        "C++",
+        "JavaScript",
+        "TypeScript",
+        "SQL",
+        "Assembly"
+      ],
+      "answer_en": "The portfolio lists Python, Java, C, C++, JavaScript, TypeScript, SQL, and Assembly among Kris’s programming languages.",
+      "answer_he": "תיק העבודות מציג את Python, Java, C, C++, JavaScript, TypeScript, SQL ו-Assembly בין שפות התכנות של כריס.",
+      "source_ids": [
+        "source-portfolio-skills"
+      ],
+      "priority": 58
+    },
+    {
+      "id": "fact-python-experience",
+      "subject": "skills-python",
+      "category": "projects",
+      "intents": [
+        "technologies",
+        "ai"
+      ],
+      "aliases": [
+        "Python",
+        "does Kris know Python",
+        "has he used Python",
+        "Python experience",
+        "האם כריס יודע Python",
+        "ניסיון ב-Python"
+      ],
+      "keywords_en": [
+        "Python",
+        "CNN",
+        "machine learning",
+        "MedGemma",
+        "PyTorch",
+        "research"
+      ],
+      "keywords_he": [
+        "Python",
+        "CNN",
+        "למידת מכונה",
+        "MedGemma",
+        "PyTorch",
+        "מחקר"
+      ],
+      "answer_en": "Yes. Kris uses Python in his facial-expression CNN work and medical-AI research; Python is also listed in his portfolio skills.",
+      "answer_he": "כן. כריס משתמש ב-Python בפרויקט ה-CNN לזיהוי הבעות פנים ובמחקר ה-AI הרפואי, והשפה מופיעה גם ברשימת המיומנויות שלו.",
+      "source_ids": [
+        "source-portfolio-skills",
+        "source-portfolio-project-cnn",
+        "source-repo-medgemma"
+      ],
+      "priority": 64
+    },
+    {
+      "id": "fact-react-experience",
+      "subject": "skills-react",
+      "category": "projects",
+      "intents": [
+        "technologies"
+      ],
+      "aliases": [
+        "React",
+        "does Kris know React",
+        "has he used React",
+        "React experience",
+        "Next.js experience",
+        "האם כריס מכיר React",
+        "ניסיון ב-React"
+      ],
+      "keywords_en": [
+        "React",
+        "React Native",
+        "Next.js",
+        "frontend",
+        "mobile",
+        "Roster Lab",
+        "Patient Record",
+        "CoolDawgs"
+      ],
+      "keywords_he": [
+        "React",
+        "React Native",
+        "Next.js",
+        "פרונטאנד",
+        "מובייל",
+        "Roster Lab",
+        "CoolDawgs"
+      ],
+      "answer_en": "Yes. Kris has used React and Next.js in full-stack products including Roster Lab and the Patient Record App, and React Native for the CoolDawgs mobile application.",
+      "answer_he": "כן. כריס השתמש ב-React וב-Next.js במוצרי full-stack ובהם Roster Lab ו-Patient Record App, וב-React Native באפליקציית המובייל של CoolDawgs.",
+      "source_ids": [
+        "source-portfolio-project-roster-lab",
+        "source-portfolio-project-patient-record",
+        "source-portfolio-experience-cooldawgs"
+      ],
+      "priority": 62
+    },
+    {
+      "id": "fact-backend-experience",
+      "subject": "skills-backend",
+      "category": "projects",
+      "intents": [
+        "technologies",
+        "background"
+      ],
+      "aliases": [
+        "backend experience",
+        "does Kris have backend experience",
+        "backend engineering",
+        "server-side experience",
+        "ניסיון Backend",
+        "האם לכריס יש ניסיון בצד השרת"
+      ],
+      "keywords_en": [
+        "backend",
+        "server",
+        "Django",
+        "Next.js",
+        "PostgreSQL",
+        "Supabase",
+        "Prisma",
+        "database",
+        "API"
+      ],
+      "keywords_he": [
+        "Backend",
+        "צד שרת",
+        "Django",
+        "Next.js",
+        "PostgreSQL",
+        "Supabase",
+        "Prisma",
+        "מסד נתונים",
+        "API"
+      ],
+      "answer_en": "Kris’s backend experience includes Django services and booking logic in Film-Hub, plus Next.js, Prisma, PostgreSQL, Supabase, authentication, and data workflows across Roster Lab and healthcare/document products.",
+      "answer_he": "הניסיון של כריס בצד השרת כולל שירותי Django ולוגיקת הזמנות ב-Film-Hub, וכן Next.js, Prisma, PostgreSQL, Supabase, אימות משתמשים ותהליכי נתונים ב-Roster Lab ובמוצרים רפואיים ותיעודיים.",
+      "source_ids": [
+        "source-repo-film-hub",
+        "source-portfolio-project-roster-lab",
+        "source-portfolio-project-patient-record"
+      ],
+      "priority": 60
+    },
+    {
+      "id": "fact-database-experience",
+      "subject": "skills-databases",
+      "category": "projects",
+      "intents": [
+        "technologies",
+        "data"
+      ],
+      "aliases": [
+        "databases",
+        "what databases has he worked with",
+        "database experience",
+        "מסדי נתונים",
+        "עם אילו מסדי נתונים הוא עבד"
+      ],
+      "keywords_en": [
+        "database",
+        "databases",
+        "PostgreSQL",
+        "MongoDB",
+        "Supabase",
+        "Firebase",
+        "Firestore",
+        "Prisma",
+        "SQL"
+      ],
+      "keywords_he": [
+        "מסד נתונים",
+        "מסדי נתונים",
+        "PostgreSQL",
+        "MongoDB",
+        "Supabase",
+        "Firebase",
+        "Firestore",
+        "Prisma",
+        "SQL"
+      ],
+      "answer_en": "The portfolio lists PostgreSQL, MongoDB, Supabase, Firebase, and Firestore. Project evidence specifically connects PostgreSQL and Prisma to Roster Lab, PostgreSQL and Supabase Auth to the Patient Record App, and Supabase to Film-Hub.",
+      "answer_he": "תיק העבודות מציג PostgreSQL, MongoDB, Supabase, Firebase ו-Firestore. בפרויקטים, PostgreSQL ו-Prisma משויכים ל-Roster Lab, PostgreSQL ו-Supabase Auth ל-Patient Record App, ו-Supabase ל-Film-Hub.",
+      "source_ids": [
+        "source-portfolio-skills",
+        "source-portfolio-project-roster-lab",
+        "source-portfolio-project-patient-record"
+      ],
+      "priority": 62
+    },
+    {
+      "id": "fact-git-experience",
+      "subject": "skills-git",
+      "category": "projects",
+      "intents": [
+        "technologies"
+      ],
+      "aliases": [
+        "Git",
+        "GitHub experience",
+        "has he used Git",
+        "version control",
+        "האם הוא משתמש ב-Git",
+        "בקרת גרסאות"
+      ],
+      "keywords_en": [
+        "Git",
+        "GitHub",
+        "version control",
+        "collaboration",
+        "repository"
+      ],
+      "keywords_he": [
+        "Git",
+        "GitHub",
+        "בקרת גרסאות",
+        "שיתוף פעולה",
+        "מאגר קוד"
+      ],
+      "answer_en": "Yes. Git and GitHub are listed among Kris’s development tools, and his portfolio links to his public GitHub profile and project repositories.",
+      "answer_he": "כן. Git ו-GitHub מופיעים בין כלי הפיתוח של כריס, ותיק העבודות מקשר לפרופיל ה-GitHub הציבורי ולמאגרי הפרויקטים שלו.",
+      "source_ids": [
+        "source-portfolio-skills",
+        "source-external-github"
+      ],
+      "priority": 54
+    },
+    {
+      "id": "fact-film-hub-backend",
+      "subject": "portfolio-project-cinema",
+      "category": "projects",
+      "intents": [
+        "background",
+        "roles"
+      ],
+      "aliases": [
+        "Film-Hub",
+        "Film Hub",
+        "Film-Hub backend",
+        "Film Hub backend",
+        "backend work in Film-Hub",
+        "Django experience",
+        "has he used Django",
+        "Backend של Film-Hub",
+        "האם כריס השתמש ב-Django"
+      ],
+      "keywords_en": [
+        "Film-Hub",
+        "backend",
+        "Django",
+        "API",
+        "server",
+        "booking",
+        "database"
+      ],
+      "keywords_he": [
+        "Film-Hub",
+        "Backend",
+        "Django",
+        "API",
+        "שרת",
+        "הזמנות",
+        "מסד נתונים"
+      ],
+      "answer_en": "In Film-Hub, Kris worked with a Django backend supporting movie data, showtimes, seat availability, user bookings, cancellations, and temporary seat holds.",
+      "answer_he": "ב-Film-Hub כריס עבד עם Backend מבוסס Django שתומך בנתוני סרטים, זמני הקרנה, זמינות מושבים, הזמנות משתמשים, ביטולים והחזקות זמניות של מושבים.",
+      "source_ids": [
+        "source-repo-film-hub"
+      ],
+      "priority": 62
+    },
+    {
+      "id": "fact-film-hub-auth-database",
+      "subject": "portfolio-project-cinema",
+      "category": "projects",
+      "intents": [
+        "data"
+      ],
+      "aliases": [
+        "Film-Hub",
+        "Film Hub",
+        "Film-Hub authentication",
+        "Film Hub database",
+        "Film-Hub Supabase",
+        "authentication in Film-Hub",
+        "database integration in Film-Hub",
+        "אימות ב-Film-Hub",
+        "מסד הנתונים של Film-Hub"
+      ],
+      "keywords_en": [
+        "Film-Hub",
+        "authentication",
+        "auth",
+        "Supabase",
+        "database",
+        "users",
+        "Django"
+      ],
+      "keywords_he": [
+        "Film-Hub",
+        "אימות",
+        "Supabase",
+        "מסד נתונים",
+        "משתמשים",
+        "Django"
+      ],
+      "answer_en": "Film-Hub integrates user authentication and booking data with Supabase while its Django backend models users, shows, seats, bookings, and payment-card records.",
+      "answer_he": "Film-Hub משלב אימות משתמשים ונתוני הזמנות עם Supabase, בעוד ה-Backend ב-Django מנהל מודלים של משתמשים, הקרנות, מושבים, הזמנות וכרטיסי תשלום.",
+      "source_ids": [
+        "source-repo-film-hub"
+      ],
+      "priority": 64
+    },
+    {
+      "id": "fact-film-hub-booking-workflow",
+      "subject": "portfolio-project-cinema",
+      "category": "projects",
+      "intents": [
+        "projects",
+        "methodology",
+        "workflow"
+      ],
+      "aliases": [
+        "Film-Hub",
+        "Film Hub",
+        "Film-Hub booking workflow",
+        "how does Film-Hub booking work",
+        "seat reservation logic",
+        "temporary seat holds",
+        "תהליך ההזמנה ב-Film-Hub",
+        "לוגיקת הזמנת מושבים"
+      ],
+      "keywords_en": [
+        "Film-Hub",
+        "booking",
+        "seat",
+        "reservation",
+        "hold",
+        "checkout",
+        "cancel",
+        "availability",
+        "double booking"
+      ],
+      "keywords_he": [
+        "Film-Hub",
+        "הזמנה",
+        "מושב",
+        "שמירה",
+        "החזקה",
+        "תשלום",
+        "ביטול",
+        "זמינות",
+        "הזמנה כפולה"
+      ],
+      "answer_en": "Film-Hub tracks seats as available, held, or booked. It supports temporary holds, availability checks, booking creation and cancellation, and protects the reservation flow from conflicting seat selections.",
+      "answer_he": "Film-Hub עוקב אחרי מושבים כזמינים, מוחזקים זמנית או מוזמנים. הוא תומך בהחזקות זמניות, בדיקות זמינות, יצירת הזמנה וביטולה, ומגן על התהליך מפני בחירה מתנגשת של אותו מושב.",
+      "source_ids": [
+        "source-portfolio-project-cinema",
+        "source-repo-film-hub"
+      ],
+      "priority": 62
+    },
+    {
+      "id": "fact-cooldawgs-technologies",
+      "subject": "portfolio-experience-cooldawgs",
+      "category": "experience",
+      "intents": [
+        "technologies"
+      ],
+      "aliases": [
+        "CoolDawgs technologies",
+        "what technologies did he use in CoolDawgs",
+        "CoolDawgs tech stack",
+        "טכנולוגיות CoolDawgs",
+        "באילו טכנולוגיות הוא השתמש ב-CoolDawgs"
+      ],
+      "keywords_en": [
+        "CoolDawgs",
+        "technology",
+        "React Native",
+        "Bluetooth",
+        "mobile",
+        "sensor",
+        "charts"
+      ],
+      "keywords_he": [
+        "CoolDawgs",
+        "טכנולוגיה",
+        "React Native",
+        "Bluetooth",
+        "מובייל",
+        "חיישן",
+        "גרפים"
+      ],
+      "answer_en": "For CoolDawgs, Kris used React Native to build the mobile interface and integrated Bluetooth-connected environmental sensor data into temperature summaries and interactive charts.",
+      "answer_he": "ב-CoolDawgs כריס השתמש ב-React Native לבניית ממשק המובייל ושילב נתונים מחיישני סביבה המחוברים ב-Bluetooth בסיכומי טמפרטורה ובגרפים אינטראקטיביים.",
+      "source_ids": [
+        "source-portfolio-experience-cooldawgs"
+      ],
+      "priority": 66
+    },
+    {
+      "id": "fact-cooldawgs-role",
+      "subject": "portfolio-experience-cooldawgs",
+      "category": "experience",
+      "intents": [
+        "roles",
+        "leadership"
+      ],
+      "aliases": [
+        "CoolDawgs role",
+        "what was Kris's role in CoolDawgs",
+        "what did Kris do as team lead",
+        "responsible for in CoolDawgs",
+        "תפקיד ב-CoolDawgs",
+        "מה כריס עשה כראש צוות",
+        "על מה היה אחראי ב-CoolDawgs"
+      ],
+      "keywords_en": [
+        "CoolDawgs",
+        "role",
+        "responsibility",
+        "team lead",
+        "mobile developer",
+        "coordinate",
+        "research team"
+      ],
+      "keywords_he": [
+        "CoolDawgs",
+        "תפקיד",
+        "אחריות",
+        "ראש צוות",
+        "מפתח מובייל",
+        "תיאום",
+        "צוות מחקר"
+      ],
+      "answer_en": "Kris served as Team Lead and Mobile Developer on CoolDawgs. He led the React Native application work, coordinated technical delivery, and helped turn live sensor readings into usable summaries and visualizations for the research team.",
+      "answer_he": "כריס שימש כראש צוות וכמפתח מובייל ב-CoolDawgs. הוא הוביל את עבודת אפליקציית React Native, תיאם את הביצוע הטכני וסייע להפוך קריאות חיישנים חיות לסיכומים ולהמחשות שימושיות לצוות המחקר.",
+      "source_ids": [
+        "source-portfolio-experience-cooldawgs"
+      ],
+      "priority": 66
+    },
+    {
+      "id": "fact-research-experience",
+      "subject": "research-synthesis",
+      "category": "experience",
+      "intents": [
+        "research",
+        "background",
+        "projects"
+      ],
+      "aliases": [
+        "research experience",
+        "does Kris have research experience",
+        "what research experience does Kris have",
+        "what is Kris researching",
+        "ניסיון מחקרי",
+        "האם לכריס יש ניסיון במחקר",
+        "במה כריס חוקר"
+      ],
+      "keywords_en": [
+        "research",
+        "thesis",
+        "CoolDawgs",
+        "MedGemma",
+        "malware",
+        "optimization",
+        "computer vision",
+        "sensor"
+      ],
+      "keywords_he": [
+        "מחקר",
+        "תזה",
+        "CoolDawgs",
+        "MedGemma",
+        "נוזקה",
+        "אופטימיזציה",
+        "ראייה ממוחשבת",
+        "חיישן"
+      ],
+      "answer_en": "Kris’s research experience includes leading mobile development for the CoolDawgs sensor project, operating-room staffing optimization for his M.S. thesis, MedGemma visual-grounding methodology, and evolutionary attacker-defender research for malware detection.",
+      "answer_he": "הניסיון המחקרי של כריס כולל הובלת פיתוח המובייל בפרויקט החיישנים CoolDawgs, אופטימיזציה לשיבוץ חדרי ניתוח בתזה, מתודולוגיית grounding חזותי ב-MedGemma ומחקר אבולוציוני של תוקף ומגן לזיהוי נוזקות.",
+      "source_ids": [
+        "source-portfolio-experience-cooldawgs",
+        "source-repo-thesis-or",
+        "source-repo-medgemma"
+      ],
+      "priority": 72
+    },
+    {
+      "id": "fact-cnn-training-evaluation",
+      "subject": "portfolio-project-cnn",
+      "category": "projects",
+      "intents": [
+        "ai",
+        "methodology"
+      ],
+      "aliases": [
+        "did he train neural networks",
+        "model training",
+        "CNN training",
+        "model evaluation",
+        "האם הוא אימן רשתות נוירונים",
+        "אימון מודלים",
+        "הערכת מודל"
+      ],
+      "keywords_en": [
+        "train",
+        "training",
+        "neural network",
+        "CNN",
+        "validation",
+        "evaluation",
+        "held-out",
+        "seven emotions",
+        "preprocessing"
+      ],
+      "keywords_he": [
+        "אימון",
+        "רשת נוירונים",
+        "CNN",
+        "אימות",
+        "הערכה",
+        "סט בדיקה",
+        "שבעה רגשות",
+        "עיבוד מקדים"
+      ],
+      "answer_en": "Yes. Kris trained and evaluated a convolutional neural network for seven-class facial-expression recognition, using preprocessing, validation during training, held-out evaluation, and saved-model inference.",
+      "answer_he": "כן. כריס אימן והעריך רשת נוירונים קונבולוציונית לסיווג שבע הבעות פנים, עם עיבוד מקדים, אימות במהלך האימון, הערכה על סט בדיקה והסקה ממודל שמור.",
+      "source_ids": [
+        "source-portfolio-project-cnn",
+        "source-repo-cnn"
+      ],
+      "priority": 64
+    },
+    {
+      "id": "fact-evolutionary-computation-experience",
+      "subject": "evolutionary-computation",
+      "category": "projects",
+      "intents": [
+        "optimization",
+        "ai",
+        "research"
+      ],
+      "aliases": [
+        "evolutionary computation experience",
+        "genetic algorithms",
+        "optimization algorithms has he used",
+        "evolutionary algorithms",
+        "ניסיון בחישוב אבולוציוני",
+        "אלגוריתמים גנטיים",
+        "באילו אלגוריתמי אופטימיזציה הוא השתמש"
+      ],
+      "keywords_en": [
+        "evolutionary computation",
+        "genetic algorithm",
+        "NSGA-II",
+        "coevolution",
+        "Pareto",
+        "optimization",
+        "malware",
+        "staffing"
+      ],
+      "keywords_he": [
+        "חישוב אבולוציוני",
+        "אלגוריתם גנטי",
+        "NSGA-II",
+        "קו-אבולוציה",
+        "פארטו",
+        "אופטימיזציה",
+        "נוזקה",
+        "שיבוץ"
+      ],
+      "answer_en": "Kris’s evolutionary-computation experience spans surrogate-assisted NSGA-II for multi-objective operating-room staffing and attacker-defender coevolution for malware detection using static feature data.",
+      "answer_he": "הניסיון של כריס בחישוב אבולוציוני כולל NSGA-II בסיוע מודל חלופי לשיבוץ רב-מטרתי בחדרי ניתוח וקו-אבולוציה של תוקף ומגן לזיהוי נוזקות באמצעות נתוני מאפיינים סטטיים.",
+      "source_ids": [
+        "source-repo-thesis-or",
+        "source-repo-malware-coevolution"
+      ],
+      "priority": 64
+    },
+    {
+      "id": "fact-thesis-algorithm",
+      "subject": "repository-thesis-or-staffing",
+      "category": "projects",
+      "intents": [
+        "optimization",
+        "methodology",
+        "technologies"
+      ],
+      "aliases": [
+        "what algorithm does the thesis use",
+        "thesis optimization method",
+        "NSGA-II method",
+        "surrogate-assisted optimization",
+        "באיזה אלגוריתם התזה משתמשת",
+        "שיטת האופטימיזציה בתזה"
+      ],
+      "keywords_en": [
+        "thesis",
+        "algorithm",
+        "method",
+        "NSGA-II",
+        "surrogate",
+        "coverage-first",
+        "Pareto",
+        "multi-objective"
+      ],
+      "keywords_he": [
+        "תזה",
+        "אלגוריתם",
+        "שיטה",
+        "NSGA-II",
+        "מודל חלופי",
+        "כיסוי",
+        "פארטו",
+        "רב-מטרתי"
+      ],
+      "answer_en": "The thesis uses a coverage-first, surrogate-assisted NSGA-II workflow. A k-nearest-neighbors surrogate screens some exploratory policies, while selected policies and the final population receive exact schedule evaluations before reporting the Pareto front.",
+      "answer_he": "התזה משתמשת בתהליך NSGA-II בסיוע מודל חלופי ותעדוף כיסוי. מודל k-nearest-neighbors מסנן חלק מהמדיניות הניסיונית, בעוד שמדיניות נבחרת והאוכלוסייה הסופית מקבלות הערכת לוח זמנים מדויקת לפני דיווח חזית הפארטו.",
+      "source_ids": [
+        "source-repo-thesis-or"
+      ],
+      "priority": 68
+    },
+    {
+      "id": "fact-european-medal-identity",
+      "subject": "european-medal",
+      "category": "athletics",
+      "intents": [
+        "achievements",
+        "swimming"
+      ],
+      "aliases": [
+        "what medal did Kris win",
+        "which medal",
+        "European medal",
+        "איזו מדליה כריס זכה",
+        "באיזו מדליה הוא זכה"
+      ],
+      "keywords_en": [
+        "what medal",
+        "which medal",
+        "bronze",
+        "European Championships",
+        "swimming"
+      ],
+      "keywords_he": [
+        "איזו מדליה",
+        "ארד",
+        "אליפות אירופה",
+        "שחייה"
+      ],
+      "answer_en": "Kris won a bronze medal at the 2024 European Championships in Belgrade.",
+      "answer_he": "כריס זכה במדליית ארד באליפות אירופה 2024 בבלגרד.",
+      "source_ids": [
+        "source-wikipedia-competitive-record"
+      ],
+      "priority": 62
+    },
+    {
+      "id": "fact-european-medal-location",
+      "subject": "european-medal",
+      "category": "athletics",
+      "intents": [
+        "location",
+        "achievements",
+        "swimming"
+      ],
+      "aliases": [
+        "where was the European medal",
+        "where did he win the medal",
+        "where was that",
+        "medal location",
+        "איפה הוא זכה במדליה",
+        "איפה זה היה",
+        "מיקום המדליה"
+      ],
+      "keywords_en": [
+        "where",
+        "location",
+        "Belgrade",
+        "European Championships",
+        "medal",
+        "bronze"
+      ],
+      "keywords_he": [
+        "איפה",
+        "מיקום",
+        "בלגרד",
+        "אליפות אירופה",
+        "מדליה",
+        "ארד"
+      ],
+      "answer_en": "Kris won the European Championships bronze medal in Belgrade, Serbia.",
+      "answer_he": "כריס זכה במדליית הארד באליפות אירופה בבלגרד, סרביה.",
+      "source_ids": [
+        "source-wikipedia-competitive-record"
+      ],
+      "priority": 68
+    },
+    {
+      "id": "fact-israeli-records-championships",
+      "subject": "swimming-israel-records",
+      "category": "athletics",
+      "intents": [
+        "achievements",
+        "swimming"
+      ],
+      "aliases": [
+        "Israeli records",
+        "swimming records",
+        "Israeli championships",
+        "is he an Israeli champion",
+        "שיאי ישראל",
+        "אליפות ישראל",
+        "האם הוא אלוף ישראל"
+      ],
+      "keywords_en": [
+        "Israeli",
+        "records",
+        "champion",
+        "championship",
+        "three individual",
+        "two relay",
+        "short course",
+        "long course",
+        "since 2020"
+      ],
+      "keywords_he": [
+        "ישראל",
+        "שיאים",
+        "אלוף",
+        "אליפות",
+        "שלושה משחים אישיים",
+        "שני משחי שליחים",
+        "בריכה קצרה",
+        "בריכה ארוכה",
+        "מאז 2020"
+      ],
+      "answer_en": "The portfolio identifies Kris as an Israeli record holder in three individual events and two relay events, and as an Israeli champion since 2020 in both short-course and long-course pools.",
+      "answer_he": "תיק העבודות מציג את כריס כמחזיק בשיאי ישראל בשלושה משחים אישיים ובשני משחי שליחים, וכאלוף ישראל מאז 2020 בבריכות קצרות וארוכות.",
+      "source_ids": [
+        "source-portfolio-athletics-club",
+        "source-wikipedia-competitive-record"
+      ],
+      "priority": 58
+    },
+    {
+      "id": "fact-uga-swimming-achievements",
+      "subject": "swimming-uga",
+      "category": "athletics",
+      "intents": [
+        "achievements",
+        "swimming"
+      ],
+      "aliases": [
+        "UGA swimming achievements",
+        "what did he accomplish at UGA",
+        "All-America",
+        "NCAA swimming achievements",
+        "הישגי שחייה ב-UGA",
+        "מה הוא השיג ב-UGA",
+        "All-American"
+      ],
+      "keywords_en": [
+        "UGA",
+        "All-American",
+        "2023",
+        "2025",
+        "SEC",
+        "NCAA",
+        "relay",
+        "school record",
+        "breaststroke"
+      ],
+      "keywords_he": [
+        "UGA",
+        "All-American",
+        "2023",
+        "2025",
+        "SEC",
+        "NCAA",
+        "שליחים",
+        "שיא בית ספר",
+        "חזה"
+      ],
+      "answer_en": "At UGA, Kris earned All-America recognition in 2023 and 2025, recorded sixth- and eighth-place NCAA relay results, contributed to school relay records, placed eighth at SECs, and posted notable 50- and 100-yard breaststroke marks.",
+      "answer_he": "ב-UGA כריס זכה להכרה כ-All-American בשנים 2023 ו-2025, השיג מקומות שישי ושמיני בשליחים ב-NCAA, היה שותף לשיאי בית ספר בשליחים, סיים שמיני ב-SEC וקבע תוצאות בולטות ב-50 וב-100 יארד חזה.",
+      "source_ids": [
+        "source-portfolio-athletics-uga"
+      ],
+      "priority": 60
+    },
+    {
+      "id": "fact-leadership-synthesis",
+      "subject": "leadership",
+      "category": "leadership",
+      "intents": [
+        "leadership",
+        "roles",
+        "background"
+      ],
+      "aliases": [
+        "has Kris led a team",
+        "leadership experience",
+        "software team leadership",
+        "what leadership experience does he have",
+        "האם כריס הוביל צוות",
+        "ניסיון מנהיגות",
+        "הובלת צוות תוכנה"
+      ],
+      "keywords_en": [
+        "leadership",
+        "team lead",
+        "CoolDawgs",
+        "research collaboration",
+        "software team",
+        "student athlete",
+        "communication"
+      ],
+      "keywords_he": [
+        "מנהיגות",
+        "ראש צוות",
+        "CoolDawgs",
+        "שיתוף פעולה מחקרי",
+        "צוות תוכנה",
+        "ספורטאי סטודנט",
+        "תקשורת"
+      ],
+      "answer_en": "Kris’s clearest software-leadership example is CoolDawgs, where he served as Team Lead and Mobile Developer for a multidisciplinary sensor-research project. His portfolio also connects research and Division I athletics with clear communication, visible tradeoffs, and sustained team execution.",
+      "answer_he": "הדוגמה המרכזית למנהיגות תוכנה אצל כריס היא CoolDawgs, שבה שימש כראש צוות וכמפתח מובייל בפרויקט מחקר חיישנים רב-תחומי. תיק העבודות מחבר גם בין מחקר וספורט Division I לבין תקשורת ברורה, הצגת פשרות מקצועיות וביצוע צוותי מתמשך.",
+      "source_ids": [
+        "source-portfolio-experience-cooldawgs",
+        "source-portfolio-about"
+      ],
+      "priority": 62
+    },
+    {
+      "id": "fact-recruiter-differentiation",
+      "subject": "portfolio-synthesis",
+      "category": "about",
+      "intents": [
+        "background",
+        "engineering",
+        "leadership"
+      ],
+      "aliases": [
+        "what makes Kris different",
+        "what makes him different from other junior developers",
+        "why Kris",
+        "recruiter summary",
+        "מה מייחד את כריס",
+        "מה מבדיל אותו ממפתחים מתחילים אחרים",
+        "סיכום למגייס"
+      ],
+      "keywords_en": [
+        "different",
+        "distinctive",
+        "junior developer",
+        "recruiter",
+        "software engineering",
+        "AI research",
+        "leadership",
+        "athletics"
+      ],
+      "keywords_he": [
+        "מייחד",
+        "מבדיל",
+        "מפתח מתחיל",
+        "מגייס",
+        "הנדסת תוכנה",
+        "מחקר AI",
+        "מנהיגות",
+        "ספורט"
+      ],
+      "answer_en": "Kris combines documented full-stack delivery, applied AI and optimization research, technical leadership on a sensor project, and experience competing at NCAA and international swimming levels. The distinction is the combination of those areas, not a claim that one alone makes him stronger than other candidates.",
+      "answer_he": "כריס משלב ניסיון מתועד בפיתוח full-stack, מחקר יישומי ב-AI ובאופטימיזציה, הובלה טכנית בפרויקט חיישנים וניסיון תחרותי בשחייה ברמות NCAA ובינלאומית. הייחוד הוא בשילוב התחומים האלה, ולא בטענה שתחום אחד לבדו הופך אותו לטוב ממועמדים אחרים.",
+      "source_ids": [
+        "source-portfolio-project-roster-lab",
+        "source-portfolio-experience-cooldawgs",
+        "source-portfolio-athletics-uga"
+      ],
+      "priority": 64
+    },
+    {
+      "id": "fact-professional-profiles",
+      "subject": "contact",
+      "category": "links",
+      "intents": [
+        "contact"
+      ],
+      "aliases": [
+        "GitHub profile",
+        "LinkedIn profile",
+        "professional profiles",
+        "where is his GitHub",
+        "where is his LinkedIn",
+        "פרופיל GitHub",
+        "פרופיל LinkedIn",
+        "פרופילים מקצועיים"
+      ],
+      "keywords_en": [
+        "GitHub",
+        "LinkedIn",
+        "profile",
+        "professional",
+        "contact",
+        "resume"
+      ],
+      "keywords_he": [
+        "GitHub",
+        "LinkedIn",
+        "פרופיל",
+        "מקצועי",
+        "יצירת קשר",
+        "קורות חיים"
+      ],
+      "answer_en": "Kris’s public GitHub and LinkedIn profiles are linked from the portfolio, along with his résumé and public contact details.",
+      "answer_he": "פרופילי ה-GitHub וה-LinkedIn הציבוריים של כריס מקושרים מתיק העבודות, לצד קורות החיים ופרטי הקשר הציבוריים שלו.",
+      "source_ids": [
+        "source-external-github",
+        "source-external-linkedin",
+        "source-external-resume"
+      ],
+      "priority": 52
+    },
+    {
+      "id": "fact-uga-overview",
+      "subject": "uga-overview",
+      "category": "about",
+      "intents": [
+        "background",
+        "education",
+        "roles",
+        "achievements"
+      ],
+      "aliases": [
+        "what did Kris do at UGA",
+        "Kris at UGA",
+        "UGA background",
+        "מה כריס עשה ב-UGA",
+        "הרקע של כריס ב-UGA"
+      ],
+      "keywords_en": [
+        "UGA",
+        "University of Georgia",
+        "computer science",
+        "artificial intelligence",
+        "swimming",
+        "All-American",
+        "app developer",
+        "graduate assistant"
+      ],
+      "keywords_he": [
+        "UGA",
+        "אוניברסיטת ג׳ורג׳יה",
+        "מדעי המחשב",
+        "בינה מלאכותית",
+        "שחייה",
+        "All-American",
+        "מפתח אפליקציה",
+        "עוזר מחקר"
+      ],
+      "answer_en": "At UGA, Kris completed a B.S. in Computer Science, continued into the Double Dawgs M.S. in Artificial Intelligence, competed for the swimming team with All-America recognition, and later built recruiting and roster-analysis software for Swimming & Diving staff.",
+      "answer_he": "ב-UGA כריס סיים תואר ראשון במדעי המחשב, המשיך לתואר מוסמך בבינה מלאכותית במסלול Double Dawgs, התחרה בנבחרת השחייה וזכה להכרה כ-All-American, ובהמשך בנה תוכנת גיוס וניתוח סגל לצוות השחייה והצלילה.",
+      "source_ids": [
+        "source-portfolio-education-bs-cs",
+        "source-portfolio-athletics-uga",
+        "source-portfolio-experience-uga-swim"
+      ],
+      "priority": 56
+    },
+    {
+      "id": "fact-education-overview",
+      "subject": "education",
+      "category": "education",
+      "intents": [
+        "education"
+      ],
+      "aliases": [
+        "education",
+        "academic background",
+        "what did Kris study",
+        "UGA degree",
+        "השכלה",
+        "מה כריס למד",
+        "תארים"
+      ],
+      "keywords_en": [
+        "study",
+        "studied",
+        "degree",
+        "degrees",
+        "education",
+        "university",
+        "uga",
+        "computer science",
+        "artificial intelligence"
+      ],
+      "keywords_he": [
+        "למד",
+        "לימודים",
+        "תואר",
+        "תארים",
+        "השכלה",
+        "אוניברסיטה",
+        "מדעי המחשב",
+        "בינה מלאכותית"
+      ],
+      "answer_en": "At the University of Georgia, Kris completed a B.S. in Computer Science with an Artificial Intelligence emphasis and a Business minor in May 2026; he is pursuing a Double Dawgs M.S. in Artificial Intelligence expected in December 2026.",
+      "answer_he": "באוניברסיטת ג׳ורג׳יה כריס סיים במאי 2026 תואר ראשון במדעי המחשב עם דגש בבינה מלאכותית ומינור בעסקים; הוא ממשיך במסלול Double Dawgs לתואר מוסמך בבינה מלאכותית, עם סיום צפוי בדצמבר 2026.",
+      "source_ids": [
+        "source-portfolio-education-bs-cs",
+        "source-portfolio-education-business",
+        "source-portfolio-education-ms-ai"
+      ],
+      "priority": 28
+    },
+    {
+      "id": "fact-swimming-major-achievements",
+      "subject": "swimming-achievements",
+      "category": "athletics",
+      "intents": [
+        "achievements",
+        "swimming"
+      ],
+      "aliases": [
+        "swimming achievements",
+        "major swimming achievements",
+        "competitive swimming record",
+        "הישגי שחייה",
+        "הישגים מרכזיים בשחייה"
+      ],
+      "keywords_en": [
+        "swimming",
+        "achievements",
+        "medal",
+        "records",
+        "all american",
+        "championships",
+        "national team"
+      ],
+      "keywords_he": [
+        "שחייה",
+        "הישגים",
+        "מדליה",
+        "שיאים",
+        "אליפות",
+        "נבחרת ישראל"
+      ],
+      "answer_en": "Kris won bronze at the 2024 European Championships, reached two World Championship semifinals, contributed to Israeli relay records, and earned All-America recognition at UGA in 2023 and 2025.",
+      "answer_he": "כריס זכה בארד באליפות אירופה 2024, הגיע לשני חצאי גמר באליפות העולם, היה שותף לשיאי שליחים ישראליים וזכה להכרה כ-All-American ב-UGA בשנים 2023 ו-2025.",
+      "source_ids": [
+        "source-portfolio-athletics-israel",
+        "source-wikipedia-competitive-record",
+        "source-portfolio-athletics-uga"
+      ],
+      "priority": 30
+    },
+    {
+      "id": "fact-european-medal-year",
+      "subject": "european-medal",
+      "category": "athletics",
+      "intents": [
+        "date",
+        "achievements",
+        "swimming"
+      ],
+      "aliases": [
+        "European medal",
+        "European Championships medal",
+        "European bronze",
+        "מדליה אירופית",
+        "מדליה באליפות אירופה",
+        "ארד באליפות אירופה"
+      ],
+      "keywords_en": [
+        "which year",
+        "what year",
+        "when",
+        "european",
+        "medal",
+        "bronze",
+        "championships",
+        "2024",
+        "belgrade"
+      ],
+      "keywords_he": [
+        "באיזו שנה",
+        "מתי",
+        "אירופה",
+        "מדליה",
+        "ארד",
+        "אליפות",
+        "2024",
+        "בלגרד"
+      ],
+      "answer_en": "Kris won the European Championships bronze medal in 2024, in Belgrade.",
+      "answer_he": "כריס זכה במדליית הארד באליפות אירופה בשנת 2024, בבלגרד.",
+      "source_ids": [
+        "source-portfolio-athletics-israel",
+        "source-wikipedia-competitive-record"
+      ],
+      "priority": 36
+    },
+    {
+      "id": "fact-contact-details",
+      "subject": "contact",
+      "category": "links",
+      "intents": [
+        "contact"
+      ],
+      "aliases": [
+        "contact Kris",
+        "email Kris",
+        "phone number",
+        "יצירת קשר",
+        "ליצור קשר",
+        "קשר עם כריס",
+        "אימייל",
+        "טלפון"
+      ],
+      "keywords_en": [
+        "contact",
+        "email",
+        "phone",
+        "github",
+        "linkedin",
+        "resume"
+      ],
+      "keywords_he": [
+        "קשר",
+        "אימייל",
+        "טלפון",
+        "גיטהאב",
+        "לינקדאין",
+        "קורות חיים"
+      ],
+      "answer_en": "Kris’s public contact details are krispitshugin@gmail.com and +972-52-633-5738; his GitHub, LinkedIn, and résumé are also linked from the portfolio.",
+      "answer_he": "פרטי הקשר הציבוריים של כריס הם krispitshugin@gmail.com ו-+972-52-633-5738; קישורים ל-GitHub, ל-LinkedIn ולקורות החיים מופיעים גם בתיק העבודות.",
+      "source_ids": [
+        "source-portfolio-links",
+        "source-external-github",
+        "source-external-linkedin",
+        "source-external-resume"
+      ],
+      "priority": 28
+    },
+    {
+      "id": "fact-film-hub-technologies-curated",
+      "subject": "portfolio-project-cinema",
+      "category": "projects",
+      "intents": [
+        "technologies"
+      ],
+      "aliases": [
+        "Film-Hub",
+        "Film Hub",
+        "Cinema Ticketing Website",
+        "פילם האב",
+        "אתר הכרטיסים לקולנוע"
+      ],
+      "keywords_en": [
+        "film hub",
+        "technology",
+        "technologies",
+        "tech",
+        "stack",
+        "built with",
+        "django",
+        "javascript",
+        "supabase"
+      ],
+      "keywords_he": [
+        "פילם האב",
+        "טכנולוגיה",
+        "טכנולוגיות",
+        "סטאק",
+        "נבנה",
+        "django",
+        "javascript",
+        "supabase"
+      ],
+      "answer_en": "Film-Hub uses Django, JavaScript, and Supabase.",
+      "answer_he": "Film-Hub נבנה עם Django, JavaScript ו-Supabase.",
+      "source_ids": [
+        "source-portfolio-project-cinema"
+      ],
+      "priority": 50
+    },
+    {
+      "id": "fact-portfolio-about-overview",
+      "subject": "portfolio-about-overview",
+      "category": "about",
+      "intents": [
+        "background",
+        "engineering"
+      ],
+      "aliases": [
+        "Overall portfolio profile",
+        "Kris's software engineering background",
+        "software engineering background",
+        "engineering background"
+      ],
+      "keywords_en": [
+        "software engineering",
+        "AI student",
+        "UGA",
+        "Double Dawgs",
+        "portfolio",
+        "full-stack"
+      ],
+      "keywords_he": [
+        "הנדסת תוכנה",
+        "בינה מלאכותית",
+        "אוניברסיטת ג׳ורג׳יה",
+        "Double Dawgs",
+        "פול סטאק",
+        "תיק עבודות"
+      ],
+      "answer_en": "Kris is a software engineer and Double Dawgs M.S. in Artificial Intelligence student at the University of Georgia. His portfolio centers on AI application workflows, internal athlete tools, research delivery, and full-stack product engineering.",
+      "answer_he": "כריס הוא מהנדס תוכנה וסטודנט במסלול Double Dawgs לתואר מוסמך בבינה מלאכותית באוניברסיטת ג׳ורג׳יה. תיק העבודות שלו מתמקד בתהליכי עבודה של יישומי AI, כלים פנימיים לעולמות הספורט, ביצוע מחקרי והנדסת מוצר full-stack.",
+      "source_ids": [
+        "source-portfolio-about"
+      ],
+      "priority": 0
+    },
+    {
+      "id": "fact-portfolio-about-engineering-approach",
+      "subject": "portfolio-about-engineering-approach",
+      "category": "about",
+      "intents": [
+        "background",
+        "engineering"
+      ],
+      "aliases": [
+        "Engineering approach"
+      ],
+      "keywords_en": [
+        "approach",
+        "engineering",
+        "reliable",
+        "dependable",
+        "structured",
+        "real-world"
+      ],
+      "keywords_he": [
+        "גישה",
+        "הנדסה",
+        "אמין",
+        "מסודר",
+        "עולם אמיתי",
+        "שימוש אמיתי"
+      ],
+      "answer_en": "Kris describes his engineering approach as dependable, structured, and built for real usage. He focuses on systems that stay useful under real-world pressure instead of polished one-off demos.",
+      "answer_he": "כריס מתאר את הגישה ההנדסית שלו כאמינה, מסודרת ומכוונת לשימוש אמיתי. הוא מתמקד במערכות שנשארות שימושיות תחת לחץ בעולם האמיתי, ולא רק בדמואים חד-פעמיים שנראים טוב.",
+      "source_ids": [
+        "source-portfolio-about"
+      ],
+      "priority": 0
+    },
+    {
+      "id": "fact-portfolio-about-leadership",
+      "subject": "portfolio-about-leadership",
+      "category": "leadership",
+      "intents": [
+        "leadership"
+      ],
+      "aliases": [
+        "Leadership and communication"
+      ],
+      "keywords_en": [
+        "leadership",
+        "communication",
+        "tradeoffs",
+        "team",
+        "student-athlete",
+        "pressure"
+      ],
+      "keywords_he": [
+        "מנהיגות",
+        "תקשורת",
+        "פשרות",
+        "צוות",
+        "ספורטאי-סטודנט",
+        "לחץ"
+      ],
+      "answer_en": "The portfolio says swimming and research taught Kris to communicate clearly, make tradeoffs visible, and keep a team moving without lowering the quality bar.",
+      "answer_he": "לפי תיק העבודות, השחייה והמחקר לימדו את כריס לתקשר בצורה ברורה, להבליט פשרות מקצועיות, ולהניע צוות קדימה בלי להוריד את רמת האיכות.",
+      "source_ids": [
+        "source-portfolio-about"
+      ],
+      "priority": 0
+    },
+    {
+      "id": "fact-portfolio-links-contact",
+      "subject": "portfolio-links-contact",
+      "category": "links",
+      "intents": [
+        "contact"
+      ],
+      "aliases": [
+        "Public links and resume"
+      ],
+      "keywords_en": [
+        "resume",
+        "CV",
+        "GitHub",
+        "LinkedIn",
+        "email",
+        "phone",
+        "contact"
+      ],
+      "keywords_he": [
+        "קורות חיים",
+        "GitHub",
+        "LinkedIn",
+        "אימייל",
+        "טלפון",
+        "יצירת קשר"
+      ],
+      "answer_en": "The portfolio provides direct public links to Kris's resume PDF, GitHub profile, LinkedIn profile, thesis sources page, phone number, and public email address.",
+      "answer_he": "תיק העבודות כולל קישורים ציבוריים ישירים לקובץ קורות החיים של כריס, לפרופיל ה-GitHub, לפרופיל ה-LinkedIn, לעמוד מקורות התזה, למספר הטלפון ולכתובת האימייל הציבורית שלו.",
+      "source_ids": [
+        "source-portfolio-links"
+      ],
+      "priority": 0
+    },
+    {
+      "id": "fact-portfolio-experience-intelliverse",
+      "subject": "portfolio-experience-intelliverse",
+      "category": "experience",
+      "intents": [
+        "roles",
+        "experience"
+      ],
+      "aliases": [
+        "IntelliVerse internship",
+        "IntelliVerse",
+        "AI and App Development Intern"
+      ],
+      "keywords_en": [
+        "IntelliVerse",
+        "internship",
+        "AI features",
+        "workflow design",
+        "testing"
+      ],
+      "keywords_he": [
+        "IntelliVerse",
+        "התמחות",
+        "פיצ'רי AI",
+        "תהליכי עבודה",
+        "בדיקות"
+      ],
+      "answer_en": "Since July 2026, Kris has worked remotely as an AI and App Development Intern at IntelliVerse. His role focuses on delivering, testing, and improving AI-driven application features and technical workflows.",
+      "answer_he": "מאז יולי 2026 כריס עובד מרחוק כמתמחה בפיתוח אפליקציות ו-AI ב-IntelliVerse. התפקיד שלו מתמקד בפיתוח, בדיקות ושיפור של פיצ'רים מבוססי AI ושל תהליכי עבודה טכניים.",
+      "source_ids": [
+        "source-portfolio-experience-intelliverse"
+      ],
+      "priority": 0
+    },
+    {
+      "id": "fact-portfolio-experience-uga-swim",
+      "subject": "portfolio-experience-uga-swim",
+      "category": "experience",
+      "intents": [
+        "roles",
+        "experience"
+      ],
+      "aliases": [
+        "UGA Swimming and Diving operations app",
+        "UGA Swimming app",
+        "roster analysis app",
+        "recruiting app"
+      ],
+      "keywords_en": [
+        "UGA Swimming",
+        "graduate assistant",
+        "roster analysis",
+        "recruiting",
+        "staff tools"
+      ],
+      "keywords_he": [
+        "UGA",
+        "שחייה",
+        "עוזר הוראה",
+        "ניתוח סגל",
+        "גיוס",
+        "כלי צוות"
+      ],
+      "answer_en": "Since April 2026, Kris has served as an App Developer and incoming Graduate Assistant for University of Georgia Swimming and Diving. He is building a recruiting and roster-analysis application with athlete management, projections, recruiting priorities, and collaborative staff tools.",
+      "answer_he": "מאז אפריל 2026 כריס משמש כמפתח אפליקציה וכעוזר הוראה עתידי בענף השחייה והצלילה של אוניברסיטת ג׳ורג׳יה. הוא בונה אפליקציית גיוס וניתוח סגל עם ניהול ספורטאים, תחזיות סגל, סדרי עדיפויות בגיוס וכלי עבודה שיתופיים לצוות.",
+      "source_ids": [
+        "source-portfolio-experience-uga-swim"
+      ],
+      "priority": 0
+    },
+    {
+      "id": "fact-portfolio-experience-cooldawgs",
+      "subject": "portfolio-experience-cooldawgs",
+      "category": "experience",
+      "intents": [
+        "roles",
+        "experience"
+      ],
+      "aliases": [
+        "CoolDawgs research leadership",
+        "CoolDawgs",
+        "Cool Dawgs",
+        "wearable sensor project"
+      ],
+      "keywords_en": [
+        "CoolDawgs",
+        "research",
+        "React Native",
+        "Bluetooth",
+        "CURO",
+        "best paper"
+      ],
+      "keywords_he": [
+        "CoolDawgs",
+        "מחקר",
+        "React Native",
+        "בלוטות'",
+        "CURO",
+        "מאמר מצטיין"
+      ],
+      "answer_en": "From August 2025 to May 2026, Kris was Team Lead and Mobile Developer for the CoolDawgs Research Team at the University of Georgia. He led the React Native mobile build for a Bluetooth sensor research system and helped deliver temperature summaries and interactive charts recognized with the CURO Best Paper Award.",
+      "answer_he": "בין אוגוסט 2025 למאי 2026 כריס שימש כראש צוות וכמפתח מובייל בצוות המחקר CoolDawgs באוניברסיטת ג׳ורג׳יה. הוא הוביל את פיתוח המובייל ב-React Native למערכת מחקרית עם חיישני Bluetooth, וסייע בהצגת סיכומי טמפרטורה וגרפים אינטראקטיביים שזכו בפרס המאמר המצטיין של CURO.",
+      "source_ids": [
+        "source-portfolio-experience-cooldawgs"
+      ],
+      "priority": 0
+    },
+    {
+      "id": "fact-portfolio-project-roster-lab",
+      "subject": "portfolio-project-roster-lab",
+      "category": "projects",
+      "intents": [
+        "projects",
+        "overview"
+      ],
+      "aliases": [
+        "Roster Lab App",
+        "Roster Lab",
+        "Roster Lab App"
+      ],
+      "keywords_en": [
+        "Roster Lab",
+        "recruiting",
+        "roster",
+        "Next.js",
+        "Prisma",
+        "PostgreSQL",
+        "athlete operations"
+      ],
+      "keywords_he": [
+        "Roster Lab",
+        "גיוס",
+        "סגל",
+        "Next.js",
+        "Prisma",
+        "PostgreSQL",
+        "תפעול ספורטאים"
+      ],
+      "answer_en": "Roster Lab App is a featured athlete-operations product that centralizes recruiting and roster analysis for swim staff. It uses Next.js, TypeScript, Tailwind CSS, Prisma, and PostgreSQL, and it focuses on searchable roster views, recruiting dashboards, scenario analysis, and long-range team planning.",
+      "answer_he": "Roster Lab App הוא פרויקט דגל בעולמות תפעול הספורטאים, שמרכז במקום אחד גיוס וניתוח סגל עבור צוות שחייה. הוא בנוי עם Next.js, TypeScript, Tailwind CSS, Prisma ו-PostgreSQL, ומתמקד בתצוגות סגל ניתנות לחיפוש, דאשבורדים לגיוס, ניתוח תרחישים ותכנון ארוך טווח של הקבוצה.",
+      "source_ids": [
+        "source-portfolio-project-roster-lab"
+      ],
+      "priority": 0
+    },
+    {
+      "id": "fact-portfolio-project-roster-lab-technologies",
+      "subject": "portfolio-project-roster-lab",
+      "category": "projects",
+      "intents": [
+        "technologies"
+      ],
+      "aliases": [
+        "Roster Lab App",
+        "Roster Lab",
+        "Roster Lab App"
+      ],
+      "keywords_en": [
+        "technology",
+        "technologies",
+        "tech",
+        "stack",
+        "built with",
+        "Next.js",
+        "TypeScript",
+        "Tailwind CSS",
+        "Prisma",
+        "PostgreSQL"
+      ],
+      "keywords_he": [
+        "טכנולוגיה",
+        "טכנולוגיות",
+        "סטאק",
+        "נבנה עם",
+        "Next.js",
+        "TypeScript",
+        "Tailwind CSS",
+        "Prisma",
+        "PostgreSQL"
+      ],
+      "answer_en": "Roster Lab App uses Next.js, TypeScript, Tailwind CSS, Prisma, PostgreSQL.",
+      "answer_he": "Roster Lab App נבנה עם Next.js, TypeScript, Tailwind CSS, Prisma, PostgreSQL.",
+      "source_ids": [
+        "source-portfolio-project-roster-lab"
+      ],
+      "priority": 20
+    },
+    {
+      "id": "fact-portfolio-project-patient-record",
+      "subject": "portfolio-project-patient-record",
+      "category": "projects",
+      "intents": [
+        "projects",
+        "overview"
+      ],
+      "aliases": [
+        "Patient Record App",
+        "Patient Record App",
+        "patient records app",
+        "KeePatients"
+      ],
+      "keywords_en": [
+        "Patient Record",
+        "healthcare",
+        "Supabase",
+        "RLS",
+        "PDF export",
+        "clinical workflow"
+      ],
+      "keywords_he": [
+        "Patient Record",
+        "בריאות",
+        "Supabase",
+        "אבטחת שורות",
+        "PDF",
+        "תהליך קליני"
+      ],
+      "answer_en": "Patient Record App is a healthcare workflow product for intake, treatment tracking, appointments, and exportable summaries. The portfolio highlights structured reports, reusable note templates, Supabase authentication, row-level security, and PDF export.",
+      "answer_he": "Patient Record App הוא מוצר לעולמות העבודה הרפואיים עבור קליטה, מעקב טיפול, פגישות וסיכומים שניתנים לייצוא. תיק העבודות מדגיש דוחות מובנים, תבניות הערות לשימוש חוזר, אימות באמצעות Supabase, אבטחת row-level וייצוא ל-PDF.",
+      "source_ids": [
+        "source-portfolio-project-patient-record"
+      ],
+      "priority": 0
+    },
+    {
+      "id": "fact-portfolio-project-patient-record-technologies",
+      "subject": "portfolio-project-patient-record",
+      "category": "projects",
+      "intents": [
+        "technologies"
+      ],
+      "aliases": [
+        "Patient Record App",
+        "Patient Record App",
+        "patient records app",
+        "KeePatients"
+      ],
+      "keywords_en": [
+        "technology",
+        "technologies",
+        "tech",
+        "stack",
+        "built with",
+        "React",
+        "Next.js",
+        "Supabase Auth",
+        "PostgreSQL",
+        "PDF export"
+      ],
+      "keywords_he": [
+        "טכנולוגיה",
+        "טכנולוגיות",
+        "סטאק",
+        "נבנה עם",
+        "React",
+        "Next.js",
+        "Supabase Auth",
+        "PostgreSQL",
+        "PDF export"
+      ],
+      "answer_en": "Patient Record App uses React, Next.js, Supabase Auth, PostgreSQL, PDF export.",
+      "answer_he": "Patient Record App נבנה עם React, Next.js, Supabase Auth, PostgreSQL, PDF export.",
+      "source_ids": [
+        "source-portfolio-project-patient-record"
+      ],
+      "priority": 20
+    },
+    {
+      "id": "fact-portfolio-project-cinema",
+      "subject": "portfolio-project-cinema",
+      "category": "projects",
+      "intents": [
+        "projects",
+        "overview"
+      ],
+      "aliases": [
+        "Film-Hub — Cinema Ticketing Website",
+        "Film-Hub",
+        "Film Hub",
+        "Cinema Ticketing Website",
+        "film-hub-theta"
+      ],
+      "keywords_en": [
+        "Film-Hub",
+        "Film Hub",
+        "cinema",
+        "ticketing",
+        "booking",
+        "Django",
+        "JavaScript",
+        "Supabase",
+        "concurrency",
+        "seats",
+        "technologies",
+        "tech stack"
+      ],
+      "keywords_he": [
+        "Film-Hub",
+        "Film Hub",
+        "קולנוע",
+        "כרטיסים",
+        "הזמנות",
+        "Django",
+        "JavaScript",
+        "Supabase",
+        "קונקרנציה",
+        "מושבים",
+        "טכנולוגיות"
+      ],
+      "answer_en": "Film-Hub, listed in the portfolio as Cinema Ticketing Website, is a booking system built with Django, JavaScript, and Supabase. Its functionality includes dynamic seat state, temporary holds, booking logic, and concurrency-safe reservations.",
+      "answer_he": "Film-Hub, שמופיע בתיק העבודות בשם Cinema Ticketing Website, הוא מערכת הזמנת כרטיסים שנבנתה עם Django, JavaScript ו-Supabase. הפונקציונליות שלה כוללת מצב מושבים דינמי, החזקות זמניות, לוגיקת הזמנות והזמנות בטוחות תחת עומס במקביל.",
+      "source_ids": [
+        "source-portfolio-project-cinema"
+      ],
+      "priority": 0
+    },
+    {
+      "id": "fact-portfolio-project-cinema-technologies",
+      "subject": "portfolio-project-cinema",
+      "category": "projects",
+      "intents": [
+        "technologies"
+      ],
+      "aliases": [
+        "Film-Hub — Cinema Ticketing Website",
+        "Film-Hub",
+        "Film Hub",
+        "Cinema Ticketing Website",
+        "film-hub-theta"
+      ],
+      "keywords_en": [
+        "technology",
+        "technologies",
+        "tech",
+        "stack",
+        "built with",
+        "Django",
+        "JavaScript",
+        "Supabase"
+      ],
+      "keywords_he": [
+        "טכנולוגיה",
+        "טכנולוגיות",
+        "סטאק",
+        "נבנה עם",
+        "Django",
+        "JavaScript",
+        "Supabase"
+      ],
+      "answer_en": "Film-Hub — Cinema Ticketing Website uses Django, JavaScript, Supabase.",
+      "answer_he": "Film-Hub — Cinema Ticketing Website נבנה עם Django, JavaScript, Supabase.",
+      "source_ids": [
+        "source-portfolio-project-cinema"
+      ],
+      "priority": 20
+    },
+    {
+      "id": "fact-portfolio-project-docompare",
+      "subject": "portfolio-project-docompare",
+      "category": "projects",
+      "intents": [
+        "projects",
+        "overview"
+      ],
+      "aliases": [
+        "DoCompare",
+        "DoCompare",
+        "Do Compare"
+      ],
+      "keywords_en": [
+        "DoCompare",
+        "documents",
+        "comparison",
+        "PDF",
+        "DOCX",
+        "protected access"
+      ],
+      "keywords_he": [
+        "DoCompare",
+        "מסמכים",
+        "השוואה",
+        "PDF",
+        "DOCX",
+        "גישה מוגנת"
+      ],
+      "answer_en": "DoCompare is a document-intelligence product for side-by-side document comparison. The portfolio describes support for PDF, DOCX, TXT, and Markdown uploads, protected access, downloadable reports, and quote-level difference review.",
+      "answer_he": "DoCompare הוא מוצר לעולמות הבינה התיעודית להשוואת מסמכים זה לצד זה. תיק העבודות מתאר תמיכה בהעלאת PDF, DOCX, TXT ו-Markdown, גישה מוגנת, דוחות להורדה ובדיקת הבדלים ברמת ציטוט.",
+      "source_ids": [
+        "source-portfolio-project-docompare"
+      ],
+      "priority": 0
+    },
+    {
+      "id": "fact-portfolio-project-docompare-technologies",
+      "subject": "portfolio-project-docompare",
+      "category": "projects",
+      "intents": [
+        "technologies"
+      ],
+      "aliases": [
+        "DoCompare",
+        "DoCompare",
+        "Do Compare"
+      ],
+      "keywords_en": [
+        "technology",
+        "technologies",
+        "tech",
+        "stack",
+        "built with",
+        "Next.js",
+        "Supabase",
+        "File processing"
+      ],
+      "keywords_he": [
+        "טכנולוגיה",
+        "טכנולוגיות",
+        "סטאק",
+        "נבנה עם",
+        "Next.js",
+        "Supabase",
+        "File processing"
+      ],
+      "answer_en": "DoCompare uses Next.js, Supabase, File processing.",
+      "answer_he": "DoCompare נבנה עם Next.js, Supabase, File processing.",
+      "source_ids": [
+        "source-portfolio-project-docompare"
+      ],
+      "priority": 20
+    },
+    {
+      "id": "fact-portfolio-project-cnn",
+      "subject": "portfolio-project-cnn",
+      "category": "projects",
+      "intents": [
+        "projects",
+        "overview"
+      ],
+      "aliases": [
+        "CNN Project",
+        "CNN Project",
+        "facial-expression recognition",
+        "emotion classification",
+        "computer vision project",
+        "machine-learning project",
+        "machine learning project"
+      ],
+      "keywords_en": [
+        "CNN",
+        "computer vision",
+        "AI",
+        "deep learning",
+        "facial expression",
+        "emotion classification",
+        "webcam",
+        "live camera",
+        "real-time inference",
+        "confidence",
+        "Grad-CAM",
+        "training",
+        "evaluation"
+      ],
+      "keywords_he": [
+        "CNN",
+        "ראייה ממוחשבת",
+        "בינה מלאכותית",
+        "למידה עמוקה",
+        "הבעות פנים",
+        "סיווג רגשות",
+        "מצלמה",
+        "זמן אמת",
+        "ביטחון",
+        "Grad-CAM",
+        "אימון",
+        "הערכה"
+      ],
+      "answer_en": "The facial-expression recognition project is a real-time computer-vision application that classifies seven expressions from uploaded images or a live webcam feed. It includes image preprocessing, model training and held-out evaluation, confidence-ranked predictions, and optional Grad-CAM views for interpreting the model's focus.",
+      "answer_he": "פרויקט זיהוי הבעות הפנים הוא יישום ראייה ממוחשבת בזמן אמת שמסווג שבע הבעות מתמונות שהועלו או מווידאו חי ממצלמת רשת. הוא כולל עיבוד מקדים של תמונות, אימון והערכה על סט בדיקה, תחזיות מדורגות לפי ביטחון ותצוגות Grad-CAM אופציונליות לפרשנות מוקד המודל.",
+      "source_ids": [
+        "source-portfolio-project-cnn"
+      ],
+      "priority": 0
+    },
+    {
+      "id": "fact-portfolio-project-cnn-technologies",
+      "subject": "portfolio-project-cnn",
+      "category": "projects",
+      "intents": [
+        "technologies"
+      ],
+      "aliases": [
+        "CNN Project",
+        "CNN Project",
+        "facial-expression recognition",
+        "emotion classification",
+        "computer vision project",
+        "machine-learning project",
+        "machine learning project"
+      ],
+      "keywords_en": [
+        "technology",
+        "technologies",
+        "tech",
+        "stack",
+        "built with",
+        "Python",
+        "CNNs",
+        "Model training",
+        "Evaluation",
+        "Grad-CAM"
+      ],
+      "keywords_he": [
+        "טכנולוגיה",
+        "טכנולוגיות",
+        "סטאק",
+        "נבנה עם",
+        "Python",
+        "CNNs",
+        "Model training",
+        "Evaluation",
+        "Grad-CAM"
+      ],
+      "answer_en": "CNN Project uses Python, CNNs, Model training, Evaluation, Grad-CAM.",
+      "answer_he": "CNN Project נבנה עם Python, CNNs, Model training, Evaluation, Grad-CAM.",
+      "source_ids": [
+        "source-portfolio-project-cnn"
+      ],
+      "priority": 20
+    },
+    {
+      "id": "fact-repository-roster-lab-scoring",
+      "subject": "repository-roster-lab-scoring",
+      "category": "projects",
+      "intents": [
+        "projects",
+        "overview"
+      ],
+      "aliases": [
+        "Roster Lab performance scoring",
+        "Roster Lab scoring",
+        "Competitive Fitness",
+        "swimmer scoring",
+        "sports analytics software",
+        "ranking algorithms"
+      ],
+      "keywords_en": [
+        "Roster Lab",
+        "score swimmers",
+        "SCY",
+        "SCM",
+        "LCM",
+        "NCAA",
+        "A cut",
+        "Top 3",
+        "Top 8",
+        "Top 16",
+        "records",
+        "benchmarks",
+        "normalize",
+        "ranking",
+        "sports analytics"
+      ],
+      "keywords_he": [
+        "Roster Lab",
+        "ניקוד שחיינים",
+        "SCY",
+        "SCM",
+        "LCM",
+        "NCAA",
+        "שיאים",
+        "מדדים",
+        "נרמול",
+        "דירוג",
+        "אנליטיקת ספורט"
+      ],
+      "answer_en": "Roster Lab scores swimmers with an event-normalized Competitive Fitness model. It uses SCY benchmarks based on NCAA Division I records, qualification standards, and multi-year Top 3, Top 8, and Top 16 placement cutoffs; SCM and LCM swims use World Aquatics benchmarks instead of being converted to SCY. Each swimmer's score averages the strongest three eligible individual events, with missing events excluded rather than treated as zero.",
+      "answer_he": "Roster Lab מדרג שחיינים באמצעות מודל Competitive Fitness מנורמל לפי משחה. זמני SCY מושווים לשיאי NCAA Division I, לתקני העפלה ולספי Top 3, Top 8 ו-Top 16 רב-שנתיים; זמני SCM ו-LCM מושווים למדדי World Aquatics במקום להיות מומרים ל-SCY. הציון של כל שחיין הוא ממוצע של שלושת המשחים האישיים החזקים ביותר שניתנים לניקוד, ונתונים חסרים אינם נחשבים לאפס.",
+      "source_ids": [
+        "source-repo-roster-lab"
+      ],
+      "priority": 0
+    },
+    {
+      "id": "fact-repository-roster-lab-scoring-technologies",
+      "subject": "repository-roster-lab-scoring",
+      "category": "projects",
+      "intents": [
+        "technologies"
+      ],
+      "aliases": [
+        "Roster Lab performance scoring",
+        "Roster Lab scoring",
+        "Competitive Fitness",
+        "swimmer scoring",
+        "sports analytics software",
+        "ranking algorithms"
+      ],
+      "keywords_en": [
+        "technology",
+        "technologies",
+        "tech",
+        "stack",
+        "built with",
+        "Next.js",
+        "TypeScript",
+        "PostgreSQL",
+        "Prisma",
+        "Recharts"
+      ],
+      "keywords_he": [
+        "טכנולוגיה",
+        "טכנולוגיות",
+        "סטאק",
+        "נבנה עם",
+        "Next.js",
+        "TypeScript",
+        "PostgreSQL",
+        "Prisma",
+        "Recharts"
+      ],
+      "answer_en": "Roster Lab performance scoring uses Next.js, TypeScript, PostgreSQL, Prisma, Recharts.",
+      "answer_he": "Roster Lab performance scoring נבנה עם Next.js, TypeScript, PostgreSQL, Prisma, Recharts.",
+      "source_ids": [
+        "source-repo-roster-lab"
+      ],
+      "priority": 20
+    },
+    {
+      "id": "fact-repository-thesis-or-staffing",
+      "subject": "repository-thesis-or-staffing",
+      "category": "projects",
+      "intents": [
+        "projects",
+        "overview"
+      ],
+      "aliases": [
+        "M.S. thesis — operating-room staffing optimization",
+        "Kris's thesis",
+        "MS thesis",
+        "operating-room staffing",
+        "OR staffing",
+        "physician scheduling",
+        "clinical worker scheduling",
+        "NSGA-II"
+      ],
+      "keywords_en": [
+        "thesis",
+        "research",
+        "optimization",
+        "evolutionary algorithms",
+        "NSGA-II",
+        "operating room",
+        "staffing",
+        "scheduling",
+        "Pareto",
+        "fairness",
+        "fatigue",
+        "recovery",
+        "preferences",
+        "constraints",
+        "surrogate"
+      ],
+      "keywords_he": [
+        "תזה",
+        "מחקר",
+        "אופטימיזציה",
+        "אלגוריתמים אבולוציוניים",
+        "NSGA-II",
+        "חדרי ניתוח",
+        "שיבוץ",
+        "פארטו",
+        "הוגנות",
+        "עייפות",
+        "התאוששות",
+        "העדפות",
+        "אילוצים"
+      ],
+      "answer_en": "Kris's M.S. thesis system addresses six-week operating-room staffing with coverage-first, surrogate-assisted NSGA-II. It builds schedules under hard constraints, then explores Pareto tradeoffs among workload imbalance, fatigue risk, recovery quality, and worker preference violations; selected and final policies receive exact schedule evaluations.",
+      "answer_he": "מערכת התזה של כריס עוסקת בשיבוץ כוח אדם לחדרי ניתוח לאורך שישה שבועות באמצעות NSGA-II בסיוע מודל חלופי ותעדוף כיסוי. המערכת בונה סידורים תחת אילוצים קשיחים ולאחר מכן בוחנת פשרות פארטו בין חוסר איזון בעומס, סיכון לעייפות, איכות התאוששות והפרת העדפות עובדים; מדיניות נבחרת והאוכלוסייה הסופית נבדקות בהערכה מדויקת.",
+      "source_ids": [
+        "source-repo-thesis-or"
+      ],
+      "priority": 0
+    },
+    {
+      "id": "fact-repository-medgemma-grounding",
+      "subject": "repository-medgemma-grounding",
+      "category": "projects",
+      "intents": [
+        "projects",
+        "overview"
+      ],
+      "aliases": [
+        "MedGemma visual-grounding research",
+        "MedGemma",
+        "medical AI project",
+        "medical vision-language model",
+        "visual grounding",
+        "CheXlocalize",
+        "patch occlusion"
+      ],
+      "keywords_en": [
+        "MedGemma",
+        "medical AI",
+        "vision language",
+        "chest X-ray",
+        "CheXlocalize",
+        "pleural effusion",
+        "radiologist",
+        "visual grounding",
+        "patch occlusion",
+        "causal influence",
+        "interpretability",
+        "PyTorch",
+        "Hugging Face"
+      ],
+      "keywords_he": [
+        "MedGemma",
+        "בינה מלאכותית רפואית",
+        "מודל ראייה ושפה",
+        "צילום חזה",
+        "CheXlocalize",
+        "תפליט פלאורלי",
+        "רדיולוג",
+        "grounding חזותי",
+        "patch occlusion",
+        "פרשנות",
+        "PyTorch",
+        "Hugging Face"
+      ],
+      "answer_en": "The MedGemma project is a research scaffold for testing visual grounding in a medical vision-language model. Its implemented patch-occlusion pipeline is designed around CheXlocalize chest X-rays, radiologist-drawn pleural-effusion contours, signed influence maps, spatial nulls, and patient-cluster bootstrap intervals. The repository explicitly notes that real-data grounding experiments have not yet been run.",
+      "answer_he": "פרויקט MedGemma הוא תשתית מחקר לבדיקת grounding חזותי במודל רפואי משולב ראייה ושפה. צינור ה-patch occlusion הממומש מיועד לצילומי חזה מ-CheXlocalize, לקווי מתאר של תפליט פלאורלי שסומנו בידי רדיולוגים, למפות השפעה חתומות, לבקרות מרחביות ולרווחי סמך באתחול לפי אשכולות מטופלים. המאגר מציין במפורש שניסויי grounding על נתונים אמיתיים עדיין לא הורצו.",
+      "source_ids": [
+        "source-repo-medgemma"
+      ],
+      "priority": 0
+    },
+    {
+      "id": "fact-repository-medgemma-grounding-technologies",
+      "subject": "repository-medgemma-grounding",
+      "category": "projects",
+      "intents": [
+        "technologies"
+      ],
+      "aliases": [
+        "MedGemma visual-grounding research",
+        "MedGemma",
+        "medical AI project",
+        "medical vision-language model",
+        "visual grounding",
+        "CheXlocalize",
+        "patch occlusion"
+      ],
+      "keywords_en": [
+        "technology",
+        "technologies",
+        "tech",
+        "stack",
+        "built with",
+        "Python",
+        "PyTorch",
+        "Hugging Face Transformers"
+      ],
+      "keywords_he": [
+        "טכנולוגיה",
+        "טכנולוגיות",
+        "סטאק",
+        "נבנה עם",
+        "Python",
+        "PyTorch",
+        "Hugging Face Transformers"
+      ],
+      "answer_en": "MedGemma visual-grounding research uses Python, PyTorch, Hugging Face Transformers.",
+      "answer_he": "MedGemma visual-grounding research נבנה עם Python, PyTorch, Hugging Face Transformers.",
+      "source_ids": [
+        "source-repo-medgemma"
+      ],
+      "priority": 20
+    },
+    {
+      "id": "fact-repository-malware-coevolution",
+      "subject": "repository-malware-coevolution",
+      "category": "projects",
+      "intents": [
+        "projects",
+        "overview"
+      ],
+      "aliases": [
+        "Malware attacker-defender coevolution",
+        "malware coevolution",
+        "EA in Cyber",
+        "evolutionary computation malware",
+        "attacker defender coevolution"
+      ],
+      "keywords_en": [
+        "malware",
+        "cybersecurity",
+        "coevolution",
+        "attacker",
+        "defender",
+        "EMBER",
+        "evolutionary computation",
+        "genetic",
+        "adversarial",
+        "detection"
+      ],
+      "keywords_he": [
+        "נוזקה",
+        "סייבר",
+        "קו-אבולוציה",
+        "תוקף",
+        "מגן",
+        "EMBER",
+        "חישוב אבולוציוני",
+        "גנטי",
+        "יריבותי",
+        "זיהוי"
+      ],
+      "answer_en": "Kris also worked on an evolutionary-computation research project for malware detection. Using static malware feature data such as EMBER, the project coevolves attacker candidates that mutate features to evade detection and defender candidates that adapt their classifications, creating an adversarial evaluation loop without generating executable malware.",
+      "answer_he": "כריס עבד גם על פרויקט מחקר בחישוב אבולוציוני לזיהוי נוזקות. באמצעות נתוני מאפיינים סטטיים של נוזקות כגון EMBER, הפרויקט מפתח במקביל מועמדי תקיפה שמשנים מאפיינים כדי לחמוק מזיהוי ומועמדי הגנה שמתאימים את הסיווג שלהם, וכך יוצר לולאת הערכה יריבותית בלי לייצר נוזקה שניתנת להרצה.",
+      "source_ids": [
+        "source-repo-malware-coevolution"
+      ],
+      "priority": 0
+    },
+    {
+      "id": "fact-portfolio-project-website",
+      "subject": "portfolio-project-website",
+      "category": "projects",
+      "intents": [
+        "projects",
+        "overview"
+      ],
+      "aliases": [
+        "Personal Profile Website"
+      ],
+      "keywords_en": [
+        "website",
+        "portfolio",
+        "HTML",
+        "CSS",
+        "JavaScript",
+        "GitHub Pages"
+      ],
+      "keywords_he": [
+        "אתר",
+        "פורטפוליו",
+        "HTML",
+        "CSS",
+        "JavaScript",
+        "GitHub Pages"
+      ],
+      "answer_en": "The portfolio site itself is a multi-page product built with HTML, CSS, JavaScript, and GitHub Pages. It was designed to present experience, projects, athletics, thesis work, and visuals in a clearer editorial format.",
+      "answer_he": "אתר הפורטפוליו עצמו הוא מוצר רב-עמודי שנבנה עם HTML, CSS, JavaScript ו-GitHub Pages. הוא עוצב כדי להציג ניסיון, פרויקטים, שחייה, עבודת תזה ותוכן חזותי בפורמט מערכתי וברור יותר.",
+      "source_ids": [
+        "source-portfolio-project-website"
+      ],
+      "priority": 0
+    },
+    {
+      "id": "fact-portfolio-education-ms-ai",
+      "subject": "portfolio-education-ms-ai",
+      "category": "education",
+      "intents": [
+        "education"
+      ],
+      "aliases": [
+        "M.S. in Artificial Intelligence"
+      ],
+      "keywords_en": [
+        "master",
+        "M.S.",
+        "Artificial Intelligence",
+        "Double Dawgs",
+        "December 2026"
+      ],
+      "keywords_he": [
+        "תואר מוסמך",
+        "בינה מלאכותית",
+        "Double Dawgs",
+        "דצמבר 2026"
+      ],
+      "answer_en": "Kris is pursuing a Master of Science in Artificial Intelligence through the Double Dawgs Program at the University of Georgia, with expected completion in December 2026.",
+      "answer_he": "כריס לומד לתואר מוסמך בבינה מלאכותית במסגרת תוכנית Double Dawgs באוניברסיטת ג׳ורג׳יה, עם סיום צפוי בדצמבר 2026.",
+      "source_ids": [
+        "source-portfolio-education-ms-ai"
+      ],
+      "priority": 0
+    },
+    {
+      "id": "fact-portfolio-education-bs-cs",
+      "subject": "portfolio-education-bs-cs",
+      "category": "education",
+      "intents": [
+        "education"
+      ],
+      "aliases": [
+        "B.S. in Computer Science"
+      ],
+      "keywords_en": [
+        "bachelor",
+        "computer science",
+        "May 2026",
+        "Artificial Intelligence emphasis"
+      ],
+      "keywords_he": [
+        "תואר ראשון",
+        "מדעי המחשב",
+        "מאי 2026",
+        "דגש בבינה מלאכותית"
+      ],
+      "answer_en": "Kris graduated in May 2026 with a Bachelor of Science in Computer Science from the University of Georgia, with an area of emphasis in Artificial Intelligence.",
+      "answer_he": "כריס סיים במאי 2026 תואר ראשון במדעי המחשב מאוניברסיטת ג׳ורג׳יה, עם דגש בתחום הבינה המלאכותית.",
+      "source_ids": [
+        "source-portfolio-education-bs-cs"
+      ],
+      "priority": 0
+    },
+    {
+      "id": "fact-portfolio-education-business",
+      "subject": "portfolio-education-business",
+      "category": "education",
+      "intents": [
+        "education"
+      ],
+      "aliases": [
+        "Business minor"
+      ],
+      "keywords_en": [
+        "Business minor",
+        "minor",
+        "business",
+        "May 2026"
+      ],
+      "keywords_he": [
+        "מינור",
+        "עסקים",
+        "מאי 2026"
+      ],
+      "answer_en": "Kris also completed a minor in Business at the University of Georgia in May 2026.",
+      "answer_he": "כריס השלים גם מינור בעסקים באוניברסיטת ג׳ורג׳יה במאי 2026.",
+      "source_ids": [
+        "source-portfolio-education-business"
+      ],
+      "priority": 0
+    },
+    {
+      "id": "fact-portfolio-education-credentials",
+      "subject": "portfolio-education-credentials",
+      "category": "education",
+      "intents": [
+        "education"
+      ],
+      "aliases": [
+        "Credentials and supporting training"
+      ],
+      "keywords_en": [
+        "Google Cybersecurity Certificate",
+        "scholarship",
+        "credentials",
+        "training"
+      ],
+      "keywords_he": [
+        "Google Cybersecurity",
+        "מלגה",
+        "הסמכות",
+        "הכשרה"
+      ],
+      "answer_en": "The education section lists the Google Cybersecurity Certificate and a Swimming and Diving Team Scholarship as relevant supporting credentials and academic context.",
+      "answer_he": "סעיף ההשכלה כולל את תעודת Google Cybersecurity ואת מלגת נבחרת השחייה והצלילה כהסמכות והקשר אקדמי תומך.",
+      "source_ids": [
+        "source-portfolio-education-credentials"
+      ],
+      "priority": 0
+    },
+    {
+      "id": "fact-portfolio-honors-awards",
+      "subject": "portfolio-honors-awards",
+      "category": "honors",
+      "intents": [
+        "honors"
+      ],
+      "aliases": [
+        "Scholarships and honors"
+      ],
+      "keywords_en": [
+        "scholarship",
+        "honor",
+        "CURO",
+        "4.0",
+        "Presidential Scholars",
+        "SEC Academic Honor Roll"
+      ],
+      "keywords_he": [
+        "מלגה",
+        "הצטיינות",
+        "CURO",
+        "4.0",
+        "Presidential Scholars",
+        "SEC Academic Honor Roll"
+      ],
+      "answer_en": "Kris's portfolio lists the Morton S. Hodgson Jr. Men's Swimming and Diving Scholarship, the Carey Louis Davis Scholarship, SEC Academic Honor Roll, University of Georgia Presidential Scholars honors, multiple 4.0-semester recognition through the J. Reid Parker Director of Athletics Honor Roll, and the CURO Best Paper Award.",
+      "answer_he": "תיק העבודות של כריס כולל את מלגת Morton S. Hodgson Jr. לשחייה וצלילה, את מלגת Carey Louis Davis, את ה-SEC Academic Honor Roll, את הצטיינות University of Georgia Presidential Scholars, הכרה על מספר סמסטרים של 4.0 במסגרת J. Reid Parker Director of Athletics Honor Roll, ואת פרס המאמר המצטיין של CURO.",
+      "source_ids": [
+        "source-portfolio-honors"
+      ],
+      "priority": 0
+    },
+    {
+      "id": "fact-portfolio-athletics-uga",
+      "subject": "portfolio-athletics-uga",
+      "category": "athletics",
+      "intents": [
+        "achievements",
+        "swimming"
+      ],
+      "aliases": [
+        "UGA swimming career"
+      ],
+      "keywords_en": [
+        "UGA",
+        "All-American",
+        "SEC",
+        "NCAA",
+        "relay records",
+        "breaststroke"
+      ],
+      "keywords_he": [
+        "UGA",
+        "All-American",
+        "SEC",
+        "NCAA",
+        "שיאי שליחים",
+        "חזה"
+      ],
+      "answer_en": "At the University of Georgia from August 2022 to May 2025, Kris earned All-America recognition in 2023 and 2025, placed eighth at the SEC Championships, earned sixth and eighth place relay results at NCAA competition, contributed to school records in the 200 and 400 IM relays, posted the eighth-fastest 100-yard breaststroke result, and set the fastest 50-yard breaststroke in school history.",
+      "answer_he": "באוניברסיטת ג׳ורג׳יה, בין אוגוסט 2022 למאי 2025, כריס זכה להכרה כ-All-American בשנים 2023 ו-2025, סיים במקום השמיני באליפות ה-SEC, השיג מקומות שישי ושמיני במשחי שליחים ב-NCAA, היה חלק משיאי בית הספר בשליחי 200 ו-400 מעורב, קבע את התוצאה השמינית בטיבה במשחה ל-100 יארד חזה, וקבע את תוצאת ה-50 יארד חזה המהירה בתולדות בית הספר.",
+      "source_ids": [
+        "source-portfolio-athletics-uga"
+      ],
+      "priority": 0
+    },
+    {
+      "id": "fact-portfolio-athletics-israel",
+      "subject": "portfolio-athletics-israel",
+      "category": "athletics",
+      "intents": [
+        "achievements",
+        "swimming"
+      ],
+      "aliases": [
+        "Israel national team achievements",
+        "European medal",
+        "European Championships bronze",
+        "Israel National Team"
+      ],
+      "keywords_en": [
+        "Israel National Team",
+        "European Championships",
+        "World Championships",
+        "relay records"
+      ],
+      "keywords_he": [
+        "נבחרת ישראל",
+        "אליפות אירופה",
+        "אליפות העולם",
+        "שיאי שליחים"
+      ],
+      "answer_en": "For the Israel National Team, Kris won bronze at the 2024 European Championships, became one of only three Israeli swimmers to reach two World Championship semifinals, placed tenth and fourteenth at the 2022 World Championships, won two gold medals at the Switzerland Olympic Trials competition, and contributed to two Israeli relay records.",
+      "answer_he": "בנבחרת ישראל כריס זכה במדליית ארד באליפות אירופה 2024, היה אחד משלושה שחיינים ישראלים בלבד שהגיעו לשני חצאי גמר באליפות העולם, סיים במקומות 10 ו-14 באליפות העולם 2022, זכה בשתי מדליות זהב בתחרות Switzerland Olympic Trials, והיה שותף לשני שיאי שליחים ישראליים.",
+      "source_ids": [
+        "source-portfolio-athletics-israel"
+      ],
+      "priority": 0
+    },
+    {
+      "id": "fact-portfolio-athletics-club",
+      "subject": "portfolio-athletics-club",
+      "category": "athletics",
+      "intents": [
+        "achievements",
+        "swimming"
+      ],
+      "aliases": [
+        "Greater Jerusalem Swimming Club",
+        "Greater Jerusalem Swimming Club",
+        "Jerusalem swimming club"
+      ],
+      "keywords_en": [
+        "Greater Jerusalem",
+        "club",
+        "Israeli record",
+        "Israeli champion"
+      ],
+      "keywords_he": [
+        "ירושלים רבתי",
+        "מועדון",
+        "שיא ישראל",
+        "אלוף ישראל"
+      ],
+      "answer_en": "With Greater Jerusalem Swimming Club, Kris is described as the only swimmer in club history to win a medal at the European Championships, an Israeli record holder in three individual events and two relay events, and an Israeli champion since 2020 in both short-course and long-course pools.",
+      "answer_he": "במועדון השחייה ירושלים רבתי כריס מתואר כשחיין היחיד בתולדות המועדון שזכה במדליה באליפות אירופה, כמחזיק בשיאי ישראל בשלושה משחים אישיים ובשני משחי שליחים, וכאלוף ישראל מאז 2020 גם בבריכות קצרות וגם בארוכות.",
+      "source_ids": [
+        "source-portfolio-athletics-club"
+      ],
+      "priority": 0
+    },
+    {
+      "id": "fact-public-wikipedia-biography",
+      "subject": "public-wikipedia-biography",
+      "category": "public",
+      "intents": [
+        "overview"
+      ],
+      "aliases": [
+        "Public biography from Hebrew Wikipedia"
+      ],
+      "keywords_en": [
+        "born",
+        "Israeli swimmer",
+        "biography",
+        "Kiryat Ata"
+      ],
+      "keywords_he": [
+        "נולד",
+        "שחיין ישראלי",
+        "ביוגרפיה",
+        "קריית אתא"
+      ],
+      "answer_en": "The approved public-source profile describes Kristian 'Kris' Pitshugin as an Israeli swimmer born on July 18, 2001. It notes that he grew up in Kiryat Ata, trained in Israeli swimming programs, and later competed internationally.",
+      "answer_he": "לפי פרופיל המקור הציבורי המאושר, כריסטיאן 'כריס' פיצ'וגין הוא שחיין ישראלי שנולד ב-18 ביולי 2001. המקור מציין כי גדל בקריית אתא, התאמן במסגרות שחייה בישראל ובהמשך התחרה בזירה הבינלאומית.",
+      "source_ids": [
+        "source-wikipedia-biography"
+      ],
+      "priority": 0
+    },
+    {
+      "id": "fact-public-wikipedia-competitive-record",
+      "subject": "public-wikipedia-competitive-record",
+      "category": "public",
+      "intents": [
+        "overview"
+      ],
+      "aliases": [
+        "Public competitive record from Hebrew Wikipedia"
+      ],
+      "keywords_en": [
+        "European Championships",
+        "bronze",
+        "Belgrade",
+        "Israeli champion",
+        "records",
+        "breaststroke"
+      ],
+      "keywords_he": [
+        "אליפות אירופה",
+        "ארד",
+        "בלגרד",
+        "אלוף ישראל",
+        "שיאים",
+        "חזה"
+      ],
+      "answer_en": "The approved public source says Kris won bronze at the 2024 European Championships in Belgrade. It also states that he has been an Israeli champion and that he has held Israeli records in breaststroke events.",
+      "answer_he": "לפי המקור הציבורי המאושר, כריס זכה במדליית ארד באליפות אירופה 2024 בבלגרד. המקור מציין גם שהוא היה אלוף ישראל ושקבע שיאי ישראל במשחי חזה.",
+      "source_ids": [
+        "source-wikipedia-competitive-record"
+      ],
+      "priority": 0
+    },
+    {
+      "id": "fact-public-wikipedia-world-championships",
+      "subject": "public-wikipedia-world-championships",
+      "category": "public",
+      "intents": [
+        "overview"
+      ],
+      "aliases": [
+        "World Championships and semifinals"
+      ],
+      "keywords_en": [
+        "World Championships",
+        "semifinals",
+        "2022",
+        "10th",
+        "14th"
+      ],
+      "keywords_he": [
+        "אליפות העולם",
+        "חצי גמר",
+        "2022",
+        "מקום 10",
+        "מקום 14"
+      ],
+      "answer_en": "The approved public record indicates that Kris reached two semifinals at the World Championships and finished tenth and fourteenth at the 2022 World Championships.",
+      "answer_he": "הרישום הציבורי המאושר מציין כי כריס הגיע לשני חצאי גמר באליפות העולם וסיים במקומות 10 ו-14 באליפות העולם 2022.",
+      "source_ids": [
+        "source-wikipedia-competitive-record"
+      ],
+      "priority": 0
+    }
+  ],
+  "sources": [
+    {
+      "id": "source-portfolio-about",
+      "type": "portfolio",
+      "label_en": "Portfolio — About",
+      "label_he": "תיק העבודות — אודות",
+      "section_en": "About",
+      "section_he": "אודות",
+      "url": "index.html#about-section",
+      "last_verified": "2026-07-20"
+    },
+    {
+      "id": "source-portfolio-links",
+      "type": "portfolio",
+      "label_en": "Portfolio — Links",
+      "label_he": "תיק העבודות — קישורים",
+      "section_en": "Selected links",
+      "section_he": "קישורים נבחרים",
+      "url": "index.html#related-links-panel",
+      "last_verified": "2026-07-20"
+    },
+    {
+      "id": "source-external-resume",
+      "type": "portfolio",
+      "label_en": "Resume PDF",
+      "label_he": "קובץ קורות החיים",
+      "section_en": "Resume",
+      "section_he": "קורות חיים",
+      "url": "Kristian-Pitshugin-Resume.pdf",
+      "last_verified": "2026-07-20"
+    },
+    {
+      "id": "source-external-github",
+      "type": "portfolio",
+      "label_en": "GitHub profile",
+      "label_he": "פרופיל GitHub",
+      "section_en": "GitHub",
+      "section_he": "GitHub",
+      "url": "https://github.com/Kris1807",
+      "last_verified": "2026-07-20"
+    },
+    {
+      "id": "source-external-linkedin",
+      "type": "portfolio",
+      "label_en": "LinkedIn profile",
+      "label_he": "פרופיל LinkedIn",
+      "section_en": "LinkedIn",
+      "section_he": "LinkedIn",
+      "url": "https://www.linkedin.com/in/kristian-pitshugin-3461001a9/",
+      "last_verified": "2026-07-20"
+    },
+    {
+      "id": "source-portfolio-experience-intelliverse",
+      "type": "portfolio",
+      "label_en": "Portfolio — IntelliVerse",
+      "label_he": "תיק העבודות — IntelliVerse",
+      "section_en": "Experience",
+      "section_he": "ניסיון",
+      "url": "experience.html#experience-intelliverse",
+      "last_verified": "2026-07-20"
+    },
+    {
+      "id": "source-portfolio-experience-uga-swim",
+      "type": "portfolio",
+      "label_en": "Portfolio — UGA Swimming & Diving",
+      "label_he": "תיק העבודות — שחייה וצלילה UGA",
+      "section_en": "Experience",
+      "section_he": "ניסיון",
+      "url": "experience.html#experience-uga-swimming-diving",
+      "last_verified": "2026-07-20"
+    },
+    {
+      "id": "source-portfolio-experience-cooldawgs",
+      "type": "portfolio",
+      "label_en": "Portfolio — CoolDawgs research",
+      "label_he": "תיק העבודות — מחקר CoolDawgs",
+      "section_en": "Experience",
+      "section_he": "ניסיון",
+      "url": "experience.html#experience-cooldawgs-research-team",
+      "last_verified": "2026-07-20"
+    },
+    {
+      "id": "source-portfolio-project-roster-lab",
+      "type": "portfolio",
+      "label_en": "Portfolio — Roster Lab App",
+      "label_he": "תיק העבודות — Roster Lab App",
+      "section_en": "Projects",
+      "section_he": "פרויקטים",
+      "url": "projects.html#project-roster-lab-app",
+      "last_verified": "2026-07-20"
+    },
+    {
+      "id": "source-portfolio-project-patient-record",
+      "type": "portfolio",
+      "label_en": "Portfolio — Patient Record App",
+      "label_he": "תיק העבודות — Patient Record App",
+      "section_en": "Projects",
+      "section_he": "פרויקטים",
+      "url": "projects.html#project-patient-record-app",
+      "last_verified": "2026-07-20"
+    },
+    {
+      "id": "source-portfolio-project-cinema",
+      "type": "portfolio",
+      "label_en": "Portfolio — Film-Hub",
+      "label_he": "תיק העבודות — Film-Hub",
+      "section_en": "Projects",
+      "section_he": "פרויקטים",
+      "url": "projects.html#project-cinema-ticketing-website",
+      "last_verified": "2026-09-27"
+    },
+    {
+      "id": "source-repo-film-hub",
+      "type": "repository",
+      "label_en": "GitHub — Film-Hub",
+      "label_he": "GitHub — Film-Hub",
+      "section_en": "Backend, authentication, and booking workflow",
+      "section_he": "Backend, אימות ותהליך הזמנות",
+      "url": "https://github.com/rpmeyer3/film-hub",
+      "last_verified": "2026-09-28"
+    },
+    {
+      "id": "source-portfolio-project-docompare",
+      "type": "portfolio",
+      "label_en": "Portfolio — DoCompare",
+      "label_he": "תיק העבודות — DoCompare",
+      "section_en": "Projects",
+      "section_he": "פרויקטים",
+      "url": "projects.html#project-docompare",
+      "last_verified": "2026-07-20"
+    },
+    {
+      "id": "source-portfolio-project-cnn",
+      "type": "portfolio",
+      "label_en": "Portfolio — CNN Project",
+      "label_he": "תיק העבודות — פרויקט CNN",
+      "section_en": "Projects",
+      "section_he": "פרויקטים",
+      "url": "projects.html#project-cnn-project",
+      "last_verified": "2026-07-20"
+    },
+    {
+      "id": "source-repo-roster-lab",
+      "type": "repository",
+      "label_en": "GitHub — Roster Lab",
+      "label_he": "GitHub — Roster Lab",
+      "section_en": "README and scoring model",
+      "section_he": "README ומודל הניקוד",
+      "url": "https://github.com/Kris1807/SwimmingStats",
+      "last_verified": "2026-09-28"
+    },
+    {
+      "id": "source-repo-cnn",
+      "type": "repository",
+      "label_en": "GitHub — Facial-expression recognition",
+      "label_he": "GitHub — זיהוי הבעות פנים",
+      "section_en": "README and live inference workflow",
+      "section_he": "README ותהליך הסקה בזמן אמת",
+      "url": "https://github.com/Kris1807/CNN_Project",
+      "last_verified": "2026-09-28"
+    },
+    {
+      "id": "source-repo-thesis-or",
+      "type": "repository",
+      "label_en": "GitHub — OR staffing thesis system",
+      "label_he": "GitHub — מערכת התזה לשיבוץ חדרי ניתוח",
+      "section_en": "README and optimization architecture",
+      "section_he": "README וארכיטקטורת האופטימיזציה",
+      "url": "https://github.com/Kris1807/EC_Thesis_Optimization",
+      "last_verified": "2026-09-28"
+    },
+    {
+      "id": "source-repo-medgemma",
+      "type": "repository",
+      "label_en": "GitHub — MedGemma grounding research",
+      "label_he": "GitHub — מחקר MedGemma בנושא grounding",
+      "section_en": "README and grounding methods",
+      "section_he": "README ושיטות grounding",
+      "url": "https://github.com/Praveen-Rangavajhula/medgemma-grounding",
+      "last_verified": "2026-09-28"
+    },
+    {
+      "id": "source-repo-malware-coevolution",
+      "type": "repository",
+      "label_en": "GitHub — Malware coevolution research",
+      "label_he": "GitHub — מחקר קו-אבולוציה לזיהוי נוזקות",
+      "section_en": "Research overview",
+      "section_he": "סקירת המחקר",
+      "url": "https://github.com/Kris1807/EA-in-Cyber",
+      "last_verified": "2026-09-28"
+    },
+    {
+      "id": "source-portfolio-project-website",
+      "type": "portfolio",
+      "label_en": "Portfolio — Personal Profile Website",
+      "label_he": "תיק העבודות — אתר הפרופיל האישי",
+      "section_en": "Projects",
+      "section_he": "פרויקטים",
+      "url": "projects.html#project-personal-profile-website",
+      "last_verified": "2026-07-20"
+    },
+    {
+      "id": "source-portfolio-education-ms-ai",
+      "type": "portfolio",
+      "label_en": "Portfolio — M.S. in Artificial Intelligence",
+      "label_he": "תיק העבודות — תואר מוסמך בבינה מלאכותית",
+      "section_en": "Education",
+      "section_he": "השכלה",
+      "url": "education.html#education-ms-ai",
+      "last_verified": "2026-07-20"
+    },
+    {
+      "id": "source-portfolio-skills",
+      "type": "portfolio",
+      "label_en": "Portfolio — Skills",
+      "label_he": "תיק העבודות — מיומנויות",
+      "section_en": "Skills",
+      "section_he": "מיומנויות",
+      "url": "index.html#portfolio-skills",
+      "last_verified": "2026-09-28"
+    },
+    {
+      "id": "source-portfolio-education-bs-cs",
+      "type": "portfolio",
+      "label_en": "Portfolio — B.S. in Computer Science",
+      "label_he": "תיק העבודות — תואר ראשון במדעי המחשב",
+      "section_en": "Education",
+      "section_he": "השכלה",
+      "url": "education.html#education-bs-cs",
+      "last_verified": "2026-07-20"
+    },
+    {
+      "id": "source-portfolio-education-business",
+      "type": "portfolio",
+      "label_en": "Portfolio — Business minor",
+      "label_he": "תיק העבודות — מינור בעסקים",
+      "section_en": "Education",
+      "section_he": "השכלה",
+      "url": "education.html#education-business-minor",
+      "last_verified": "2026-07-20"
+    },
+    {
+      "id": "source-portfolio-education-credentials",
+      "type": "portfolio",
+      "label_en": "Portfolio — Credentials",
+      "label_he": "תיק העבודות — הסמכות",
+      "section_en": "Education",
+      "section_he": "השכלה",
+      "url": "education.html#education-credentials",
+      "last_verified": "2026-07-20"
+    },
+    {
+      "id": "source-portfolio-honors",
+      "type": "portfolio",
+      "label_en": "Portfolio — Honors",
+      "label_he": "תיק העבודות — הישגים והצטיינויות",
+      "section_en": "Honors",
+      "section_he": "הצטיינויות",
+      "url": "honors.html#section-content",
+      "last_verified": "2026-07-20"
+    },
+    {
+      "id": "source-portfolio-athletics-uga",
+      "type": "portfolio",
+      "label_en": "Portfolio — UGA Swimming and Diving",
+      "label_he": "תיק העבודות — שחייה וצלילה UGA",
+      "section_en": "Athletics",
+      "section_he": "שחייה תחרותית",
+      "url": "athletics.html#athletics-uga",
+      "last_verified": "2026-07-20"
+    },
+    {
+      "id": "source-portfolio-athletics-israel",
+      "type": "portfolio",
+      "label_en": "Portfolio — Israel National Team",
+      "label_he": "תיק העבודות — נבחרת ישראל",
+      "section_en": "Athletics",
+      "section_he": "שחייה תחרותית",
+      "url": "athletics.html#athletics-israel-national-team",
+      "last_verified": "2026-07-20"
+    },
+    {
+      "id": "source-portfolio-athletics-club",
+      "type": "portfolio",
+      "label_en": "Portfolio — Greater Jerusalem Swimming Club",
+      "label_he": "תיק העבודות — מועדון השחייה ירושלים רבתי",
+      "section_en": "Athletics",
+      "section_he": "שחייה תחרותית",
+      "url": "athletics.html#athletics-greater-jerusalem",
+      "last_verified": "2026-07-20"
+    },
+    {
+      "id": "source-wikipedia-biography",
+      "type": "wikipedia",
+      "label_en": "Wikipedia — Biography",
+      "label_he": "ויקיפדיה — ביוגרפיה",
+      "section_en": "Biography",
+      "section_he": "ביוגרפיה",
+      "url": "https://he.wikipedia.org/wiki/%D7%9B%D7%A8%D7%99%D7%A1%D7%98%D7%99%D7%90%D7%9F_%D7%A4%D7%99%D7%A6%27%D7%95%D7%92%D7%99%D7%9F",
+      "last_verified": "2026-09-27"
+    },
+    {
+      "id": "source-wikipedia-competitive-record",
+      "type": "wikipedia",
+      "label_en": "Wikipedia — Competitive record",
+      "label_he": "ויקיפדיה — הישגים תחרותיים",
+      "section_en": "Competitive record",
+      "section_he": "הישגים תחרותיים",
+      "url": "https://he.wikipedia.org/wiki/%D7%9B%D7%A8%D7%99%D7%A1%D7%98%D7%99%D7%90%D7%9F_%D7%A4%D7%99%D7%A6%27%D7%95%D7%92%D7%99%D7%9F",
+      "last_verified": "2026-09-27"
+    }
+  ]
+}

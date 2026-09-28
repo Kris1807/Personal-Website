@@ -102,12 +102,22 @@ export const sourceCatalog = [
   {
     id: "source-portfolio-project-cinema",
     type: "portfolio",
-    label_en: "Portfolio — Cinema Ticketing Website",
-    label_he: "תיק העבודות — אתר כרטיסי קולנוע",
+    label_en: "Portfolio — Film-Hub",
+    label_he: "תיק העבודות — Film-Hub",
     section_en: "Projects",
     section_he: "פרויקטים",
     url: "projects.html#project-cinema-ticketing-website",
-    last_verified: "2026-07-20"
+    last_verified: "2026-09-27"
+  },
+  {
+    id: "source-repo-film-hub",
+    type: "repository",
+    label_en: "GitHub — Film-Hub",
+    label_he: "GitHub — Film-Hub",
+    section_en: "Backend, authentication, and booking workflow",
+    section_he: "Backend, אימות ותהליך הזמנות",
+    url: "https://github.com/rpmeyer3/film-hub",
+    last_verified: "2026-09-28"
   },
   {
     id: "source-portfolio-project-docompare",
@@ -130,6 +140,56 @@ export const sourceCatalog = [
     last_verified: "2026-07-20"
   },
   {
+    id: "source-repo-roster-lab",
+    type: "repository",
+    label_en: "GitHub — Roster Lab",
+    label_he: "GitHub — Roster Lab",
+    section_en: "README and scoring model",
+    section_he: "README ומודל הניקוד",
+    url: "https://github.com/Kris1807/SwimmingStats",
+    last_verified: "2026-09-28"
+  },
+  {
+    id: "source-repo-cnn",
+    type: "repository",
+    label_en: "GitHub — Facial-expression recognition",
+    label_he: "GitHub — זיהוי הבעות פנים",
+    section_en: "README and live inference workflow",
+    section_he: "README ותהליך הסקה בזמן אמת",
+    url: "https://github.com/Kris1807/CNN_Project",
+    last_verified: "2026-09-28"
+  },
+  {
+    id: "source-repo-thesis-or",
+    type: "repository",
+    label_en: "GitHub — OR staffing thesis system",
+    label_he: "GitHub — מערכת התזה לשיבוץ חדרי ניתוח",
+    section_en: "README and optimization architecture",
+    section_he: "README וארכיטקטורת האופטימיזציה",
+    url: "https://github.com/Kris1807/EC_Thesis_Optimization",
+    last_verified: "2026-09-28"
+  },
+  {
+    id: "source-repo-medgemma",
+    type: "repository",
+    label_en: "GitHub — MedGemma grounding research",
+    label_he: "GitHub — מחקר MedGemma בנושא grounding",
+    section_en: "README and grounding methods",
+    section_he: "README ושיטות grounding",
+    url: "https://github.com/Praveen-Rangavajhula/medgemma-grounding",
+    last_verified: "2026-09-28"
+  },
+  {
+    id: "source-repo-malware-coevolution",
+    type: "repository",
+    label_en: "GitHub — Malware coevolution research",
+    label_he: "GitHub — מחקר קו-אבולוציה לזיהוי נוזקות",
+    section_en: "Research overview",
+    section_he: "סקירת המחקר",
+    url: "https://github.com/Kris1807/EA-in-Cyber",
+    last_verified: "2026-09-28"
+  },
+  {
     id: "source-portfolio-project-website",
     type: "portfolio",
     label_en: "Portfolio — Personal Profile Website",
@@ -148,6 +208,16 @@ export const sourceCatalog = [
     section_he: "השכלה",
     url: "education.html#education-ms-ai",
     last_verified: "2026-07-20"
+  },
+  {
+    id: "source-portfolio-skills",
+    type: "portfolio",
+    label_en: "Portfolio — Skills",
+    label_he: "תיק העבודות — מיומנויות",
+    section_en: "Skills",
+    section_he: "מיומנויות",
+    url: "index.html#portfolio-skills",
+    last_verified: "2026-09-28"
   },
   {
     id: "source-portfolio-education-bs-cs",
@@ -227,7 +297,7 @@ export const sourceCatalog = [
     section_en: "Biography",
     section_he: "ביוגרפיה",
     url: "https://he.wikipedia.org/wiki/%D7%9B%D7%A8%D7%99%D7%A1%D7%98%D7%99%D7%90%D7%9F_%D7%A4%D7%99%D7%A6%27%D7%95%D7%92%D7%99%D7%9F",
-    last_verified: "2026-07-20"
+    last_verified: "2026-09-27"
   },
   {
     id: "source-wikipedia-competitive-record",
@@ -237,16 +307,6 @@ export const sourceCatalog = [
     section_en: "Competitive record",
     section_he: "הישגים תחרותיים",
     url: "https://he.wikipedia.org/wiki/%D7%9B%D7%A8%D7%99%D7%A1%D7%98%D7%99%D7%90%D7%9F_%D7%A4%D7%99%D7%A6%27%D7%95%D7%92%D7%99%D7%9F",
-    last_verified: "2026-07-20"
-  },
-  {
-    id: "source-wikidata-identity",
-    type: "wikidata",
-    label_en: "Wikidata — Identity and public facts",
-    label_he: "ויקינתונים — זהות ועובדות ציבוריות",
-    section_en: "Identity",
-    section_he: "זהות",
-    url: "https://www.wikidata.org/wiki/Q106348288",
-    last_verified: "2026-07-20"
+    last_verified: "2026-09-27"
   }
 ];
