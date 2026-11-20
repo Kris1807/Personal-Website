@@ -72,7 +72,7 @@ function passage({ id, x, z, nx, nz, turn }, rooms) {
   const farWall = surface("gallery-wall portal-wall", galleryWidth, roomHeight, 0, centerY, back);
   farWall.style.setProperty("--wall-tone", room.tone);
   const title = surface("portal-preview", 154, 89, 0, -10, back - 2);
-  title.append(element("span", "", room.exhibits?.[0]?.title || "The Lobby"));
+  title.append(element("span", "", id === "lobby" ? room.title : room.exhibits[0]?.title || room.title));
 
   return [
     surface("portal-floor", doorwayWidth, depth, 0, floorY, depth / 2, `${facing} rotateX(90deg)`),
@@ -95,6 +95,7 @@ function exhibitImage(exhibit) {
     image.src = new URL(`../${exhibit.photo.src}`, import.meta.url);
     image.alt = "";
     image.decoding = "async";
+    image.loading = "lazy";
     image.draggable = false;
     return image;
   }
@@ -113,15 +114,38 @@ function exhibitImage(exhibit) {
   return artwork;
 }
 
-function exhibitFrame(exhibit, index, total) {
-  const spacing = total === 3 ? 282 : 345;
-  const width = total === 3 ? 220 : 280;
-  const x = (index - (total - 1) / 2) * spacing;
-  const frame = plane("gallery-frame", width, 198, x, -3, -366);
+const displayWalls = {
+  front: { x: 0, z: -roomDepth / 2, nx: 0, nz: 1, turn: 0, span: roomWidth - 100 },
+  right: { x: roomWidth / 2, z: 0, nx: -1, nz: 0, turn: -90, span: roomDepth - 104 },
+  left: { x: -roomWidth / 2, z: 0, nx: 1, nz: 0, turn: 90, span: roomDepth - 104 },
+};
+
+function wallSlots(roomId, count) {
+  if (roomId === "lobby") return [{ wallName: "front", offset: 151, width: 114, height: 136 }];
+
+  const front = Math.min(count, count >= 10 ? 4 : 3);
+  const spare = count - front;
+  const slots = ([wallName, total]) => {
+    const distance = displayWalls[wallName].span / Math.max(2, total);
+    const width = Math.min(278, distance - 27);
+    return Array.from({ length: total }, (_, index) => ({
+      wallName, offset: (index - (total - 1) / 2) * distance, width, height: 180,
+    }));
+  };
+  return [["front", front], ["right", Math.ceil(spare / 2)], ["left", Math.floor(spare / 2)]].flatMap(slots);
+}
+
+function exhibitFrame(exhibit, index, { wallName, offset, width, height }) {
+  const { x, z, nx, nz, turn } = displayWalls[wallName];
+  const mount = (style, w, h, y, depth) => plane(
+    style, w, h, x + offset * nz + nx * depth, y, z - offset * nx + nz * depth, `rotateY(${turn}deg)`,
+  );
+  const frame = mount(`gallery-frame${width < 200 ? " is-compact" : ""}`, width, height, -4, 4);
   frame.dataset.exhibit = String(index);
+  frame.dataset.wall = wallName;
   frame.append(exhibitImage(exhibit), element("span", "frame-caption", exhibit.title));
-  const wash = plane("gallery-wash", width + 88, 320, x, -44, -369);
-  const lamp = plane("gallery-frame-lamp", 57, 7, x, -116, -364);
+  const wash = mount("gallery-wash", width + 64, 300, -44, 1);
+  const lamp = mount("gallery-frame-lamp", Math.min(57, width / 3), 7, -height / 2 - 22, 6);
   return [wash, lamp, frame];
 }
 
@@ -154,11 +178,9 @@ export function renderScene(camera, roomId, rooms) {
     ...doors.map((doorway) => door(doorway, rooms)),
   );
 
-  if (roomId === "lobby") {
-    camera.append(...bench());
-  } else {
-    camera.append(...room.exhibits.flatMap((exhibit, index) => exhibitFrame(exhibit, index, room.exhibits.length)));
-  }
+  const slots = wallSlots(roomId, room.exhibits.length);
+  camera.append(...room.exhibits.flatMap((exhibit, index) => exhibitFrame(exhibit, index, slots[index])));
+  if (roomId === "lobby") camera.append(...bench());
 }
 
 const clamp = (value, minimum, maximum) => Math.min(maximum, Math.max(minimum, value));

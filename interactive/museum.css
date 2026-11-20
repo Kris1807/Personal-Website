@@ -291,8 +291,11 @@ a { color: inherit; }
 }
 .exhibit-art--roster { background: radial-gradient(ellipse at top right, #234d66, #172f3c 72%); }
 .exhibit-art--vision { background: radial-gradient(ellipse at top right, #655551, #362d34 72%); }
+.exhibit-art--project { background: radial-gradient(ellipse at top right, #46564e, #293b36 72%); }
 .art-label { font-size: 11px; text-transform: uppercase; letter-spacing: 0.09em; }
-.art-title { font: 700 30px/1.05 Georgia, serif; }
+.art-title { font: 700 26px/1.1 Georgia, serif; overflow-wrap: anywhere; }
+.gallery-frame.is-compact .exhibit-art { padding: 9px; }
+.gallery-frame.is-compact .art-title { font-size: 20px; }
 .art-motif { display: flex; height: 35px; align-items: end; gap: 5px; margin: 3px auto 0; }
 .art-motif span { width: 10px; height: var(--level); background: #dfc190b0; }
 
@@ -398,6 +401,11 @@ a { color: inherit; }
 .exhibit-dialog li + li { margin-top: 0.4rem; }
 .exhibit-dialog figure { margin: 1rem 0; }
 .exhibit-dialog figure img { display: block; height: auto; max-height: 52vh; width: 100%; object-fit: contain; background: #e9e0d2; border-radius: 0.25rem; }
+.exhibit-photos figcaption { margin-top: 0.55rem; color: var(--quiet); font-size: 0.9rem; }
+.photo-actions { display: flex; flex-wrap: wrap; gap: 0.4rem; margin: 0.65rem 0 0; }
+.exhibit-details { margin: 1rem 0; }
+.exhibit-details dt { margin-top: 0.75rem; font-weight: 700; color: var(--accent); }
+.exhibit-details dd { margin: 0.22rem 0 0; line-height: 1.55; }
 .exhibit-tags { display: flex; flex-wrap: wrap; gap: 0.4rem; margin: 1rem 0; }
 .exhibit-tags span { padding: 0.28rem 0.6rem; background: #70563670; border-radius: 0.22rem; font-size: 0.875rem; }
 .exhibit-links { display: flex; flex-wrap: wrap; gap: 0.55rem; margin-top: 1rem; }

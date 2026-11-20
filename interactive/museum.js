@@ -31,6 +31,46 @@ resetView.hidden = !spatial;
 document.body.classList.toggle("spatial-museum", spatial);
 if (spatial) menu.open = false;
 
+function createPhotoDisplay(photos) {
+  const figure = element("figure", "exhibit-photos");
+  const image = element("img");
+  const caption = element("figcaption");
+  const fullImage = element("a", "museum-link", "Open full image");
+  fullImage.target = "_blank";
+  fullImage.rel = "noopener noreferrer";
+  figure.append(image, caption);
+
+  const actions = element("div", "photo-actions");
+  let index = 0;
+  function showPhoto() {
+    const photo = photos[index];
+    image.src = new URL(`../${photo.src}`, import.meta.url);
+    image.alt = photo.alt;
+    fullImage.href = image.src;
+    const position = photos.length > 1 ? `Photo ${index + 1} of ${photos.length}` : "";
+    caption.textContent = [photo.caption, position].filter(Boolean).join(" · ");
+    caption.hidden = !caption.textContent;
+  }
+
+  if (photos.length > 1) {
+    caption.setAttribute("aria-live", "polite");
+    for (const [label, direction] of [["Previous photo", -1], ["Next photo", 1]]) {
+      const button = element("button", "museum-link", label);
+      button.type = "button";
+      button.addEventListener("click", () => {
+        index = (index + direction + photos.length) % photos.length;
+        showPhoto();
+      });
+      actions.append(button);
+    }
+  }
+
+  actions.append(fullImage);
+  figure.insertBefore(actions, caption);
+  showPhoto();
+  return figure;
+}
+
 function openExhibit(index) {
   const exhibit = rooms[activeRoom].exhibits?.[index];
   if (!exhibit || dialog.open) return;
@@ -39,16 +79,16 @@ function openExhibit(index) {
   title.id = "exhibit-title";
   dialogContent.replaceChildren(label, title);
 
-  if (exhibit.photo) {
-    const figure = element("figure");
-    const image = element("img");
-    image.src = new URL(`../${exhibit.photo.src}`, import.meta.url);
-    image.alt = exhibit.photo.alt;
-    figure.append(image);
-    dialogContent.append(figure);
-  }
+  const photos = exhibit.photos || (exhibit.photo ? [exhibit.photo] : []);
+  if (photos.length) dialogContent.append(createPhotoDisplay(photos));
 
   if (exhibit.description) dialogContent.append(element("p", "", exhibit.description));
+
+  if (exhibit.sections?.length) {
+    const details = element("dl", "exhibit-details");
+    for (const [term, value] of exhibit.sections) details.append(element("dt", "", term), element("dd", "", value));
+    dialogContent.append(details);
+  }
 
   if (exhibit.facts?.length) {
     const list = element("ul");
@@ -71,6 +111,11 @@ function openExhibit(index) {
     for (const link of exhibit.links) {
       const anchor = element("a", "museum-link", link.label);
       anchor.href = link.url;
+      if (link.download) anchor.download = "";
+      if (link.url.startsWith("https://")) {
+        anchor.target = "_blank";
+        anchor.rel = "noopener noreferrer";
+      }
       links.append(anchor);
     }
     dialogContent.append(links);
