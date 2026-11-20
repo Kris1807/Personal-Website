@@ -352,7 +352,7 @@ function injectSiteHeader() {
   const currentKey = pageType === "section" ? document.body.dataset.section : "home";
   const landingHref = (key) => pageType === "landing" ? `#portfolio-${key}` : sectionMeta[key].href;
   const navItems = [
-    { key: "home", label: "Home", href: "index.html" },
+    { key: "home", label: "Home", href: "./?view=cv" },
     ...sectionOrder.map((key) => ({ key, label: sectionMeta[key].label, href: landingHref(key) })),
   ];
 
@@ -377,6 +377,7 @@ function injectSiteHeader() {
                   <li class="site-pill-item">
                     <a
                       class="site-nav-link js-pill-link${currentKey === item.key ? " is-active" : ""}"
+                      data-nav-key="${item.key}"
                       href="${item.href}"
                       ${currentKey === item.key ? 'aria-current="page"' : ""}
                     >
@@ -465,7 +466,7 @@ function setupSiteHeader() {
 function setupLandingNavScrollSpy(header) {
   if (!header || document.body.dataset.page !== "landing") return;
 
-  const homeLink = header.querySelector('.site-nav-link[href="index.html"]');
+  const homeLink = header.querySelector('.site-nav-link[data-nav-key="home"]');
   const chapterLinks = sectionOrder
     .map((key) => ({
       key,
@@ -844,6 +845,11 @@ function renderHeroActions() {
       href: getResumeDownloadLink(),
       className: "hero-action is-primary",
       download: true,
+    },
+    {
+      label: "Interactive CV",
+      href: "interactive/",
+      className: "hero-action",
     },
   ];
 

@@ -11,8 +11,29 @@
   <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Fraunces:opsz,wght@9..144,600;9..144,700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="styles.css" />
   <link rel="stylesheet" href="assistant/assistant.css" />
+  <link rel="stylesheet" href="interactive/entry.css" />
+  <script>
+    const selectPortfolioView = () => {
+      const explicitCV = new URLSearchParams(location.search).get("view") === "cv";
+      document.documentElement.toggleAttribute("data-portfolio-entry", !explicitCV && !location.hash);
+    };
+    selectPortfolioView();
+    addEventListener("hashchange", selectPortfolioView);
+    addEventListener("popstate", selectPortfolioView);
+  </script>
 </head>
 <body data-page="landing" class="is-loading">
+  <section class="portfolio-entry" aria-labelledby="portfolio-entry-title">
+    <div class="portfolio-entry-copy">
+      <p class="portfolio-entry-name">Kristian Pitshugin</p>
+      <h1 id="portfolio-entry-title">How would you like to explore?</h1>
+      <div class="portfolio-entry-options">
+        <a href="?view=cv"><strong>CV</strong><span>Read the full portfolio</span></a>
+        <a href="interactive/"><strong>Interactive CV</strong><span>Explore the museum</span></a>
+      </div>
+    </div>
+    <div class="portfolio-entry-image" aria-hidden="true"></div>
+  </section>
   <div class="scroll-progress" aria-hidden="true">
     <span id="scroll-progress-bar"></span>
   </div>

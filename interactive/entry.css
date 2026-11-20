@@ -1,0 +1,73 @@
+.portfolio-entry { display: none; }
+
+html[data-portfolio-entry] body > :not(.portfolio-entry) { display: none !important; }
+
+html[data-portfolio-entry] body {
+  margin: 0;
+  background: #161c22;
+  overflow: auto;
+}
+
+html[data-portfolio-entry] .portfolio-entry {
+  display: grid;
+  grid-template-columns: minmax(22rem, 0.94fr) minmax(0, 1.06fr);
+  min-height: 100svh;
+  background: #181e24;
+  color: #f4ede1;
+  font-family: "Space Grotesk", system-ui, sans-serif;
+  opacity: 1;
+}
+
+.portfolio-entry-copy {
+  align-self: center;
+  width: 100%;
+  max-width: 47rem;
+  padding: clamp(2.5rem, 6vw, 7rem);
+  justify-self: end;
+}
+
+.portfolio-entry-name {
+  color: #e2c389;
+  font-size: 0.88rem;
+  letter-spacing: 0.13em;
+  text-transform: uppercase;
+  margin: 0 0 1.2rem;
+}
+
+.portfolio-entry h1 {
+  font: 600 clamp(2.7rem, 6vw, 6.35rem)/0.98 "Fraunces", Georgia, serif;
+  letter-spacing: -0.046em;
+  color: inherit;
+  margin: 0 0 clamp(1.75rem, 4vw, 3.5rem);
+}
+
+.portfolio-entry-options { display: grid; gap: 0.65rem; }
+
+.portfolio-entry-options a {
+  display: flex;
+  align-items: baseline;
+  flex-wrap: wrap;
+  gap: 0.2rem 1rem;
+  justify-content: space-between;
+  color: #f4ede1;
+  text-decoration: none;
+  padding: 0.9rem 1.15rem;
+  border: 1px solid #ffffff42;
+  border-radius: 0.22rem;
+}
+
+.portfolio-entry-options a:hover { background: #ffffff12; }
+.portfolio-entry-options a + a { background: #dfc190; color: #231c14; border-color: #dfc190; }
+.portfolio-entry-options a + a:hover { background: #f1d6a9; }
+.portfolio-entry-options a span { font-size: 0.9rem; }
+.portfolio-entry-options a:focus-visible { outline: 3px solid #fff3d8; outline-offset: 4px; }
+
+.portfolio-entry-image {
+  background: #655340 url("gallery-welcome.webp") center / cover no-repeat;
+}
+
+@media (max-width: 740px) {
+  html[data-portfolio-entry] .portfolio-entry { grid-template-columns: 1fr; align-content: start; }
+  .portfolio-entry-copy { justify-self: center; padding: 2.25rem 1.3rem; }
+  .portfolio-entry-image { grid-row: 1; min-height: clamp(13rem, 37svh, 23rem); }
+}

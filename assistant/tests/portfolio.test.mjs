@@ -82,8 +82,9 @@ describe("portfolio landing page", () => {
       window.resume.projects.length
     );
 
-    const homeLink = window.document.querySelector('.site-nav-link[href="index.html"]');
+    const homeLink = window.document.querySelector('.site-nav-link[data-nav-key="home"]');
     const projectsLink = window.document.querySelector('.site-nav-link[href="#portfolio-projects"]');
+    expect(homeLink?.getAttribute("href")).toBe("./?view=cv");
     expect(homeLink?.classList.contains("is-active")).toBe(true);
 
     window.scrollY = 4200;

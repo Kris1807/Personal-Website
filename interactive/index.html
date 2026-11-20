@@ -1,0 +1,62 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Explore Kristian Pitshugin’s projects, experience, education, swimming and honors in a first-person museum.">
+  <title>Interactive CV | Kristian Pitshugin</title>
+  <link rel="canonical" href="https://krispitshugin.com/interactive/">
+  <link rel="stylesheet" href="museum.css">
+  <script src="../domain-redirect.js" defer></script>
+  <script src="../resume-content.js" defer></script>
+  <script src="museum.js" type="module"></script>
+</head>
+<body>
+  <header class="museum-header">
+    <a class="museum-brand" href="../">Kristian Pitshugin</a>
+    <a class="museum-link" href="../?view=cv">Standard CV</a>
+  </header>
+  <main class="museum-main">
+    <header class="room-header">
+      <p class="room-overline">Interactive CV</p>
+      <h1 id="room-heading" tabindex="-1">The Lobby</h1>
+      <p id="room-description">Choose a door to explore the museum.</p>
+    </header>
+
+    <div class="museum-viewport" id="museum-viewport" aria-hidden="true">
+      <div class="museum-camera" id="museum-camera"></div>
+      <div class="museum-vignette"></div>
+    </div>
+
+    <div class="museum-controls" id="museum-controls" hidden>
+      <div class="look-controls" aria-label="Camera controls" role="group">
+        <button type="button" data-look="-1" aria-label="Turn left">&#x2039;</button>
+        <button type="button" data-look="1" aria-label="Turn right">&#x203A;</button>
+      </div>
+      <p>Drag to look around. Use arrow keys or WASD to move.</p>
+      <button type="button" class="museum-link" id="reset-view">Reset view</button>
+    </div>
+
+    <section class="museum-exhibits" id="museum-exhibits" aria-labelledby="exhibits-heading" hidden>
+      <h2 id="exhibits-heading">Exhibits</h2>
+      <div id="exhibit-list" class="exhibit-list"></div>
+    </section>
+
+    <nav class="room-index" aria-label="Museum rooms">
+      <a href="#lobby" data-room="lobby" aria-current="location">Lobby</a>
+      <a href="#projects" data-room="projects">Projects</a>
+      <a href="#skills" data-room="skills">Skills &amp; Experience</a>
+      <a href="#swimming" data-room="swimming">Swimming</a>
+      <a href="#education" data-room="education">Education</a>
+      <a href="#honors" data-room="honors">Honors</a>
+    </nav>
+
+    <noscript><p>The museum requires JavaScript. <a href="../?view=cv">Read the standard CV</a>.</p></noscript>
+  </main>
+
+  <dialog class="exhibit-dialog" id="exhibit-dialog" aria-labelledby="exhibit-title">
+    <form method="dialog"><button type="submit" class="museum-link" autofocus>Close</button></form>
+    <div id="exhibit-content"></div>
+  </dialog>
+</body>
+</html>
