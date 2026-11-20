@@ -12,6 +12,7 @@
   <link rel="stylesheet" href="styles.css" />
   <link rel="stylesheet" href="assistant/assistant.css" />
   <link rel="stylesheet" href="interactive/entry.css" />
+  <script src="interactive/entry.js" type="module"></script>
   <script>
     const selectPortfolioView = () => {
       const explicitCV = new URLSearchParams(location.search).get("view") === "cv";
@@ -24,15 +25,36 @@
 </head>
 <body data-page="landing" class="is-loading">
   <section class="portfolio-entry" aria-labelledby="portfolio-entry-title">
-    <div class="portfolio-entry-copy">
-      <p class="portfolio-entry-name">Kristian Pitshugin</p>
-      <h1 id="portfolio-entry-title">How would you like to explore?</h1>
-      <div class="portfolio-entry-options">
-        <a href="?view=cv"><strong>CV</strong><span>Read the full portfolio</span></a>
-        <a href="interactive/"><strong>Interactive CV</strong><span>Explore the museum</span></a>
-      </div>
+    <div class="portal-chamber">
+      <header class="portal-heading">
+        <p class="portal-invitation">Choose an entrance</p>
+        <h1 id="portfolio-entry-title">Kristian Pitshugin</h1>
+      </header>
+      <nav class="portal-options" aria-label="Portfolio entrances">
+        <a class="portal-choice portal-choice--official" data-portal="official" href="?view=cv" aria-labelledby="portal-official-title">
+          <span class="portal-frame" aria-hidden="true">
+            <span class="portal-threshold">
+              <span class="portal-paper">
+                <span class="portal-paper-header"><span class="portal-paper-portrait"></span><span class="portal-paper-name">Kristian<br>Pitshugin</span></span>
+                <span class="portal-paper-lines"></span>
+              </span>
+            </span>
+          </span>
+          <span class="portal-caption">
+            <strong id="portal-official-title">Official CV Page</strong>
+            <span>Read the portfolio <span class="portal-arrow" aria-hidden="true">→</span></span>
+          </span>
+        </a>
+        <a class="portal-choice portal-choice--game" data-portal="game" href="interactive/" aria-labelledby="portal-game-title">
+          <span class="portal-frame" aria-hidden="true"><span class="portal-threshold"></span></span>
+          <span class="portal-caption">
+            <strong id="portal-game-title">Interactive CV Game</strong>
+            <span>Explore the museum <span class="portal-arrow" aria-hidden="true">→</span></span>
+          </span>
+        </a>
+      </nav>
     </div>
-    <div class="portfolio-entry-image" aria-hidden="true"></div>
+    <div class="portal-departure" aria-hidden="true"></div>
   </section>
   <div class="scroll-progress" aria-hidden="true">
     <span id="scroll-progress-bar"></span>
