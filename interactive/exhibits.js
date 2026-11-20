@@ -38,7 +38,7 @@ export function createRooms(resume) {
   });
 
   return {
-    lobby: { title: "The Lobby", description: "Choose a door to explore the museum.", tone: "#a69b8a" },
+    lobby: { title: "The Lobby", description: "Walk up to a door to explore the museum.", tone: "#a69b8a" },
     projects: {
       title: "Projects",
       description: "Explore the systems I built and the problems they solve.",

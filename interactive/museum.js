@@ -7,6 +7,9 @@ const description = document.querySelector("#room-description");
 const viewport = document.querySelector("#museum-viewport");
 const cameraNode = document.querySelector("#museum-camera");
 const controls = document.querySelector("#museum-controls");
+const menu = document.querySelector("#museum-menu");
+const menuButton = menu.querySelector("summary");
+const resetView = document.querySelector("#reset-view");
 const roomIndex = document.querySelector(".room-index");
 const roomLinks = [...roomIndex.querySelectorAll("[data-room]")];
 const exhibits = document.querySelector("#museum-exhibits");
@@ -18,13 +21,15 @@ const spatial = CSS.supports("transform-style", "preserve-3d") && "ResizeObserve
 const camera = spatial ? createCamera(viewport, cameraNode) : null;
 
 let activeRoom = "lobby";
-let transitionTimer;
 let dialogReturn;
 let pointer;
 let lastGestureWasDrag = false;
 
 viewport.hidden = !spatial;
 controls.hidden = !spatial;
+resetView.hidden = !spatial;
+document.body.classList.toggle("spatial-museum", spatial);
+if (spatial) menu.open = false;
 
 function openExhibit(index) {
   const exhibit = rooms[activeRoom].exhibits?.[index];
@@ -71,7 +76,8 @@ function openExhibit(index) {
     dialogContent.append(links);
   }
 
-  dialogReturn = exhibitList.children[index];
+  stopMovement();
+  dialogReturn = menu.open ? exhibitList.children[index] : menuButton;
   dialog.showModal();
   dialog.scrollTop = 0;
 }
@@ -82,9 +88,8 @@ dialog.addEventListener("close", () => {
   dialogContent.replaceChildren();
 });
 
-function showRoom(roomId, focus) {
-  clearTimeout(transitionTimer);
-  viewport.classList.remove("is-travelling");
+function showRoom(roomId, focus, crossing) {
+  viewport.classList.remove("is-entering");
   if (dialog.open) dialog.close();
   activeRoom = roomId;
   const room = rooms[roomId];
@@ -107,58 +112,55 @@ function showRoom(roomId, focus) {
   exhibits.hidden = !buttons.length;
 
   if (camera) {
+    menu.open = false;
     renderScene(cameraNode, roomId, rooms);
-    camera.reset();
+    camera.enter(roomId, crossing);
+    if (crossing && !reduceMotion.matches) viewport.classList.add("is-entering");
   }
 
   if (focus) {
     heading.focus({ preventScroll: true });
-    window.scrollTo(0, 0);
+    if (!spatial) window.scrollTo(0, 0);
   }
 }
 
 function showFromHash(focus) {
+  stopMovement();
   const key = location.hash.slice(1);
   showRoom(Object.hasOwn(rooms, key) ? key : "lobby", focus);
 }
 
-function visit(roomId, animate) {
-  clearTimeout(transitionTimer);
-  viewport.classList.remove("is-travelling");
+function visit(roomId, crossing) {
   if (roomId === activeRoom) return;
-
-  const changeRoom = () => {
-    history.pushState(null, "", `#${roomId}`);
-    showRoom(roomId, true);
-  };
-
-  if (!camera || !animate || reduceMotion.matches || activeRoom !== "lobby") {
-    changeRoom();
-    return;
-  }
-
-  viewport.classList.add("is-travelling");
-  camera.approach(roomId);
-  transitionTimer = setTimeout(changeRoom, 420);
+  if (!crossing) stopMovement();
+  history.pushState(null, "", `#${roomId}`);
+  showRoom(roomId, true, crossing);
 }
 
 roomIndex.addEventListener("click", (event) => {
   const link = event.target.closest("a[data-room]");
   if (!link || event.metaKey || event.ctrlKey || event.shiftKey || event.altKey) return;
   event.preventDefault();
-  visit(link.dataset.room, false);
+  if (link.dataset.room === activeRoom && spatial) menu.open = false;
+  else visit(link.dataset.room);
 });
 
 viewport.addEventListener("click", (event) => {
   if (lastGestureWasDrag) return;
+  if (menu.open) {
+    menu.open = false;
+    return;
+  }
   const door = event.target.closest("[data-door]");
   const frame = event.target.closest("[data-exhibit]");
-  if (door) visit(door.dataset.door, true);
+  if (door) visit(door.dataset.door);
   if (frame) openExhibit(Number(frame.dataset.exhibit));
 });
 
+viewport.addEventListener("animationend", () => viewport.classList.remove("is-entering"));
+
 viewport.addEventListener("pointerdown", (event) => {
-  if (!event.isPrimary || event.button !== 0 || viewport.classList.contains("is-travelling")) return;
+  if (!event.isPrimary || event.button !== 0 || menu.open) return;
   pointer = { id: event.pointerId, x: event.clientX, y: event.clientY };
   lastGestureWasDrag = false;
 });
@@ -189,31 +191,89 @@ viewport.addEventListener("pointercancel", endGesture);
 viewport.addEventListener("pointerleave", endGesture);
 viewport.addEventListener("lostpointercapture", endGesture);
 
-controls.addEventListener("click", (event) => {
-  if (!camera || viewport.classList.contains("is-travelling")) return;
-  const turn = event.target.closest("[data-look]");
-  if (turn) camera.look(Number(turn.dataset.look) * 25);
-  if (event.target.id === "reset-view") camera.reset();
+resetView.addEventListener("click", () => {
+  stopMovement();
+  camera.reset();
+  menu.open = false;
+  menuButton.focus({ preventScroll: true });
 });
 
-const keyboardMovement = {
-  arrowup: () => camera.move(24),
-  arrowdown: () => camera.move(-24),
-  arrowleft: () => camera.look(-10),
-  arrowright: () => camera.look(10),
-  w: () => camera.move(24),
-  s: () => camera.move(-24),
-  a: () => camera.move(0, -24),
-  d: () => camera.move(0, 24),
+const keyboardActions = {
+  arrowup: "forward", arrowdown: "backward", arrowleft: "left", arrowright: "right",
+  w: "forward", s: "backward", a: "strafe-left", d: "strafe-right", q: "left", e: "right",
 };
+const heldControls = new Map();
+let animationFrame = 0;
+let previousFrame = 0;
+
+function applyMovement(actions, seconds) {
+  const axis = (positive, negative) => Number(actions.has(positive)) - Number(actions.has(negative));
+  const crossing = camera.drive(
+    axis("forward", "backward"), axis("strafe-right", "strafe-left"), axis("right", "left"), seconds,
+  );
+  if (crossing) visit(crossing.entrance, crossing);
+}
+
+function moveFrame(now) {
+  animationFrame = 0;
+  if (!heldControls.size || menu.open || dialog.open) return;
+  const seconds = Math.min((now - previousFrame) / 1000, 0.045);
+  previousFrame = now;
+  applyMovement(new Set(heldControls.values()), seconds);
+  if (heldControls.size) animationFrame = requestAnimationFrame(moveFrame);
+}
+
+function holdControl(source, action) {
+  if (heldControls.has(source)) return;
+  heldControls.set(source, action);
+  if (!animationFrame) {
+    previousFrame = performance.now();
+    applyMovement(new Set(heldControls.values()), 0.026);
+    animationFrame = requestAnimationFrame(moveFrame);
+  }
+}
+
+function stopMovement() {
+  heldControls.clear();
+  cancelAnimationFrame(animationFrame);
+  animationFrame = 0;
+}
 
 document.addEventListener("keydown", (event) => {
-  if (!camera || dialog.open || event.altKey || event.ctrlKey || event.metaKey || viewport.classList.contains("is-travelling")) return;
-  if (event.target.closest?.("a, button, input, textarea, select, [contenteditable=true]")) return;
+  if (!camera || dialog.open || event.altKey || event.ctrlKey || event.metaKey) return;
+  if (menu.open) {
+    if (event.key === "Escape") {
+      menu.open = false;
+      menuButton.focus({ preventScroll: true });
+    }
+    return;
+  }
+  if (event.target.closest?.("input, textarea, select, [contenteditable=true]")) return;
   const key = event.key.toLowerCase();
-  if (!Object.hasOwn(keyboardMovement, key)) return;
+  if (!Object.hasOwn(keyboardActions, key)) return;
   event.preventDefault();
-  keyboardMovement[key]();
+  holdControl(`key:${key}`, keyboardActions[key]);
+});
+
+document.addEventListener("keyup", (event) => heldControls.delete(`key:${event.key.toLowerCase()}`));
+window.addEventListener("blur", stopMovement);
+document.addEventListener("visibilitychange", () => { if (document.hidden) stopMovement(); });
+menu.addEventListener("toggle", () => { if (menu.open) stopMovement(); });
+
+controls.addEventListener("pointerdown", (event) => {
+  const button = event.target.closest("[data-motion]");
+  if (!button || event.button !== 0 || !camera || menu.open || dialog.open) return;
+  button.setPointerCapture(event.pointerId);
+  holdControl(`pointer:${event.pointerId}`, button.dataset.motion);
+});
+
+for (const type of ["pointerup", "pointercancel", "lostpointercapture"]) {
+  controls.addEventListener(type, (event) => heldControls.delete(`pointer:${event.pointerId}`));
+}
+
+controls.addEventListener("click", (event) => {
+  const action = event.target.closest("[data-motion]")?.dataset.motion;
+  if (action && event.detail === 0 && camera && !menu.open) applyMovement(new Set([action]), 0.11);
 });
 
 window.addEventListener("hashchange", () => showFromHash(true));
