@@ -38,18 +38,7 @@ function skillsExhibits(resume) {
     photo: role.image && { src: role.image, alt: role.imageAlt, fit: "document" },
     links: [cvLink("experience", "Experience in the CV")],
   }));
-  const rosterLab = resume.projects.find((project) => project.name === "Roster Lab App");
-  return [
-    ...experience,
-    {
-      title: "Full-stack engineering",
-      label: rosterLab.name,
-      description: rosterLab.solution,
-      tags: rosterLab.stack,
-      links: [cvLink("projects", "Roster Lab case study"), ...rosterLab.links],
-    },
-    ...groups,
-  ];
+  return [...experience, ...groups];
 }
 
 function swimmingExhibits(resume) {
@@ -89,7 +78,7 @@ function educationExhibits(resume) {
   const diplomas = resume.educationGallery;
   const photo = (file) => photoByName(diplomas, file);
   const links = [cvLink("education", "Education in the CV")];
-  const degrees = resume.education.map((item) => {
+  const degrees = resume.education.filter((item) => item.degree !== "Relevant Coursework & Credentials").map((item) => {
     const [title, description] = item.degree.split("\n");
     return {
       title,
@@ -114,7 +103,7 @@ function educationExhibits(resume) {
     { title: "Intermediate Machine Learning", label: "Kaggle certificate", photo: photo("intermediate-machine-learning.png"), links },
     {
       title: "UGA graduation gallery", label: "University of Georgia · May 2026",
-      photo: photo("graduation-arch.jpeg"),
+      photo: { ...photo("graduation-arch.jpeg"), fit: "contain", aspectRatio: 3413 / 5120 },
       photos: ["graduation-arch.jpeg", "graduation-stadium.jpeg", "graduation-classic-center.jpeg", "graduation-indoor.jpeg"].map(photo),
       links,
     },
@@ -162,6 +151,7 @@ export function createRooms(resume) {
     },
     projects: {
       title: "Projects", description: "Explore the systems I built and the problems they solve.", tone: "#8b928c",
+      frameText: true,
       exhibits: projectExhibits(resume.projects),
     },
     skills: {
@@ -178,6 +168,7 @@ export function createRooms(resume) {
     },
     honors: {
       title: "Honors", description: "Awards in research, academics, and athletics.", tone: "#9e8b81",
+      frameText: true,
       exhibits: honorsExhibits(resume),
     },
   };

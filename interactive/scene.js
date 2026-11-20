@@ -120,21 +120,32 @@ function wallSlots(roomId, count) {
   return [["front", front], ["right", Math.ceil(spare / 2)], ["left", Math.floor(spare / 2)]].flatMap(slots);
 }
 
-function exhibitFrame(exhibit, index, { wallName, offset, width, height }, preview) {
+function exhibitFrame(exhibit, index, { wallName, offset, width, height }, { preview, frameText }) {
   const { x, z, nx, nz, turn } = displayWalls[wallName];
   const mount = (style, w, h, y, depth) => plane(
     style, w, h, x + offset * nz + nx * depth, y, z - offset * nx + nz * depth, `rotateY(${turn}deg)`,
   );
-  const style = exhibit.photo ? "gallery-frame" : "gallery-inscription";
-  const display = mount(`${style}${width < 200 ? " is-compact" : ""}`, width, height, -4, 4);
+  const matAndBorder = 28;
+  const frameWidth = exhibit.photo?.aspectRatio
+    ? Math.min(width, (height - matAndBorder) * exhibit.photo.aspectRatio + matAndBorder)
+    : width;
+  const style = exhibit.photo ? "gallery-frame" : frameText ? "gallery-frame gallery-frame--lettered" : "gallery-inscription";
+  const display = mount(`${style}${frameWidth < 200 ? " is-compact" : ""}`, frameWidth, height, -4, 4);
   if (!preview) {
     display.dataset.exhibit = String(index);
     display.dataset.wall = wallName;
   }
-  if (exhibit.photo) display.append(exhibitImage(exhibit.photo), element("span", "frame-caption", exhibit.title));
-  else letterExhibit(display, exhibit);
-  const wash = mount("gallery-wash", width + 64, 300, -44, 1);
-  const lamp = mount("gallery-frame-lamp", Math.min(57, width / 3), 7, -height / 2 - 22, 6);
+  if (exhibit.photo) {
+    display.append(exhibitImage(exhibit.photo), element("span", "frame-caption", exhibit.title));
+  } else if (frameText) {
+    const label = element("div", "gallery-inscription framed-inscription");
+    letterExhibit(label, exhibit);
+    display.append(label);
+  } else {
+    letterExhibit(display, exhibit);
+  }
+  const wash = mount("gallery-wash", frameWidth + 64, 300, -44, 1);
+  const lamp = mount("gallery-frame-lamp", Math.min(57, frameWidth / 3), 7, -height / 2 - 22, 6);
   return [wash, lamp, display];
 }
 
@@ -170,7 +181,9 @@ function gallery(roomId, rooms, preview = false) {
   }
 
   const slots = wallSlots(roomId, room.exhibits.length);
-  surfaces.push(...room.exhibits.flatMap((exhibit, index) => exhibitFrame(exhibit, index, slots[index], preview)));
+  surfaces.push(...room.exhibits.flatMap((exhibit, index) => exhibitFrame(exhibit, index, slots[index], {
+    preview, frameText: room.frameText,
+  })));
   if (roomId === "lobby") surfaces.push(...bench());
   return surfaces;
 }

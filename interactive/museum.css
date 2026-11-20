@@ -296,7 +296,18 @@ a { color: inherit; }
 .gallery-inscription:hover { color: #45270f; text-shadow: 0 1px #ffe0a8; }
 .gallery-inscription:hover::before { background: #9b6636; }
 .inscription-title { font: 700 28px/1.06 Georgia, serif; text-wrap: balance; overflow-wrap: anywhere; }
-.gallery-inscription.is-compact .inscription-title { font-size: 23px; }
+.is-compact .inscription-title { font-size: 23px; }
+.gallery-frame--lettered {
+  background: #d3bc94;
+  padding: 6px;
+}
+.framed-inscription {
+  height: 100%;
+  border: 1px solid #a488568c;
+  background: linear-gradient(145deg, #f5e8ce, #e9d9b8);
+  color: #36291d;
+  text-shadow: 0 1px #fff4dd96;
+}
 .inscription-label {
   font-size: 10px;
   font-weight: 650;

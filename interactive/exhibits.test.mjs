@@ -17,13 +17,19 @@ describe("museum collection", () => {
     ))));
     expect(titles("projects")[0]).toBe("Roster Lab App");
     expect(titles("skills")).toEqual(expect.arrayContaining(resume.experience.map(({ role }) => role)));
+    expect(titles("skills")).not.toContain("Full-stack engineering");
+    expect(rooms.skills.exhibits.some(({ label }) => label === "Roster Lab App")).toBe(false);
     expect(rooms.projects.exhibits.find(({ title }) => title === "Film-Hub").tags).toEqual([
       "Django", "JavaScript", "Supabase",
     ]);
   });
 
-  it("covers every academic entry and honor in the shared portfolio data", () => {
-    expect(titles("education")).toEqual(expect.arrayContaining(resume.education.map(({ degree }) => degree.split("\n")[0])));
+  it("shows academic milestones, individual certificates, and all honors", () => {
+    expect(titles("education")).toEqual(expect.arrayContaining([
+      "Master of Science in Artificial Intelligence", "Bachelor of Science in Computer Science", "Minor in Business",
+      "Google Cybersecurity", "Intermediate Machine Learning",
+    ]));
+    expect(titles("education")).not.toContain("Relevant Coursework & Credentials");
     expect(titles("education")).toContain("Master’s thesis");
     expect(rooms.honors.exhibits.map(({ description }) => description)).toEqual(expect.arrayContaining(resume.honors));
   });
@@ -44,6 +50,20 @@ describe("museum collection", () => {
     const toolboxNames = [...scene.querySelectorAll(".inscription-names li")].map((item) => item.textContent);
     expect(toolboxNames).toEqual(expect.arrayContaining(["PostgreSQL", "Supabase", "KiCad", "Hebrew - Native"]));
     expect(scene.querySelectorAll(".gallery-frame img")).toHaveLength(resume.experience.length);
+  });
+
+  it("frames the text in Honors and Projects and fits the graduation cover in a portrait frame", () => {
+    const scene = document.createElement("div");
+    for (const roomId of ["honors", "projects"]) {
+      renderScene(scene, roomId, rooms);
+      expect(scene.querySelectorAll("[data-exhibit].gallery-frame")).toHaveLength(rooms[roomId].exhibits.length);
+      expect(scene.querySelectorAll(".gallery-frame--lettered > .framed-inscription").length).toBeGreaterThan(0);
+    }
+    renderScene(scene, "education", rooms);
+    const gallery = rooms.education.exhibits.findIndex(({ title }) => title === "UGA graduation gallery");
+    const frame = scene.querySelector(`[data-exhibit="${gallery}"]`);
+    expect(parseFloat(frame.style.width)).toBeLessThan(parseFloat(frame.style.height));
+    expect(frame.querySelector("img.frame-contained")?.src).toContain("graduation-arch.jpeg");
   });
 
   it("reveals multiple exhibits and the destination gallery geometry at an open door", () => {
