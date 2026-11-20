@@ -209,18 +209,14 @@ a { color: inherit; }
 }
 .portal-side { box-shadow: inset 0 0 14px #251d16aa; }
 .portal-ceiling { background: #8e7c62; }
-.portal-wall { pointer-events: none; }
-.portal-preview {
-  display: grid;
-  place-items: center;
-  padding: 0.55rem;
-  border: 5px ridge #b49a6d;
-  background: #453d35;
-  color: #e9d8bb;
-  text-align: center;
-  font: bold 16px/1.12 Georgia, serif;
-  pointer-events: none;
+.portal-room {
+  position: absolute;
+  transform-style: preserve-3d;
+  visibility: hidden;
+  transition: visibility 0s 420ms;
 }
+.portal-room.is-visible { visibility: visible; transition-delay: 0s; }
+.portal-room, .portal-room * { pointer-events: none; }
 .bench-shadow { background: radial-gradient(ellipse at 45% 41%, #22150de8 4%, #22150d9e 33%, #25170f26 61%, transparent 75%); }
 .bench-seat {
   border: 3px solid #8d7355;
@@ -264,7 +260,7 @@ a { color: inherit; }
 .gallery-frame:hover { border-color: #f0d59e; }
 .gallery-frame img { display: block; width: 100%; height: 100%; background: #ded6c6; }
 .frame-photo { object-fit: cover; object-position: center 38%; }
-.frame-document { object-fit: contain; }
+.frame-contained { object-fit: contain; }
 .frame-caption {
   position: absolute;
   top: calc(100% + 18px);
@@ -279,25 +275,47 @@ a { color: inherit; }
   font: bold 14px/1.16 Georgia, serif;
   box-shadow: 0 1px 4px #392a2069;
 }
-.exhibit-art {
+.gallery-inscription {
   display: grid;
   align-content: center;
-  gap: 7px;
-  padding: 14px;
-  height: 100%;
-  background: #594738;
-  color: #fff3dd;
+  justify-items: center;
+  gap: 9px;
+  padding: 10px 11px;
+  color: #2e241d;
   text-align: center;
+  text-shadow: 0 1px #f2dbb58c, 0 -1px #2b211b23;
+  cursor: pointer;
 }
-.exhibit-art--roster { background: radial-gradient(ellipse at top right, #234d66, #172f3c 72%); }
-.exhibit-art--vision { background: radial-gradient(ellipse at top right, #655551, #362d34 72%); }
-.exhibit-art--project { background: radial-gradient(ellipse at top right, #46564e, #293b36 72%); }
-.art-label { font-size: 11px; text-transform: uppercase; letter-spacing: 0.09em; }
-.art-title { font: 700 26px/1.1 Georgia, serif; overflow-wrap: anywhere; }
-.gallery-frame.is-compact .exhibit-art { padding: 9px; }
-.gallery-frame.is-compact .art-title { font-size: 20px; }
-.art-motif { display: flex; height: 35px; align-items: end; gap: 5px; margin: 3px auto 0; }
-.art-motif span { width: 10px; height: var(--level); background: #dfc190b0; }
+.gallery-inscription::before {
+  content: "";
+  width: 36px;
+  height: 2px;
+  background: #84613a;
+  box-shadow: 0 1px #fae0b480;
+}
+.gallery-inscription:hover { color: #45270f; text-shadow: 0 1px #ffe0a8; }
+.gallery-inscription:hover::before { background: #9b6636; }
+.inscription-title { font: 700 28px/1.06 Georgia, serif; text-wrap: balance; overflow-wrap: anywhere; }
+.gallery-inscription.is-compact .inscription-title { font-size: 23px; }
+.inscription-label {
+  font-size: 10px;
+  font-weight: 650;
+  letter-spacing: 0.11em;
+  text-transform: uppercase;
+  text-wrap: balance;
+}
+.inscription-names {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 4px 10px;
+  max-width: 96%;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  font: 650 12px/1.2 system-ui, sans-serif;
+}
+.inscription-names li { white-space: nowrap; }
 
 .museum-controls {
   position: absolute;
@@ -417,6 +435,6 @@ a { color: inherit; }
 }
 
 @media (prefers-reduced-motion: reduce) {
-  .door-leaf { transition: none; }
+  .door-leaf, .portal-room { transition: none; }
   .museum-viewport.is-entering .museum-vignette { animation: none; }
 }

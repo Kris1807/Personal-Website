@@ -17,14 +17,14 @@ function projectExhibits(projects) {
     facts: item.decisions || item.highlights,
     tags: item.stack,
     links: [...(item.links || []), cvLink("projects", "Portfolio case studies")],
-    style: item.name === priority[0] ? "roster" : item.name === priority[1] ? "vision" : "project",
+    awaitingRecording: item.name === priority[0],
   }));
 }
 
 function skillsExhibits(resume) {
   const frameworks = new Set(resume.skills.flatMap(({ items }) => items));
   const groups = resume.skills.map(({ category, items }) => ({
-    title: category === "Languages" ? "Spoken Languages" : category,
+    title: category === "Languages" ? "Spoken Languages" : category.replace(" / ", " & "),
     label: "Toolbox",
     tags: category === "Frameworks / Libraries" && !frameworks.has("Next.js") ? ["Next.js", ...items] : items,
     links: [cvLink("skills", "Full skills list")],
@@ -56,6 +56,7 @@ function swimmingExhibits(resume) {
   const [college, international, club] = resume.athletics;
   const [europeanBronze, semifinals, worldResults, trials, relayRecords] = international.achievements;
   const photos = resume.athleticsGallery;
+  const medalWall = photoByName(resume.honorsGallery, "medal-wall.jpeg");
   const photo = (number) => photoByName(photos, `athletics-${number}.jpeg`);
   const links = [cvLink("athletics", "Swimming in the CV")];
   return [
@@ -63,7 +64,16 @@ function swimmingExhibits(resume) {
     { title: "NCAA All-American & team records", label: college.organization, facts: college.achievements, photo: photo("07"), links },
     { title: "World Championships semifinals", label: "Israel national team", facts: [semifinals, worldResults], photo: photo("09"), links },
     { title: "Israeli records & national titles", label: "Greater Jerusalem Swimming Club", facts: [...club.achievements, relayRecords], photo: photo("12"), links },
-    { title: "Swiss Olympic Trials", label: "International competition", facts: [trials], links },
+    {
+      title: "Swiss Olympic Trials", label: "International competition", facts: [trials], links,
+      photo: {
+        src: "assets/athletics/swiss-olympic-trials.webp",
+        alt: "Kristian Pitshugin smiling and flexing in the pool beside a red lane line.",
+        caption: "Swiss Olympic Trials. Photo © G. Velletri.",
+        fit: "contain",
+      },
+    },
+    { title: "Medal wall", label: "Athletics and academics", photo: medalWall, links },
     {
       title: "Race photographs", label: "In the water", photo: photo("04"),
       photos: ["04", "03", "05", "06", "11", "12"].map(photo), links,
@@ -98,7 +108,6 @@ function educationExhibits(resume) {
       label: "Physician scheduling · University of Georgia",
       description: "Evolutionary optimization of physician scheduling using bipartite matching and machine learning.",
       links: [{ label: "Thesis proposal", url: "../thesis-proposal.pdf" }, { label: "Thesis sources", url: "../thesis-sources.html" }],
-      style: "vision",
     },
     ...degrees.slice(2),
     { title: "Google Cybersecurity", label: "Professional Certificate", photo: photo("google-cybersecurity-v2.jpg"), links },
@@ -134,7 +143,7 @@ function honorsExhibits(resume) {
       photoByName(gallery, "sec-academic-honor-roll-2023.jpeg"),
     ] : undefined,
   }));
-  return [...awards, { title: "Medal wall", label: "Athletics and academics", photo: photoByName(gallery, "medal-wall.jpeg"), links }];
+  return awards;
 }
 
 export function createRooms(resume) {

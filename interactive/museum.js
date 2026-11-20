@@ -18,7 +18,7 @@ const dialog = document.querySelector("#exhibit-dialog");
 const dialogContent = document.querySelector("#exhibit-content");
 const reduceMotion = matchMedia("(prefers-reduced-motion: reduce)");
 const spatial = CSS.supports("transform-style", "preserve-3d") && "ResizeObserver" in window;
-const camera = spatial ? createCamera(viewport, cameraNode) : null;
+const camera = spatial ? createCamera(viewport, cameraNode, rooms) : null;
 
 let activeRoom = "lobby";
 let dialogReturn;
@@ -102,7 +102,7 @@ function openExhibit(index) {
     dialogContent.append(tags);
   }
 
-  if (exhibit.style === "roster") {
+  if (exhibit.awaitingRecording) {
     dialogContent.append(element("p", "recording-note", "The recorded walkthrough will be added here."));
   }
 

@@ -25,10 +25,10 @@ function plane(className, width, height, x, y, z, rotation = "") {
   return node;
 }
 
-function door(doorway, rooms) {
+function door(doorway, rooms, preview = false) {
   const { id, x, z, nx, nz, turn } = doorway;
   const node = plane("gallery-door", 147, 276, x + nx, floorY - 138, z + nz, `rotateY(${turn}deg)`);
-  node.dataset.door = id;
+  if (!preview) node.dataset.door = id;
   const opening = element("div", "door-opening");
   opening.append(element("div", "door-leaf"), element("div", "door-leaf"));
   node.append(element("div", "door-sign", id === "lobby" ? "Lobby" : rooms[id].title), opening);
@@ -54,10 +54,9 @@ function wall(className, width, x, z, nx, nz, turn, doors) {
   return node;
 }
 
-function passage({ id, x, z, nx, nz, turn }, rooms) {
-  const depth = 94;
-  const galleryDepth = 310;
-  const galleryWidth = 390;
+function passage({ id, x, z, nx, nz, turn }) {
+  const depth = 75;
+  const scale = 0.6;
   const midpoint = floorY - doorwayHeight / 2;
   const facing = `rotateY(${turn}deg)`;
   const surface = (style, width, height, offset, y, distance, angle = facing) => plane(
@@ -66,52 +65,38 @@ function passage({ id, x, z, nx, nz, turn }, rooms) {
   const side = (length, height, width, y, distance, direction) => surface(
     "portal-side", length, height, direction * width / 2, y, distance, `rotateY(${turn - direction * 90}deg)`,
   );
-  const galleryCenter = depth + galleryDepth / 2;
-  const back = depth + galleryDepth;
-  const room = rooms[id];
-  const farWall = surface("gallery-wall portal-wall", galleryWidth, roomHeight, 0, centerY, back);
-  farWall.style.setProperty("--wall-tone", room.tone);
-  const title = surface("portal-preview", 154, 89, 0, -10, back - 2);
-  title.append(element("span", "", id === "lobby" ? room.title : room.exhibits[0]?.title || room.title));
+  const peek = element("div", "portal-room");
+  peek.dataset.peek = id;
+  peek.style.transform = `translate3d(${x - nx * depth}px, ${floorY * (1 - scale)}px, ${z - nz * depth}px) ${facing} scale3d(${scale}, ${scale}, ${scale}) translateZ(${-roomDepth / 2}px)`;
 
   return [
     surface("portal-floor", doorwayWidth, depth, 0, floorY, depth / 2, `${facing} rotateX(90deg)`),
     surface("portal-ceiling", doorwayWidth, depth, 0, floorY - doorwayHeight, depth / 2, `${facing} rotateX(-90deg)`),
     side(depth, doorwayHeight, doorwayWidth, midpoint, depth / 2, -1),
     side(depth, doorwayHeight, doorwayWidth, midpoint, depth / 2, 1),
-    surface("portal-floor", galleryWidth, galleryDepth, 0, floorY, galleryCenter, `${facing} rotateX(90deg)`),
-    surface("portal-ceiling", galleryWidth, galleryDepth, 0, ceilingY, galleryCenter, `${facing} rotateX(-90deg)`),
-    side(galleryDepth, roomHeight, galleryWidth, centerY, galleryCenter, -1),
-    side(galleryDepth, roomHeight, galleryWidth, centerY, galleryCenter, 1),
-    farWall,
-    surface("gallery-wash", 265, 260, 0, -30, back - 1),
-    title,
+    peek,
   ];
 }
 
-function exhibitImage(exhibit) {
-  if (exhibit.photo) {
-    const image = element("img", exhibit.photo.fit === "document" ? "frame-document" : "frame-photo");
-    image.src = new URL(`../${exhibit.photo.src}`, import.meta.url);
-    image.alt = "";
-    image.decoding = "async";
-    image.loading = "lazy";
-    image.draggable = false;
-    return image;
-  }
+function exhibitImage(photo) {
+  const image = element("img", photo.fit ? "frame-contained" : "frame-photo");
+  image.src = new URL(`../${photo.src}`, import.meta.url);
+  image.alt = "";
+  image.decoding = "async";
+  image.loading = "lazy";
+  image.draggable = false;
+  return image;
+}
 
-  const artwork = element("div", `exhibit-art exhibit-art--${exhibit.style || "type"}`);
-  artwork.append(element("span", "art-label", exhibit.label), element("strong", "art-title", exhibit.title));
-  if (exhibit.style === "roster" || exhibit.style === "vision") {
-    const motif = element("div", "art-motif");
-    for (let index = 0; index < 8; index++) {
-      const block = element("span");
-      block.style.setProperty("--level", [34, 76, 50, 64, 86, 59, 74, 96][index] + "%");
-      motif.append(block);
-    }
-    artwork.append(motif);
+function letterExhibit(mount, exhibit) {
+  mount.append(element("strong", "inscription-title", exhibit.title));
+  if (exhibit.label === "Toolbox" && exhibit.tags?.length) {
+    const list = element("ul", "inscription-names");
+    list.append(...exhibit.tags.map((name) => element("li", "", name)));
+    mount.append(list);
+  } else if (exhibit.label) {
+    mount.append(element("span", "inscription-label", exhibit.label));
   }
-  return artwork;
 }
 
 const displayWalls = {
@@ -135,18 +120,22 @@ function wallSlots(roomId, count) {
   return [["front", front], ["right", Math.ceil(spare / 2)], ["left", Math.floor(spare / 2)]].flatMap(slots);
 }
 
-function exhibitFrame(exhibit, index, { wallName, offset, width, height }) {
+function exhibitFrame(exhibit, index, { wallName, offset, width, height }, preview) {
   const { x, z, nx, nz, turn } = displayWalls[wallName];
   const mount = (style, w, h, y, depth) => plane(
     style, w, h, x + offset * nz + nx * depth, y, z - offset * nx + nz * depth, `rotateY(${turn}deg)`,
   );
-  const frame = mount(`gallery-frame${width < 200 ? " is-compact" : ""}`, width, height, -4, 4);
-  frame.dataset.exhibit = String(index);
-  frame.dataset.wall = wallName;
-  frame.append(exhibitImage(exhibit), element("span", "frame-caption", exhibit.title));
+  const style = exhibit.photo ? "gallery-frame" : "gallery-inscription";
+  const display = mount(`${style}${width < 200 ? " is-compact" : ""}`, width, height, -4, 4);
+  if (!preview) {
+    display.dataset.exhibit = String(index);
+    display.dataset.wall = wallName;
+  }
+  if (exhibit.photo) display.append(exhibitImage(exhibit.photo), element("span", "frame-caption", exhibit.title));
+  else letterExhibit(display, exhibit);
   const wash = mount("gallery-wash", width + 64, 300, -44, 1);
   const lamp = mount("gallery-frame-lamp", Math.min(57, width / 3), 7, -height / 2 - 22, 6);
-  return [wash, lamp, frame];
+  return [wash, lamp, display];
 }
 
 function bench() {
@@ -160,32 +149,40 @@ function bench() {
   return [shadow, seat, front, rear, left, right];
 }
 
-export function renderScene(camera, roomId, rooms) {
+function gallery(roomId, rooms, preview = false) {
   const room = rooms[roomId];
   const doors = roomDoors(roomId);
-  camera.style.setProperty("--wall-tone", room.tone);
   const floor = plane("gallery-floor", roomWidth, roomDepth, 0, floorY, 0, "rotateX(90deg)");
   const ceiling = plane("gallery-ceiling", roomWidth, roomDepth, 0, ceilingY, 0, "rotateX(-90deg)");
   ceiling.append(element("div", "gallery-skylight"));
-  camera.replaceChildren(
+  const surfaces = [
     floor,
     ceiling,
     wall("", roomWidth, 0, -roomDepth / 2, 0, 1, 0, doors),
     wall("gallery-wall--left", roomDepth, -roomWidth / 2, 0, 1, 0, 90, doors),
     wall("gallery-wall--right", roomDepth, roomWidth / 2, 0, -1, 0, -90, doors),
-    wall("", roomWidth, 0, roomDepth / 2, 0, -1, 180, doors),
-    ...doors.flatMap((doorway) => passage(doorway, rooms)),
-    ...doors.map((doorway) => door(doorway, rooms)),
-  );
+  ];
+  if (!preview) {
+    surfaces.push(wall("", roomWidth, 0, roomDepth / 2, 0, -1, 180, doors));
+    surfaces.push(...doors.flatMap(passage), ...doors.map((doorway) => door(doorway, rooms)));
+  } else if (roomId === "lobby") {
+    surfaces.push(...doors.map((doorway) => door(doorway, rooms, preview)));
+  }
 
   const slots = wallSlots(roomId, room.exhibits.length);
-  camera.append(...room.exhibits.flatMap((exhibit, index) => exhibitFrame(exhibit, index, slots[index])));
-  if (roomId === "lobby") camera.append(...bench());
+  surfaces.push(...room.exhibits.flatMap((exhibit, index) => exhibitFrame(exhibit, index, slots[index], preview)));
+  if (roomId === "lobby") surfaces.push(...bench());
+  return surfaces;
+}
+
+export function renderScene(camera, roomId, rooms) {
+  camera.style.setProperty("--wall-tone", rooms[roomId].tone);
+  camera.replaceChildren(...gallery(roomId, rooms));
 }
 
 const clamp = (value, minimum, maximum) => Math.min(maximum, Math.max(minimum, value));
 
-export function createCamera(viewport, camera) {
+export function createCamera(viewport, camera, rooms) {
   let roomId = "lobby";
   let view = arrivalView(roomId);
   let doors = [];
@@ -194,8 +191,14 @@ export function createCamera(viewport, camera) {
   const paint = () => {
     const { x, z, yaw, pitch } = view;
     camera.style.transform = `translateZ(${perspective}px) rotateX(${pitch}deg) rotateY(${yaw}deg) translate3d(${-x}px, 0, ${-z}px)`;
-    for (const { doorway, node } of doors) {
-      node.classList.toggle("is-open", shouldOpenDoor(view, doorway, node.classList.contains("is-open")));
+    for (const { doorway, node, peek } of doors) {
+      const open = shouldOpenDoor(view, doorway, node.classList.contains("is-open"));
+      if (open && !peek.firstChild) {
+        peek.style.setProperty("--wall-tone", rooms[doorway.id].tone);
+        peek.append(...gallery(doorway.id, rooms, true));
+      }
+      node.classList.toggle("is-open", open);
+      peek.classList.toggle("is-visible", open);
     }
   };
 
@@ -209,7 +212,11 @@ export function createCamera(viewport, camera) {
   return {
     enter(nextRoom, crossing) {
       roomId = nextRoom;
-      doors = roomDoors(roomId).map((doorway) => ({ doorway, node: camera.querySelector(`[data-door="${doorway.id}"]`) }));
+      doors = roomDoors(roomId).map((doorway) => ({
+        doorway,
+        node: camera.querySelector(`[data-door="${doorway.id}"]`),
+        peek: camera.querySelector(`[data-peek="${doorway.id}"]`),
+      }));
       view = arrivalView(roomId, crossing);
       paint();
     },
