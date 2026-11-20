@@ -104,10 +104,17 @@ const displayWalls = {
   front: { x: 0, z: -roomDepth / 2, nx: 0, nz: 1, turn: 0, span: roomWidth - 100 },
   right: { x: roomWidth / 2, z: 0, nx: -1, nz: 0, turn: -90, span: roomDepth - 104 },
   left: { x: -roomWidth / 2, z: 0, nx: 1, nz: 0, turn: 90, span: roomDepth - 104 },
+  rear: { x: 0, z: roomDepth / 2, nx: 0, nz: -1, turn: 180 },
 };
 
 function wallSlots(roomId, count) {
-  if (roomId === "lobby") return [{ wallName: "front", offset: 151, width: 114, height: 136 }];
+  if (roomId === "lobby") {
+    const portrait = { wallName: "front", offset: 151, width: 114, height: 136 };
+    const drawings = Array.from({ length: count - 1 }, (_, index) => ({
+      wallName: "rear", offset: (index - (count - 2) / 2) * 230, width: 186, height: 206,
+    }));
+    return [portrait, ...drawings];
+  }
 
   const front = Math.min(count, count >= 10 ? 4 : 3);
   const spare = count - front;
@@ -132,6 +139,7 @@ function exhibitFrame(exhibit, index, { wallName, offset, width, height }, { pre
     : width;
   const style = exhibit.photo ? "gallery-frame" : frameText ? "gallery-frame gallery-frame--lettered" : "gallery-inscription";
   const display = mount(`${style}${frameWidth < 200 ? " is-compact" : ""}`, frameWidth, height, -4, 4);
+  if (wallName === "rear") display.classList.add("gallery-frame--drawing");
   if (!preview) {
     display.dataset.exhibit = String(index);
     display.dataset.wall = wallName;
@@ -182,9 +190,11 @@ function gallery(roomId, rooms, preview = false) {
   }
 
   const slots = wallSlots(roomId, room.exhibits.length);
-  surfaces.push(...room.exhibits.flatMap((exhibit, index) => exhibitFrame(exhibit, index, slots[index], {
-    preview, frameText: room.frameText,
-  })));
+  surfaces.push(...room.exhibits.flatMap((exhibit, index) => {
+    const slot = slots[index];
+    if (preview && slot.wallName === "rear") return [];
+    return exhibitFrame(exhibit, index, slot, { preview, frameText: room.frameText });
+  }));
   if (roomId === "lobby") surfaces.push(...bench(), ...lobbyDecor(plane, floorY, preview));
   return surfaces;
 }

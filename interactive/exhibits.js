@@ -144,7 +144,7 @@ export function createRooms(resume) {
         description: resume.positioning,
         photo: { src: resume.profileImage, thumbnail: "interactive/lobby-portrait.webp", alt: "Portrait of Kristian Pitshugin" },
         links: [{ label: "Visit the Visitor Desk", url: "#visitor-desk" }],
-      }],
+      }, ...lobbyDrawings],
     },
     projects: {
       title: "Projects", description: "Explore the systems I built and the problems they solve.", tone: "#8b928c",
@@ -185,3 +185,39 @@ export function createRooms(resume) {
     },
   };
 }
+
+const lobbyDrawings = [
+  {
+    title: "The Turn",
+    label: "Original AI-generated Cubist drawing",
+    description: "A swimmer folds into a flip turn. The split viewpoints catch the motion from overhead and from the side.",
+    photo: {
+      src: "assets/museum/the-turn.webp",
+      alt: "An angular swimmer turns in deep blue water beside a red lane rope.",
+      fit: "contain",
+      aspectRatio: 2 / 3,
+    },
+  },
+  {
+    title: "Signals in Fragments",
+    label: "Original AI-generated Cubist drawing",
+    description: "A green circle pulls scattered lines and planes together, like a signal emerging from noise.",
+    photo: {
+      src: "assets/museum/signals-in-fragments.webp",
+      alt: "Sage and graphite planes intersect around a green circle and a small rust-orange square.",
+      fit: "contain",
+      aspectRatio: 2 / 3,
+    },
+  },
+  {
+    title: "Two Vessels at Dusk",
+    label: "Original AI-generated Cubist drawing",
+    description: "Two vessels share a tilted tabletop, with their profiles and openings visible at the same time.",
+    photo: {
+      src: "assets/museum/two-vessels-at-dusk.webp",
+      alt: "Two angular vessels in muted teal and bone-white sit on a tilted ochre table.",
+      fit: "contain",
+      aspectRatio: 2 / 3,
+    },
+  },
+];

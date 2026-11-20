@@ -106,6 +106,16 @@ describe("museum collection", () => {
     await Promise.all(downloads.map(({ url }) => access(resolve(url.slice(3)))));
   });
 
+  it("hangs the three lobby drawings on the rear wall as openable exhibits", () => {
+    const scene = document.createElement("div");
+    renderScene(scene, "lobby", rooms);
+    const frames = [...scene.querySelectorAll('[data-wall="rear"].gallery-frame--drawing')];
+    expect(frames.map((frame) => frame.querySelector(".frame-caption").textContent)).toEqual([
+      "The Turn", "Signals in Fragments", "Two Vessels at Dusk",
+    ]);
+    expect(frames.every((frame) => frame.hasAttribute("data-exhibit") && frame.querySelector("img.frame-contained"))).toBe(true);
+  });
+
   it("references existing image files for every frame and photo collection", async () => {
     const paths = new Set();
     for (const { exhibits } of Object.values(rooms)) {

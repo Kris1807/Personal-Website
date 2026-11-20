@@ -306,6 +306,9 @@ a { color: inherit; }
   background: linear-gradient(115deg, #fff4d928, transparent 36% 80%, #e3c28d1a);
 }
 .gallery-frame:hover { border-color: #f0d59e; }
+.gallery-frame--drawing { border-color: #97724d; background: #efe2cb; }
+.gallery-frame--drawing:hover { border-color: #c49a63; }
+.gallery-frame--drawing .frame-caption { max-width: calc(100% + 30px); font-size: 12px; }
 .gallery-frame img { display: block; width: 100%; height: 100%; background: #ded6c6; }
 .frame-photo { object-fit: cover; object-position: center 38%; }
 .frame-contained { object-fit: contain; }
