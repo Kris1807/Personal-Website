@@ -9,8 +9,8 @@ const doorPositions = {
   education: { x: -302, z: -369, turn: 0 },
   projects: { x: 0, z: -369, turn: 0 },
   swimming: { x: 302, z: -369, turn: 0 },
-  skills: { x: -504, z: -145, turn: 90 },
-  honors: { x: 504, z: -145, turn: -90 },
+  skills: { x: -504, z: -246, turn: 90 },
+  honors: { x: 504, z: -246, turn: -90 },
 };
 
 export function element(tag, className, text) {
@@ -70,16 +70,19 @@ function exhibitFrame(exhibit, index, total) {
   const frame = plane("gallery-frame", width, 198, x, -3, -366);
   frame.dataset.exhibit = String(index);
   frame.append(exhibitImage(exhibit), element("span", "frame-caption", exhibit.title));
-  return frame;
+  const wash = plane("gallery-wash", width + 88, 320, x, -44, -369);
+  const lamp = plane("gallery-frame-lamp", 57, 7, x, -116, -364);
+  return [wash, lamp, frame];
 }
 
 function bench() {
-  const shadow = plane("bench-shadow", 207, 110, 0, floorY - 1, 15, "rotateX(90deg)");
-  const seat = plane("bench-seat", 180, 73, 0, floorY - 42, 15, "rotateX(90deg)");
-  const front = plane("bench-front", 180, 32, 0, floorY - 26, 51);
-  const rear = plane("bench-front", 180, 32, 0, floorY - 26, -21, "rotateY(180deg)");
-  const left = plane("bench-front", 73, 32, -90, floorY - 26, 15, "rotateY(-90deg)");
-  const right = plane("bench-front", 73, 32, 90, floorY - 26, 15, "rotateY(90deg)");
+  const depth = -147;
+  const shadow = plane("bench-shadow", 242, 125, 12, floorY - 1, depth + 14, "rotateX(90deg)");
+  const seat = plane("bench-seat", 180, 73, 0, floorY - 42, depth, "rotateX(90deg)");
+  const front = plane("bench-front", 180, 32, 0, floorY - 26, depth + 36);
+  const rear = plane("bench-front", 180, 32, 0, floorY - 26, depth - 36, "rotateY(180deg)");
+  const left = plane("bench-front", 73, 32, -90, floorY - 26, depth, "rotateY(-90deg)");
+  const right = plane("bench-front", 73, 32, 90, floorY - 26, depth, "rotateY(90deg)");
   return [shadow, seat, front, rear, left, right];
 }
 
@@ -93,20 +96,20 @@ export function renderScene(camera, roomId, rooms) {
     floor,
     ceiling,
     plane("gallery-wall", roomWidth, roomHeight, 0, centerY, -370),
-    plane("gallery-wall gallery-wall--side", roomDepth, roomHeight, -505, centerY, 0, "rotateY(90deg)"),
-    plane("gallery-wall gallery-wall--side", roomDepth, roomHeight, 505, centerY, 0, "rotateY(-90deg)"),
+    plane("gallery-wall gallery-wall--left", roomDepth, roomHeight, -505, centerY, 0, "rotateY(90deg)"),
+    plane("gallery-wall gallery-wall--right", roomDepth, roomHeight, 505, centerY, 0, "rotateY(-90deg)"),
     plane("gallery-wall", roomWidth, roomHeight, 0, centerY, 370, "rotateY(180deg)"),
   );
 
   if (roomId === "lobby") {
     camera.append(...Object.entries(doorPositions).map(([id, position]) => door(id, rooms[id].title, position)), ...bench());
   } else {
-    camera.append(...room.exhibits.map((exhibit, index) => exhibitFrame(exhibit, index, room.exhibits.length)));
+    camera.append(...room.exhibits.flatMap((exhibit, index) => exhibitFrame(exhibit, index, room.exhibits.length)));
     camera.append(door("lobby", "Lobby", { x: 504, z: -85, turn: -90 }));
   }
 }
 
-const startingView = { x: 0, z: 288, yaw: 0, pitch: -3 };
+const startingView = { x: 0, z: 288, yaw: -1.5, pitch: 3 };
 const clamp = (value, minimum, maximum) => Math.min(maximum, Math.max(minimum, value));
 
 export function createCamera(viewport, camera) {
@@ -119,7 +122,7 @@ export function createCamera(viewport, camera) {
   };
 
   new ResizeObserver(([{ contentRect }]) => {
-    perspective = Math.max(contentRect.width * 0.64, contentRect.height * 0.71);
+    perspective = clamp(contentRect.width * 0.64, contentRect.height * 0.72, contentRect.height * 1.1);
     viewport.style.perspective = `${perspective}px`;
     paint();
   }).observe(viewport);
