@@ -1,3 +1,4 @@
+import { lobbyDecor } from "./decor.js";
 import {
   arrivalView, benchPosition, doorwayHeight, doorwayWidth, roomDepth, roomDoors,
   roomWidth, shouldOpenDoor, walkStep,
@@ -80,10 +81,10 @@ function passage({ id, x, z, nx, nz, turn }) {
 
 function exhibitImage(photo) {
   const image = element("img", photo.fit ? "frame-contained" : "frame-photo");
-  image.src = new URL(`../${photo.src}`, import.meta.url);
+  image.src = new URL(`../${photo.thumbnail || photo.src}`, import.meta.url);
   image.alt = "";
   image.decoding = "async";
-  image.loading = "lazy";
+  image.loading = photo.thumbnail ? "eager" : "lazy";
   image.draggable = false;
   return image;
 }
@@ -184,7 +185,7 @@ function gallery(roomId, rooms, preview = false) {
   surfaces.push(...room.exhibits.flatMap((exhibit, index) => exhibitFrame(exhibit, index, slots[index], {
     preview, frameText: room.frameText,
   })));
-  if (roomId === "lobby") surfaces.push(...bench());
+  if (roomId === "lobby") surfaces.push(...bench(), ...lobbyDecor(plane, floorY, preview));
   return surfaces;
 }
 
@@ -216,8 +217,10 @@ export function createCamera(viewport, camera, rooms) {
   };
 
   new ResizeObserver(([{ contentRect }]) => {
-    const lens = contentRect.width < 700 ? 0.7 : 0.65;
-    perspective = Math.min(contentRect.width * lens, contentRect.height * 1.1);
+    const { width, height } = contentRect;
+    const portrait = width < 700 && height > width;
+    perspective = portrait ? Math.min(width * 0.95, Math.max(width * 0.7, height * 0.39))
+      : Math.min(width * 0.65, height * 1.1);
     viewport.style.perspective = `${perspective}px`;
     paint();
   }).observe(viewport);

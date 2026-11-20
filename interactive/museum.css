@@ -24,6 +24,7 @@ a { color: inherit; }
   position: fixed;
   inset: 0;
   width: auto;
+  height: 100dvh;
   margin: 0;
 }
 
@@ -232,6 +233,53 @@ a { color: inherit; }
   box-shadow: inset 0 1px 2px #d4b18b40;
 }
 
+.plinth-top, .plinth-side, .plinth-shadow, .pot-shadow, .pot-rim, .pot-face { pointer-events: none; }
+.plinth-shadow, .pot-shadow { background: radial-gradient(ellipse, #23150cb0, #28190d40 38%, transparent 72%); }
+.plinth-top {
+  border: 3px ridge #c6b698;
+  background: radial-gradient(ellipse at 28% 35%, #e4dbc7, #b5a486 85%);
+}
+.plinth-side {
+  background: linear-gradient(90deg, #b09c7f, #c4b497 22%, #b6a487 95%);
+  border-block: 5px ridge #ac9879;
+  box-shadow: inset 1px 0 #e5d5b880, inset -1px 0 #6f5d477a;
+}
+.plinth-front {
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  background: linear-gradient(140deg, #e0d1b5, #c3b194 70%, #ae997c);
+}
+.plinth-label {
+  margin-top: 0.65rem;
+  padding: 3px 4px;
+  background: linear-gradient(#d4b484, #a98557);
+  border: 1px solid #ad8e5c;
+  box-shadow: 0 1px 3px #5840278c;
+  color: #332418;
+  white-space: nowrap;
+  font: bold 7px/1 Georgia, serif;
+  letter-spacing: 0.04em;
+}
+.pot-porcelain { --glaze: #efe2c3; --glaze-shadow: #776c55; --ribbon: #34617d; }
+.pot-celadon { --glaze: #80a398; --glaze-shadow: #293e39; }
+.pot-bronze { --glaze: #bc8b5d; --glaze-shadow: #4e3022; }
+.pot-face {
+  background-color: var(--glaze);
+  background:
+    linear-gradient(180deg, #fff8db29, transparent 45%, #291b153b),
+    color-mix(in srgb, var(--glaze) var(--pot-light), var(--glaze-shadow));
+}
+.pot-ribbon {
+  background:
+    linear-gradient(180deg, transparent 12%, #14364b80 18% 23%, var(--ribbon) 27% 64%, #14364b7a 67% 73%, transparent 80%),
+    color-mix(in srgb, var(--glaze) var(--pot-light), var(--glaze-shadow));
+}
+.pot-rim {
+  border-radius: 50%;
+  background: radial-gradient(ellipse, #1f1c15 54%, var(--glaze-shadow) 62%, var(--glaze) 72%, var(--glaze-shadow) 100%);
+}
+
 .gallery-wash {
   pointer-events: none;
   background: radial-gradient(ellipse at 50% 30%, #ffe7ad8c 0%, #ffe1ab46 24%, #ffe1a80d 55%, transparent 73%);
@@ -344,28 +392,29 @@ a { color: inherit; }
   font-size: 0.8rem;
 }
 .keyboard-hint kbd { color: var(--ink); font: inherit; font-weight: 700; }
-.touch-controls { display: none; }
+.touch-controls, .touch-hint { display: none; }
 .touch-controls button {
-  min-height: 2.85rem;
-  padding: 0.35rem 0.65rem;
+  min-width: 3rem;
+  min-height: 3rem;
+  padding: 0.3rem 0.4rem;
   border: 1px solid var(--line);
   color: var(--ink);
   background: #221a14e8;
   border-radius: 0.3rem;
-  font-size: 0.86rem;
+  font-size: 0.8rem;
   cursor: pointer;
   touch-action: none;
   user-select: none;
   pointer-events: auto;
 }
-.touch-controls button:active { background: #6b5037; }
+.touch-controls button:active { background: #7a593c; }
 .touch-controls button:first-child { grid-column: 2; }
 .touch-controls button:nth-child(2) { grid-column: 1; }
 
 .spatial-museum .museum-menu {
   position: absolute;
-  top: max(0.8rem, env(safe-area-inset-top));
-  right: max(0.8rem, env(safe-area-inset-right));
+  top: calc(0.65rem + env(safe-area-inset-top));
+  right: calc(0.65rem + env(safe-area-inset-right));
 }
 .museum-menu summary {
   width: fit-content;
@@ -382,9 +431,10 @@ a { color: inherit; }
 }
 .museum-menu summary::-webkit-details-marker { display: none; }
 .museum-menu-panel {
-  width: min(24rem, calc(100vw - 1.6rem));
-  max-height: calc(100dvh - 5rem);
+  width: min(24rem, calc(100vw - 1.6rem - env(safe-area-inset-left) - env(safe-area-inset-right)));
+  max-height: calc(100dvh - 5rem - env(safe-area-inset-top) - env(safe-area-inset-bottom));
   overflow: auto;
+  overscroll-behavior: contain;
   margin-top: 0.45rem;
   padding: 0.95rem;
   border: 1px solid var(--line);
@@ -413,8 +463,9 @@ a { color: inherit; }
 .museum-exhibits h2 { margin: 0 0 0.5rem; font: 700 1.15rem Georgia, serif; }
 
 .exhibit-dialog {
-  width: min(100% - 1.7rem, 42rem);
-  max-height: calc(100% - 1.7rem);
+  width: min(100% - 1.7rem - env(safe-area-inset-left) - env(safe-area-inset-right), 42rem);
+  max-height: calc(100dvh - 1.7rem - env(safe-area-inset-top) - env(safe-area-inset-bottom));
+  overscroll-behavior: contain;
   padding: clamp(1rem, 4vw, 2rem);
   border: 1px solid var(--line);
   border-radius: 0.4rem;
@@ -440,9 +491,27 @@ a { color: inherit; }
 .exhibit-links { display: flex; flex-wrap: wrap; gap: 0.55rem; margin-top: 1rem; }
 .recording-note { color: var(--quiet); font-size: 0.92rem; }
 
-@media (max-width: 700px), (pointer: coarse) {
+@media (max-width: 700px), (max-width: 950px) and (max-height: 500px), (pointer: coarse) {
   .keyboard-hint { display: none; }
-  .touch-controls { display: grid; grid-template-columns: repeat(3, auto); gap: 0.28rem; }
+  .museum-controls {
+    inset: auto calc(0.65rem + env(safe-area-inset-right)) calc(0.65rem + env(safe-area-inset-bottom)) calc(0.65rem + env(safe-area-inset-left));
+    grid-template-columns: auto 1fr;
+    align-items: end;
+    justify-items: start;
+    gap: 0.5rem;
+  }
+  .touch-controls { display: grid; grid-template-columns: repeat(3, auto); gap: 0.24rem; }
+  .touch-hint {
+    display: block;
+    justify-self: end;
+    margin: 0;
+    padding: 0.45rem 0.65rem;
+    border-radius: 0.3rem;
+    background: #211913d9;
+    color: var(--quiet);
+    font-size: 0.77rem;
+    white-space: nowrap;
+  }
 }
 
 @media (prefers-reduced-motion: reduce) {

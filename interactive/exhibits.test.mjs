@@ -40,7 +40,7 @@ describe("museum collection", () => {
       renderScene(camera, roomId, rooms);
       const frames = [...camera.querySelectorAll("[data-exhibit]")];
       expect(frames.map((frame) => Number(frame.dataset.exhibit))).toEqual(room.exhibits.map((_, index) => index));
-      if (roomId !== "lobby") expect(new Set(frames.map((frame) => frame.dataset.wall)).size).toBe(3);
+      if (room.exhibits.length >= 5) expect(new Set(frames.map((frame) => frame.dataset.wall)).size).toBe(3);
     }
   });
 
@@ -93,11 +93,24 @@ describe("museum collection", () => {
     expect(titles("honors")).not.toContain("Medal wall");
   });
 
+  it("includes three lobby objects and a Visitor Desk with approved downloads and links", async () => {
+    const scene = document.createElement("div");
+    renderScene(scene, "lobby", rooms);
+    expect(scene.querySelectorAll(".plinth-label")).toHaveLength(3);
+    expect(scene.querySelector('[data-door="visitor-desk"] .door-sign').textContent).toBe("Visitor Desk");
+    const desk = rooms["visitor-desk"].exhibits;
+    const downloads = desk.flatMap(({ links }) => links || []).filter(({ download }) => download);
+    expect(downloads.map(({ url }) => url)).toEqual(["../Kristian-Pitshugin-Resume.pdf", "../thesis-proposal.pdf"]);
+    expect(desk.find(({ title }) => title === "Grade Sheet").links).toBeUndefined();
+    await Promise.all(downloads.map(({ url }) => access(resolve(url.slice(3)))));
+  });
+
   it("references existing image files for every frame and photo collection", async () => {
     const paths = new Set();
     for (const { exhibits } of Object.values(rooms)) {
       for (const exhibit of exhibits) {
         if (exhibit.photo) paths.add(exhibit.photo.src);
+        if (exhibit.photo?.thumbnail) paths.add(exhibit.photo.thumbnail);
         for (const photo of exhibit.photos || []) paths.add(photo.src);
       }
     }

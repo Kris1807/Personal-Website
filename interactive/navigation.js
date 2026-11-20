@@ -3,6 +3,11 @@ export const roomDepth = 740;
 export const doorwayWidth = 128;
 export const doorwayHeight = 215;
 export const benchPosition = { x: -192, z: -147 };
+export const lobbyPedestals = [
+  { x: -323, z: -163, width: 76, depth: 70, height: 87, piece: "porcelain" },
+  { x: 291, z: -170, width: 73, depth: 67, height: 91, piece: "celadon" },
+  { x: -297, z: 214, width: 67, depth: 67, height: 78, piece: "bronze" },
+];
 
 const left = -roomWidth / 2;
 const right = roomWidth / 2;
@@ -17,8 +22,10 @@ const lobbyDoors = [
   { id: "swimming", x: 302, z: front, turn: 0, nx: 0, nz: 1 },
   { id: "skills", x: left, z: -238, turn: 90, nx: 1, nz: 0 },
   { id: "honors", x: right, z: -238, turn: -90, nx: -1, nz: 0 },
+  { id: "visitor-desk", x: right, z: 112, turn: -90, nx: -1, nz: 0 },
 ];
 const returnDoor = { id: "lobby", x: 0, z: back, turn: 180, nx: 0, nz: -1 };
+const lobbyObstacles = [{ ...benchPosition, width: 180, depth: 72 }, ...lobbyPedestals];
 
 export const roomDoors = (roomId) => roomId === "lobby" ? lobbyDoors : [returnDoor];
 
@@ -39,9 +46,10 @@ function fitsOpening(point, door) {
 }
 
 function canOccupy(point, roomId, doors) {
-  if (roomId === "lobby" &&
-      Math.abs(point.x - benchPosition.x) < 90 + playerRadius &&
-      Math.abs(point.z - benchPosition.z) < 36 + playerRadius) return false;
+  if (roomId === "lobby" && lobbyObstacles.some((item) => (
+    Math.abs(point.x - item.x) < item.width / 2 + playerRadius &&
+    Math.abs(point.z - item.z) < item.depth / 2 + playerRadius
+  ))) return false;
 
   const inside = point.x >= left + playerRadius && point.x <= right - playerRadius &&
     point.z >= front + playerRadius && point.z <= back - playerRadius;

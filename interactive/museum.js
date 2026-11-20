@@ -205,8 +205,8 @@ viewport.addEventListener("click", (event) => {
 viewport.addEventListener("animationend", () => viewport.classList.remove("is-entering"));
 
 viewport.addEventListener("pointerdown", (event) => {
-  if (!event.isPrimary || event.button !== 0 || menu.open) return;
-  pointer = { id: event.pointerId, x: event.clientX, y: event.clientY };
+  if (pointer || event.button !== 0 || menu.open) return;
+  pointer = { id: event.pointerId, x: event.clientX, y: event.clientY, touch: event.pointerType === "touch" };
   lastGestureWasDrag = false;
 });
 
@@ -220,7 +220,8 @@ viewport.addEventListener("pointermove", (event) => {
     viewport.setPointerCapture(event.pointerId);
     viewport.classList.add("is-dragging");
   }
-  camera.look(-horizontal * 0.15, vertical * 0.12);
+  const sensitivity = pointer.touch ? 0.28 : 0.15;
+  camera.look(-horizontal * sensitivity, vertical * sensitivity * 0.8);
   pointer.x = event.clientX;
   pointer.y = event.clientY;
 });

@@ -1,5 +1,5 @@
 import { describe, expect, it } from "vitest";
-import { arrivalView, benchPosition, roomDoors, shouldOpenDoor, walkStep } from "./navigation.js";
+import { arrivalView, benchPosition, lobbyPedestals, roomDoors, shouldOpenDoor, walkStep } from "./navigation.js";
 
 function walk(room, start, { forward = 1, strafe = 0, steps = 150 } = {}) {
   let view = { ...start };
@@ -48,5 +48,14 @@ describe("first-person museum navigation", () => {
     const retreated = walk("lobby", returned, { forward: -1, steps: 30 });
     expect(retreated.z).toBeGreaterThan(returned.z);
     expect(retreated.entrance).toBeUndefined();
+  });
+
+  it("keeps the pedestal solid and leaves the Visitor Desk doorway walkable", () => {
+    const item = lobbyPedestals[1];
+    const collision = walk("lobby", { x: item.x, z: item.z + 100, yaw: 0 });
+    expect(collision.z).toBeGreaterThan(item.z + item.depth / 2);
+    const entrance = walk("lobby", { x: 340, z: 112, yaw: 90 });
+    expect(entrance.entrance).toBe("visitor-desk");
+    expect(arrivalView("visitor-desk", { fromRoom: "lobby", yaw: 90, pitch: 3 }).yaw).toBe(0);
   });
 });

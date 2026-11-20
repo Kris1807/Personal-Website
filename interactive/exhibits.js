@@ -142,11 +142,8 @@ export function createRooms(resume) {
       exhibits: [{
         title: "Kristian Pitshugin", label: "CV & contact",
         description: resume.positioning,
-        photo: { src: resume.profileImage, alt: "Portrait of Kristian Pitshugin" },
-        links: [
-          { label: "Download résumé", url: `../${resume.resumeFile}`, download: true },
-          ...resume.contact,
-        ],
+        photo: { src: resume.profileImage, thumbnail: "interactive/lobby-portrait.webp", alt: "Portrait of Kristian Pitshugin" },
+        links: [{ label: "Visit the Visitor Desk", url: "#visitor-desk" }],
       }],
     },
     projects: {
@@ -170,6 +167,28 @@ export function createRooms(resume) {
       title: "Honors", description: "Awards in research, academics, and athletics.", tone: "#9e8b81",
       frameText: true,
       exhibits: honorsExhibits(resume),
+    },
+    "visitor-desk": {
+      title: "Visitor Desk", description: "Take a copy of my résumé, browse my research, or get in touch.", tone: "#aa9785",
+      frameText: true,
+      exhibits: [
+        {
+          title: "Résumé", label: "Kristian Pitshugin",
+          links: [{ label: "Download résumé (PDF)", url: `../${resume.resumeFile}`, download: true }],
+        },
+        {
+          title: "Connect", label: "Professional links",
+          links: resume.contact.filter(({ url }) => url.startsWith("https://") || url.startsWith("mailto:")),
+        },
+        { title: "Grade Sheet", label: "Academic record", description: "Download pending." },
+        {
+          title: "Research Materials", label: "Master’s thesis",
+          links: [
+            { label: "Download thesis proposal (PDF)", url: "../thesis-proposal.pdf", download: true },
+            { label: "Browse thesis sources", url: "../thesis-sources.html" },
+          ],
+        },
+      ],
     },
   };
 }
