@@ -169,7 +169,7 @@ export function createRooms(resume) {
       exhibits: honorsExhibits(resume),
     },
     "visitor-desk": {
-      title: "Visitor Desk", description: "Take a copy of my résumé, browse my research, or get in touch.", tone: "#aa9785",
+      title: "Visitor Desk", description: "Download my résumé or get in touch.", tone: "#aa9785",
       frameText: true,
       exhibits: [
         {
@@ -181,13 +181,6 @@ export function createRooms(resume) {
           links: resume.contact.filter(({ url }) => url.startsWith("https://") || url.startsWith("mailto:")),
         },
         { title: "Grade Sheet", label: "Academic record", description: "Download pending." },
-        {
-          title: "Research Materials", label: "Master’s thesis",
-          links: [
-            { label: "Download thesis proposal (PDF)", url: "../thesis-proposal.pdf", download: true },
-            { label: "Browse thesis sources", url: "../thesis-sources.html" },
-          ],
-        },
       ],
     },
   };

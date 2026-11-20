@@ -99,8 +99,9 @@ describe("museum collection", () => {
     expect(scene.querySelectorAll(".plinth-label")).toHaveLength(3);
     expect(scene.querySelector('[data-door="visitor-desk"] .door-sign').textContent).toBe("Visitor Desk");
     const desk = rooms["visitor-desk"].exhibits;
+    expect(titles("visitor-desk")).toEqual(["Résumé", "Connect", "Grade Sheet"]);
     const downloads = desk.flatMap(({ links }) => links || []).filter(({ download }) => download);
-    expect(downloads.map(({ url }) => url)).toEqual(["../Kristian-Pitshugin-Resume.pdf", "../thesis-proposal.pdf"]);
+    expect(downloads.map(({ url }) => url)).toEqual(["../Kristian-Pitshugin-Resume.pdf"]);
     expect(desk.find(({ title }) => title === "Grade Sheet").links).toBeUndefined();
     await Promise.all(downloads.map(({ url }) => access(resolve(url.slice(3)))));
   });
