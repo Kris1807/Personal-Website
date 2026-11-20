@@ -268,17 +268,39 @@ a { color: inherit; }
   background-color: var(--glaze);
   background:
     linear-gradient(180deg, #fff8db29, transparent 45%, #291b153b),
-    color-mix(in srgb, var(--glaze) var(--pot-light), var(--glaze-shadow));
+    color-mix(in srgb, var(--glaze) var(--facet-light), var(--glaze-shadow));
 }
 .pot-ribbon {
   background:
     linear-gradient(180deg, transparent 12%, #14364b80 18% 23%, var(--ribbon) 27% 64%, #14364b7a 67% 73%, transparent 80%),
-    color-mix(in srgb, var(--glaze) var(--pot-light), var(--glaze-shadow));
+    color-mix(in srgb, var(--glaze) var(--facet-light), var(--glaze-shadow));
 }
 .pot-rim {
   border-radius: 50%;
   background: radial-gradient(ellipse, #1f1c15 54%, var(--glaze-shadow) 62%, var(--glaze) 72%, var(--glaze-shadow) 100%);
 }
+
+.floor-lamp-part { pointer-events: none; }
+.lamp-floor-light { background: radial-gradient(ellipse, #f7c07a5c, #f6be7140 30%, #bd783f14 53%, transparent 73%); }
+.lamp-wall-light { background: radial-gradient(ellipse at 50% 45%, #ffcc8590, #ffd09234 35%, transparent 70%); }
+.lamp-brass {
+  background: #a17745;
+  background: linear-gradient(90deg, #f0cb8240, #54351d46), color-mix(in srgb, #d8ae70 var(--facet-light), #614026);
+}
+.lamp-base { border-bottom: 1px solid #604023; }
+.lamp-base-top, .lamp-diffuser, .lamp-shade-top { border-radius: 50%; }
+.lamp-base-top { background: radial-gradient(circle at 38% 32%, #d8b280, #73512e); }
+.lamp-diffuser { background: radial-gradient(circle, #fff5bc, #ffd588 48%, #b67e45 91%); }
+.lamp-shade {
+  border-block: 2px solid #bf955b;
+  background: #ecd8af;
+  background:
+    repeating-linear-gradient(90deg, #82582e23 0 1px, #ffe8b532 1px 4px),
+    linear-gradient(180deg, #baa27c25, transparent 35%, #ffda9573 100%),
+    color-mix(in srgb, #fff0cb var(--facet-light), #c7a778);
+  box-shadow: 0 0 5px #ffd08a78;
+}
+.lamp-shade-top { background: radial-gradient(circle, #b89669 36%, #f9dba8 62%, #9f7745 96%); }
 
 .gallery-wash {
   pointer-events: none;

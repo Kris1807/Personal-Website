@@ -8,6 +8,12 @@ export const lobbyPedestals = [
   { x: 291, z: -170, width: 73, depth: 67, height: 91, piece: "celadon" },
   { x: -297, z: 214, width: 67, depth: 67, height: 78, piece: "bronze" },
 ];
+export const lobbyLamps = [
+  { x: -430, z: -313, width: 46, depth: 46 },
+  { x: 430, z: -313, width: 46, depth: 46 },
+  { x: -430, z: 304, width: 46, depth: 46 },
+  { x: 430, z: 304, width: 46, depth: 46 },
+];
 
 const left = -roomWidth / 2;
 const right = roomWidth / 2;
@@ -25,7 +31,7 @@ const lobbyDoors = [
   { id: "visitor-desk", x: right, z: 112, turn: -90, nx: -1, nz: 0 },
 ];
 const returnDoor = { id: "lobby", x: 0, z: back, turn: 180, nx: 0, nz: -1 };
-const lobbyObstacles = [{ ...benchPosition, width: 180, depth: 72 }, ...lobbyPedestals];
+const lobbyObstacles = [{ ...benchPosition, width: 180, depth: 72 }, ...lobbyPedestals, ...lobbyLamps];
 
 export const roomDoors = (roomId) => roomId === "lobby" ? lobbyDoors : [returnDoor];
 

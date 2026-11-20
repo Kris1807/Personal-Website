@@ -93,10 +93,11 @@ describe("museum collection", () => {
     expect(titles("honors")).not.toContain("Medal wall");
   });
 
-  it("includes three lobby objects and a Visitor Desk with approved downloads and links", async () => {
+  it("puts the plinths and four lamps in the lobby and provides the Visitor Desk downloads", async () => {
     const scene = document.createElement("div");
     renderScene(scene, "lobby", rooms);
     expect(scene.querySelectorAll(".plinth-label")).toHaveLength(3);
+    expect(scene.querySelectorAll(".lamp-floor-light")).toHaveLength(4);
     expect(scene.querySelector('[data-door="visitor-desk"] .door-sign').textContent).toBe("Visitor Desk");
     const desk = rooms["visitor-desk"].exhibits;
     expect(titles("visitor-desk")).toEqual(["Résumé", "Connect", "Grade Sheet"]);
