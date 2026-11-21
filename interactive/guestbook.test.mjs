@@ -83,6 +83,24 @@ describe("guestbook API", () => {
     expect(range.slice(2)).toEqual(["+inf", `(${START}`, "LIMIT", 0, BOARD_CAPACITY]);
     expect(read).toEqual(["MGET", key, "expired-key"]);
   });
+
+  it("accepts quoted dashboard values and keeps Redis failures private", async () => {
+    const fetchImpl = vi.fn().mockResolvedValue(Response.json({ error: "secret provider detail" }, { status: 401 }));
+    const getStore = () => createRedisGuestbook({
+      url: ' "https://redis.example.test" ', token: ' "sample-secret" ', fetchImpl,
+    });
+    const log = vi.spyOn(console, "error").mockImplementation(() => {});
+    try {
+      const reply = await call(createGuestbookHandler({ getStore }));
+      expect(reply.status).toBe(503);
+      expect(reply.data.error).not.toContain("secret");
+      expect(fetchImpl.mock.calls[0][0].href).toBe("https://redis.example.test/");
+      expect(fetchImpl.mock.calls[0][1].headers.Authorization).toBe("Bearer sample-secret");
+      expect(log.mock.calls).toEqual([["Museum guestbook storage unavailable:", "rest_http_401"]]);
+    } finally {
+      log.mockRestore();
+    }
+  });
 });
 
 const buttonNamed = (node, name) => [...node.querySelectorAll("button")].find(button => button.textContent === name);

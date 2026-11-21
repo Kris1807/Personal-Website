@@ -19,22 +19,54 @@ redis.call('PEXPIRE', KEYS[1], ARGV[5])
 return 'created'
 `;
 
+class RedisGuestbookError extends Error {
+  constructor(code) {
+    super(code);
+    this.code = code;
+  }
+}
+
+function normalizeCredential(value) {
+  const trimmed = value?.trim() || "";
+  if (trimmed.length >= 2 && ['"', "'"].includes(trimmed[0]) && trimmed[0] === trimmed.at(-1)) {
+    return trimmed.slice(1, -1).trim();
+  }
+  return trimmed;
+}
+
 export function createRedisGuestbook({ url, token, fetchImpl = fetch, now = Date.now }) {
+  url = normalizeCredential(url);
+  token = normalizeCredential(token);
   if (!url || !token) return null;
-  const endpoint = new URL(url);
-  if (endpoint.protocol !== "https:") throw new Error("Guestbook Redis endpoint must use HTTPS.");
+  let endpoint;
+  try { endpoint = new URL(url); }
+  catch { throw new RedisGuestbookError("invalid_rest_url"); }
+  if (endpoint.protocol !== "https:" || endpoint.pathname !== "/" || endpoint.search ||
+      endpoint.hash || endpoint.username || endpoint.password || endpoint.port) {
+    throw new RedisGuestbookError("invalid_rest_url");
+  }
+  if (!/^[!-~]+$/.test(token)) throw new RedisGuestbookError("invalid_rest_token_format");
 
   async function command(args) {
-    const response = await fetchImpl(endpoint, {
-      method: "POST",
-      headers: { Authorization: `Bearer ${token}`, "Content-Type": "application/json" },
-      body: JSON.stringify(args),
-      signal: AbortSignal.timeout(5000),
-      redirect: "error",
-    });
-    if (!response.ok) throw new Error("Guestbook Redis request failed.");
-    const data = await response.json();
-    if (data.error || !Object.hasOwn(data, "result")) throw new Error("Guestbook Redis command failed.");
+    let response;
+    try {
+      response = await fetchImpl(endpoint, {
+        method: "POST",
+        headers: { Authorization: `Bearer ${token}`, "Content-Type": "application/json" },
+        body: JSON.stringify(args),
+        signal: AbortSignal.timeout(5000),
+        redirect: "error",
+      });
+    } catch (error) {
+      throw new RedisGuestbookError(error?.name === "TimeoutError" ? "rest_timeout" : "rest_connection_failed");
+    }
+    if (!response.ok) throw new RedisGuestbookError(`rest_http_${response.status}`);
+    const data = await response.json().catch(() => null);
+    if (!data || typeof data !== "object") throw new RedisGuestbookError("invalid_rest_response");
+    if (data.error || !Object.hasOwn(data, "result")) {
+      const code = /^(WRONGPASS|NOAUTH|NOPERM)\b/i.test(data.error) ? "rest_auth_rejected" : "rest_command_rejected";
+      throw new RedisGuestbookError(code);
+    }
     return data.result;
   }
 
@@ -133,9 +165,10 @@ export function createGuestbookHandler({ getStore, now = Date.now } = {}) {
       if (result === "full") return send(409, { error: "The board is full. Try again after some notes expire." });
       if (result !== "created") throw new Error("Unexpected guestbook write result.");
       return send(201, { note });
-    } catch {
+    } catch (error) {
       // Never log messages, IPs, tokens or provider error payloads.
-      console.error("Museum guestbook storage unavailable.");
+      const code = error instanceof RedisGuestbookError ? error.code : "storage_error";
+      console.error("Museum guestbook storage unavailable:", code);
       return send(503, { error: "The guestbook is not available right now. Please try again later." });
     }
   };
