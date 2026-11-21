@@ -435,6 +435,49 @@ a { color: inherit; }
 }
 .inscription-names li { white-space: nowrap; }
 
+.gallery-guestbook {
+  display: grid;
+  place-items: center;
+  grid-template-rows: auto 1fr auto;
+  padding: 11px 8px 8px;
+  border: 7px ridge #be965d;
+  border-radius: 3px;
+  color: #fff4de;
+  background:
+    repeating-conic-gradient(#48271447 0% 25%, transparent 0% 50%) 0 / 5px 5px,
+    radial-gradient(ellipse at 50% 0%, #b08058, #725032);
+  box-shadow: 5px 8px 12px #1f150983, inset 0 1px 8px #241509a6;
+  cursor: pointer;
+}
+.guestbook-board-title {
+  padding: 3px 13px 4px;
+  border: 1px solid #dfc28e;
+  background: #3c2b20;
+  font: 700 21px/1.05 Georgia, serif;
+}
+.guestbook-board-caption { font: 650 10px/1.2 system-ui, sans-serif; text-shadow: 0 1px 2px #25180f; }
+.guestbook-papers { display: flex; align-items: center; justify-content: center; gap: 8px; }
+.guestbook-paper {
+  position: relative;
+  width: 49px;
+  height: 57px;
+  background: repeating-linear-gradient(180deg, transparent 0 5px, #624b313c 5px 6px) 8px 16px / 33px 26px no-repeat, #f5e2ac;
+  box-shadow: 2px 4px 6px #26180070;
+  transform: rotate(-8deg);
+}
+.guestbook-paper:nth-child(2) { background-color: #e6edcf; transform: translateY(3px) rotate(5deg); }
+.guestbook-paper:nth-child(3) { background-color: #edd4bc; transform: rotate(-3deg); }
+.guestbook-paper::before {
+  content: "";
+  position: absolute;
+  inset: 4px auto auto 22px;
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: #895345;
+  box-shadow: 1px 2px 1px #44281f80, inset 1px 1px 1px #fff5;
+}
+
 .museum-controls {
   position: absolute;
   inset: auto 0 max(0.75rem, env(safe-area-inset-bottom)) 0;
@@ -590,6 +633,45 @@ a { color: inherit; }
 .exhibit-tags span { padding: 0.28rem 0.6rem; background: #70563670; border-radius: 0.22rem; font-size: 0.875rem; }
 .exhibit-links { display: flex; flex-wrap: wrap; gap: 0.55rem; margin-top: 1rem; }
 .recording-note { color: var(--quiet); font-size: 0.92rem; }
+
+.guestbook-panel { margin-top: 0.8rem; }
+.guestbook-panel [dir="auto"] { overflow-wrap: anywhere; }
+.guestbook-policy { color: var(--quiet); font-size: 0.88rem; }
+.guestbook-toolbar { display: flex; flex-wrap: wrap; gap: 0.55rem; margin: 1rem 0; }
+.guestbook-panel .guestbook-primary { background: #e0bd85; color: #2a1c13; border-color: #e0bd85; }
+.guestbook-panel .guestbook-primary:hover { background: #f3d29c; }
+.guestbook-status { margin: 0.7rem 0; color: var(--quiet); }
+.guestbook-notes {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(min(100%, 10rem), 1fr));
+  gap: 0.75rem;
+}
+.guestbook-note {
+  min-width: 0;
+  padding: 1rem;
+  text-align: start;
+  border: 1px solid #d5be91;
+  border-radius: 0.25rem;
+  background: #f5e6bd;
+  color: #2c2118;
+  box-shadow: 0 4px 8px #130d075e;
+}
+button.guestbook-note { cursor: pointer; }
+button.guestbook-note:hover { background: #fff0c9; }
+.guestbook-note time { display: block; color: #584838; font-size: 0.76rem; margin-top: 0.35rem; }
+.guestbook-note p { margin: 0.65rem 0 0; white-space: pre-wrap; }
+.guestbook-form { display: grid; gap: 0.55rem; }
+.guestbook-form :is(input, textarea) {
+  width: 100%;
+  padding: 0.65rem;
+  border: 1px solid var(--line);
+  border-radius: 0.25rem;
+  color: var(--ink);
+  background: #17120e;
+  font: inherit;
+}
+.guestbook-form textarea { min-height: 6rem; resize: vertical; }
+.guestbook-form .guestbook-count { justify-self: end; color: var(--quiet); font-size: 0.78rem; }
 
 @media (max-width: 700px), (max-width: 950px) and (max-height: 500px), (pointer: coarse) {
   .spatial-museum :is(.museum-viewport, .museum-controls, .room-header),

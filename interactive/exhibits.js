@@ -165,7 +165,11 @@ export function createRooms(resume) {
         description: resume.positioning,
         photo: { src: resume.profileImage, thumbnail: "interactive/lobby-portrait.webp", alt: "Portrait of Kristian Pitshugin" },
         links: [{ label: "Visit the Visitor Desk", url: "#visitor-desk" }],
-      }, ...lobbyDrawings],
+      }, ...lobbyDrawings, {
+        kind: "guestbook",
+        title: "Visitor Notes",
+        label: "Lobby guestbook",
+      }],
     },
     projects: {
       title: "Projects", description: "Explore the systems I built and the problems they solve.", tone: "#8b928c",

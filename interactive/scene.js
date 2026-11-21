@@ -112,12 +112,12 @@ const partnerSlot = (index) => ({ wallName: "rear", offset: 148 + index * 128, w
 
 function wallSlots(roomId, items) {
   if (roomId === "lobby") {
-    const count = items.length;
-    const portrait = { wallName: "front", offset: 151, width: 114, height: 136 };
-    const drawings = Array.from({ length: count - 1 }, (_, index) => ({
-      wallName: "rear", offset: (index - (count - 2) / 2) * 230, width: 186, height: 206,
-    }));
-    return [portrait, ...drawings];
+    const drawings = items.slice(1).filter(({ kind }) => kind !== "guestbook");
+    return items.map((item, index) => {
+      if (item.kind === "guestbook") return { wallName: "left", offset: -84, width: 256, height: 185 };
+      if (index === 0) return { wallName: "front", offset: 151, width: 114, height: 136 };
+      return { wallName: "rear", offset: (drawings.indexOf(item) - (drawings.length - 1) / 2) * 230, width: 186, height: 206 };
+    });
   }
 
   // Keep the competition exhibits where they were, with teams and partners
@@ -157,7 +157,8 @@ function exhibitFrame(exhibit, index, { wallName, offset, width, height, y: cent
     ? Math.min(width, (height - matAndBorder) * exhibit.photo.aspectRatio + matAndBorder)
     : width;
   const placeholder = exhibit.kind === "swim-partner-placeholder";
-  const style = exhibit.kind === "swim-partner-invitation" ? "gallery-partner-invitation"
+  const style = exhibit.kind === "guestbook" ? "gallery-guestbook"
+    : exhibit.kind === "swim-partner-invitation" ? "gallery-partner-invitation"
     : placeholder ? "gallery-frame gallery-frame--partner gallery-frame--partner-placeholder"
     : exhibit.photo ? "gallery-frame" : frameText ? "gallery-frame gallery-frame--lettered" : "gallery-inscription";
   const display = mount(`${style}${frameWidth < 200 ? " is-compact" : ""}`, frameWidth, height, center, 4);
@@ -173,6 +174,14 @@ function exhibitFrame(exhibit, index, { wallName, offset, width, height, y: cent
     display.append(
       element("span", "partner-placeholder-emoji", "😢"),
       element("span", "frame-caption", "Open spot"),
+    );
+  } else if (exhibit.kind === "guestbook") {
+    const papers = element("span", "guestbook-papers");
+    papers.append(...Array.from({ length: 3 }, () => element("span", "guestbook-paper")));
+    display.append(
+      element("strong", "guestbook-board-title", exhibit.title),
+      papers,
+      element("span", "guestbook-board-caption", "Read or leave a note"),
     );
   } else if (exhibit.kind === "swim-partner-invitation") {
     display.append(

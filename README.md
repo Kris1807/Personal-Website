@@ -121,6 +121,14 @@ The tests currently cover:
 
 The portfolio search assistant is part of the static site and works on GitHub Pages or any static host. The former `/api/assistant` route is retired and returns HTTP 410 if reached.
 
+### Museum guestbook
+
+Run `npm run dev:guestbook` and open `http://127.0.0.1:8141/interactive/`. The preview uses temporary memory shared across tabs while the loopback server runs. It doesn't connect to production or require credentials.
+
+For production, connect a dedicated Upstash Redis store to this Vercel project and provide the server-only `UPSTASH_REDIS_REST_URL` and `UPSTASH_REDIS_REST_TOKEN` values through Vercel, not frontend files. Use a separate database for previews, or leave preview credentials unset. Notes are public, limited to plain text, and expire in Redis after 14 days. Without a connected store the board shows an unavailable message. Portfolio search needs neither the guestbook API nor Redis.
+
+The public API limits posting to one note per network address per two minutes (only a short-lived keyed fingerprint is stored), and the board holds up to 96 active notes. If a note needs early removal, use the connected database's console: delete its `museum:guestbook:v1:note:<id>` key and remove that same member from `museum:guestbook:v1:index`. Note IDs are available from `GET /api/guestbook`. There is no public moderation endpoint.
+
 ## Troubleshooting
 
 ### Search data does not load

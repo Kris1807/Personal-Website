@@ -1,6 +1,7 @@
 import { createRooms } from "./exhibits.js";
 import { createCamera, element, renderScene } from "./scene.js";
 import { createTouchPad } from "./touch-pad.js";
+import { mountGuestbook } from "./guestbook.js";
 
 const rooms = createRooms(globalThis.resume);
 const heading = document.querySelector("#room-heading");
@@ -23,6 +24,7 @@ const camera = spatial ? createCamera(viewport, cameraNode, rooms) : null;
 
 let activeRoom = "lobby";
 let dialogReturn;
+let closeGuestbook;
 let pointer;
 let lastGestureWasDrag = false;
 
@@ -79,6 +81,7 @@ function openExhibit(index) {
   const title = element("h2", "", exhibit.title);
   title.id = "exhibit-title";
   dialogContent.replaceChildren(label, title);
+  if (exhibit.kind === "guestbook") closeGuestbook = mountGuestbook(dialogContent);
 
   const photos = exhibit.photos || (exhibit.photo ? [exhibit.photo] : []);
   if (photos.length) dialogContent.append(createPhotoDisplay(photos));
@@ -129,6 +132,8 @@ function openExhibit(index) {
 }
 
 dialog.addEventListener("close", () => {
+  closeGuestbook?.();
+  closeGuestbook = null;
   if (dialogReturn?.isConnected) dialogReturn.focus({ preventScroll: true });
   dialogReturn = null;
   dialogContent.replaceChildren();
