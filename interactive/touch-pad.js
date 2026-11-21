@@ -32,6 +32,12 @@ export function createTouchPad(pad, { enabled, steer, nudge }) {
     pad.addEventListener(type, event => event.preventDefault());
   }
 
+  // iOS can start text selection from a native touch gesture even when
+  // pointerdown is canceled. Cancel that gesture only on the gamepad.
+  pad.addEventListener("touchstart", event => {
+    if (event.cancelable) event.preventDefault();
+  }, { passive: false });
+
   pad.addEventListener("pointerdown", event => {
     if (event.button !== 0) return;
     event.preventDefault();

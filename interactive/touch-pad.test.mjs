@@ -64,3 +64,21 @@ it("blocks selection and long-press menus without removing keyboard and assistiv
   dispatch("click", { target });
   expect(nudge.mock.calls.flat()).toEqual(["left"]);
 });
+
+it("cancels native touch selection on the pad without interrupting pointer movement", () => {
+  const { pad, steer, dispatch } = setup();
+  const button = pad.querySelector('[data-motion="forward"]');
+  const touch = () => new TouchEvent("touchstart", { bubbles: true, cancelable: true });
+  const unrelated = touch();
+  const exhibitText = document.createElement("p");
+  exhibitText.dispatchEvent(unrelated);
+  expect(unrelated.defaultPrevented).toBe(false);
+
+  dispatch("pointerdown", { target: button });
+  const nativePress = touch();
+  button.dispatchEvent(nativePress);
+  expect(nativePress.defaultPrevented).toBe(true);
+  dispatch("pointermove", { x: 125, y: 75 });
+  dispatch("pointerup");
+  expect(steer.mock.calls.flat()).toEqual(["forward", "right", null]);
+});
