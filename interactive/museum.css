@@ -418,23 +418,64 @@ a { color: inherit; }
 }
 .keyboard-hint kbd { color: var(--ink); font: inherit; font-weight: 700; }
 .touch-controls, .touch-hint { display: none; }
-.touch-controls button {
-  min-width: 3rem;
-  min-height: 3rem;
-  padding: 0.3rem 0.4rem;
-  border: 1px solid var(--line);
-  color: var(--ink);
-  background: #221a14e8;
-  border-radius: 0.3rem;
-  font-size: 0.8rem;
-  cursor: pointer;
-  touch-action: none;
-  user-select: none;
+.touch-controls {
+  position: relative;
+  flex: none;
+  width: clamp(8.75rem, 36vw, 10.5rem);
+  aspect-ratio: 1;
+  grid-template: repeat(3, minmax(0, 1fr)) / repeat(3, minmax(0, 1fr));
+  padding: 0.09rem;
+  border: 1px solid #fff1d792;
+  border-radius: 50%;
+  background: radial-gradient(circle, #2b211b27 0 57%, #2119133d 58% 100%);
+  box-shadow: inset 0 0 0 2px #21191357, 0 2px 14px #1a130e32;
   pointer-events: auto;
 }
-.touch-controls button:active { background: #7a593c; }
-.touch-controls button:first-child { grid-column: 2; }
-.touch-controls button:nth-child(2) { grid-column: 1; }
+.touch-controls::before {
+  content: "";
+  position: absolute;
+  inset: 15%;
+  border: 1px solid #fff1d750;
+  border-radius: 50%;
+}
+.touch-controls, .touch-controls * {
+  touch-action: none;
+  -webkit-touch-callout: none;
+  -webkit-user-select: none;
+  user-select: none;
+}
+.touch-controls button {
+  position: relative;
+  display: grid;
+  min-width: 0;
+  min-height: 0;
+  place-items: center;
+  padding: 0;
+  border: 1px solid transparent;
+  border-radius: 50%;
+  color: #fff5e6;
+  background: transparent;
+  cursor: pointer;
+}
+.touch-controls button.is-held {
+  background: #f8d6a84d;
+  border-color: #fff1d7b3;
+}
+.touch-controls button:focus-visible { outline-offset: -3px; }
+.touch-controls button svg {
+  width: 1.55rem;
+  height: 1.55rem;
+  fill: currentColor;
+  filter: drop-shadow(0 1px 2px #140f0c) drop-shadow(0 0 1px #140f0c);
+  pointer-events: none;
+}
+.touch-controls [data-motion="forward"] { grid-area: 1 / 2; }
+.touch-controls [data-motion="left"] { grid-area: 2 / 1; }
+.touch-controls [data-motion="right"] { grid-area: 2 / 3; }
+.touch-controls [data-motion="backward"] { grid-area: 3 / 2; }
+.touch-controls [data-motion="left"] svg { transform: rotate(-90deg); }
+.touch-controls [data-motion="right"] svg { transform: rotate(90deg); }
+.touch-controls [data-motion="backward"] svg { transform: rotate(180deg); }
 
 .spatial-museum .museum-menu {
   position: absolute;
@@ -525,7 +566,7 @@ a { color: inherit; }
     justify-items: start;
     gap: 0.5rem;
   }
-  .touch-controls { display: grid; grid-template-columns: repeat(3, auto); gap: 0.24rem; }
+  .touch-controls { display: grid; }
   .touch-hint {
     display: block;
     justify-self: end;
@@ -537,6 +578,10 @@ a { color: inherit; }
     font-size: 0.77rem;
     white-space: nowrap;
   }
+}
+
+@media (max-height: 450px) and (orientation: landscape) {
+  .touch-controls { width: 8.75rem; }
 }
 
 @media (prefers-reduced-motion: reduce) {

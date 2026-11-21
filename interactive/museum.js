@@ -1,5 +1,6 @@
 import { createRooms } from "./exhibits.js";
 import { createCamera, element, renderScene } from "./scene.js";
+import { createTouchPad } from "./touch-pad.js";
 
 const rooms = createRooms(globalThis.resume);
 const heading = document.querySelector("#room-heading");
@@ -270,7 +271,7 @@ function moveFrame(now) {
 }
 
 function holdControl(source, action) {
-  if (heldControls.has(source)) return;
+  if (heldControls.get(source) === action) return;
   heldControls.set(source, action);
   if (!animationFrame) {
     previousFrame = performance.now();
@@ -280,6 +281,7 @@ function holdControl(source, action) {
 }
 
 function stopMovement() {
+  touchPad.reset();
   heldControls.clear();
   cancelAnimationFrame(animationFrame);
   animationFrame = 0;
@@ -306,20 +308,13 @@ window.addEventListener("blur", stopMovement);
 document.addEventListener("visibilitychange", () => { if (document.hidden) stopMovement(); });
 menu.addEventListener("toggle", () => { if (menu.open) stopMovement(); });
 
-controls.addEventListener("pointerdown", (event) => {
-  const button = event.target.closest("[data-motion]");
-  if (!button || event.button !== 0 || !camera || menu.open || dialog.open) return;
-  button.setPointerCapture(event.pointerId);
-  holdControl(`pointer:${event.pointerId}`, button.dataset.motion);
-});
-
-for (const type of ["pointerup", "pointercancel", "lostpointercapture"]) {
-  controls.addEventListener(type, (event) => heldControls.delete(`pointer:${event.pointerId}`));
-}
-
-controls.addEventListener("click", (event) => {
-  const action = event.target.closest("[data-motion]")?.dataset.motion;
-  if (action && event.detail === 0 && camera && !menu.open) applyMovement(new Set([action]), 0.11);
+const touchPad = createTouchPad(controls.querySelector(".touch-controls"), {
+  enabled: () => Boolean(camera && !menu.open && !dialog.open),
+  steer: (action) => {
+    if (action) holdControl("touch-pad", action);
+    else heldControls.delete("touch-pad");
+  },
+  nudge: (action) => applyMovement(new Set([action]), 0.11),
 });
 
 window.addEventListener("hashchange", () => showFromHash(true));
