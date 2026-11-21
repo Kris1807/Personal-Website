@@ -40,7 +40,10 @@ describe("museum collection", () => {
       renderScene(camera, roomId, rooms);
       const frames = [...camera.querySelectorAll("[data-exhibit]")];
       expect(frames.map((frame) => Number(frame.dataset.exhibit))).toEqual(room.exhibits.map((_, index) => index));
-      if (room.exhibits.length >= 5) expect(new Set(frames.map((frame) => frame.dataset.wall)).size).toBe(3);
+      const generalFrames = frames.filter((frame) => !frame.matches(
+        ".gallery-frame--team, .gallery-frame--partner, .gallery-partner-invitation",
+      ));
+      if (generalFrames.length >= 5) expect(new Set(generalFrames.map((frame) => frame.dataset.wall)).size).toBe(3);
     }
   });
 
@@ -91,6 +94,71 @@ describe("museum collection", () => {
     expect(swiss.photo.src).toBe("assets/athletics/swiss-olympic-trials.webp");
     expect(titles("swimming")).toContain("Medal wall");
     expect(titles("honors")).not.toContain("Medal wall");
+  });
+
+  it("adds the three clickable team logos beside the Swimming room's Lobby door", async () => {
+    const scene = document.createElement("div");
+    renderScene(scene, "swimming", rooms);
+    const teams = [...scene.querySelectorAll(".gallery-frame--team")];
+    expect(teams.map(frame => frame.dataset.wall)).toEqual(["rear", "rear", "rear"]);
+    expect(teams.map(frame => frame.querySelector(".frame-caption").textContent)).toEqual([
+      "Georgia Swim & Dive", "Greater Jerusalem Swimming Club", "Israel National Swim Team",
+    ]);
+    for (const frame of teams) {
+      const exhibit = rooms.swimming.exhibits[frame.dataset.exhibit];
+      expect(frame.querySelector("img").classList.contains("frame-contained")).toBe(true);
+      await access(resolve(exhibit.photo.src));
+    }
+    const index = rooms.swimming.exhibits.findIndex(({ title }) => title === "Medal wall");
+    expect(scene.querySelector(`[data-exhibit="${index}"]`).dataset.wall).toBe("right");
+  });
+
+  it("displays Speedo across the door from the Swimming team frames", async () => {
+    const scene = document.createElement("div");
+    renderScene(scene, "swimming", rooms);
+    const partner = scene.querySelector(".gallery-frame--partner");
+    const team = scene.querySelector(".gallery-frame--team");
+    expect(partner.dataset.wall).toBe("rear");
+    expect(partner.style.transform).toMatch(/^translate3d\(-/);
+    expect(team.style.transform).toMatch(/^translate3d\(\d/);
+    const exhibit = rooms.swimming.exhibits[partner.dataset.exhibit];
+    expect(exhibit.title).toBe("Speedo");
+    expect(partner.style.width).toBe("112px");
+    expect(partner.querySelector(".frame-caption").textContent).toBe("Swimming partner");
+    await access(resolve(exhibit.photo.src));
+  });
+
+  it("inscribes a visible partner invitation linked to the portfolio email", () => {
+    const scene = document.createElement("div");
+    renderScene(scene, "swimming", rooms);
+    const inscription = scene.querySelector(".gallery-partner-invitation");
+    expect(inscription.dataset.wall).toBe("rear");
+    expect(inscription.querySelector("strong").textContent).toBe("Want to join me on the journey?");
+    expect(inscription.querySelector("span").textContent).toBe("Contact me, I would love to discuss.");
+    expect(rooms.swimming.exhibits[inscription.dataset.exhibit].links).toContainEqual({
+      label: "Contact me by email", url: resume.contact.find(({ url }) => url.startsWith("mailto:")).url,
+    });
+  });
+
+  it("fills exactly the unused partner slots with matching emoji frames", () => {
+    const scene = document.createElement("div");
+    renderScene(scene, "swimming", rooms);
+    const speedo = scene.querySelector(".gallery-frame--partner[data-exhibit]");
+    const placeholders = [...scene.querySelectorAll(".gallery-frame--partner-placeholder")];
+    expect(placeholders).toHaveLength(2);
+    for (const frame of placeholders) {
+      expect(frame.style.width).toBe(speedo.style.width);
+      expect(frame.style.height).toBe(speedo.style.height);
+      expect(frame.querySelector(".partner-placeholder-emoji").textContent).toBe("😢");
+      expect(frame.hasAttribute("data-exhibit")).toBe(false);
+    }
+    expect(new Set([speedo, ...placeholders].map(frame => frame.style.transform)).size).toBe(3);
+    const swimming = rooms.swimming;
+    const partner = swimming.exhibits.find(({ kind }) => kind === "swim-partner");
+    renderScene(scene, "swimming", {
+      ...rooms, swimming: { ...swimming, exhibits: [...swimming.exhibits, { ...partner, title: "New partner" }] },
+    });
+    expect(scene.querySelectorAll(".gallery-frame--partner-placeholder")).toHaveLength(1);
   });
 
   it("puts the plinths and four lamps in the lobby and provides the Visitor Desk downloads", async () => {

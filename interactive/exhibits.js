@@ -48,6 +48,10 @@ function swimmingExhibits(resume) {
   const medalWall = photoByName(resume.honorsGallery, "medal-wall.jpeg");
   const photo = (number) => photoByName(photos, `athletics-${number}.jpeg`);
   const links = [cvLink("athletics", "Swimming in the CV")];
+  const team = (title, label, file, alt, { period, achievements }) => ({
+    kind: "swim-team", title, label, facts: [period, ...achievements], links,
+    photo: { src: `assets/athletics/${file}`, alt, fit: "contain", aspectRatio: 1 },
+  });
   return [
     { title: "European Championships bronze", label: "Israel national team · 2024", facts: [europeanBronze], photo: photo("01"), links },
     { title: "NCAA All-American & team records", label: college.organization, facts: college.achievements, photo: photo("07"), links },
@@ -70,6 +74,23 @@ function swimmingExhibits(resume) {
     {
       title: "On deck", label: "Competition gallery", photo: photo("10"),
       photos: ["10", "07", "08", "09"].map(photo), links,
+    },
+    team("Georgia Swim & Dive", "Collegiate team", "team-georgia-swim-dive.jpeg", "Georgia Swim & Dive logo", college),
+    team("Greater Jerusalem Swimming Club", "Club team", "team-greater-jerusalem.jpeg", "Greater Jerusalem Swimming Club emblem", club),
+    team("Israel National Swim Team", "National team", "team-israel-swimming.jpeg", "Israel Swimming Association logo", international),
+    {
+      kind: "swim-partner",
+      title: "Speedo",
+      label: "Swimming partner",
+      photo: { src: "assets/athletics/partner-speedo.png", alt: "Speedo wordmark and red arrow", fit: "contain" },
+    },
+    {
+      kind: "swim-partner-invitation",
+      title: "Want to join me on the journey?",
+      label: "Partnerships",
+      description: "Contact me, I would love to discuss.",
+      links: resume.contact.filter(({ url }) => url.startsWith("mailto:"))
+        .map(({ url }) => ({ label: "Contact me by email", url })),
     },
   ];
 }

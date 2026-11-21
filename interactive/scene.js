@@ -107,8 +107,12 @@ const displayWalls = {
   rear: { x: 0, z: roomDepth / 2, nx: 0, nz: -1, turn: 180 },
 };
 
-function wallSlots(roomId, count) {
+const partnerSlots = 3;
+const partnerSlot = (index) => ({ wallName: "rear", offset: 148 + index * 128, width: 112, height: 70 });
+
+function wallSlots(roomId, items) {
   if (roomId === "lobby") {
+    const count = items.length;
     const portrait = { wallName: "front", offset: 151, width: 114, height: 136 };
     const drawings = Array.from({ length: count - 1 }, (_, index) => ({
       wallName: "rear", offset: (index - (count - 2) / 2) * 230, width: 186, height: 206,
@@ -116,6 +120,10 @@ function wallSlots(roomId, count) {
     return [portrait, ...drawings];
   }
 
+  // Keep the competition exhibits where they were, with teams and partners
+  // on opposite sides of the Lobby door.
+  const isRearExhibit = ({ kind }) => ["swim-team", "swim-partner", "swim-partner-invitation"].includes(kind);
+  const count = items.filter(item => !isRearExhibit(item)).length;
   const front = Math.min(count, count >= 10 ? 4 : 3);
   const spare = count - front;
   const slots = ([wallName, total]) => {
@@ -125,10 +133,21 @@ function wallSlots(roomId, count) {
       wallName, offset: (index - (total - 1) / 2) * distance, width, height: 180,
     }));
   };
-  return [["front", front], ["right", Math.ceil(spare / 2)], ["left", Math.floor(spare / 2)]].flatMap(slots);
+  const regular = [["front", front], ["right", Math.ceil(spare / 2)], ["left", Math.floor(spare / 2)]].flatMap(slots);
+  let regularIndex = 0;
+  let teamIndex = 0;
+  let partnerIndex = 0;
+  return items.map(({ kind }) => {
+    if (kind === "swim-team") return { wallName: "rear", offset: -404 + teamIndex++ * 128, width: 116, height: 116 };
+    if (kind === "swim-partner") return partnerSlot(partnerIndex++);
+    if (kind === "swim-partner-invitation") {
+      return { wallName: "rear", offset: 276, width: 366, height: 72, y: -111 };
+    }
+    return regular[regularIndex++];
+  });
 }
 
-function exhibitFrame(exhibit, index, { wallName, offset, width, height }, { preview, frameText }) {
+function exhibitFrame(exhibit, index, { wallName, offset, width, height, y: center = -4 }, { preview, frameText }) {
   const { x, z, nx, nz, turn } = displayWalls[wallName];
   const mount = (style, w, h, y, depth) => plane(
     style, w, h, x + offset * nz + nx * depth, y, z - offset * nx + nz * depth, `rotateY(${turn}deg)`,
@@ -137,15 +156,33 @@ function exhibitFrame(exhibit, index, { wallName, offset, width, height }, { pre
   const frameWidth = exhibit.photo?.aspectRatio
     ? Math.min(width, (height - matAndBorder) * exhibit.photo.aspectRatio + matAndBorder)
     : width;
-  const style = exhibit.photo ? "gallery-frame" : frameText ? "gallery-frame gallery-frame--lettered" : "gallery-inscription";
-  const display = mount(`${style}${frameWidth < 200 ? " is-compact" : ""}`, frameWidth, height, -4, 4);
-  if (wallName === "rear") display.classList.add("gallery-frame--drawing");
-  if (!preview) {
+  const placeholder = exhibit.kind === "swim-partner-placeholder";
+  const style = exhibit.kind === "swim-partner-invitation" ? "gallery-partner-invitation"
+    : placeholder ? "gallery-frame gallery-frame--partner gallery-frame--partner-placeholder"
+    : exhibit.photo ? "gallery-frame" : frameText ? "gallery-frame gallery-frame--lettered" : "gallery-inscription";
+  const display = mount(`${style}${frameWidth < 200 ? " is-compact" : ""}`, frameWidth, height, center, 4);
+  if (exhibit.kind === "swim-team") display.classList.add("gallery-frame--team");
+  else if (exhibit.kind === "swim-partner") display.classList.add("gallery-frame--partner");
+  else if (wallName === "rear" && exhibit.photo) display.classList.add("gallery-frame--drawing");
+  if (!preview && !placeholder) {
     display.dataset.exhibit = String(index);
     display.dataset.wall = wallName;
   }
-  if (exhibit.photo) {
-    display.append(exhibitImage(exhibit.photo), element("span", "frame-caption", exhibit.title));
+  if (placeholder) {
+    display.setAttribute("aria-hidden", "true");
+    display.append(
+      element("span", "partner-placeholder-emoji", "😢"),
+      element("span", "frame-caption", "Open spot"),
+    );
+  } else if (exhibit.kind === "swim-partner-invitation") {
+    display.append(
+      element("strong", "partner-invitation-heading", exhibit.title),
+      element("span", "partner-invitation-contact", exhibit.description),
+    );
+    return [display];
+  } else if (exhibit.photo) {
+    const caption = exhibit.kind === "swim-partner" ? exhibit.label : exhibit.title;
+    display.append(exhibitImage(exhibit.photo), element("span", "frame-caption", caption));
   } else if (frameText) {
     const label = element("div", "gallery-inscription framed-inscription");
     letterExhibit(label, exhibit);
@@ -189,12 +226,18 @@ function gallery(roomId, rooms, preview = false) {
     surfaces.push(...doors.map((doorway) => door(doorway, rooms, preview)));
   }
 
-  const slots = wallSlots(roomId, room.exhibits.length);
+  const slots = wallSlots(roomId, room.exhibits);
   surfaces.push(...room.exhibits.flatMap((exhibit, index) => {
     const slot = slots[index];
     if (preview && slot.wallName === "rear") return [];
     return exhibitFrame(exhibit, index, slot, { preview, frameText: room.frameText });
   }));
+  if (roomId === "swimming" && !preview) {
+    const occupied = room.exhibits.filter(({ kind }) => kind === "swim-partner").length;
+    for (let index = occupied; index < partnerSlots; index++) {
+      surfaces.push(...exhibitFrame({ kind: "swim-partner-placeholder" }, null, partnerSlot(index), { preview }));
+    }
+  }
   if (roomId === "lobby") surfaces.push(...bench(), ...lobbyDecor(plane, floorY, preview));
   return surfaces;
 }

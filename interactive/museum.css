@@ -331,9 +331,43 @@ a { color: inherit; }
 .gallery-frame--drawing { border-color: #97724d; background: #efe2cb; }
 .gallery-frame--drawing:hover { border-color: #c49a63; }
 .gallery-frame--drawing .frame-caption { max-width: calc(100% + 30px); font-size: 12px; }
+.gallery-frame--team { border-width: 7px; }
+.gallery-frame--team .frame-caption {
+  top: calc(100% + 13px);
+  max-width: calc(100% + 18px);
+  font-size: 11px;
+}
 .gallery-frame img { display: block; width: 100%; height: 100%; background: #ded6c6; }
 .frame-photo { object-fit: cover; object-position: center 38%; }
 .frame-contained { object-fit: contain; }
+.gallery-frame--partner { border-width: 6px; padding: 5px 7px; }
+.gallery-frame--partner img { object-fit: cover; background: transparent; }
+.gallery-frame--partner .frame-caption {
+  top: calc(100% + 12px);
+  max-width: calc(100% + 14px);
+  font-size: 10px;
+}
+.gallery-frame--partner-placeholder {
+  display: grid;
+  place-items: center;
+  pointer-events: none;
+}
+.partner-placeholder-emoji {
+  font: 32px/1 "Apple Color Emoji", "Segoe UI Emoji", "Noto Color Emoji", sans-serif;
+}
+.gallery-partner-invitation {
+  display: grid;
+  align-content: center;
+  gap: 6px;
+  padding: 4px 10px;
+  color: #25221b;
+  text-align: center;
+  text-shadow: 0 1px 1px #fff1d2ae;
+  cursor: pointer;
+}
+.partner-invitation-heading { font: 700 22px/1.1 Georgia, serif; text-wrap: balance; }
+.partner-invitation-contact { font: 650 13px/1.3 system-ui, sans-serif; }
+.gallery-partner-invitation:hover .partner-invitation-contact { text-decoration: underline; }
 .frame-caption {
   position: absolute;
   top: calc(100% + 18px);
