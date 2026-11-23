@@ -215,12 +215,25 @@ function bench() {
   return [shadow, seat, front, rear, left, right];
 }
 
+function skylight() {
+  const frame = element("div", "gallery-skylight");
+  const sky = element("div", "gallery-sky");
+  const distantClouds = element("div", "sky-clouds sky-clouds--distant");
+  const nearClouds = element("div", "sky-clouds");
+  const seconds = Date.now() / 1000;
+  distantClouds.style.setProperty("--cloud-delay", `-${seconds % 720}s`);
+  nearClouds.style.setProperty("--cloud-delay", `-${seconds % 480}s`);
+  sky.append(element("div", "sky-stars"), element("div", "sky-sun"), distantClouds, nearClouds);
+  frame.append(sky);
+  return frame;
+}
+
 function gallery(roomId, rooms, preview = false) {
   const room = rooms[roomId];
   const doors = roomDoors(roomId);
   const floor = plane("gallery-floor", roomWidth, roomDepth, 0, floorY, 0, "rotateX(90deg)");
   const ceiling = plane("gallery-ceiling", roomWidth, roomDepth, 0, ceilingY, 0, "rotateX(-90deg)");
-  ceiling.append(element("div", "gallery-skylight"));
+  ceiling.append(skylight());
   const surfaces = [
     floor,
     ceiling,

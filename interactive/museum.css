@@ -144,6 +144,7 @@ a { color: inherit; }
     repeating-linear-gradient(0deg, transparent 0 2px, #000 6px 55px, transparent 60px 63px);
   mask-composite: intersect;
   transform: translate(-12px, 8px) skewX(-15deg) rotate(-7deg);
+  opacity: var(--sky-floor, 1);
 }
 .gallery-ceiling {
   padding: 61px 143px;
@@ -152,14 +153,82 @@ a { color: inherit; }
   box-shadow: inset 0 0 18px 5px #46372c78;
 }
 .gallery-skylight {
+  position: relative;
   height: 100%;
+  overflow: hidden;
   border: 13px ridge #c8b7a4;
-  background:
-    repeating-linear-gradient(90deg, transparent 0 62px, #faf8e958 62px 64px, #646a68 64px 68px, #484b49 68px 70px),
-    repeating-linear-gradient(0deg, transparent 0 50px, #e9e2cd59 50px 52px, #72766f 52px 56px, #4e514d 56px 58px),
-    radial-gradient(ellipse at 42% 45%, #fffdf0 8%, #e0e8e8 55%, #a1b2ba);
-  box-shadow: 0 0 35px 4px #fff3d08c, inset 0 0 21px #5e625d8c;
+  box-shadow: 0 0 35px 4px #fff3d073;
 }
+.gallery-sky {
+  position: absolute;
+  inset: 0;
+  overflow: hidden;
+  background:
+    linear-gradient(170deg, var(--sky-top, #59a7de), var(--sky-bottom, #dceef8));
+}
+.gallery-skylight::after {
+  position: absolute;
+  content: "";
+  inset: 0;
+  background:
+    repeating-linear-gradient(90deg, transparent 0 62px, #e5edf080 62px 64px, #59625e 64px 68px, #383e3b 68px 70px),
+    repeating-linear-gradient(0deg, transparent 0 50px, #ecf0e180 50px 52px, #656f65 52px 56px, #435047 56px 58px),
+    linear-gradient(135deg, #fffdf51f, transparent 42%, #dbe7f617);
+  box-shadow: inset 0 0 19px #29333594;
+  pointer-events: none;
+}
+.sky-sun {
+  position: absolute;
+  top: var(--sky-sun-y, 58%);
+  left: var(--sky-sun-x, 54%);
+  width: 112px;
+  aspect-ratio: 1;
+  border-radius: 50%;
+  background: radial-gradient(circle,
+    #fffef8 0 9px, #fff9da 11px, #fff3cf9c 14px,
+    color-mix(in srgb, var(--sky-sun-halo, #fff2be) 45%, transparent) 21px,
+    color-mix(in srgb, var(--sky-sun-halo, #fff2be) 13%, transparent) 38px,
+    transparent 56px);
+  transform: translate(-50%, -50%);
+  opacity: var(--sky-sun, 1);
+}
+.sky-stars {
+  position: absolute;
+  inset: 0;
+  background:
+    radial-gradient(circle at 14% 24%, #fcf7e9bc 0 1px, transparent 2px),
+    radial-gradient(circle at 26% 36%, #d7e8ff95 0 1px, transparent 2px),
+    radial-gradient(circle at 33% 15%, #fcf7e9c0 0 1px, transparent 2px),
+    radial-gradient(circle at 49% 29%, #e2edffb8 0 1px, transparent 2px),
+    radial-gradient(circle at 57% 12%, #e2edff9e 0 1px, transparent 2px),
+    radial-gradient(circle at 66% 44%, #e2edffac 0 1px, transparent 2px),
+    radial-gradient(circle at 75% 23%, #e2edffc0 0 1px, transparent 2px),
+    radial-gradient(circle at 86% 37%, #fff3d798 0 1px, transparent 2px),
+    radial-gradient(circle at 93% 18%, #fff3d7c0 0 1px, transparent 2px);
+  opacity: var(--sky-stars, 0);
+}
+.sky-clouds {
+  --cloud-tile: 760px;
+  --cloud-period: 480s;
+  position: absolute;
+  inset: 10% auto 0 0;
+  width: calc(100% + var(--cloud-tile));
+  background: url("../assets/museum/sky-clouds-realistic.webp") left center / var(--cloud-tile) auto repeat-x;
+  opacity: var(--sky-cloud, 0.92);
+  filter: brightness(var(--sky-cloud-light, 1)) sepia(var(--sky-cloud-warmth, 0));
+  animation: skylight-drift var(--cloud-period) linear var(--cloud-delay, 0s) infinite;
+}
+.sky-clouds--distant {
+  --cloud-tile: 650px;
+  --cloud-period: 720s;
+  inset-block: -11% 23%;
+  background-position-x: 165px;
+  opacity: calc(var(--sky-cloud, 0.92) * 0.26);
+}
+@keyframes skylight-drift {
+  to { transform: translateX(calc(-1 * var(--cloud-tile))); }
+}
+.portal-room .sky-clouds { animation-play-state: paused; }
 
 .gallery-door { cursor: pointer; text-align: center; padding-top: 5px; transform-style: preserve-3d; }
 .door-sign {
@@ -718,6 +787,7 @@ button.guestbook-note:hover { background: var(--note-parchment); border-color: v
 }
 
 @media (prefers-reduced-motion: reduce) {
+  .sky-clouds { animation-play-state: paused; }
   .door-leaf, .portal-room { transition: none; }
   .museum-viewport.is-entering .museum-vignette { animation: none; }
 }

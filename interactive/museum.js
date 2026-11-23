@@ -2,6 +2,7 @@ import { createRooms } from "./exhibits.js";
 import { createCamera, element, renderScene } from "./scene.js";
 import { createTouchPad } from "./touch-pad.js";
 import { mountGuestbook } from "./guestbook.js";
+import { museumSkyTime, startSkyClock } from "./sky.js";
 
 const rooms = createRooms(globalThis.resume);
 const heading = document.querySelector("#room-heading");
@@ -32,7 +33,10 @@ viewport.hidden = !spatial;
 controls.hidden = !spatial;
 resetView.hidden = !spatial;
 document.body.classList.toggle("spatial-museum", spatial);
-if (spatial) menu.open = false;
+if (spatial) {
+  menu.open = false;
+  startSkyClock(viewport, () => museumSkyTime(location));
+}
 
 function createPhotoDisplay(photos) {
   const figure = element("figure", "exhibit-photos");
