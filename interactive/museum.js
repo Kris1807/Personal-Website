@@ -2,6 +2,7 @@ import { createRooms } from "./exhibits.js";
 import { createCamera, element, renderScene } from "./scene.js";
 import { createTouchPad } from "./touch-pad.js";
 import { mountGuestbook } from "./guestbook.js";
+import { bindMuseumMusic } from "./music.js";
 import { museumSkyTime, startSkyClock } from "./sky.js";
 
 const rooms = createRooms(globalThis.resume);
@@ -22,6 +23,12 @@ const dialogContent = document.querySelector("#exhibit-content");
 const reduceMotion = matchMedia("(prefers-reduced-motion: reduce)");
 const spatial = CSS.supports("transform-style", "preserve-3d") && "ResizeObserver" in window;
 const camera = spatial ? createCamera(viewport, cameraNode, rooms) : null;
+const setMusicRoom = bindMuseumMusic(
+  document.querySelector("#museum-soundtrack"),
+  document.querySelectorAll("[data-music-toggle]"),
+  document.querySelectorAll("[data-music-status]"),
+);
+for (const wrapper of document.querySelectorAll(".museum-music, .exhibit-music")) wrapper.hidden = false;
 
 let activeRoom = "lobby";
 let dialogReturn;
@@ -144,6 +151,7 @@ dialog.addEventListener("close", () => {
 });
 
 function showRoom(roomId, focus, crossing) {
+  setMusicRoom(roomId);
   viewport.classList.remove("is-entering");
   if (dialog.open) dialog.close();
   activeRoom = roomId;

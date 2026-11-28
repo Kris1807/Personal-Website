@@ -36,6 +36,14 @@
       <p class="touch-hint">Drag to look</p>
     </div>
 
+    <div class="museum-music" hidden>
+      <button type="button" class="museum-music-button" data-music-toggle aria-label="Play museum music">
+        <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M9 18V5l12-2v13M9 18a3 2 0 1 1-6 0 3 2 0 0 1 6 0Zm12-2a3 2 0 1 1-6 0 3 2 0 0 1 6 0Z"/></svg>
+        <span data-music-label>Play music</span>
+      </button>
+      <span class="museum-music-status" data-music-status role="status" hidden></span>
+    </div>
+
     <details class="museum-menu" id="museum-menu" open>
       <summary>Menu</summary>
       <div class="museum-menu-panel">
@@ -62,8 +70,15 @@
     <noscript><p>The museum requires JavaScript. <a href="../?view=cv">Read the standard CV</a>.</p></noscript>
   </main>
 
+  <audio id="museum-soundtrack" data-src="../assets/museum/after-hours.m4a" preload="none" loop></audio>
   <dialog class="exhibit-dialog" id="exhibit-dialog" aria-labelledby="exhibit-title">
-    <form method="dialog"><button type="submit" class="museum-link" autofocus>Close</button></form>
+    <div class="exhibit-dialog-toolbar">
+      <div class="exhibit-music" hidden>
+        <button type="button" class="museum-music-button" data-music-toggle aria-label="Play museum music"><span data-music-label>Play music</span></button>
+        <span class="museum-music-status" data-music-status role="status" hidden></span>
+      </div>
+      <form method="dialog"><button type="submit" class="museum-link" autofocus>Close</button></form>
+    </div>
     <div id="exhibit-content"></div>
   </dialog>
 </body>

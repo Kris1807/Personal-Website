@@ -1,4 +1,5 @@
 import { lobbyDecor } from "./decor.js";
+import { nearbyExhibit } from "./exhibit-cue.js";
 import {
   arrivalView, benchPosition, doorwayHeight, doorwayWidth, roomDepth, roomDoors,
   roomWidth, shouldOpenDoor, walkStep,
@@ -8,6 +9,7 @@ const floorY = 160;
 const ceilingY = -245;
 const roomHeight = floorY - ceilingY;
 const centerY = (floorY + ceilingY) / 2;
+const exhibitPoints = new WeakMap();
 
 export function element(tag, className, text) {
   const node = document.createElement(tag);
@@ -168,6 +170,11 @@ function exhibitFrame(exhibit, index, { wallName, offset, width, height, y: cent
   if (!preview && !placeholder) {
     display.dataset.exhibit = String(index);
     display.dataset.wall = wallName;
+    const below = ["guestbook", "swim-partner-invitation"].includes(exhibit.kind);
+    exhibitPoints.set(display, {
+      x: x + offset * nz + nx * 4, z: z - offset * nx + nz * 4,
+      y: center, cueY: center + height / 2 + (below ? 11 : -14), nx, nz, index,
+    });
   }
   if (placeholder) {
     display.setAttribute("aria-hidden", "true");
@@ -275,7 +282,15 @@ export function createCamera(viewport, camera, rooms) {
   let roomId = "lobby";
   let view = arrivalView(roomId);
   let doors = [];
+  let exhibits = [];
   let perspective = 650;
+  let viewWidth = 0;
+  let viewHeight = 0;
+  const cue = element("span", "exhibit-cue");
+  cue.hidden = true;
+  cue.setAttribute("aria-hidden", "true");
+  cue.append(element("span", "exhibit-cue-click", "Click to explore"), element("span", "exhibit-cue-tap", "Tap to explore"));
+  viewport.append(cue);
 
   const paint = () => {
     const { x, z, yaw, pitch } = view;
@@ -289,10 +304,19 @@ export function createCamera(viewport, camera, rooms) {
       node.classList.toggle("is-open", open);
       peek.classList.toggle("is-visible", open);
     }
+    const next = nearbyExhibit(view, exhibits, { width: viewWidth, height: viewHeight, perspective });
+    cue.hidden = !next;
+    if (next) {
+      cue.dataset.exhibit = String(next.exhibit.index);
+      cue.style.left = `${next.x}px`;
+      cue.style.top = `${next.y}px`;
+    }
   };
 
   new ResizeObserver(([{ contentRect }]) => {
     const { width, height } = contentRect;
+    viewWidth = width;
+    viewHeight = height;
     const portrait = width < 700 && height > width;
     perspective = portrait ? Math.min(width * 0.95, Math.max(width * 0.7, height * 0.39))
       : Math.min(width * 0.65, height * 1.1);
@@ -303,6 +327,7 @@ export function createCamera(viewport, camera, rooms) {
   return {
     enter(nextRoom, crossing) {
       roomId = nextRoom;
+      exhibits = [...camera.querySelectorAll("[data-exhibit]")].map(node => exhibitPoints.get(node));
       doors = roomDoors(roomId).map((doorway) => ({
         doorway,
         node: camera.querySelector(`[data-door="${doorway.id}"]`),

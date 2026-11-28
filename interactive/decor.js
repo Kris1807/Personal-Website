@@ -41,7 +41,8 @@ function facetedBand(plane, { x, z, base, lower, upper, facets, style }) {
   const apothemFactor = Math.cos(Math.PI / facets);
   const lowerWidth = lowerRadius * chordFactor;
   const upperWidth = upperRadius * chordFactor;
-  const width = Math.max(lowerWidth, upperWidth);
+  // Slightly overlap adjacent faces so antialiasing cannot reveal hairline seams.
+  const width = Math.max(lowerWidth, upperWidth) + 0.28;
   const radius = (lowerRadius + upperRadius) * apothemFactor / 2;
   const rise = upperY - lowerY;
   const taper = (lowerRadius - upperRadius) * apothemFactor;
@@ -53,12 +54,17 @@ function facetedBand(plane, { x, z, base, lower, upper, facets, style }) {
 
   return Array.from({ length: facets }, (_, side) => {
     const angle = side * 2 * Math.PI / facets;
+    const halfAngle = Math.PI / facets;
     const rotation = `rotateY(${side * 360 / facets}deg) rotateX(${tilt}deg)`;
     const face = plane(style, width, Math.hypot(rise, taper),
       x + Math.sin(angle) * radius, y, z + Math.cos(angle) * radius, rotation);
     face.style.clipPath = `polygon(${upperInset} 0, calc(100% - ${upperInset}) 0, calc(100% - ${lowerInset}) 100%, ${lowerInset} 100%)`;
-    const light = 23 + Math.round((1 + Math.cos(angle + 1.15)) * 31);
-    face.style.setProperty("--facet-light", `${light}%`);
+    const light = direction => `${23 + Math.round((1 + Math.cos(direction + 1.15)) * 31)}%`;
+    face.style.setProperty("--facet-light", light(angle));
+    if (style.startsWith("pot-face")) {
+      face.style.setProperty("--facet-light-start", light(angle - halfAngle));
+      face.style.setProperty("--facet-light-end", light(angle + halfAngle));
+    }
     return face;
   });
 }
@@ -104,7 +110,7 @@ function floorLamp({ x, z }, floorY, plane, preview) {
 export function lobbyDecor(plane, floorY, preview) {
   const pieces = lobbyPedestals.flatMap((item) => [
     ...pedestal(item, floorY, plane),
-    ...ceramic(item, floorY, plane, preview ? 6 : 9),
+    ...ceramic(item, floorY, plane, preview ? 6 : 15),
   ]);
   return [...pieces, ...lobbyLamps.flatMap((item) => floorLamp(item, floorY, plane, preview))];
 }

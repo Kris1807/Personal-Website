@@ -23,6 +23,7 @@ const types = {
   ".html": "text/html; charset=utf-8", ".js": "text/javascript; charset=utf-8",
   ".css": "text/css; charset=utf-8", ".webp": "image/webp", ".png": "image/png",
   ".jpg": "image/jpeg", ".jpeg": "image/jpeg", ".svg": "image/svg+xml",
+  ".m4a": "audio/mp4",
 };
 const port = Number(process.argv[2] || 8141);
 
